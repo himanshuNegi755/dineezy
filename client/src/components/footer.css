@@ -1,0 +1,39 @@
+.footer {
+    background-color: #696969;
+}
+
+.contact-us {
+    margin-left: 35px;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.contact-us-par {
+    margin-left: 35px;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.fa-facebook-square {
+    margin-left: 35px;
+    margin-right: 5px;
+    float: left;
+    color: #3b5998;
+}
+
+.fa-instagram {
+    margin-right: 5px;
+    float: left;
+    color: white;
+}
+
+.fa-google-plus-square {
+    margin-right: 5px;
+    float: left;
+    color: #db4a39;
+}
+
+.fa-twitter {
+    float: left;
+    color: #00acee;
+}

@@ -1,0 +1,23 @@
+.main-div {
+    overflow: hidden;
+    margin: 0; 
+}
+
+.main-container {
+    background: #f2f2ea;
+    padding-bottom: 20px;
+}
+
+.carousel-class {
+    width: 800px;
+    height: 400px;
+}
+
+.pricing-div {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.card-component {
+    margin: auto;
+}

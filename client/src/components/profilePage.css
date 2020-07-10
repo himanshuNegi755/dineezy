@@ -1,0 +1,24 @@
+.parent-div {
+    overflow: hidden;
+}
+
+.profile-image-background {
+    width: 100%;
+    height: 150px;
+}
+
+.profile-image {
+    width: 115px !important;
+    border-radius: 50%;
+    margin-left: 120px;
+}
+
+.overlap-div {
+    position: relative;
+}
+
+.aling-profile-image-over-big-image {
+    float: left;
+    position: absolute;
+    top: 30px;
+}

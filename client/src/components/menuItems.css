@@ -1,0 +1,13 @@
+.menu-item-design {
+    margin: 2px;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+}
+
+.table-for-items td {
+    padding: 0;
+}
+
+.button-for-editing-items {
+    margin: 5px;
+}

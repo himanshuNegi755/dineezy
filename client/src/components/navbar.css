@@ -1,0 +1,29 @@
+/*.bg-light {
+    background-color: #f2f2ea !important;
+}*/
+
+.navbar-brand {
+    color: #FF6347 !important;
+}
+
+.nav-link:hover {
+    color: #FF6347 !important;
+}
+
+.dropdown-item:hover {
+    color: #FF6347 !important;
+}
+
+.button {
+    color: #FF6347!important;
+}
+
+/*############### Mobile ################
+
+@media screen and (max-width: 680px) {
+    .drop-down-options ul {
+        margin-left: 30px;
+        margin-top: -100px;
+        
+    }
+}*/

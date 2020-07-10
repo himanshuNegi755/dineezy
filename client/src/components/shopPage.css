@@ -1,0 +1,31 @@
+.add-shop-button {
+    margin: 10px;
+    width: inherit;
+}
+
+.shop-listed-area {
+    height: 370px;
+    margin-bottom: 2px;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    margin-left: 10px;
+    text-align: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.address-text-area {
+    resize: none;
+}
+
+.hr-rule-under-shop {
+    border-top: 1px solid #ccc;
+}
+
+.div-to-show-menu {
+    height: 430px;
+    border: 1px solid #ccc;
+    margin: 2px 2px 2px 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}

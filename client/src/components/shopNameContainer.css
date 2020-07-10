@@ -1,0 +1,12 @@
+.shop-name-holer-div {
+    cursor: pointer;
+}
+
+.drop-down-options ul {
+    list-style: none;
+    position: absolute;
+    z-index: 1;
+    color: red;
+    cursor: pointer;
+    background: #17a2b8;
+}
