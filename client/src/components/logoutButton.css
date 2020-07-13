@@ -1,13 +1,15 @@
 .log-out-button {
-    background-color: #343a40;
-    border-color: #343a40;
-    color: #FF6347;
-    margin-top: 0; 
+    background-color: unset;
+    border: 0.5px solid;
+    border-color: #092532;
+    color: #89c9b8;
+    margin-right: 1.5rem;
     float: left !important;
 }
 
 .log-out-button:hover {
-    background-color: unset!important;
-    color: #FF6347!important;
-    border-color: #343a40!important;
+    background-color: unset;
+    color: #c7e2b2;
+    border: 0.5px solid;
+    border-color: #89c9b8;
 }

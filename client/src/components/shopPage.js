@@ -10,14 +10,14 @@ import MenuItems from './menuItems';
 import Footer from './footer';
 
 
-class ProfilePage extends Component{    
-    
+class ProfilePage extends Component{
+
     constructor(props) {
         super(props);
-        
-        this.state = { userEmail: '', loggedIn: true, showModal: false, shopName: '', shopAddress: '', noOfTables: '', 
+
+        this.state = { userEmail: '', loggedIn: true, showModal: false, shopName: '', shopAddress: '', noOfTables: '',
                       shopList: [], menuItemList: [], shopIdVar: ""}
-        
+
         this.showShopAddModal = this.showShopAddModal.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -33,16 +33,16 @@ class ProfilePage extends Component{
             showModal: !this.state.showModal
         })
     }
-    
+
     handleInputChange = (e) => {
-        this.setState({ 
-            [e.target.name]: e.target.value 
+        this.setState({
+            [e.target.name]: e.target.value
         });
     }
-    
+
     onSubmit() {
         this.setState({showModal: !this.state.showModal})
-        
+
         axios.put('http://localhost:5000/shop', {
             userEmail: this.state.userEmail,
             shopName: this.state.shopName,
@@ -53,7 +53,7 @@ class ProfilePage extends Component{
             console.log(res.data);
             this.showShopAfterAdding();
         })
-        
+
     }
 
     showShopAfterAdding() {
@@ -63,7 +63,7 @@ class ProfilePage extends Component{
                 this.setState({shopList: res.data[0].shop})
             })
     }
-    
+
     componentDidUpdate(prevProps, prevState) {
         try{
             if(!prevState.userName) {
@@ -92,51 +92,51 @@ class ProfilePage extends Component{
     deleteItemFunction(itemIdAttribute) {
         axios.put('http://localhost:5000/menu/item/delete/', {
                 shopId: this.state.shopIdVar,
-                itemId: itemIdAttribute  
+                itemId: itemIdAttribute
             })
         .then(res => {
             console.log(res.data);
             //this.props.loadComponentAgain();
-            
+
         })
     }
-    
+
     shopList = () => {
         const list = this.state.shopList.map((shop) =>
             <div key={shop._id}>
                 <ShopNameContainer shopName={shop.shopName} menuForShop={this.getMenuFunction}
-                    shopId={shop._id}/>         
+                    shopId={shop._id}/>
             </div>
         );
-        
+
         return (list);
     }
-    
+
     menuItemList = () => {
         const list = this.state.menuItemList.map((menuItem) =>
             <div key={menuItem._id}>
                 <MenuItems itemName={menuItem.itemName} vegOrNonVeg={menuItem.vegOrNonVeg} price={menuItem.price} description={menuItem.description} category={menuItem.category} deleteItemFromMenu={this.deleteItemFunction}
-                itemId={menuItem._id} shopId={this.state.shopIdVar} menuReload={this.getMenuFunction}/>         
+                itemId={menuItem._id} shopId={this.state.shopIdVar} menuReload={this.getMenuFunction}/>
             </div>
         );
-        
+
         return (list);
     }
-    
+
     render() {
         if(!this.state.loggedIn) {
             return <Redirect to='/' />;
         }
-        
+
         return (
             <div className="parent-div">
                 <NavbarForSite />
-                <div className="shop-related-container row">
+                <div className="main-container row">
                     <div className="col-md-4">
-                        <Button variant="danger" className="add-shop-button" onClick={() => {this.showShopAddModal()}}>ADD SHOP</Button>
-                        
+                        <Button variant="danger" className="add-shop-button" onClick={() => {this.showShopAddModal()}}>Add Restaurant</Button>
+
                         <div className="shop-listed-area">
-                            <h3>Shops</h3>
+                            <h3>Restaurants</h3>
                             <hr className="hr-rule-under-shop"/>
                             {this.shopList()}
                         </div>
@@ -150,8 +150,8 @@ class ProfilePage extends Component{
                 <div>
                     <Footer />
                 </div>
-                
-                
+
+
                 <div>
                     <Modal
                         size="md"
@@ -165,14 +165,14 @@ class ProfilePage extends Component{
                                     SHOP DETAILS
                                 </Modal.Title>
                             </Modal.Header>
-                            <Modal.Body>                                
+                            <Modal.Body>
                                 <Form onSubmit={this.handleSubmit}>
-                                    
+
                                     <Form.Group controlId="formBasicName">
                                         <Form.Label>Shop Name</Form.Label>
                                         <Form.Control type="text" placeholder="Shop Name" name='shopName' value={this.state.shopName} onChange={this.handleInputChange}/>
                                     </Form.Group>
-                                    
+
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label>Address</Form.Label>
                                         <Form.Control as="textarea" rows="3" placeholder="Address" name='shopAddress' className="address-text-area" value={this.state.shopAddress} onChange={this.handleInputChange}/>
@@ -186,13 +186,13 @@ class ProfilePage extends Component{
                                         Submit
                                     </Button>
                                 </Form>
-                            
+
                             </Modal.Body>
                         </Modal>
                 </div>
-                
-                
-            </div>    
+
+
+            </div>
         );
     }
 }

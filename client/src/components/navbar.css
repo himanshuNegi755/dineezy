@@ -2,21 +2,43 @@
     background-color: #f2f2ea !important;
 }*/
 
-.navbar-brand {
-    color: #FF6347 !important;
+.navbar{
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  background-color: #092532;
+  padding: 10px 100px;
+  position: relative;
+  z-index: 1;
+  padding: 0;
+}
+#brand-logo{
+  width: 4.5rem;
+  height: 4.55rem;
+}
+#navbar-brand{
+  position: relative;
+  z-index: 1;
+  width: auto;
+  padding: 0;
+  margin: 0.3rem 5%;
+}
+.nav-item{
+  position: relative;
+  z-index: 1;
+  padding: 0 15px;
+}
+.nav-link{
+  font-size: 1.2rem;
+  font-weight: lighter;
+}
+.navbar-toggler{
+  margin-right: 5%;
+}
+.navbar-toggler-icon{
+  position: relative;
+  z-index: 1;
 }
 
-.nav-link:hover {
-    color: #FF6347 !important;
-}
 
-.dropdown-item:hover {
-    color: #FF6347 !important;
-}
-
-.button {
-    color: #FF6347!important;
-}
 
 /*############### Mobile ################
 
@@ -24,6 +46,6 @@
     .drop-down-options ul {
         margin-left: 30px;
         margin-top: -100px;
-        
+
     }
 }*/

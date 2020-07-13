@@ -1,8 +1,17 @@
+.main-container{
+  padding: 7% 5%;
+}
 .add-shop-button {
     margin: 10px;
-    width: inherit;
+    width: 98%;
+    background-color: #092532;
+    color: #e1ffc2;
+    border: 0;
 }
-
+.add-shop-button:hover{
+    background-color: #89c9b8;
+    color: #092532;
+}
 .shop-listed-area {
     height: 370px;
     margin-bottom: 2px;

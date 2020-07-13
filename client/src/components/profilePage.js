@@ -8,28 +8,28 @@ import NavbarForSite from './navbar';
 import Footer from './footer';
 
 
-class ProfilePage extends Component{    
-    
+class ProfilePage extends Component{
+
     constructor(props) {
         super(props);
-        
+
         this.state = { userName: null, userEmail: '', userImage: '', numberField: '', show: false, msg: '', otp: '',
                      verify: '', loggedIn: true}
-        
+
         this.verifyNumberFunction = this.verifyNumberFunction.bind(this);
         this.onTextChanged = this.onTextChanged.bind(this);
         this.showOTPEnterModal = this.showOTPEnterModal.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
-    
+
     onTextChanged = (e) => {
-        this.setState({ 
-            [e.target.name]: e.target.value 
+        this.setState({
+            [e.target.name]: e.target.value
         });
     }
-    
+
     verifyNumberFunction() {
-        
+
         if(this.state.numberField === '') {
             alert('please enter your mobile number')
         }else{
@@ -39,19 +39,19 @@ class ProfilePage extends Component{
                               msg: res.data.message})
                 this.showOTPEnterModal();
                 //alert(res.data.message)
-                
+
             })
-            
+
             //this.setState({show: !this.state.show})
             //this.showOTPEnterModal();
-            
+
         }
-        
+
     }
 
     onSubmit() {
         this.setState({show: !this.state.show})
-        
+
         axios.get(`http://localhost:5000/verify?phoneNo=${this.state.numberField}&code=${this.state.otp}&userId=${this.props.user._id}`)
             .then(res => {
                 //console.log(res)
@@ -59,13 +59,13 @@ class ProfilePage extends Component{
                 this.setState({
                     verify: 'Verified'
                 })
-                
+
             })
-        
+
     }
 
     showOTPEnterModal() {
-    
+
         return (
             <React.Fragment>
                 <Modal
@@ -91,12 +91,12 @@ class ProfilePage extends Component{
                     <Button variant="secondary" onClick={this.onSubmit}>
                         Submit
                     </Button>
-                        
+
                 </Modal.Footer>
                 </Modal>
             </React.Fragment>
         )
-    
+
 }
 
 
@@ -113,66 +113,55 @@ class ProfilePage extends Component{
                     this.setState({userName: this.props.user.userName,
                               userEmail: this.props.user.userEmail,
                               userImage: this.props.user.userImage})
-                }  
+                }
             }
         } catch(err) {
             this.setState({loggedIn: false})
         }
     }
-    
+
     render() {
         if(!this.state.loggedIn) {
             return <Redirect to='/' />;
         }
-        
+
         return (
             <div className="parent-div">
                 <NavbarForSite />
-                
-                {this.showOTPEnterModal()}
-                
-                <div className="row overlap-div">
-                    <div className="col-md-12">
-                        <Image className="profile-image-background" src="https://blog.newrelic.com/wp-content/uploads/digital-background-min.jpeg" alt="profile background"/>
-                    </div>
-                    <div className="aling-profile-image-over-big-image">
-                        <img className="profile-image" alt="profile" src={this.state.userImage}/>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-1"></div>
-                    <div className="col-9">       
-                        <Form>
-                            <Form.Group as={Row} controlId="formPlaintextEmail">
-                                <Form.Label column sm="2">
-                                    Email
-                                </Form.Label>
-                                <Col sm="10">
-                                    <Form.Control plaintext readOnly defaultValue={this.state.userEmail} />
-                                </Col>
-                            </Form.Group>
 
-                            <Form.Group as={Row} controlId="formPlaintextPassword">
-                                <Form.Label column sm="3">
-                                    Phone Number ({this.state.verify})
-                                </Form.Label>
-                                <Col sm="6">
-                                    <Form.Control type="number" value={this.state.numberField} name='numberField' onChange={this.onTextChanged} placeholder="Enter Phone Number without 0 or +91" />
-                                </Col>
-                                <Button onClick={this.verifyNumberFunction}> Verify Number </Button>
-                                
-                            </Form.Group>                
-                        </Form>
-                    </div>
-                    <div className="col-2">
-                    </div>
-                    
+                {this.showOTPEnterModal()}
+
+                <div className="profile-info">
+                    <img className="profile-image" alt="profile" src={this.state.userImage}/>
+                    <hr className="profile-divider" />
+                    <Form>
+                        <Form.Group as={Row} controlId="formPlaintextEmail">
+                            <Form.Label column sm="3">
+                                Email
+                            </Form.Label>
+                            <Col sm="9">
+                                <Form.Control plaintext readOnly defaultValue={this.state.userEmail} />
+                            </Col>
+                        </Form.Group>
+
+                        <Form.Group as={Row} controlId="formPlaintextPassword">
+                            <Form.Label column sm="3">
+                                Phone Number {this.state.verify}
+                            </Form.Label>
+                            <Col sm="6">
+                                <Form.Control type="number" value={this.state.numberField} name='numberField' onChange={this.onTextChanged} placeholder="Enter Phone Number without 0 or +91" />
+                            </Col>
+                            <Button className="verify-btn" onClick={this.verifyNumberFunction}> Verify Number </Button>
+
+                        </Form.Group>
+                    </Form>
                 </div>
+
                 <div>
                     <Footer />
                 </div>
-                
-            </div>    
+
+            </div>
         );
     }
 }

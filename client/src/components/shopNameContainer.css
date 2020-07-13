@@ -3,10 +3,11 @@
 }
 
 .drop-down-options ul {
+    text-align: center;
     list-style: none;
     position: absolute;
     z-index: 1;
-    color: red;
+    color: Black;
     cursor: pointer;
-    background: #17a2b8;
+    background: #c7e2b2;
 }

@@ -5,17 +5,17 @@ import './navbar.css';
 import GoogleButton from './googleButton';
 import LogoutButton from './logoutButton';
 import ProfileButton from './profileButton';
+import DMLogo from './images/dmLogo.svg';
 
+class NavbarForSite extends Component{
 
-class NavbarForSite extends Component{    
-    
     constructor(props) {
         super(props);
-        
+
         this.renderContent = this.renderContent.bind(this);
         this.renderMidContent = this.renderMidContent.bind(this);
     }
-    
+
     renderContent = () => {
         switch(this.props.user) {
             case null:
@@ -32,7 +32,7 @@ class NavbarForSite extends Component{
                         <div>
                             <GoogleButton />
                         </div>
-                        
+
                     </React.Fragment>
                 )
             default:
@@ -48,7 +48,7 @@ class NavbarForSite extends Component{
                 )
         }
     }
-    
+
     renderMidContent = () => {
         switch(this.props.user) {
             case null:
@@ -64,7 +64,7 @@ class NavbarForSite extends Component{
                     <React.Fragment>
                         <div>
                         </div>
-                        
+
                     </React.Fragment>
                 )
             default:
@@ -75,28 +75,34 @@ class NavbarForSite extends Component{
                 )
         }
     }
-    
+
     render() {
-        
+
         return (
-                <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                    <Navbar.Brand href="http://localhost:3000/"><b>Digi Menu</b></Navbar.Brand>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="mr-auto">
-                            <Nav.Link href="#">About</Nav.Link>
-                            <Nav.Link href="#">Pricing</Nav.Link>
-                            {this.renderMidContent()}
-                        </Nav>
-                        
-                        <Nav>
-                            
-                            {this.renderContent()}
-                            
-                        </Nav>
-                        
-                    </Navbar.Collapse>                
-                </Navbar>
+
+          <nav class="navbar navbar-expand-lg navbar-dark">
+            <a id="navbar-brand" href="http://localhost:3000/"><span><img id="brand-logo" src={DMLogo} alt="Company Logo"/></span></a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#myNavigation" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="myNavigation">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#footer">Contact</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#pricing-section">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    {this.renderMidContent()}
+                </li>
+              </ul>
+                {this.renderContent()}
+            </div>
+          </nav>
+
         );
     }
 }

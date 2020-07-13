@@ -1,23 +1,78 @@
+
 .main-div {
     overflow: hidden;
-    margin: 0; 
+    margin: 0;
 }
 
-.main-container {
-    background: #f2f2ea;
-    padding-bottom: 20px;
+.front-parent-div {
+    background-color: #fdfdf6;
+    padding: 0 15% 2%;
+}
+/*
+#feature{
+  color: black
+}
+.white-section{
+  background-color: white;
+  padding-bottom: 5%;
+}
+.feature-icon{
+  padding: 5%;
+}
+.feature-subs{
+  font-size: 1.6rem;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 2;
+}
+.feature-box{
+  font-size: 0.9rem;
+  padding: 2% 3%;
+}
+.features-heading {
+    padding: 4% 15% 1%;
+    font-size: 43px;
 }
 
-.carousel-class {
-    width: 800px;
-    height: 400px;
-}
-
-.pricing-div {
-    margin-top: 20px;
+ */
+#pricing-section {
+    box-shadow: -1px 0 5px grey;
+    background: #c7e2b2;
+    padding: 5% 7%;
     text-align: center;
 }
 
-.card-component {
-    margin: auto;
+.pricing-heading{
+    font-family: 'Righteous', cursive;
+    font-size: 4rem;
+    font-weight: bold;
+    letter-spacing: 1rem;
+    padding: 2% 0;
+}
+.card{
+    background-color: #e1ffc2;
+    border-radius: 2%;
+}
+.card-header{
+    font-family: 'Ubuntu', sans-serif;
+}
+.price-text{
+    padding: 2%;
+    font-size: 3rem;
+    font-weight: bold;
+    line-height: 1.5;
+}
+.pricing-col{
+    padding: 3% 2%;
+}
+.trial-text{
+    line-height: 2;
+    padding: 0 10%;
+}
+
+@media (max-width: 991px) {
+
+  .main-container{
+    padding: 0 0 5%;
+  }
 }
