@@ -4,7 +4,7 @@ import './googleButton.css';
 class GoogleButton extends Component{
     render() {
         return (
-            <div>
+            <div class="log-in-btn">
                 <a href="http://localhost:5000/auth/google" className="button google-button-a-tag">
                     <div>
                         <span className="svgIcon t-popup-svg">

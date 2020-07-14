@@ -3,6 +3,8 @@ import { Carousel, Card } from 'react-bootstrap';
 import './frontPage.css';
 import NavbarForSite from './navbar';
 import Footer from './footer';
+import NOTch from './images/no-touch.svg'
+import MobChk from './images/onMobile.svg'
 
 class FrontPage extends Component{
 
@@ -65,6 +67,28 @@ class FrontPage extends Component{
 
                 </section>
 
+                <section id="about-section">
+                    <h1 class="about-heading">Perks of a digital menu.</h1>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 about-col">
+                            <img class="about-img" src={NOTch} alt="Less Contact Image"/>
+                            <h3>Less contact, less germs.</h3>
+                            <p class="about-text">According to a study, a restaurant menu can contain 185,000 germs per square centimeter.
+                            For reference, a public toilet has about 500 - 1,000 germs per square centimeter.</p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 about-col">
+                            <img class="about-img" src={MobChk} alt="Order on Mobile Image"/>
+                            <h3>No delay in customer service.</h3>
+                            <p class="about-text">As a customer, no more waiting for a waiter in a crowded day you can order in the digital menu itself.
+                             As a restaurant, less worries about any complaint regarding bad services.</p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 about-col">
+                            <i class="fas fa-calculator fa-5x about-img"></i>
+                            <h3>No miss calculations.</h3>
+                            <p class="about-text">No more confusions while taking bills. All the items will be recorded and saved untill the payment is done.</p>
+                        </div>
+                    </div>
+                </section>
 
                 <section id="pricing-section">
                     <div>

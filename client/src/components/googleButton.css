@@ -1,7 +1,12 @@
+.log-in-btn{
+  text-align: center;
+  padding-bottom: 0.5rem;
+}
 .google-button-a-tag {
  -webkit-tap-highlight-color: transparent;
  text-decoration: none !important;
 }
+
 
 .button {
  display: inline-block;

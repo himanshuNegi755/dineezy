@@ -19,7 +19,36 @@
   border-color: #092532;
   opacity: 0.5;
 }
+.email-container{
+  color: #737373;
+  padding-left: 1rem;
+  background-color: #fff;
+  width: 69%;
+  border: 1px solid;
+  border-radius: 3px;
+  border-color: #d9d9d9;
+}
+.phno-container{
+  width: 100%;
+}
 .verify-btn{
   background-color: #61ad99;
   border-color: #61ad99;
+}
+
+@media (max-width: 670px){
+
+  .profile-info{
+    padding: 10%;
+  }
+  .email-container{
+    width: 25rem;
+  }
+  .phno-container{
+    width: 25rem;
+  }
+  .verify-btn{
+    margin: 4% 33%;
+  }
+
 }

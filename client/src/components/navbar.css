@@ -22,6 +22,7 @@
   margin: 0.3rem 5%;
 }
 .nav-item{
+  text-align: center;
   position: relative;
   z-index: 1;
   padding: 0 15px;

@@ -55,3 +55,18 @@
     color: white;
     opacity: 0.5;
 }
+
+@media (max-width: 600px) {
+
+  .footer {
+      padding: 2% 5%;
+  }
+  .contact-us {
+      font-family: 'Ubuntu', sans-serif;
+      letter-spacing: 0.7rem;
+      color: white;
+      padding: 2% 7%;
+  }
+
+
+}
