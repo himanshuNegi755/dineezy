@@ -6,6 +6,7 @@ import { fetchUser } from './store/actions/authActions';
 import FrontPage from './components/frontPage';
 import ProfilePage from './components/profilePage';
 import ShopPage from './components/shopPage';
+import ShowMenu from './components/showMenu';
 
 function App(props) {
     useEffect(() => {
@@ -17,6 +18,7 @@ function App(props) {
           <Route exact path="/" component={FrontPage} />
           <Route exact path="/profile" component={ProfilePage} />
           <Route exact path="/shops" component={ShopPage} />
+          <Route exact path="/show_menu/:shopId" component={ShowMenu} />
       </Switch>
   );
 }

@@ -40,5 +40,5 @@ require("./routes/database-api-routes")(app);
 
 // listining for port
 app.listen(PORT, function() {
-    console.log("ThekaToHome API running on port " + PORT + "....");
+    console.log("Digi Menu API running on port " + PORT + "....");
 });
