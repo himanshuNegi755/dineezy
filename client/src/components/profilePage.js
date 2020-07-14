@@ -136,20 +136,20 @@ class ProfilePage extends Component{
                     <hr className="profile-divider" />
                     <Form>
                         <Form.Group as={Row} controlId="formPlaintextEmail">
-                            <Form.Label column sm="3">
+                            <Form.Label column sm="2">
                                 Email
                             </Form.Label>
-                            <Col sm="9">
-                                <Form.Control plaintext readOnly defaultValue={this.state.userEmail} />
+                            <Col sm="10">
+                                <Form.Control className="email-container" plaintext readOnly defaultValue={this.state.userEmail} />
                             </Col>
                         </Form.Group>
 
                         <Form.Group as={Row} controlId="formPlaintextPassword">
-                            <Form.Label column sm="3">
+                            <Form.Label column sm="2">
                                 Phone Number {this.state.verify}
                             </Form.Label>
-                            <Col sm="6">
-                                <Form.Control type="number" value={this.state.numberField} name='numberField' onChange={this.onTextChanged} placeholder="Enter Phone Number without 0 or +91" />
+                            <Col sm="7">
+                                <Form.Control className="phno-container" type="number" value={this.state.numberField} name='numberField' onChange={this.onTextChanged} placeholder="Enter Phone Number without 0 or +91" />
                             </Col>
                             <Button className="verify-btn" onClick={this.verifyNumberFunction}> Verify Number </Button>
 

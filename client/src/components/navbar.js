@@ -87,7 +87,7 @@ class NavbarForSite extends Component{
             <div class="collapse navbar-collapse" id="myNavigation">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                  <a class="nav-link" href="#">About</a>
+                  <a class="nav-link" href="#about-section">About</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#footer">Contact</a>
