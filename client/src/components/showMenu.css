@@ -1,0 +1,17 @@
+.show-menu-main-div {
+    overflow: hidden;
+}
+
+.menu-category {
+    margin: 10px;
+}
+
+.menu-category ul li{
+    list-style: none;
+    float: left;
+    margin-right: 30px;
+}
+
+.items-card {
+    margin-top: 50px;
+}

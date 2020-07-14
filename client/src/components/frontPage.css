@@ -72,7 +72,8 @@
 
 @media (max-width: 991px) {
 
-  .main-container{
+  .front-parent-div{
     padding: 0 0 5%;
   }
+    
 }

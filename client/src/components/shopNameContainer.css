@@ -11,3 +11,12 @@
     cursor: pointer;
     background: #c7e2b2;
 }
+
+.qr-code-div a canvas {
+    display: block;
+    margin: auto;
+}
+
+.qr-code-div {
+    text-align: center;
+}

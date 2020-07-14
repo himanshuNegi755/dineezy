@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import QRCode from 'qrcode.react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import './shopNameContainer.css';
 
@@ -9,17 +10,28 @@ class ShopNameContainer extends Component{
     constructor(props) {
         super(props);
         
-        this.state = { showOptions: false, showFileUpload: false}
+        this.state = { showOptions: false, showFileUpload: false, showMenuOption: false, showQRCode: false}
         this.showDropDownOptions = this.showDropDownOptions.bind(this);
         this.showFileUploadModal = this.showFileUploadModal.bind(this);
         this.showOptionFunction = this.showOptionFunction.bind(this);
     }
     
     showOptionFunction() {
-        this.setState({
-            showOptions: !this.state.showOptions
-        });
-        this.props.menuForShop(this.props.shopId);
+        
+        axios.get(`http://localhost:5000/menu/${this.props.shopId}`)
+        .then(res => {
+            if(res.data[0].menu.length === 0) {
+                this.setState({
+                    showOptions: !this.state.showOptions
+                });
+            } else {
+                this.props.menuForShop(this.props.shopId);
+                this.setState({
+                    showMenuOption: !this.state.showMenuOption
+                });
+            }
+            
+        })
     }
     
     showDropDownOptions() {
@@ -28,7 +40,21 @@ class ShopNameContainer extends Component{
                 <React.Fragment>
                     <div className="drop-down-options">
                         <ul>
-                            <li onClick = {() => {this.setState({showFileUpload: !this.state.showFileUpload})}}><b>Add Menu</b></li>
+                            <li onClick= {() => {this.setState({showFileUpload: !this.state.showFileUpload})}}>
+                                <b>Add Menu</b>
+                            </li>
+                        </ul>
+                    </div>
+                </React.Fragment>
+            )
+        } else if(this.state.showMenuOption) {
+            return(
+                <React.Fragment>
+                    <div className="drop-down-options">
+                        <ul>
+                            <li onClick= {() => {this.setState({showQRCode: !this.state.showQrCode})}}>
+                                <b>See Menu</b>
+                            </li>
                         </ul>
                     </div>
                 </React.Fragment>
@@ -87,6 +113,38 @@ class ShopNameContainer extends Component{
                     </Modal.Body>
                 </Modal>
                 
+                
+                
+                
+                
+                
+                
+                
+                <Modal
+                    size="md"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                    show={this.state.showQRCode}
+                    onHide={() => {this.setState({showQRCode: !this.state.showQRCode})}}
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title id="contained-modal-title-vcenter">
+                            QR Code For Your Shop
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div className="qr-code-div">
+                            <a href={"/show_menu/" + this.props.shopId}>
+                                <QRCode 
+                                    id= "qr-code-for-shop"
+                                    value= {"http://localhost:3000/show_menu/" + this.props.shopId}
+                                />
+                            </a>
+                            
+                            <p>To Download QR, just right click and save image.</p>
+                        </div>
+                    </Modal.Body>
+                </Modal>                
             </div>
         );
     }

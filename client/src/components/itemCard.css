@@ -1,0 +1,19 @@
+.card-for-item {
+    margin: auto;
+}
+
+.button-for-changing-quantity {
+    height: 48px;
+    width: 48px;
+}
+
+.quantity-input::-webkit-inner-spin-button, 
+.quantity-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.quantity-input {
+    height: 48px;
+    width: 48px;
+}

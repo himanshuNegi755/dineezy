@@ -80,22 +80,22 @@ class NavbarForSite extends Component{
 
         return (
 
-          <nav class="navbar navbar-expand-lg navbar-dark">
+          <nav className="navbar navbar-expand-lg navbar-dark">
             <a id="navbar-brand" href="http://localhost:3000/"><span><img id="brand-logo" src={DMLogo} alt="Company Logo"/></span></a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#myNavigation" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="myNavigation">
-              <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                  <a class="nav-link" href="#">About</a>
+            <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#myNavigation" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span></button>
+            <div className="collapse navbar-collapse" id="myNavigation">
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <a className="nav-link" href="#">About</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#footer">Contact</a>
+                <li className="nav-item">
+                  <a className="nav-link" href="#footer">Contact</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#pricing-section">Pricing</a>
+                <li className="nav-item">
+                  <a className="nav-link" href="#pricing-section">Pricing</a>
                 </li>
-                <li class="nav-item">
+                <li className="nav-item">
                     {this.renderMidContent()}
                 </li>
               </ul>
