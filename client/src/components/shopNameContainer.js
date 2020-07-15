@@ -5,19 +5,19 @@ import { Button, Modal, Form } from 'react-bootstrap';
 import './shopNameContainer.css';
 
 
-class ShopNameContainer extends Component{    
-    
+class ShopNameContainer extends Component{
+
     constructor(props) {
         super(props);
-        
+
         this.state = { showOptions: false, showFileUpload: false, showMenuOption: false, showQRCode: false}
         this.showDropDownOptions = this.showDropDownOptions.bind(this);
         this.showFileUploadModal = this.showFileUploadModal.bind(this);
         this.showOptionFunction = this.showOptionFunction.bind(this);
     }
-    
+
     showOptionFunction() {
-        
+
         axios.get(`http://localhost:5000/menu/${this.props.shopId}`)
         .then(res => {
             if(res.data[0].menu.length === 0) {
@@ -30,10 +30,10 @@ class ShopNameContainer extends Component{
                     showMenuOption: !this.state.showMenuOption
                 });
             }
-            
+
         })
     }
-    
+
     showDropDownOptions() {
         if(this.state.showOptions) {
             return(
@@ -53,28 +53,28 @@ class ShopNameContainer extends Component{
                     <div className="drop-down-options">
                         <ul>
                             <li onClick= {() => {this.setState({showQRCode: !this.state.showQrCode})}}>
-                                <b>See Menu</b>
+                                <b>Get Menu QR code</b>
                             </li>
                         </ul>
                     </div>
                 </React.Fragment>
             )
         }
-        
+
     }
-    
+
     showFileUploadModal() {
         this.setState({
             showFileUpload: !this.state.showFileUpload
         })
     }
-    
-    render() {        
+
+    render() {
         return (
-            <div className="shop-name-holer-div">
-                <h5 onClick = {() => {this.showOptionFunction()}}>{this.props.shopName}</h5>
+            <div>
+                <h5 className="restaurant-name-holder" onClick = {() => {this.showOptionFunction()}}>{this.props.shopName}</h5>
                 {this.showDropDownOptions()}
-                
+
                 <Modal
                     size="md"
                     aria-labelledby="contained-modal-title-vcenter"
@@ -87,9 +87,9 @@ class ShopNameContainer extends Component{
                             Upload Your Menu
                         </Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>                                
+                    <Modal.Body>
                         <Form onSubmit={this.handleSubmit}>
-                                    
+
                             <Form.Group controlId="formBasicEmail">
                                 <Form.File
                                     className="position-relative"
@@ -104,22 +104,22 @@ class ShopNameContainer extends Component{
                             <Form.Label>
                                 The digital Menu will be uploaded within next 24 hours.
                             </Form.Label>
-                                    
+
                             <Button variant="primary" onClick={this.onSubmit} className="sign-up-button">
                                 Upload
                             </Button>
                         </Form>
-                            
+
                     </Modal.Body>
                 </Modal>
-                
-                
-                
-                
-                
-                
-                
-                
+
+
+
+
+
+
+
+
                 <Modal
                     size="md"
                     aria-labelledby="contained-modal-title-vcenter"
@@ -135,16 +135,16 @@ class ShopNameContainer extends Component{
                     <Modal.Body>
                         <div className="qr-code-div">
                             <a href={"/show_menu/" + this.props.shopId}>
-                                <QRCode 
+                                <QRCode
                                     id= "qr-code-for-shop"
                                     value= {"http://localhost:3000/show_menu/" + this.props.shopId}
                                 />
                             </a>
-                            
+
                             <p>To Download QR, just right click and save image.</p>
                         </div>
                     </Modal.Body>
-                </Modal>                
+                </Modal>
             </div>
         );
     }

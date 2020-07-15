@@ -91,10 +91,10 @@ class NavbarForSite extends Component{
                   <a className="nav-link" href="#about-section">About</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#footer">Contact</a>
+                  <a className="nav-link" href="#pricing-section">Pricing</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#pricing-section">Pricing</a>
+                  <a className="nav-link" href="#footer">Contact</a>
                 </li>
                 <li className="nav-item">
                     {this.renderMidContent()}

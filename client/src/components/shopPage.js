@@ -132,16 +132,15 @@ class ProfilePage extends Component{
             <div className="parent-div">
                 <NavbarForSite />
                 <div className="main-container row">
-                    <div className="col-md-4">
-                        <Button variant="danger" className="add-shop-button" onClick={() => {this.showShopAddModal()}}>Add Restaurant</Button>
+                    <div className="col-md-4 retaurant-col">
+                        <Button variant="danger" className="add-restaurant-button" onClick={() => {this.showShopAddModal()}}>Add Restaurant</Button>
 
-                        <div className="shop-listed-area">
-                            <h3>Restaurants</h3>
-                            <hr className="hr-rule-under-shop"/>
+                        <div className="restaurant-list">
+                            <h3 className="col-heading">Restaurants</h3>
                             {this.shopList()}
                         </div>
                     </div>
-                    <div className="col-md-8">
+                    <div className="col-md-8 menu-col">
                         <div className="div-to-show-menu">
                             {this.menuItemList()}
                         </div>

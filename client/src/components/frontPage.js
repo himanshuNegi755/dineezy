@@ -17,9 +17,9 @@ class FrontPage extends Component{
 
                 <section className="front-parent-div">
 
-                    <div id="front-carousel" class="carousel slide" data-ride="carousel">
+                    <div id="front-carousel" className="carousel slide" data-ride="carousel">
                       <ol className="carousel-indicators">
-                        <li data-target="#front-carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#front-carousel" data-slide-to="0" className="active"></li>
                         <li data-target="#front-carousel" data-slide-to="1"></li>
                         <li data-target="#front-carousel" data-slide-to="2"></li>
                       </ol>

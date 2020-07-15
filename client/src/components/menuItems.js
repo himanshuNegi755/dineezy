@@ -128,8 +128,9 @@ class MenuItems extends Component{
                       </tbody>
                 </Table>
 
-                <Button variant="danger" className="button-for-editing-items" onClick={this.deleteItemAndReloadMenu}>DELETE</Button>
-                <Button variant="danger" className="button-for-editing-items" onClick={this.changeItemDetails}>SAVE</Button>
+                <Button variant="success" className="button-for-editing-items save-btn" onClick={this.changeItemDetails}>Save</Button>
+                <Button variant="danger" className="button-for-editing-items delete-btn" onClick={this.deleteItemAndReloadMenu}>Delete</Button>
+
             </div>
         );
     }

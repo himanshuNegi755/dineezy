@@ -1,23 +1,37 @@
-.main-container{
-  padding: 0;
+.retaurant-col{
+  background-color: #e1ffc2;
 }
-.add-shop-button {
-    margin: 10px;
-    width: 98%;
+
+.add-restaurant-button {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.4rem;
+    width: 100%;
+    height: 4rem;
+    background-color: #c7e2b2;
+    color: #092532;
+    border: 0;
+    border-radius: 0;
+}
+.add-restaurant-button:hover{
     background-color: #092532;
     color: #e1ffc2;
-    border: 0;
 }
-.add-shop-button:hover{
-    background-color: #89c9b8;
-    color: #092532;
+.col-heading{
+    padding: 1rem 0;
+    margin: 0;
+    border: 1px solid #c7e2b2;
 }
-.shop-listed-area {
-    height: 370px;
-    margin-bottom: 2px;
+.main-container .retaurant-col{
+    padding: 0;
+}
+.main-container .menu-col{
+    padding: 0;
+}
+.restaurant-list {
+    height: auto;
+    margin: 0;
     border: 1px solid #ccc;
-    border-radius: 16px;
-    margin-left: 10px;
     text-align: center;
     overflow-x: hidden;
     overflow-y: auto;
@@ -27,14 +41,21 @@
     resize: none;
 }
 
-.hr-rule-under-shop {
-    border-top: 1px solid #ccc;
-}
-
 .div-to-show-menu {
-    height: 430px;
-    border: 1px solid #ccc;
-    margin: 2px 2px 2px 0;
+    background-color: #ecffd9;
+    height: 52rem;
+    border: 1px solid grey;
+    margin: 0;
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+@media (max-width: 767px){
+  .parent-div{
+    background-color: #092532;
+  }
+  .main-container .menu-col{
+      margin-top: 1rem;
+  }
+
 }
