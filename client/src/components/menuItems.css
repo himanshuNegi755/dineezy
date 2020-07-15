@@ -1,8 +1,36 @@
 .menu-item-design {
-    margin: 3%;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 1% 1% 0;
+    background-color: #c7e2b2;
+    margin: 0 1rem 1rem 0;
+    border: 1px solid grey;
+}
+.table-for-items .item-detail{
+    background-color: #e1ffc2;
+    border: 2px solid #c7e2b2;
+    border-radius: 2px;
+}
+.table-for-items .item-input{
+    padding: 0.3rem;
+    background-color: #e1ffc2;
+    border: 2px solid #c7e2b2;
+    border-radius: 2px;
 }
 .button-for-editing-items {
-    margin: 1%;
+    margin: 0 2% 2%;
+    width: 20%;
+    background-color: #092532;
+    border: 0;
+    font-family: 'Ubuntu', sans-serif;
+    color: #e1ffc2;
+}
+.button-for-editing-items.save-btn{
+  margin-left: 25%;
+}
+.button-for-editing-items.save-btn:hover{
+  background-color: #0cc912;
+  color: #092532;
+}
+.button-for-editing-items.delete-btn:hover{
+  background-color: #d91a1a;
+  color: #092532;
 }

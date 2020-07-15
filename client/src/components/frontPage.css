@@ -67,9 +67,6 @@
 @media (max-width: 991px) {
 
   .front-parent-div{
-<<<<<<< HEAD
-    padding: 0 0 5%;
-=======
     padding: 0 0;
   }
   .about-heading{
@@ -80,9 +77,8 @@
   .pricing-heading{
     font-size: 3rem;
     letter-spacing: 0.8rem;
->>>>>>> 1cd6a8fc02303a49fc54445d00f56b3f2d1d3180
   }
-    
+
 }
 
 @media (max-width: 600px) {

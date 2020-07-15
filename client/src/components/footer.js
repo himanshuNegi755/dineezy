@@ -12,8 +12,8 @@ const Footer = () => {
                   <a href="https://www.instagram.com/"><i className="fab fa-instagram fa-2x contact-icons" aria-hidden="true"></i></a>
                   <a href="mailto:thekatohome@gmail.com"><i className="fas fa-envelope fa-2x contact-icons" aria-hidden="true"></i></a>
                   <i className="fab fa-twitter fa-2x contact-icons"></i>
-                  <hr class="contact-divider"></hr>
-                  <p class="copyright">© COPYRIGHT 2020 VIRTUAL MENU.</p>
+                  <hr className="contact-divider"></hr>
+                  <p className="copyright">© COPYRIGHT 2020 VIRTUAL MENU.</p>
               </div>
           </footer>
         );
