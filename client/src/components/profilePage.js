@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
-import { Image, Form, Col, Row, Button, Modal } from 'react-bootstrap';
+import { Form, Col, Row, Button, Modal } from 'react-bootstrap';
 import './profilePage.css';
 import NavbarForSite from './navbar';
 import Footer from './footer';

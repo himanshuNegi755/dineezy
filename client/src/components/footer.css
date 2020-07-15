@@ -5,12 +5,14 @@
 .contact-details{
   text-align: center;
 }
+
 .contact-us {
     font-family: 'Ubuntu', sans-serif;
     letter-spacing: 1rem;
     color: white;
     padding: 2% 15%;
 }
+
 .contact-text {
     font-size: 0.8rem;
     line-height: 1.5;
@@ -35,14 +37,17 @@
     color: #3b5998;
     transition: 0.3s;
 }
+
 .fa-instagram:hover{
     color: white;
     transition: 0.3s;
 }
+
 .fa-envelope:hover{
     color: #D44638;
     transition: 0.3s;
 }
+
 .fa-twitter:hover{
     color: #00acee;
     transition: 0.3s;
@@ -61,6 +66,7 @@
   .footer {
       padding: 2% 5%;
   }
+    
   .contact-us {
       font-family: 'Ubuntu', sans-serif;
       letter-spacing: 0.7rem;

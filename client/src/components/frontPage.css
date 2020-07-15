@@ -8,6 +8,7 @@
     background-color: #e1ffc2;
     padding: 0 15% 2%;
 }
+
 #front-carousel{
   box-shadow: 0 0 15px grey;
 }
@@ -16,6 +17,7 @@
   text-align: center;
   padding: 8% 7%;
 }
+
 .about-heading{
   font-family: 'Righteous', cursive;
   font-size: 3.5rem;
@@ -43,10 +45,12 @@
     letter-spacing: 1rem;
     padding: 2% 0;
 }
+
 .card{
     background-color: #e1ffc2;
     border-radius: 2%;
 }
+
 .card-header{
     font-family: 'Ubuntu', sans-serif;
 }
@@ -64,12 +68,13 @@
     padding: 0 10%;
 }
 
+.signUp-button-from-pricing {
+    text-decoration: none !important;
+}
+
 @media (max-width: 991px) {
 
   .front-parent-div{
-<<<<<<< HEAD
-    padding: 0 0 5%;
-=======
     padding: 0 0;
   }
   .about-heading{
@@ -80,7 +85,6 @@
   .pricing-heading{
     font-size: 3rem;
     letter-spacing: 0.8rem;
->>>>>>> 1cd6a8fc02303a49fc54445d00f56b3f2d1d3180
   }
     
 }

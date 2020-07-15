@@ -10,7 +10,7 @@ class ShowMenu extends Component{
     constructor(props) {
         super(props);
         
-        this.state = { category:[], itemsByCategory: [] }
+        this.state = { category: [], itemsByCategory: [], itemQuantity: [] }
         
         this.loadCategoryFunction = this.loadCategoryFunction.bind(this);
         this.loadCategoryFunction();
@@ -42,7 +42,7 @@ class ShowMenu extends Component{
                 return (
                     <React.Fragment>
                         <div className="btn-div">
-                            <h5>Nothing to show</h5>
+                            <h5>Loading</h5>
                         </div>
                     </React.Fragment>
                 )
@@ -65,11 +65,15 @@ class ShowMenu extends Component{
     renderMenuItemList = () => {
         const list = this.state.itemsByCategory.map((menuItem) =>
             <div key={menuItem.menu._id}>
-                <ItemCard itemName={menuItem.menu.itemName} vegOrNonVeg={menuItem.menu.vegOrNonVeg} price={menuItem.menu.price} description={menuItem.menu.description} itemId={menuItem.menu._id}/>
+                <ItemCard itemName={menuItem.menu.itemName} vegOrNonVeg={menuItem.menu.vegOrNonVeg} price={menuItem.menu.price} description={menuItem.menu.description} itemId={menuItem.menu._id} itemQuantity={this.state.quantity}/>
             </div>
         );
 
         return (list);
+    }
+    
+    increaseItemQuantity() {
+        
     }
     
     render() {        

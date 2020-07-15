@@ -51,8 +51,8 @@ class MenuItems extends Component{
                 <Table striped bordered hover className="table-for-items">
                     <tbody>
                         <tr>
-                            <td class="item-detail">Item Name</td>
-                            <td class="item-input">
+                            <td className="item-detail">Item Name</td>
+                            <td className="item-input">
                                 <InputGroup>
                                     <FormControl
                                         placeholder="Item Name"
@@ -66,8 +66,8 @@ class MenuItems extends Component{
                             </td>
                         </tr>
                         <tr>
-                            <td class="item-detail">Veg Or Non-Veg</td>
-                            <td class="item-input">
+                            <td className="item-detail">Veg Or Non-Veg</td>
+                            <td className="item-input">
                                 <InputGroup>
                                     <FormControl
                                         placeholder="Item Name"
@@ -81,8 +81,8 @@ class MenuItems extends Component{
                             </td>
                         </tr>
                         <tr>
-                            <td class="item-detail">Price</td>
-                            <td class="item-input">
+                            <td className="item-detail">Price</td>
+                            <td className="item-input">
                                 <InputGroup>
                                     <FormControl
                                         placeholder="Item Name"
@@ -96,8 +96,8 @@ class MenuItems extends Component{
                             </td>
                         </tr>
                         <tr>
-                            <td class="item-detail">Description</td>
-                            <td class="item-input">
+                            <td className="item-detail">Description</td>
+                            <td className="item-input">
                                 <InputGroup>
                                     <FormControl
                                         placeholder="Item Name"
@@ -111,8 +111,8 @@ class MenuItems extends Component{
                             </td>
                         </tr>
                         <tr>
-                            <td class="item-detail">Category</td>
-                            <td class="item-input">
+                            <td className="item-detail">Category</td>
+                            <td className="item-input">
                                 <InputGroup>
                                     <FormControl
                                         placeholder="Item Name"
