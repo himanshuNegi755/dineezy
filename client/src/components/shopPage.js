@@ -84,7 +84,7 @@ class ProfilePage extends Component{
         this.setState({shopIdVar: shopId});
         axios.get(`http://localhost:5000/menu/${shopId}`)
         .then(res => {
-            console.log(res.data[0].menu)
+            //console.log(res.data[0].menu)
             this.setState({menuItemList: res.data[0].menu})
         })
     }

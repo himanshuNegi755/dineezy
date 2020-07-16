@@ -1,16 +1,3 @@
 .card-for-item {
     margin: auto;
 }
-
-.change-quantity-div i {
-    float: left;
-    cursor: pointer;
-}
-
-.change-quantity-div p {
-    float: left;
-    width: 42px;
-    height: 48px;
-    text-align: center;
-    font-size: 25px;
-}

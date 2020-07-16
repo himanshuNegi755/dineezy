@@ -10,13 +10,12 @@ class ShowMenu extends Component{
     constructor(props) {
         super(props);
         
-        this.state = { category: [], itemsByCategory: [], itemQuantity: [] }
+        this.state = { category: [], itemsByCategory: [] }
         
         this.loadCategoryFunction = this.loadCategoryFunction.bind(this);
         this.loadCategoryFunction();
-        this.renderMidContent = this.renderMidContent.bind(this);
+        this.renderItemCategory = this.renderItemCategory.bind(this);
         this.loadItemFunction = this.loadItemFunction.bind(this);
-        this.loadItemFunction();
     }
     
     loadCategoryFunction() {
@@ -35,8 +34,7 @@ class ShowMenu extends Component{
         })
     }
     
-    
-    renderMidContent = () => {
+    renderItemCategory = () => {
         switch(this.state.category.length) {
             case 0:
                 return (
@@ -47,8 +45,6 @@ class ShowMenu extends Component{
                     </React.Fragment>
                 )
             default:
-                
-                
                 const list = this.state.category.map((itemCategory) =>
                     <div key={itemCategory}>
                         <ul>
@@ -65,15 +61,11 @@ class ShowMenu extends Component{
     renderMenuItemList = () => {
         const list = this.state.itemsByCategory.map((menuItem) =>
             <div key={menuItem.menu._id}>
-                <ItemCard itemName={menuItem.menu.itemName} vegOrNonVeg={menuItem.menu.vegOrNonVeg} price={menuItem.menu.price} description={menuItem.menu.description} itemId={menuItem.menu._id} itemQuantity={this.state.quantity}/>
+                <ItemCard itemName={menuItem.menu.itemName} vegOrNonVeg={menuItem.menu.vegOrNonVeg} price={menuItem.menu.price} description={menuItem.menu.description} itemId={menuItem.menu._id}/>
             </div>
         );
 
         return (list);
-    }
-    
-    increaseItemQuantity() {
-        
     }
     
     render() {        
@@ -83,12 +75,20 @@ class ShowMenu extends Component{
                 <NavbarForSite />
                 
                 <div className="menu-category">
-                    {this.renderMidContent()}
+                    {this.renderItemCategory()}
+                </div>
+                
+                <div className="cart-btn">
+                    <span className="nav-icon">
+                        <i className="fas fa-cart-plus"></i>
+                    </span>
+                    <div className="cart-items">0</div>
                 </div>
                 
                 <div className="items-card">
                     {this.renderMenuItemList()}
                 </div>
+
             </div>
         );
     }

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import './frontPage.css';
 import NavbarForSite from './navbar';
 import Footer from './footer';
@@ -6,6 +7,71 @@ import NOTch from './images/no-touch.svg'
 import MobChk from './images/onMobile.svg'
 
 class FrontPage extends Component{
+    
+    constructor(props) {
+        super(props);
+
+        this.renderPricingContent = this.renderPricingContent.bind(this);
+        this.renderFreeContent = this.renderFreeContent.bind(this);
+    }
+
+    renderPricingContent = () => {
+        switch(this.props.user) {
+            case null:
+                return (
+                    <React.Fragment>
+                        <div className="btn-div">
+                            <h5>Loading</h5>
+                        </div>
+                    </React.Fragment>
+                )
+            case false:
+                return (
+                    <React.Fragment>
+                        <a href="http://localhost:5000/auth/google" className="signUp-button-from-pricing">
+                            <button type="button" className="btn btn-dark btn-lg btn-block">Sign Up</button>
+                        </a>
+
+                    </React.Fragment>
+                )
+            default:
+                return (
+                    <React.Fragment>
+                        <div>
+                        </div>
+                    </React.Fragment>
+                )
+        }
+    }
+    
+    renderFreeContent = () => {
+        switch(this.props.user) {
+            case null:
+                return (
+                    <React.Fragment>
+                        <div className="btn-div">
+                            <h5>Loading</h5>
+                        </div>
+                    </React.Fragment>
+                )
+            case false:
+                return (
+                    <React.Fragment>
+                        <a href="http://localhost:5000/auth/google" className="signUp-button-from-pricing">
+                            <button type="button" className="btn btn-outline-dark btn-lg btn-block">Sign Up</button>
+                        </a>
+
+                    </React.Fragment>
+                )
+            default:
+                return (
+                    <React.Fragment>
+                        <div>
+                        </div>
+                    </React.Fragment>
+                )
+        }
+    }
 
     render() {
 
@@ -103,9 +169,7 @@ class FrontPage extends Component{
                           <div className="card-body">
                             <h2 className="price-text">Free</h2>
                             <p className="trial-text">After the trail version you'll love to try our monthly and yearly packs.</p>
-                            <a href="http://localhost:5000/auth/google" className="signUp-button-from-pricing">
-                                <button type="button" class="btn btn-outline-dark btn-lg btn-block">Sign Up</button>
-                            </a>
+                            {this.renderFreeContent()}
                           </div>
                         </div>
                       </div>
@@ -119,9 +183,7 @@ class FrontPage extends Component{
                             <h2 className="price-text">₹ 150 / mo</h2>
                             <p>Payment at the beginning of the month</p>
                             <p>Validity : 30 Days from the day of payment.</p>
-                            <a href="http://localhost:5000/auth/google" className="signUp-button-from-pricing">
-                                <button type="button" class="btn btn-dark btn-lg btn-block">Sign Up</button>
-                            </a>
+                            {this.renderPricingContent()}
                           </div>
                         </div>
                       </div>
@@ -134,9 +196,7 @@ class FrontPage extends Component{
                             <h2 className="price-text">₹ 1200 / yr</h2>
                             <p>Payment at the beginning of the year</p>
                             <p>Validity : 365 days from the day of payment</p>
-                            <a href="http://localhost:5000/auth/google" className="signUp-button-from-pricing">
-                                <button type="button" class="btn btn-dark btn-lg btn-block">Sign Up</button>
-                            </a>
+                            {this.renderPricingContent()}
                           </div>
                         </div>
                       </div>
@@ -153,5 +213,10 @@ class FrontPage extends Component{
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        user: state.auth
+    }
+}
 
-export default FrontPage;
+export default connect(mapStateToProps)(FrontPage);

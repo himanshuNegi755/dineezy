@@ -15,3 +15,23 @@
 .items-card {
     margin-top: 50px;
 }
+
+.nav-icon {
+    font-size: 1.5rem;
+}
+
+.cart-btn {
+    margin-top: 40px;
+    position: relative;
+    cursor: pointer;
+}
+
+.cart-items {
+    position: absolute;
+    top: -7px;
+    left: 403px;
+    background: #f09d51;
+    padding: 0 5px;
+    border-radius: 30%;
+    color: #fff;
+}

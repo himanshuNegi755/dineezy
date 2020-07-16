@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { addItem } from '../store/actions/itemActions';
 import { Card, Button } from 'react-bootstrap';
 import './itemCard.css';
 
@@ -6,13 +8,9 @@ class ItemCard extends Component{
     
     constructor(props) {
         super(props);
-        
-        this.state = { quantity: 0 }
     
         this.showVegOrNonVegImage = this.showVegOrNonVegImage.bind(this);
-        this.increaseItemQuantity = this.increaseItemQuantity.bind(this);
-        this.decreaseItemQuantity = this.decreaseItemQuantity.bind(this);
-        this.itemWithQuantity = {itemId: "", quantity: 0};
+        this.addItemFunction = this.addItemFunction.bind(this);
     }
     
     showVegOrNonVegImage (vegOrNonVeg) {
@@ -22,19 +20,17 @@ class ItemCard extends Component{
             )
         } else {
             return(
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAACU0lEQVRoge2ZzW5SYRCGn+FACxuadmWUuG2jG2M07UmPkRuw0CtRSSN214UG7eI0dufOSyi9AkxADDFxZ/dau1TaTTU9MC6KiTZQ6BzCT3KehBW8M/My33zf+YGIiIiIcSK9vljxPR1lIf34WKh2rTU26kKGTbzfD3o5HxX9VsLUdyAyMG6m3kDfIb4Kru8uIE4e1bU2siSQAVA4RDlA2E/8Zq+6Wf05rJxDMeD6bkrVKSg8Q0mD/HfACCwiLAL5YJadFf/BthDs1Av107C5Qy+h1der11Xj7xFeAOkBJHOgL9s4H7w33s2w+UMZWN7NZloJaSB6/6pagTtBi5rruzfC1GA24PpuSoKgDIQpIAPOXnYrm7QGMBtoS2wDuGvV/0Xh3mk6eGLVmwy4vrsgKhvWpBcReO6VvHmL1tiB2DqDDeygzAUzkjNVYkz4yKjrjeiaRWYyoMRuW3SXx+SWRWfsgF6z6Xojxt1skq6F2haR1cCRUTf0mLYZUL5YdH0wxbR1QNg36S4LqZQtOpOBGK0ycGzRdkOhORuLm/4Uk4F6of4DZNui7YaIlCpPK02L1rwLJU8cX+CTVf8PjeSxs2sVmw1Utiq/oJUHDq0xgG/Oma6fx7IR6hyoF+rfnTNdBhpXV+vnuINXK9ZCbcmhD7JasXaUPIk/VNhkgMFWaCJSnI+n3erj6tew+YdyT9xZAq+8kvc2mJGcojkRlujc1HO+zA5AyylJlK0D242hPpXoPG141/mMhEm6FjIRGRg3U2+g7xBP2puai0x9ByIiIiLGyx9AgJ3oyiyc0wAAAABJRU5ErkJggg=="/>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAACU0lEQVRoge2ZzW5SYRCGn+FACxuadmWUuG2jG2M07UmPkRuw0CtRSSN214UG7eI0dufOSyi9AkxADDFxZ/dau1TaTTU9MC6KiTZQ6BzCT3KehBW8M/My33zf+YGIiIiIcSK9vljxPR1lIf34WKh2rTU26kKGTbzfD3o5HxX9VsLUdyAyMG6m3kDfIb4Kru8uIE4e1bU2siSQAVA4RDlA2E/8Zq+6Wf05rJxDMeD6bkrVKSg8Q0mD/HfACCwiLAL5YJadFf/BthDs1Av107C5Qy+h1der11Xj7xFeAOkBJHOgL9s4H7w33s2w+UMZWN7NZloJaSB6/6pagTtBi5rruzfC1GA24PpuSoKgDIQpIAPOXnYrm7QGMBtoS2wDuGvV/0Xh3mk6eGLVmwy4vrsgKhvWpBcReO6VvHmL1tiB2DqDDeygzAUzkjNVYkz4yKjrjeiaRWYyoMRuW3SXx+SWRWfsgF6z6Xojxt1skq6F2haR1cCRUTf0mLYZUL5YdH0wxbR1QNg36S4LqZQtOpOBGK0ycGzRdkOhORuLm/4Uk4F6of4DZNui7YaIlCpPK02L1rwLJU8cX+CTVf8PjeSxs2sVmw1Utiq/oJUHDq0xgG/Oma6fx7IR6hyoF+rfnTNdBhpXV+vnuINXK9ZCbcmhD7JasXaUPIk/VNhkgMFWaCJSnI+n3erj6tew+YdyT9xZAq+8kvc2mJGcojkRlujc1HO+zA5AyylJlK0D242hPpXoPG141/mMhEm6FjIRGRg3U2+g7xBP2puai0x9ByIiIiLGyx9AgJ3oyiyc0wAAAABJRU5ErkJggg==" alt="veg"/>
             )
         }
     }
     
-    increaseItemQuantity() {
-        this.setState({quantity: this.state.quantity+1})
-    }
-    
-    decreaseItemQuantity() {
-        if(this.state.quantity > 0) {
-            this.setState({quantity: this.state.quantity-1})
-        }
+    addItemFunction() {
+        this.props.addItem({
+            itemName: this.props.itemName,
+            itemPrice: this.props.price,
+            itemQuanity: 1
+        })
     }
     
     render() {
@@ -51,16 +47,17 @@ class ItemCard extends Component{
                     <Card.Text>
                         Rs. {this.props.price}
                     </Card.Text>
-                    <div className="change-quantity-div">
-                        <i className="fas fa-minus-square fa-3x" onClick={this.decreaseItemQuantity}></i>
-                        <p>{this.state.quantity}</p>
-                        <i className="fas fa-plus-square fa-3x" onClick={this.increaseItemQuantity}></i>
-                    </div>
-                    
+                    <Button onClick= {this.addItemFunction}>Add to Cart</Button>
                 </Card.Body>
             </Card>
         );
     }
 }
 
-export default ItemCard;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addItem: (itemObj) => { dispatch(addItem(itemObj)) }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(ItemCard);
