@@ -1,20 +1,20 @@
 import React, {Component} from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import './itemCard.css';
 
-class ItemCard extends Component{ 
-    
+class ItemCard extends Component{
+
     constructor(props) {
         super(props);
-        
+
         this.state = { quantity: 0 }
-    
+
         this.showVegOrNonVegImage = this.showVegOrNonVegImage.bind(this);
         this.increaseItemQuantity = this.increaseItemQuantity.bind(this);
         this.decreaseItemQuantity = this.decreaseItemQuantity.bind(this);
         this.itemWithQuantity = {itemId: "", quantity: 0};
     }
-    
+
     showVegOrNonVegImage (vegOrNonVeg) {
         if(vegOrNonVeg === "non-veg") {
             return (
@@ -22,42 +22,42 @@ class ItemCard extends Component{
             )
         } else {
             return(
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAACU0lEQVRoge2ZzW5SYRCGn+FACxuadmWUuG2jG2M07UmPkRuw0CtRSSN214UG7eI0dufOSyi9AkxADDFxZ/dau1TaTTU9MC6KiTZQ6BzCT3KehBW8M/My33zf+YGIiIiIcSK9vljxPR1lIf34WKh2rTU26kKGTbzfD3o5HxX9VsLUdyAyMG6m3kDfIb4Kru8uIE4e1bU2siSQAVA4RDlA2E/8Zq+6Wf05rJxDMeD6bkrVKSg8Q0mD/HfACCwiLAL5YJadFf/BthDs1Av107C5Qy+h1der11Xj7xFeAOkBJHOgL9s4H7w33s2w+UMZWN7NZloJaSB6/6pagTtBi5rruzfC1GA24PpuSoKgDIQpIAPOXnYrm7QGMBtoS2wDuGvV/0Xh3mk6eGLVmwy4vrsgKhvWpBcReO6VvHmL1tiB2DqDDeygzAUzkjNVYkz4yKjrjeiaRWYyoMRuW3SXx+SWRWfsgF6z6Xojxt1skq6F2haR1cCRUTf0mLYZUL5YdH0wxbR1QNg36S4LqZQtOpOBGK0ycGzRdkOhORuLm/4Uk4F6of4DZNui7YaIlCpPK02L1rwLJU8cX+CTVf8PjeSxs2sVmw1Utiq/oJUHDq0xgG/Oma6fx7IR6hyoF+rfnTNdBhpXV+vnuINXK9ZCbcmhD7JasXaUPIk/VNhkgMFWaCJSnI+n3erj6tew+YdyT9xZAq+8kvc2mJGcojkRlujc1HO+zA5AyylJlK0D242hPpXoPG141/mMhEm6FjIRGRg3U2+g7xBP2puai0x9ByIiIiLGyx9AgJ3oyiyc0wAAAABJRU5ErkJggg=="/>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAACU0lEQVRoge2ZzW5SYRCGn+FACxuadmWUuG2jG2M07UmPkRuw0CtRSSN214UG7eI0dufOSyi9AkxADDFxZ/dau1TaTTU9MC6KiTZQ6BzCT3KehBW8M/My33zf+YGIiIiIcSK9vljxPR1lIf34WKh2rTU26kKGTbzfD3o5HxX9VsLUdyAyMG6m3kDfIb4Kru8uIE4e1bU2siSQAVA4RDlA2E/8Zq+6Wf05rJxDMeD6bkrVKSg8Q0mD/HfACCwiLAL5YJadFf/BthDs1Av107C5Qy+h1der11Xj7xFeAOkBJHOgL9s4H7w33s2w+UMZWN7NZloJaSB6/6pagTtBi5rruzfC1GA24PpuSoKgDIQpIAPOXnYrm7QGMBtoS2wDuGvV/0Xh3mk6eGLVmwy4vrsgKhvWpBcReO6VvHmL1tiB2DqDDeygzAUzkjNVYkz4yKjrjeiaRWYyoMRuW3SXx+SWRWfsgF6z6Xojxt1skq6F2haR1cCRUTf0mLYZUL5YdH0wxbR1QNg36S4LqZQtOpOBGK0ycGzRdkOhORuLm/4Uk4F6of4DZNui7YaIlCpPK02L1rwLJU8cX+CTVf8PjeSxs2sVmw1Utiq/oJUHDq0xgG/Oma6fx7IR6hyoF+rfnTNdBhpXV+vnuINXK9ZCbcmhD7JasXaUPIk/VNhkgMFWaCJSnI+n3erj6tew+YdyT9xZAq+8kvc2mJGcojkRlujc1HO+zA5AyylJlK0D242hPpXoPG141/mMhEm6FjIRGRg3U2+g7xBP2puai0x9ByIiIiLGyx9AgJ3oyiyc0wAAAABJRU5ErkJggg==" alt="veg"/>
             )
         }
     }
-    
+
     increaseItemQuantity() {
         this.setState({quantity: this.state.quantity+1})
     }
-    
+
     decreaseItemQuantity() {
         if(this.state.quantity > 0) {
             this.setState({quantity: this.state.quantity-1})
         }
     }
-    
+
     render() {
         return (
-            <Card style={{ width: '80%' }} className="card-for-item" bg="light">
+            <Card style={{ width: '49%' }} className="card-for-item" bg="light">
                 <Card.Body>
                     <Card.Title>
-                        {this.props.itemName}
-                        {this.showVegOrNonVegImage(this.props.vegOrNonVeg)}
+                        <div className="item-name">{this.props.itemName}</div>
+                        <div className="vnv-id">{this.showVegOrNonVegImage(this.props.vegOrNonVeg)}</div>
                     </Card.Title>
-                    <Card.Text>
+                    <Card.Text className="item-description">
                         {this.props.description}
                     </Card.Text>
-                    <Card.Text>
-                        Rs. {this.props.price}
+                    <Card.Text  className="item-price">
+                        ₹ {this.props.price}
+                        <p className="item-quantity">Qty: {this.state.quantity}</p>
                     </Card.Text>
-                    <div className="change-quantity-div">
-                        <i className="fas fa-minus-square fa-3x" onClick={this.decreaseItemQuantity}></i>
-                        <p>{this.state.quantity}</p>
-                        <i className="fas fa-plus-square fa-3x" onClick={this.increaseItemQuantity}></i>
-                    </div>
-                    
+
                 </Card.Body>
+                <Card.Footer>
+                  <i class="fas fa-minus fa-2x minus-div qty-div"  onClick={this.decreaseItemQuantity}></i>
+                  <i class="fas fa-plus fa-2x plus-div qty-div" onClick={this.increaseItemQuantity}></i>
+                </Card.Footer>
             </Card>
         );
     }

@@ -1,16 +1,79 @@
 .card-for-item {
-    margin: auto;
-}
-
-.change-quantity-div i {
+    margin: 1% 0.5%;
     float: left;
-    cursor: pointer;
+    border: 0;
 }
-
-.change-quantity-div p {
+.card-body{
+  border-radius: 5px;
+  background-color: #e1ffc2;
+  padding-left: 1rem;
+}
+.item-name{
+  display: inline-block;
+  font-family: 'Noto Serif', serif;
+  font-size: 1.5rem;
+}
+.vnv-id{
+  float: right;
+}
+.item-price{
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1.2rem;
+}
+.item-quantity{
+  float: right;
+  padding-right: 0.5rem;
+}
+.card-footer{
+  background-color: #e1ffc2;
+  padding: 1%;
+}
+.qty-div{
+  background-color: #092532;
+  padding-top: 0.6rem;
+  text-align: center;
+  width: 49.6%;
+  display: inline-block;
+  height: 3.2rem;
+}
+.minus-div{
+    border-radius: 9px 0 0 9px;
+    color: #c7e2b2;
     float: left;
-    width: 42px;
-    height: 48px;
+}
+.minus-div:hover{
+    color: white;
+    background-color: #eb1400;
+}
+.plus-div{
+    border-radius: 0 9px 9px 0;
+    color: #c7e2b2;
+    float: right;
+}
+.plus-div:hover{
+    color: white;
+    background-color: #68eb00;
+}
+@media (max-width: 900px)
+{
+  .card-body{
+    height: 15rem
+  }
+  .item-name{
+    font-size: 1.3rem;
+  }
+  .item-description{
+    font-size: 0.9rem;
+  }
+  .card-footer{
+    background-color: #e1ffc2;
+    padding: 1% 2% 2%;
+  }
+  .qty-div{
     text-align: center;
-    font-size: 25px;
+    width: 49%;
+    padding-top: 0.5rem;
+    display: inline-block;
+    height: 3rem;
+  }
 }

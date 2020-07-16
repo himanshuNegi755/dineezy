@@ -1,17 +1,34 @@
 .show-menu-main-div {
     overflow: hidden;
+    background-color: #c7e2b2;
+    height: 45rem;
 }
 
 .menu-category {
-    margin: 10px;
+    height: 3.7rem;
+    margin: 0;
 }
-
+.menu-category ul{
+    display: block;
+    margin: 2px 5% 0;
+}
 .menu-category ul li{
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.3rem;
     list-style: none;
     float: left;
-    margin-right: 30px;
+    width: 11rem;
+    padding: 1% 2%;
+    margin: 2px 0.2rem 0;
+}
+.menu-category ul li:hover{
+    transition: 0.4s;
+    background-color: #092532;
+    color: #e1ffc2;
 }
 
 .items-card {
-    margin-top: 50px;
+    margin: 0 1%;
 }

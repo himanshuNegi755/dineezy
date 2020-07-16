@@ -5,20 +5,20 @@ import NavbarForSite from './navbar';
 import ItemCard from './itemCard';
 
 
-class ShowMenu extends Component{ 
-    
+class ShowMenu extends Component{
+
     constructor(props) {
         super(props);
-        
+
         this.state = { category: [], itemsByCategory: [], itemQuantity: [] }
-        
+
         this.loadCategoryFunction = this.loadCategoryFunction.bind(this);
         this.loadCategoryFunction();
         this.renderMidContent = this.renderMidContent.bind(this);
         this.loadItemFunction = this.loadItemFunction.bind(this);
         this.loadItemFunction();
     }
-    
+
     loadCategoryFunction() {
         axios.get(`http://localhost:5000/item_categories/${this.props.match.params.shopId}`)
         .then(res => {
@@ -26,7 +26,7 @@ class ShowMenu extends Component{
             this.setState({category: res.data})
         })
     }
-    
+
     loadItemFunction(itemCategory) {
         axios.get(`http://localhost:5000/items?shopId=${this.props.match.params.shopId}&category=${itemCategory}`)
         .then(res => {
@@ -34,8 +34,8 @@ class ShowMenu extends Component{
             this.setState({itemsByCategory: res.data})
         })
     }
-    
-    
+
+
     renderMidContent = () => {
         switch(this.state.category.length) {
             case 0:
@@ -47,8 +47,8 @@ class ShowMenu extends Component{
                     </React.Fragment>
                 )
             default:
-                
-                
+
+
                 const list = this.state.category.map((itemCategory) =>
                     <div key={itemCategory}>
                         <ul>
@@ -56,12 +56,12 @@ class ShowMenu extends Component{
                         </ul>
                     </div>
                 );
-        
+
         return (list);
-                
+
         }
     }
-    
+
     renderMenuItemList = () => {
         const list = this.state.itemsByCategory.map((menuItem) =>
             <div key={menuItem.menu._id}>
@@ -71,21 +71,21 @@ class ShowMenu extends Component{
 
         return (list);
     }
-    
+
     increaseItemQuantity() {
-        
+
     }
-    
-    render() {        
+
+    render() {
         return (
             <div className="show-menu-main-div">
-                
-                <NavbarForSite />
-                
+
+                <NavbarForSite/>
+
                 <div className="menu-category">
                     {this.renderMidContent()}
                 </div>
-                
+
                 <div className="items-card">
                     {this.renderMenuItemList()}
                 </div>

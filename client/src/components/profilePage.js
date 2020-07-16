@@ -157,7 +157,7 @@ class ProfilePage extends Component{
                     </Form>
                 </div>
 
-                <div>
+                <div id="footer">
                     <Footer />
                 </div>
 
