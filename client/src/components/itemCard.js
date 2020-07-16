@@ -2,17 +2,18 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { addItem } from '../store/actions/itemActions';
 import { Card, Button } from 'react-bootstrap';
+
 import './itemCard.css';
 
-class ItemCard extends Component{ 
-    
+class ItemCard extends Component{
+
     constructor(props) {
         super(props);
-    
+
         this.showVegOrNonVegImage = this.showVegOrNonVegImage.bind(this);
         this.addItemFunction = this.addItemFunction.bind(this);
     }
-    
+
     showVegOrNonVegImage (vegOrNonVeg) {
         if(vegOrNonVeg === "non-veg") {
             return (
@@ -32,23 +33,27 @@ class ItemCard extends Component{
             itemQuanity: 1
         })
     }
-    
+
     render() {
         return (
-            <Card style={{ width: '80%' }} className="card-for-item" bg="light">
+            <Card style={{ width: '49%' }} className="card-for-item" bg="light">
                 <Card.Body>
                     <Card.Title>
-                        {this.props.itemName}
-                        {this.showVegOrNonVegImage(this.props.vegOrNonVeg)}
+                        <div className="item-name">{this.props.itemName}</div>
+                        <div className="vnv-id">{this.showVegOrNonVegImage(this.props.vegOrNonVeg)}</div>
                     </Card.Title>
-                    <Card.Text>
+                    <Card.Text className="item-description">
                         {this.props.description}
                     </Card.Text>
-                    <Card.Text>
-                        Rs. {this.props.price}
+                    <Card.Text  className="item-price">
+                        ₹ {this.props.price}
                     </Card.Text>
                     <Button onClick= {this.addItemFunction}>Add to Cart</Button>
                 </Card.Body>
+                <Card.Footer>
+                  <i class="fas fa-minus fa-2x minus-div qty-div"  onClick={this.decreaseItemQuantity}></i>
+                  <i class="fas fa-plus fa-2x plus-div qty-div" onClick={this.increaseItemQuantity}></i>
+                </Card.Footer>
             </Card>
         );
     }

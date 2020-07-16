@@ -5,11 +5,11 @@ import NavbarForSite from './navbar';
 import ItemCard from './itemCard';
 
 
-class ShowMenu extends Component{ 
-    
+class ShowMenu extends Component{
+
     constructor(props) {
         super(props);
-        
+
         this.state = { category: [], itemsByCategory: [] }
         
         this.loadCategoryFunction = this.loadCategoryFunction.bind(this);
@@ -17,7 +17,7 @@ class ShowMenu extends Component{
         this.renderItemCategory = this.renderItemCategory.bind(this);
         this.loadItemFunction = this.loadItemFunction.bind(this);
     }
-    
+
     loadCategoryFunction() {
         axios.get(`http://localhost:5000/item_categories/${this.props.match.params.shopId}`)
         .then(res => {
@@ -25,7 +25,7 @@ class ShowMenu extends Component{
             this.setState({category: res.data})
         })
     }
-    
+
     loadItemFunction(itemCategory) {
         axios.get(`http://localhost:5000/items?shopId=${this.props.match.params.shopId}&category=${itemCategory}`)
         .then(res => {
@@ -52,12 +52,12 @@ class ShowMenu extends Component{
                         </ul>
                     </div>
                 );
-        
+
         return (list);
-                
+
         }
     }
-    
+
     renderMenuItemList = () => {
         const list = this.state.itemsByCategory.map((menuItem) =>
             <div key={menuItem.menu._id}>
@@ -67,13 +67,13 @@ class ShowMenu extends Component{
 
         return (list);
     }
-    
-    render() {        
+
+    render() {
         return (
             <div className="show-menu-main-div">
-                
-                <NavbarForSite />
-                
+
+                <NavbarForSite/>
+
                 <div className="menu-category">
                     {this.renderItemCategory()}
                 </div>
@@ -84,7 +84,7 @@ class ShowMenu extends Component{
                     </span>
                     <div className="cart-items">0</div>
                 </div>
-                
+
                 <div className="items-card">
                     {this.renderMenuItemList()}
                 </div>
