@@ -7,7 +7,7 @@ import NOTch from '../images/no-touch.svg'
 import MobChk from '../images/onMobile.svg'
 
 class FrontPage extends Component{
-    
+
     constructor(props) {
         super(props);
 
@@ -43,7 +43,7 @@ class FrontPage extends Component{
                 )
         }
     }
-    
+
     renderFreeContent = () => {
         switch(this.props.user) {
             case null:
