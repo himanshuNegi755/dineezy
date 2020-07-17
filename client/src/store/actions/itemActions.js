@@ -6,9 +6,9 @@ export const addItem = (itemObj) => {
     }
 }
 
-export const deleteItem = (itemId) => {
+export const deleteItem = (itemName) => {
     return {
         type: 'DELETE_ITEM',
-        payload: itemId
+        payload: itemName
     }
 }

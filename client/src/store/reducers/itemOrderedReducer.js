@@ -13,6 +13,14 @@ const itemOrderedReducer = (state = initState, action) => {
                 ...state,
                 items: [...state.items, action.payload]
             }
+        case 'DELETE_ITEM':
+            let newItems = state.items.filter(post => {
+                return action.payload !== post.itemName
+            });
+            return {
+                ...state,
+                items: newItems
+            }
         default :
             return state;
     }

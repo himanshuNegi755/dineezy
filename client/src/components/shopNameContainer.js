@@ -113,13 +113,6 @@ class ShopNameContainer extends Component{
                     </Modal.Body>
                 </Modal>
 
-
-
-
-
-
-
-
                 <Modal
                     size="md"
                     aria-labelledby="contained-modal-title-vcenter"
