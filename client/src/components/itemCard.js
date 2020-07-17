@@ -33,7 +33,7 @@ class ItemCard extends Component{
             itemQuanity: 1
         })
     }
-    
+
     deleteItemFunction() {
         this.props.deleteItem(this.props.itemName);
     }

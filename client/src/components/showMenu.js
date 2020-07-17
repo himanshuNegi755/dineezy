@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import { Button } from 'react-bootstrap';
 import './showMenu.css';
 import NavbarForSite from './navbar';
 import ItemCard from './itemCard';
-import CartForItem from './cartForItem';
+import ItemsInCart from './itemsInCart';
 
 
 class ShowMenu extends Component{
@@ -11,12 +12,14 @@ class ShowMenu extends Component{
     constructor(props) {
         super(props);
 
-        this.state = { category: [], itemsByCategory: [] }
+        this.state = { category: [], itemsByCategory: [], visibility: "hidden", transform: "translateX(100)" }
 
         this.loadCategoryFunction = this.loadCategoryFunction.bind(this);
         this.loadCategoryFunction();
         this.renderItemCategory = this.renderItemCategory.bind(this);
         this.loadItemFunction = this.loadItemFunction.bind(this);
+        this.showCartSideBar = this.showCartSideBar.bind(this);
+        this.closeCartSideBar = this.closeCartSideBar.bind(this);
     }
 
     loadCategoryFunction() {
@@ -69,6 +72,20 @@ class ShowMenu extends Component{
         return (list);
     }
 
+    closeCartSideBar() {
+        this.setState({
+            visibility: "hidden",
+            transform: "translateX(100)"
+        })
+    }
+
+    showCartSideBar() {
+        this.setState({
+            visibility: "visible",
+            transform: "translateX(0)"
+        })
+    }
+
     render() {
         return (
             <div className="show-menu-main-div">
@@ -88,8 +105,19 @@ class ShowMenu extends Component{
                     {this.renderMenuItemList()}
                 </div>
 
-                <CartForItem />
-                
+                <div className="cart-overlay transparentBcg" style={{visibility: this.state.visibility}}>
+                <div className="cart-side-bar showCart" style={{transform: this.state.transform}}>
+                    <i class="back-btn fas fa-arrow-circle-left fa-2x" onClick={this.closeCartSideBar}></i>
+                      <div className="item-bg"><ItemsInCart /></div>
+                    <div className="cart-footer">
+                        <h3>your total: ₹ 100</h3>
+                        <Button className="clear-cart">Clear cart</Button>
+                    </div>
+
+                </div>
+            </div>
+
+
             </div>
         );
     }
