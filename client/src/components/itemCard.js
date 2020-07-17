@@ -25,7 +25,7 @@ class ItemCard extends Component{
             )
         }
     }
-    
+
     addItemFunction() {
         this.props.addItem({
             itemName: this.props.itemName,
@@ -48,11 +48,9 @@ class ItemCard extends Component{
                     <Card.Text  className="item-price">
                         ₹ {this.props.price}
                     </Card.Text>
-                    <Button onClick= {this.addItemFunction}>Add to Cart</Button>
                 </Card.Body>
                 <Card.Footer>
-                  <i class="fas fa-minus fa-2x minus-div qty-div"  onClick={this.decreaseItemQuantity}></i>
-                  <i class="fas fa-plus fa-2x plus-div qty-div" onClick={this.increaseItemQuantity}></i>
+                    <Button className="add-to-cart" onClick= {this.addItemFunction}>Add to Cart</Button>
                 </Card.Footer>
             </Card>
         );

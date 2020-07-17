@@ -11,7 +11,7 @@ class ShowMenu extends Component{
         super(props);
 
         this.state = { category: [], itemsByCategory: [] }
-        
+
         this.loadCategoryFunction = this.loadCategoryFunction.bind(this);
         this.loadCategoryFunction();
         this.renderItemCategory = this.renderItemCategory.bind(this);
@@ -33,7 +33,7 @@ class ShowMenu extends Component{
             this.setState({itemsByCategory: res.data})
         })
     }
-    
+
     renderItemCategory = () => {
         switch(this.state.category.length) {
             case 0:
@@ -74,17 +74,15 @@ class ShowMenu extends Component{
 
                 <NavbarForSite/>
 
-                <div className="menu-category">
+                <div className="menu-category row">
+                  <div className="col-lg-11 col-md-10 col-sm-10">
                     {this.renderItemCategory()}
+                  </div>
+                  <div className="col-lg-1 col-md-2 col-sm-2 cart-option">
+                        <span><i className="fas fa-cart-plus cart-icon"></i></span>
+                        <span className="cart-items">0</span>
+                  </div>
                 </div>
-                
-                <div className="cart-btn">
-                    <span className="nav-icon">
-                        <i className="fas fa-cart-plus"></i>
-                    </span>
-                    <div className="cart-items">0</div>
-                </div>
-
                 <div className="items-card">
                     {this.renderMenuItemList()}
                 </div>

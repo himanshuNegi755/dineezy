@@ -6,11 +6,12 @@
 
 .menu-category {
     height: 3.7rem;
-    margin: 0;
+    margin: 0 1.5%;
 }
 .menu-category ul{
     display: block;
-    margin: 2px 5% 0;
+    padding: 0;
+    margin: 2px 0 0;
 }
 .menu-category ul li{
     text-align: center;
@@ -19,36 +20,41 @@
     letter-spacing: 0.3rem;
     list-style: none;
     float: left;
-    width: 11rem;
     padding: 1% 2%;
     margin: 2px 0.2rem 0;
+    cursor: pointer;
 }
 .menu-category ul li:hover{
     transition: 0.4s;
     background-color: #092532;
     color: #e1ffc2;
 }
-
 .items-card {
     margin: 0 1%;
 }
 
-.nav-icon {
-    font-size: 1.5rem;
-}
-
-.cart-btn {
-    margin-top: 40px;
-    position: relative;
+.cart-option {
+    border-radius: 28px 3px 3px 28px;
+    margin: 5px 0 0;
+    font-size: 1.3rem;
+    text-align: center;
     cursor: pointer;
 }
-
+.cart-option:hover{
+    transition: 0.4s;
+    background-color:  #092532;
+    color: #e1ffc2;
+}
+.cart-icon{
+    padding: 1.5rem 0 0;
+}
 .cart-items {
+    text-align: center;
+    font-size: 0.8rem;
     position: absolute;
-    top: -7px;
-    left: 403px;
-    background: #f09d51;
-    padding: 0 5px;
-    border-radius: 30%;
+    margin-top: 0.5rem;
+    background-color: #f09d51;
+    padding: 1% 3%;
+    border-radius: 10%;
     color: #fff;
 }

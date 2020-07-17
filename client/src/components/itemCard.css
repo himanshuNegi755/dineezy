@@ -28,31 +28,16 @@
   background-color: #e1ffc2;
   padding: 1%;
 }
-.qty-div{
+.add-to-cart{
+  font-family: 'Ubuntu', sans-serif;
+  width: 100%;
   background-color: #092532;
-  padding-top: 0.6rem;
-  text-align: center;
-  width: 49.6%;
-  display: inline-block;
-  height: 3.2rem;
+  color: #e1ffc2;
+  border-radius: 2px;
+  border: 0;
 }
-.minus-div{
-    border-radius: 9px 0 0 9px;
-    color: #c7e2b2;
-    float: left;
-}
-.minus-div:hover{
-    color: white;
-    background-color: #eb1400;
-}
-.plus-div{
-    border-radius: 0 9px 9px 0;
-    color: #c7e2b2;
-    float: right;
-}
-.plus-div:hover{
-    color: white;
-    background-color: #68eb00;
+.add-to-cart:hover{
+  background-color: #8be0ca;
 }
 @media (max-width: 900px)
 {
