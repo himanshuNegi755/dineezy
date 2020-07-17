@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { addItem, deleteItem } from '../store/actions/itemActions';
+import { addItem } from '../store/actions/itemActions';
 import { Card, Button } from 'react-bootstrap';
 
 import './itemCard.css';
@@ -30,12 +30,8 @@ class ItemCard extends Component{
         this.props.addItem({
             itemName: this.props.itemName,
             itemPrice: this.props.price,
-            itemQuanity: 1
+            itemQuantity: 1
         })
-    }
-
-    deleteItemFunction() {
-        this.props.deleteItem(this.props.itemName);
     }
 
     render() {
@@ -63,8 +59,7 @@ class ItemCard extends Component{
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addItem: (itemObj) => { dispatch(addItem(itemObj)) },
-        deleteItem: (itemName) => { dispatch(deleteItem(itemName)) }
+        addItem: (itemObj) => { dispatch(addItem(itemObj)) }
     }
 }
 

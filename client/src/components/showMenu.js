@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
+//import { addItem, deleteItem } from '../store/actions/itemActions';
 import './showMenu.css';
 import NavbarForSite from './navbar';
 import ItemCard from './itemCard';
@@ -12,7 +14,7 @@ class ShowMenu extends Component{
     constructor(props) {
         super(props);
 
-        this.state = { category: [], itemsByCategory: [], visibility: "hidden", transform: "translateX(100)" }
+        this.state = { category: [], itemsByCategory: [], visibility: "hidden", transform: "translateX(100)", itemsInCart: [], noOfItemsInCart: 0, totalPrice: 0 }
 
         this.loadCategoryFunction = this.loadCategoryFunction.bind(this);
         this.loadCategoryFunction();
@@ -20,6 +22,8 @@ class ShowMenu extends Component{
         this.loadItemFunction = this.loadItemFunction.bind(this);
         this.showCartSideBar = this.showCartSideBar.bind(this);
         this.closeCartSideBar = this.closeCartSideBar.bind(this);
+        this.renderCartItems = this.renderCartItems.bind(this);
+        console.log(this.props.items);
     }
 
     loadCategoryFunction() {
@@ -80,10 +84,40 @@ class ShowMenu extends Component{
     }
 
     showCartSideBar() {
-        this.setState({
-            visibility: "visible",
-            transform: "translateX(0)"
-        })
+        
+        if (this.props.items) {
+            var noOfItems = 0;
+            var totalPrice = 0;
+            
+            for (var i=0; i<this.state.itemsInCart.length; i++){
+                noOfItems+=this.state.itemsInCart[i].itemQuantity;
+                totalPrice+=this.state.itemsInCart[i].itemQuantity * this.state.itemsInCart[i].itemPrice;
+            }
+            
+            this.setState({
+                visibility: "visible",
+                transform: "translateX(0)",
+                itemsInCart: this.props.items,
+                noOfItemsInCart: noOfItems,
+                totalPrice: totalPrice
+            })
+            
+        } else {
+            this.setState({
+                visibility: "visible",
+                transform: "translateX(0)"
+            })
+        }
+    }
+
+    renderCartItems = () => {
+        const list = this.state.itemsInCart.map((cartItem) =>
+            <div key={cartItem.itemName}>
+                <ItemsInCart itemName={cartItem.itemName} price={cartItem.itemPrice} quantity={cartItem.itemQuantity}/>
+            </div>
+        );
+
+        return (list);
     }
 
     render() {
@@ -98,7 +132,7 @@ class ShowMenu extends Component{
                     </div>
                   <div className="col-lg-1 col-md-2 col-sm-2 cart-option">
                       <span onClick={this.showCartSideBar}><i className="fas fa-cart-plus cart-icon"></i></span>
-                      <span className="cart-items">0</span>
+                      <span className="cart-items">{this.state.noOfItemsInCart}</span>
                   </div>
                 </div>
                 <div className="items-card">
@@ -106,16 +140,18 @@ class ShowMenu extends Component{
                 </div>
 
                 <div className="cart-overlay transparentBcg" style={{visibility: this.state.visibility}}>
-                <div className="cart-side-bar showCart" style={{transform: this.state.transform}}>
-                    <i class="back-btn fas fa-arrow-circle-left fa-2x" onClick={this.closeCartSideBar}></i>
-                      <div className="item-bg"><ItemsInCart /></div>
-                    <div className="cart-footer">
-                        <h3>your total: ₹ 100</h3>
-                        <Button className="clear-cart">Clear cart</Button>
-                    </div>
+                    <div className="cart-side-bar showCart" style={{transform: this.state.transform}}>
+                        <i className="back-btn fas fa-arrow-circle-left fa-2x" onClick={this.closeCartSideBar}></i>
+                        <div className="item-bg">
+                            {this.renderCartItems()}
+                        </div>
+                        <div className="cart-footer">
+                            <h3>your total: ₹ {this.state.totalPrice}</h3>
+                            <Button className="clear-cart">Clear cart</Button>
+                        </div>
 
+                    </div>
                 </div>
-            </div>
 
 
             </div>
@@ -123,4 +159,10 @@ class ShowMenu extends Component{
     }
 }
 
-export default ShowMenu;
+const mapStateToProps = (state) => {
+    return {
+        items: state.item.items
+    }
+}
+
+export default connect(mapStateToProps)(ShowMenu);
