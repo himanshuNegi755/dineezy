@@ -127,10 +127,18 @@ class ShowMenu extends Component{
                 <NavbarForSite/>
 
                 <div className="menu-category row">
-                    <div className="col-lg-11 col-md-10 col-sm-10">
-                        {this.renderItemCategory()}
+                    <div className="col-lg-11 col-md-10 col-sm-6 ">
+                        <div className="default-list">{this.renderItemCategory()}</div>
+                        <div class="dropdown category-drop">
+                          <button class="btn btn-secondary dropdown-toggle category-btn" type="button" id="categorydropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Category
+                          </button>
+                          <div class="dropdown-menu category-list" aria-labelledby="categorydropdown">
+                            <div className="small-sc-list">{this.renderItemCategory()}</div>
+                          </div>
+                        </div>
                     </div>
-                  <div className="col-lg-1 col-md-2 col-sm-2 cart-option">
+                  <div className="col-lg-1 col-md-2 col-sm-6 cart-option">
                       <span onClick={this.showCartSideBar}><i className="fas fa-cart-plus cart-icon"></i></span>
                       <span className="cart-items">{this.state.noOfItemsInCart}</span>
                   </div>
