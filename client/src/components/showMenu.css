@@ -29,6 +29,29 @@
     background-color: #092532;
     color: #e1ffc2;
 }
+.category-drop{
+  text-align: center;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.3rem;
+  list-style: none;
+  float: left;
+  padding: 1% 2%;
+  margin: 2px 0.2rem 0;
+  cursor: pointer;
+}
+.category-btn{
+  background-color: #c7e2b2;
+  color: #092532;
+}
+.category-btn:hover{
+  background-color: #092532;
+  color: #e1ffc2;
+}
+.category-list{
+  background-color: #c7e2b2;
+  box-shadow: 1px 1px 3px black;
+}
 .items-card {
     margin: 0 1%;
 }
@@ -84,7 +107,7 @@
     overflow: scroll;
     z-index: 3;
     background: #c7e2b2;
-    padding: 1.5rem;
+    padding: 1.2rem;
     transition: all 0.3s linear;
     /*transform: translateX(100%);*/
 }
@@ -98,8 +121,9 @@
   color: #fff;
 }
 .item-bg{
+  box-shadow: 0 0 3px #94bd75;
   background-color: #e1ffc2;
-  padding: 2px;
+  padding: 0.5rem;
   border-radius: 3px;
 }
 
@@ -130,9 +154,46 @@
   visibility: visible;
 }*/
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 650px) {
   .cart-side-bar {
     width: 30vw;
     min-width: 450px;
+  }
+}
+
+@media (max-width: 575px)
+{
+  .items-card {
+      margin: 8% 1%;
+  }
+  .menu-category ul li{
+      font-size: 1.1rem;
+      letter-spacing: 0.2rem;
+      padding: 1%;
+      margin: 2px 0.1rem 0;
+  }
+  .cart-items {
+      text-align: center;
+      font-size: 0.8rem;
+      position: absolute;
+      margin-top: 0.5rem;
+      background-color: #f09d51;
+      padding: 0 2px;
+      border-radius: 10%;
+      color: #fff;
+  }
+}
+@media (max-width: 900px){
+  .default-list{
+    display: none;
+  }
+  .small-sc-list{
+    margin-left: 1rem;
+  }
+}
+@media (min-width: 901px)
+{
+  .category-drop{
+    display: none;
   }
 }
