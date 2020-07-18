@@ -1,20 +1,10 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
-import { addItem } from '../store/actions/itemActions';
 import { Card, Button } from 'react-bootstrap';
-
 import './itemCard.css';
 
 class ItemCard extends Component{
 
-    constructor(props) {
-        super(props);
-
-        this.showVegOrNonVegImage = this.showVegOrNonVegImage.bind(this);
-        this.addItemFunction = this.addItemFunction.bind(this);
-    }
-
-    showVegOrNonVegImage (vegOrNonVeg) {
+    showVegOrNonVegImage = (vegOrNonVeg) => {
         if(vegOrNonVeg === "non-veg") {
             return (
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAACaElEQVRoge2Zy2sTURTGv5NJtAl5YFeiwW2LbsRHy2hEo1jc2KT/iUjxsVeULiy4c+ef0HRVFE2lJoGg6MruNXZZU9M2j2bmuEhpUfPqNyEPmB/M6s53zvnm3nPnBbi4uLgMEmk1kJ4Kaj8L6UQ8v920Vk+/C+k13k4ntHLeLzqthJGfAdfAoBl5Ax2b+CismOHxY7YmRXUWwCSg0caIFACsi8iy4fMsXfu49atXOXtiIGvCX7WC98WyHygQPhw52MAmAEyoarJesxbfT4UWxozS4pUcyk5zO15Cb64GTlWt0AcAT/4uviURgT6tWsHs24v+M07zOzKQnvZHfXuePKCXCfl5r2Fk3pn+005qoA1kTfjFNlIAnBQQ9VjepfQNjLEBaAO1enBeBRdY/SF6CTuhe6yaMrBihschmGeT/ofoo7VY5AQjpQwct3Suy4btlki9aicYIbmE9C6na4PoLCNje+AcqWvHWUbEGjhJ6tpB7WZD8ywkgM3oKAMCbDC6dqhwMSkDCnxjdO0QMiY3AyLLjK4dtmqK0VEGKh5JAdhitC0oSs1HXRTKwJ3c702FLDDaZijkWfxrscho6V1IAqUXgHxi9QdxRPMSKL1k9bSB+CoqtlFPAiiwMQD8qHl1Lr6KChvA0X3gVq78c89nT4tonpB/qVtWbCaz62hLdnwjm8nsbqh/5zpUHqO7xi4q5GF5c9u8/bn83Wn+nrwTN5ZA6flaLPKqXrUTEE1AMAlF46VeUIBiHdAUar7UTbJhm9HTrxL7Xxte7x99YWiehVhcA4Nm5A10bOJh+1PzLyM/Ay4uLi6D5Q8FuLRpD+X2VAAAAABJRU5ErkJggg==" alt="non-veg"/>
@@ -26,14 +16,11 @@ class ItemCard extends Component{
         }
     }
 
-    addItemFunction() {
-        this.props.addItem({
-            itemName: this.props.itemName,
-            itemPrice: this.props.price,
-            itemQuantity: 1
-        })
+    addAndShowCart = () => {
+        this.props.addItem({itemName: this.props.itemName, itemPrice: this.props.price, itemQuantity: 1});
+        this.props.showCart();
     }
-
+    
     render() {
         return (
             <Card style={{ width: '49%' }} className="card-for-item" bg="light">
@@ -50,17 +37,11 @@ class ItemCard extends Component{
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer>
-                    <Button className="add-to-cart" onClick= {this.addItemFunction}>Add to Cart</Button>
+                    <Button className="add-to-cart" onClick={this.addAndShowCart}>Add to Cart</Button>
                 </Card.Footer>
             </Card>
         );
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addItem: (itemObj) => { dispatch(addItem(itemObj)) }
-    }
-}
-
-export default connect(null, mapDispatchToProps)(ItemCard);
+export default ItemCard;

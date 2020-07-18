@@ -1,20 +1,8 @@
 import React, {Component} from 'react';
 import { Button } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { deleteItem } from '../store/actions/itemActions';
 import './itemsInCart.css';
 
 class ItemsInCart extends Component{
-
-    constructor(props) {
-        super(props);
-
-        this.deleteItemFunction = this.deleteItemFunction.bind(this);
-    }
-    
-    deleteItemFunction() {
-        //this.props.deleteItem(this.props.itemName);
-    }
     
     render() {
         return (
@@ -23,9 +11,9 @@ class ItemsInCart extends Component{
                 <div className="item-qty">{this.props.quantity}</div>
                 <div className="item-price">₹ {this.props.price}</div>
 
-                <Button className="cart-btn remove-btn" onClick={this.deleteItemFunction}>Remove</Button>
-                <Button className="cart-btn minus-btn"><i class="fas fa-minus"></i></Button>
-                <Button className="cart-btn plus-btn"><i class="fas fa-plus"></i></Button>
+                <Button className="cart-btn remove-btn" onClick={() => {this.props.deleteItem(this.props.itemName)}}>Remove</Button>
+                <Button className="cart-btn minus-btn" onClick={() => {this.props.changeQuantity(this.props.itemName, "-")}}><i className="fas fa-minus"></i></Button>
+                <Button className="cart-btn plus-btn" onClick={() => {this.props.changeQuantity(this.props.itemName, "+")}}><i className="fas fa-plus"></i></Button>
 
             </div>
 
@@ -33,10 +21,4 @@ class ItemsInCart extends Component{
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        deleteItem: (itemName) => { dispatch(deleteItem(itemName)) }
-    }
-}
-
-export default connect(null, mapDispatchToProps)(ItemsInCart);
+export default ItemsInCart;
