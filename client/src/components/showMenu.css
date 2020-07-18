@@ -57,7 +57,7 @@
 }
 
 .cart-option {
-    border-radius: 28px 3px 3px 28px;
+    border-radius: 3px 28px 28px 3px;
     margin: 5px 0 0;
     font-size: 1.3rem;
     text-align: center;
@@ -158,7 +158,7 @@
 @media (max-width: 575px)
 {
   .items-card {
-      margin: 1%;
+      margin: 3rem 1% 0;
   }
   .menu-category ul li{
       font-size: 1.1rem;
@@ -177,9 +177,7 @@
       color: #fff;
   }
   .cart-option{
-    position: relative;
-    bottom: 3rem;
-    margin-left: 75%
+    border-radius: 3px;
   }
 }
 @media (max-width: 900px){
