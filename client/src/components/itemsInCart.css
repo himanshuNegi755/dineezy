@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .items-in-cart{
   box-shadow: 0 0 3px #94bd75;
   background-color: #e1ffc2;
@@ -6,6 +7,15 @@
   margin: 2%;
 }
 
+=======
+
+.items-in-cart{
+    box-shadow: 0 0 3px #94bd75;
+    background-color: #e1ffc2;
+    padding: 0.5rem;
+    border-radius: 3px;
+  }
+>>>>>>> 3b66251407da2c2eb5d84d926857c0972aec56f6
 .item-name{
   display: inline-block;
   font-family: 'Noto Serif', serif;
