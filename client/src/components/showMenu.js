@@ -52,7 +52,7 @@ class ShowMenu extends Component{
                 const list = this.state.category.map((itemCategory) =>
                     <div key={itemCategory}>
                         <ul>
-                            <li onClick={() => {this.loadItemFunction(itemCategory)}}>{itemCategory}</li>
+                            <li className="category-ind"onClick={() => {this.loadItemFunction(itemCategory)}}>{itemCategory}</li>
                         </ul>
                     </div>
                 );
@@ -93,7 +93,7 @@ class ShowMenu extends Component{
                 <NavbarForSite/>
 
                 <div className="menu-category row">
-                    <div className="col-lg-11 col-md-10 col-sm-6 ">
+                    <div className="col-lg-11 col-md-10 col-sm-10 ">
                         <div className="default-list">{this.renderItemCategory()}</div>
                         <div class="dropdown category-drop">
                           <button class="btn btn-secondary dropdown-toggle category-btn" type="button" id="categorydropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -104,8 +104,8 @@ class ShowMenu extends Component{
                           </div>
                         </div>
                     </div>
-                  <div className="col-lg-1 col-md-2 col-sm-6 cart-option">
-                      <span onClick={this.showCartSideBar}><i className="fas fa-cart-plus cart-icon"></i></span>
+                  <div className="col-lg-1 col-md-2 col-sm-2 cart-option" onClick={this.showCartSideBar}>
+                      <i className="fas fa-cart-plus cart-icon"></i>
                       <span className="cart-items">0</span>
                   </div>
                 </div>
@@ -116,7 +116,7 @@ class ShowMenu extends Component{
                 <div className="cart-overlay transparentBcg" style={{visibility: this.state.visibility}}>
                 <div className="cart-side-bar showCart" style={{transform: this.state.transform}}>
                     <i class="back-btn fas fa-arrow-circle-left fa-2x" onClick={this.closeCartSideBar}></i>
-                      <div className="item-bg"><ItemsInCart /></div>
+                      <ItemsInCart />
                     <div className="cart-footer">
                         <h3>your total: ₹ 100</h3>
                         <Button className="clear-cart">Clear cart</Button>

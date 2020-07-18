@@ -120,12 +120,6 @@
 .back-btn:hover{
   color: #fff;
 }
-.item-bg{
-  box-shadow: 0 0 3px #94bd75;
-  background-color: #e1ffc2;
-  padding: 0.5rem;
-  border-radius: 3px;
-}
 
 .cart-footer{
   margin: 1.5rem 0;
@@ -164,7 +158,7 @@
 @media (max-width: 575px)
 {
   .items-card {
-      margin: 8% 1%;
+      margin: 1%;
   }
   .menu-category ul li{
       font-size: 1.1rem;
@@ -182,13 +176,22 @@
       border-radius: 10%;
       color: #fff;
   }
+  .cart-option{
+    position: relative;
+    bottom: 3rem;
+    margin-left: 75%
+  }
 }
 @media (max-width: 900px){
   .default-list{
     display: none;
   }
   .small-sc-list{
-    margin-left: 1rem;
+    margin-left: 0.1rem;
+    width: 10.1rem;
+  }
+  .category-ind{
+    width: 9.8rem;
   }
 }
 @media (min-width: 901px)
