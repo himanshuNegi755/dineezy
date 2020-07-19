@@ -47,7 +47,7 @@
 }
 
 .div-to-hold-searchBar {
-    display: inline-block;
+    /*display: inline-block;*/
     width: inherit;
 }
 

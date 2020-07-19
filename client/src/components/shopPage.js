@@ -16,7 +16,7 @@ class ShopPage extends Component{
         super(props);
 
         this.state = { userEmail: '', loggedIn: true, showModal: false, shopName: '', shopAddress: '', noOfTables: 1,
-                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: '',  itemPrice: 0, itemDescription: '', itemCategory: ''}
+                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: '',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBar: 'none', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: ''}
 
         this.showShopAddModal = this.showShopAddModal.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -52,7 +52,17 @@ class ShopPage extends Component{
     suggestionSelected = (value) => {
         this.setState({item: value, suggestions: []});
         
+        var itemObj = this.state.menuItemList.filter(item => item.itemName === value)
         
+        this.setState({
+            editItemName: itemObj[0].itemName,
+            editVegOrNonVeg: itemObj[0].vegOrNonVeg,
+            editItemPrice: itemObj[0].price,
+            editItemDescription: itemObj[0].description,
+            editItemCategory: itemObj[0].category,
+            editItemId: itemObj[0]._id,
+            showItemEditModal: !this.showItemEditModal
+        });
         
     }
     
@@ -161,7 +171,7 @@ class ShopPage extends Component{
     shopList = () => {
         const list = this.state.shopList.map((shop) =>
             <div key={shop._id}>
-                <ShopNameContainer shopName={shop.shopName} menuForShop={this.getMenuFunction} shopId={shop._id}/>
+                <ShopNameContainer shopName={shop.shopName} menuForShop={this.getMenuFunction} shopId={shop._id} showSearchBar={this.showSearchBarFunction}/>
             </div>
         );
 
@@ -177,6 +187,29 @@ class ShopPage extends Component{
         );
 
         return (list);
+    }
+    
+    showSearchBarFunction = () => {
+        this.setState({showSearchBar: 'inline-block'})
+    }
+    
+    editItemDetails = () => {
+        this.setState({showItemEditModal: !this.state.showItemEditModal});
+        axios.put('http://localhost:5000/menu/item_update', {
+            shopId: this.state.shopIdVar,
+            menuItemId: this.state.editItemId,
+            itemName: this.state.editItemName,
+            vegOrNonVeg: this.state.editVegOrNonVeg,
+            price: this.state.editItemPrice,
+            description: this.state.editItemDescription,
+            category: this.state.editItemCategory
+            })
+        .then(res => {
+            console.log(res.data);
+            this.getMenuFunction(this.state.shopIdVar);
+            //this.props.loadComponentAgain();
+
+        })
     }
 
     render() {
@@ -198,7 +231,7 @@ class ShopPage extends Component{
                     </div>
                     <div className="col-md-8 menu-col">                           
                             
-                        <div className="div-to-hold-searchBar">
+                        <div className="div-to-hold-searchBar" style={{display: this.state.showSearchBar}}>
                         <InputGroup className="searchBar">
                             <InputGroup.Prepend>
                                 <InputGroup.Text id="basic-addon1"><span role="img" aria-label="search">🔍</span></InputGroup.Text>
@@ -229,6 +262,56 @@ class ShopPage extends Component{
                 
                 <div id="footer">
                     <Footer />
+                </div>
+                
+                <div>
+                    <Modal
+                        size="md"
+                        aria-labelledby="item-edit-modal"
+                        centered
+                        show={this.state.showItemEditModal}
+                        onHide={() => { this.setState({showItemEditModal: !this.state.showItemEditModal}) }}
+                        >
+                            <Modal.Header closeButton>
+                                <Modal.Title id="contained-modal-title-vcenter">
+                                    ADD NEW ITEM DETAILS
+                                </Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <Form>
+
+                                    <Form.Group controlId="formBasicName">
+                                        <Form.Label>Item Name</Form.Label>
+                                        <Form.Control type="text" placeholder="Item Name" name='editItemName' value={this.state.editItemName} onChange={this.handleInputChange}/>
+                                    </Form.Group>
+                                    
+                                    <Form.Group controlId="formBasicName">
+                                        <Form.Label>Veg/Non-Veg</Form.Label>
+                                        <Form.Control type="text" placeholder="Veg/Non-Veg" name='editVegOrNonVeg' value={this.state.editVegOrNonVeg} onChange={this.handleInputChange}/>
+                                    </Form.Group>
+                                    
+                                    <Form.Group controlId="formBasicName">
+                                        <Form.Label>Price</Form.Label>
+                                        <Form.Control type="number" placeholder="Item Price" name='editItemPrice' value={this.state.editItemPrice} onChange={this.handleInputChange}/>
+                                    </Form.Group>
+                                    
+                                    <Form.Group controlId="formBasicName">
+                                        <Form.Label>Description</Form.Label>
+                                        <Form.Control type="text" placeholder="One Line description of item" name='editItemDescription' value={this.state.editItemDescription} onChange={this.handleInputChange}/>
+                                    </Form.Group>
+                                    
+                                    <Form.Group controlId="formBasicName">
+                                        <Form.Label>Item Category</Form.Label>
+                                        <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='editItemCategory' value={this.state.editItemCategory} onChange={this.handleInputChange}/>
+                                    </Form.Group>
+
+                                    <Button variant="primary" onClick={this.editItemDetails}>
+                                        Submit
+                                    </Button>
+                                </Form>
+
+                            </Modal.Body>
+                        </Modal>
                 </div>
 
                 <div>
