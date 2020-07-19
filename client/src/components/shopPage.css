@@ -13,21 +13,26 @@
     border: 0;
     border-radius: 0;
 }
+
 .add-restaurant-button:hover{
     background-color: #092532;
     color: #e1ffc2;
 }
+
 .col-heading{
     padding: 1rem 0;
     margin: 0;
     border: 1px solid #c7e2b2;
 }
+
 .main-container .retaurant-col{
     padding: 0;
 }
+
 .main-container .menu-col{
     padding: 0;
 }
+
 .restaurant-list {
     height: auto;
     margin: 0;
@@ -41,6 +46,43 @@
     resize: none;
 }
 
+.div-to-hold-searchBar {
+    display: inline-block;
+    width: inherit;
+}
+
+.searchBar {
+    display: flex;
+    width: 400px;
+}
+
+.suggestion {
+    background-color: white;
+    position: absolute;
+    z-index: 1;
+}
+
+.suggestion ul {
+    list-style: none;
+    text-align: left;
+}
+
+.suggestion li {
+    cursor: pointer;
+}
+
+.suggestion li:hover {
+    text-decoration: underline;
+    background-color: rgba(128, 128, 128, 0.20);
+}
+
+.add-new-item-button {
+    margin-top: 0;
+    background-color: #ecffd9;
+    border-color: ##ecffd9;
+    float: right;
+}
+
 .div-to-show-menu {
     background-color: #ecffd9;
     height: 52rem;
@@ -51,9 +93,11 @@
 }
 
 @media (max-width: 767px){
+    
   .parent-div{
     background-color: #092532;
   }
+    
   .main-container .menu-col{
       margin-top: 1rem;
   }

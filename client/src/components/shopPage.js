@@ -15,11 +15,10 @@ class ShopPage extends Component{
     constructor(props) {
         super(props);
 
-        this.state = { userEmail: '', loggedIn: true, showModal: false, shopName: '', shopAddress: '', noOfTables: '',
-                      shopList: [], menuItemList: [], shopIdVar: ""}
+        this.state = { userEmail: '', loggedIn: true, showModal: false, shopName: '', shopAddress: '', noOfTables: 1,
+                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: '',  itemPrice: 0, itemDescription: '', itemCategory: ''}
 
         this.showShopAddModal = this.showShopAddModal.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.showShopAfterAdding = this.showShopAfterAdding.bind(this);
         this.shopList = this.shopList.bind(this);
@@ -39,6 +38,34 @@ class ShopPage extends Component{
             [e.target.name]: e.target.value
         });
     }
+    
+    onTextChanged = (e) => {
+        const value = e.target.value;
+        let suggestions = [];
+        if (value.length > 0) {
+            const regex = new RegExp(`^${value}`, 'i');
+            suggestions = this.state.itemNameList.sort().filter(v => regex.test(v));
+        }
+        this.setState(() => ({ suggestions, item: value }));
+    }
+    
+    suggestionSelected = (value) => {
+        this.setState({item: value, suggestions: []});
+        
+        
+        
+    }
+    
+    renderSuggestions = () => {
+        if(this.state.suggestions.length === 0) {
+            return null;
+        }
+        return (            
+            <ul>
+                {this.state.suggestions.map((item) => <li onClick = {() => this.suggestionSelected(item)} key={item}>{item}</li>)}
+            </ul>
+        );
+    }
 
     onSubmit() {
         this.setState({showModal: !this.state.showModal})
@@ -54,6 +81,24 @@ class ShopPage extends Component{
             this.showShopAfterAdding();
         })
 
+    }
+
+    addNewItemToMenuFunction = () => {
+        
+        this.setState({showNewItemAddModal: !this.state.showNewItemAddModal})
+        
+        axios.put('http://localhost:5000/menu', {
+            shopId: this.state.shopIdVar,
+            itemName: this.state.itemName,
+            vegOrNonVeg: this.state.vegOrNonVeg,
+            price: this.state.itemPrice,
+            description: this.state.itemDescription,
+            category: this.state.itemCategory
+        })
+        .then(res => {
+            console.log(res.data);
+            this.getMenuFunction(this.state.shopIdVar);
+        })
     }
 
     showShopAfterAdding() {
@@ -87,6 +132,18 @@ class ShopPage extends Component{
             //console.log(res.data[0].menu)
             this.setState({menuItemList: res.data[0].menu})
         })
+        
+        axios.get(`http://localhost:5000/items_name/for-autoComplete/${shopId}`)
+        .then(res => {
+            this.setState({itemNameAsObjectArr: res.data})
+            var arr = [];
+            //console.log(this.state.productSuggestions[0].productName)
+            for(var i=0; i<this.state.itemNameAsObjectArr.length; i++) {
+                arr[i] = this.state.itemNameAsObjectArr[i].itemName
+            }
+            this.setState({itemNameList: arr})
+        }) 
+        
     }
 
     deleteItemFunction(itemIdAttribute) {
@@ -104,8 +161,7 @@ class ShopPage extends Component{
     shopList = () => {
         const list = this.state.shopList.map((shop) =>
             <div key={shop._id}>
-                <ShopNameContainer shopName={shop.shopName} menuForShop={this.getMenuFunction}
-                    shopId={shop._id}/>
+                <ShopNameContainer shopName={shop.shopName} menuForShop={this.getMenuFunction} shopId={shop._id}/>
             </div>
         );
 
@@ -143,20 +199,26 @@ class ShopPage extends Component{
                     <div className="col-md-8 menu-col">                           
                             
                         <div className="div-to-hold-searchBar">
-                            <InputGroup className="mb-3 searchBar">
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text id="basic-addon1"><span role="img" aria-label="search">🔍</span></InputGroup.Text>
+                        <InputGroup className="searchBar">
+                            <InputGroup.Prepend>
+                                <InputGroup.Text id="basic-addon1"><span role="img" aria-label="search">🔍</span></InputGroup.Text>
                                 </InputGroup.Prepend>
-                                <FormControl
-                                    placeholder="What can we help you find?"
-                                    aria-label="What can we help you find"
-                                    onChange={this.onTextChanged}
-                                    type='text'
-                                    value={this.state.text}
-                                />
-                            </InputGroup>
-                
+                            <FormControl
+                                placeholder="What can we help you find?"
+                                aria-label="What can we help you find"
+                                onChange={this.onTextChanged}
+                                type='text'
+                                value={this.state.item}
+                            />
+                        </InputGroup>
+                            
+                        <div className="mb-3 suggestion">
+                            {this.renderSuggestions()}
                         </div>
+                
+                        <button className="add-new-item-button" onClick={() => {this.setState({showNewItemAddModal: !this.state.showNewItemAddModal})}}>Add New Item</button>
+                            
+                    </div>
                             
                         
                         <div className="div-to-show-menu">
@@ -164,15 +226,65 @@ class ShopPage extends Component{
                         </div>
                     </div>
                 </div>
+                
                 <div id="footer">
                     <Footer />
                 </div>
 
-
                 <div>
                     <Modal
                         size="md"
-                        aria-labelledby="contained-modal-title-vcenter"
+                        aria-labelledby="new-item-add-modal"
+                        centered
+                        show={this.state.showNewItemAddModal}
+                        onHide={() => { this.setState({showNewItemAddModal: !this.state.showNewItemAddModal}) }}
+                        >
+                            <Modal.Header closeButton>
+                                <Modal.Title id="contained-modal-title-vcenter">
+                                    ADD NEW ITEM DETAILS
+                                </Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <Form>
+
+                                    <Form.Group controlId="formBasicName">
+                                        <Form.Label>Item Name</Form.Label>
+                                        <Form.Control type="text" placeholder="Item Name" name='itemName' value={this.state.itemName} onChange={this.handleInputChange}/>
+                                    </Form.Group>
+                                    
+                                    <Form.Group controlId="formBasicName">
+                                        <Form.Label>Veg/Non-Veg</Form.Label>
+                                        <Form.Control type="text" placeholder="Veg/Non-Veg" name='vegOrNonVeg' value={this.state.vegOrNonVeg} onChange={this.handleInputChange}/>
+                                    </Form.Group>
+                                    
+                                    <Form.Group controlId="formBasicName">
+                                        <Form.Label>Price</Form.Label>
+                                        <Form.Control type="number" placeholder="Item Price" name='itemPrice' value={this.state.itemPrice} onChange={this.handleInputChange}/>
+                                    </Form.Group>
+                                    
+                                    <Form.Group controlId="formBasicName">
+                                        <Form.Label>Description</Form.Label>
+                                        <Form.Control type="text" placeholder="One Line description of item" name='itemDescription' value={this.state.itemDescription} onChange={this.handleInputChange}/>
+                                    </Form.Group>
+                                    
+                                    <Form.Group controlId="formBasicName">
+                                        <Form.Label>Item Category</Form.Label>
+                                        <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='itemCategory' value={this.state.itemCategory} onChange={this.handleInputChange}/>
+                                    </Form.Group>
+
+                                    <Button variant="primary" onClick={this.addNewItemToMenuFunction}>
+                                        Submit
+                                    </Button>
+                                </Form>
+
+                            </Modal.Body>
+                        </Modal>
+                </div>
+                
+                <div>
+                    <Modal
+                        size="md"
+                        aria-labelledby="shop-add-modal"
                         centered
                         show={this.state.showModal}
                         onHide={this.showShopAddModal}
