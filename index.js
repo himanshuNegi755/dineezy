@@ -38,6 +38,16 @@ require("./routes/auth-routes")(app);
 require("./routes/phone-verification-routes")(app);
 require("./routes/database-api-routes")(app);
 
+
+if(process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'))
+    const path = require('path');
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    })
+}
+
+
 // listining for port
 app.listen(PORT, function() {
     console.log("Digi Menu API running on port " + PORT + "....");

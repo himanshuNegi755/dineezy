@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import { Button, Modal, Form } from 'react-bootstrap';
+import { Button, Modal, Form, InputGroup, FormControl } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import './shopPage.css';
@@ -140,7 +140,25 @@ class ShopPage extends Component{
                             {this.shopList()}
                         </div>
                     </div>
-                    <div className="col-md-8 menu-col">
+                    <div className="col-md-8 menu-col">                           
+                            
+                        <div className="div-to-hold-searchBar">
+                            <InputGroup className="mb-3 searchBar">
+                                <InputGroup.Prepend>
+                                    <InputGroup.Text id="basic-addon1"><span role="img" aria-label="search">🔍</span></InputGroup.Text>
+                                </InputGroup.Prepend>
+                                <FormControl
+                                    placeholder="What can we help you find?"
+                                    aria-label="What can we help you find"
+                                    onChange={this.onTextChanged}
+                                    type='text'
+                                    value={this.state.text}
+                                />
+                            </InputGroup>
+                
+                        </div>
+                            
+                        
                         <div className="div-to-show-menu">
                             {this.menuItemList()}
                         </div>
