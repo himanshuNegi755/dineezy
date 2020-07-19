@@ -10,7 +10,7 @@ import MenuItems from './menuItems';
 import Footer from './footer';
 
 
-class ProfilePage extends Component{
+class ShopPage extends Component{
 
     constructor(props) {
         super(props);
@@ -202,4 +202,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(ProfilePage);
+export default connect(mapStateToProps)(ShopPage);
