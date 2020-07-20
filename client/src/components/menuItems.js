@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import axios from 'axios';
-import { Button, Table, InputGroup, FormControl } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import './menuItems.css';
 
 class MenuItems extends Component{
@@ -8,36 +7,22 @@ class MenuItems extends Component{
     constructor(props) {
         super(props);
 
-        this.state = { itemName: this.props.itemName, vegOrNonVeg: this.props.vegOrNonVeg, price: this.props.price, description:
-                     this.props.description, category: this.props.category }
-
-        this.onTextChanged = this.onTextChanged.bind(this);
-        this.changeItemDetails = this.changeItemDetails.bind(this);
         this.deleteItemAndReloadMenu = this.deleteItemAndReloadMenu.bind(this);
     }
 
-    onTextChanged = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
+
+    showVegOrNonVegImage = (vegOrNonVeg) => {
+        if(vegOrNonVeg === "non-veg") {
+            return (
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAACaElEQVRoge2Zy2sTURTGv5NJtAl5YFeiwW2LbsRHy2hEo1jc2KT/iUjxsVeULiy4c+ef0HRVFE2lJoGg6MruNXZZU9M2j2bmuEhpUfPqNyEPmB/M6s53zvnm3nPnBbi4uLgMEmk1kJ4Kaj8L6UQ8v920Vk+/C+k13k4ntHLeLzqthJGfAdfAoBl5Ax2b+CismOHxY7YmRXUWwCSg0caIFACsi8iy4fMsXfu49atXOXtiIGvCX7WC98WyHygQPhw52MAmAEyoarJesxbfT4UWxozS4pUcyk5zO15Cb64GTlWt0AcAT/4uviURgT6tWsHs24v+M07zOzKQnvZHfXuePKCXCfl5r2Fk3pn+005qoA1kTfjFNlIAnBQQ9VjepfQNjLEBaAO1enBeBRdY/SF6CTuhe6yaMrBihschmGeT/ofoo7VY5AQjpQwct3Suy4btlki9aicYIbmE9C6na4PoLCNje+AcqWvHWUbEGjhJ6tpB7WZD8ywkgM3oKAMCbDC6dqhwMSkDCnxjdO0QMiY3AyLLjK4dtmqK0VEGKh5JAdhitC0oSs1HXRTKwJ3c702FLDDaZijkWfxrscho6V1IAqUXgHxi9QdxRPMSKL1k9bSB+CoqtlFPAiiwMQD8qHl1Lr6KChvA0X3gVq78c89nT4tonpB/qVtWbCaz62hLdnwjm8nsbqh/5zpUHqO7xi4q5GF5c9u8/bn83Wn+nrwTN5ZA6flaLPKqXrUTEE1AMAlF46VeUIBiHdAUar7UTbJhm9HTrxL7Xxte7x99YWiehVhcA4Nm5A10bOJh+1PzLyM/Ay4uLi6D5Q8FuLRpD+X2VAAAAABJRU5ErkJggg==" alt="non-veg"/>
+            )
+        } else {
+            return(
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAACU0lEQVRoge2ZzW5SYRCGn+FACxuadmWUuG2jG2M07UmPkRuw0CtRSSN214UG7eI0dufOSyi9AkxADDFxZ/dau1TaTTU9MC6KiTZQ6BzCT3KehBW8M/My33zf+YGIiIiIcSK9vljxPR1lIf34WKh2rTU26kKGTbzfD3o5HxX9VsLUdyAyMG6m3kDfIb4Kru8uIE4e1bU2siSQAVA4RDlA2E/8Zq+6Wf05rJxDMeD6bkrVKSg8Q0mD/HfACCwiLAL5YJadFf/BthDs1Av107C5Qy+h1der11Xj7xFeAOkBJHOgL9s4H7w33s2w+UMZWN7NZloJaSB6/6pagTtBi5rruzfC1GA24PpuSoKgDIQpIAPOXnYrm7QGMBtoS2wDuGvV/0Xh3mk6eGLVmwy4vrsgKhvWpBcReO6VvHmL1tiB2DqDDeygzAUzkjNVYkz4yKjrjeiaRWYyoMRuW3SXx+SWRWfsgF6z6Xojxt1skq6F2haR1cCRUTf0mLYZUL5YdH0wxbR1QNg36S4LqZQtOpOBGK0ycGzRdkOhORuLm/4Uk4F6of4DZNui7YaIlCpPK02L1rwLJU8cX+CTVf8PjeSxs2sVmw1Utiq/oJUHDq0xgG/Oma6fx7IR6hyoF+rfnTNdBhpXV+vnuINXK9ZCbcmhD7JasXaUPIk/VNhkgMFWaCJSnI+n3erj6tew+YdyT9xZAq+8kvc2mJGcojkRlujc1HO+zA5AyylJlK0D242hPpXoPG141/mMhEm6FjIRGRg3U2+g7xBP2puai0x9ByIiIiLGyx9AgJ3oyiyc0wAAAABJRU5ErkJggg==" alt="veg"/>
+            )
+        }
     }
 
-    changeItemDetails() {
-        axios.put('http://localhost:5000/menu/item_update', {
-            shopId: this.props.shopId,
-            menuItemId: this.props.itemId,
-            itemName: this.state.itemName,
-            vegOrNonVeg: this.state.vegOrNonVeg,
-            price: this.state.price,
-            description: this.state.description,
-            category: this.state.category
-            })
-        .then(res => {
-            console.log(res.data);
-            //this.props.loadComponentAgain();
-
-        })
-    }
 
     deleteItemAndReloadMenu() {
         this.props.deleteItemFromMenu(this.props.itemId);
@@ -46,90 +31,27 @@ class MenuItems extends Component{
 
     render() {
         return (
-            <div className="menu-item-design">
 
-                <div className="rows-for-items row">
-                  <div className="col-lg-3 col-md-3 col-sm-4 item-detail">Item name</div>
-                  <div className="col-lg-9 col-md-9 col-sm-8 item-input">
-                    <InputGroup>
-                        <FormControl
-                            placeholder="Item Name"
-                            aria-label="Item Name"
-                            aria-describedby="basic-addon1"
-                            value={this.state.itemName}
-                            name='itemName'
-                            onChange={this.onTextChanged}
-                        />
-                    </InputGroup>
-                  </div>
-                </div>
-                <div className="rows-for-items row">
-                  <div className="col-lg-3 col-md-3 col-sm-4 item-detail">Veg Or Non-Veg</div>
-                  <div className="col-lg-9 col-md-9 col-sm-8 item-input">
-                    <InputGroup>
-                        <select class="custom-select form-control" placeholder="Item Category" aria-label="Item Category" aria-describedby="basic-addon1"
-                        value={this.state.vegOrNonVeg} name='vegOrNonVeg' onChange={this.onTextChanged} id="inputGroupSelect">
-                          <option selected>Choose...</option>
-                          <option value="veg">veg</option>
-                          <option value="non-veg">non-veg</option>
-                        </select>
-                    </InputGroup>
-                  </div>
-                </div>
-                <div className="rows-for-items row">
-                  <div className="col-lg-3 col-md-3 col-sm-4 item-detail">Price</div>
-                  <div className="col-lg-9 col-md-9 col-sm-8 item-input">
-                    <InputGroup>
-                        <InputGroup.Prepend>
-                          <InputGroup.Text>₹</InputGroup.Text>
-                        </InputGroup.Prepend>
-                        <FormControl
-                            placeholder="Item Price"
-                            aria-label="Item Price"
-                            aria-describedby="basic-addon1"
-                            value={this.state.price}
-                            name='price'
-                            onChange={this.onTextChanged}
-                        />
-                    </InputGroup>
-                  </div>
-                </div>
-                <div className="rows-for-items row">
-                  <div className="col-lg-3 col-md-3 col-sm-4 item-detail">Description</div>
-                  <div className="col-lg-9 col-md-9 col-sm-8 item-input">
-                    <InputGroup>
-                        <FormControl
-                            placeholder="Description or ingredients"
-                            aria-label="Item Description"
-                            aria-describedby="basic-addon1"
-                            value={this.state.description}
-                            name='description'
-                            onChange={this.onTextChanged}
-                        />
-                    </InputGroup>
-                  </div>
-                </div>
-                <div className="rows-for-items row">
-                  <div className="col-lg-3 col-md-3 col-sm-4 item-detail">Category</div>
-                  <div className="col-lg-9 col-md-9 col-sm-8 item-input">
-                    <InputGroup>
-                        <FormControl
-                            placeholder="Item Category"
-                            aria-label="Item Category"
-                            aria-describedby="basic-addon1"
-                            value={this.state.category}
-                            name='category'
-                            onChange={this.onTextChanged}
-                        />
+                <Card style={{ width: '49%' }} className="card-for-item" bg="light">
+                    <Card.Body>
+                        <Card.Title>
+                            <div className="item-name">{this.props.itemName}</div>
+                            <div className="vnv-id">{this.showVegOrNonVegImage(this.props.vegOrNonVeg)}</div>
+                        </Card.Title>
+                        <Card.Text className="item-description">
+                            {this.props.description}
+                        </Card.Text>
+                        <Card.Text  className="item-price">
+                            ₹ {this.props.price}
+                        </Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                        <Button variant="success" className="button-for-editing-items save-btn" onClick={ () => {this.props.editItem(this.props.itemName)}}>Edit</Button>
+                        <Button variant="danger" className="button-for-editing-items delete-btn" onClick={this.deleteItemAndReloadMenu}>Delete</Button>
+                    </Card.Footer>
+                </Card>
 
-                    </InputGroup>
-                  </div>
-                </div>
 
-                <Button variant="success" className="button-for-editing-items save-btn" onClick={this.changeItemDetails}>Save</Button>
-                <Button variant="danger" className="button-for-editing-items delete-btn" onClick={this.deleteItemAndReloadMenu}>Delete</Button>
-
-            </div>
         );
     }
 }

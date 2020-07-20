@@ -54,60 +54,94 @@
     overflow-x: hidden;
     overflow-y: auto;
 }
-
 .searchBar-div {
-    padding: 2%;
+    background-color: #c7e2b2;
+    padding: 1.1% 3% 1% 2%;
     width: inherit;
 }
 .searchBar-div{
   margin: 0;
 }
 
-.searchBar{
-    width: 40rem;
-}
-.input-group-pretend{
-    width: auto;
-}
 .input-group-text{
     width: auto;
     background-color: #fff;
     border-radius: 0;
 }
-.searchBar .form-control{
+.form-control{
     border-radius: 0;
+    margin-right: 35%;
 }
-
-
-
-
-
 .suggestion {
     background-color: white;
+    width: 47%;
+    box-shadow: 0 0 4px #b0b0b0;
     position: absolute;
+    left: 3.5%;
+    top: 2.35rem;
     z-index: 1;
 }
 .suggestion ul {
     list-style: none;
     text-align: left;
+    padding: 0;
+    margin: 0;
 }
 .suggestion li {
+    padding: 2%;
     cursor: pointer;
 }
 .suggestion li:hover {
-    text-decoration: underline;
-    background-color: rgba(128, 128, 128, 0.20);
+    transition: 0.3s;
+    font-size: 1.01rem;
+    background-color: rgba(200, 200, 200, 0.1);
 }
 
 .add-new-item-btn {
-    display: inline-block;
-    background-color: #ecffd9;
-    border-color: #ecffd9;
-    float: right;
+    font-family: 'Ubuntu', sans-serif;
+    letter-spacing: 0.1rem;
+    background-color: #f1ffe3;
+    border: 0;
+    border-radius: 3px;
+    box-shadow: 0 0 3px #d0d0d0;
+}
+.add-new-item-btn:hover {
+    transition: 0.2s;
+    background-color: #092532;
+    color: #e1ffc2;
+}
+.addItem-text{
+    margin: auto 1.2rem;
 }
 .add-item-col{
   padding: 0;
 }
+.menu-category {
+    height: 3.7rem;
+    margin: 0 1.5%;
+}
+.menu-category ul{
+    display: block;
+    padding: 0;
+    margin: 2px 0 0;
+}
+.menu-category ul li{
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.3rem;
+    list-style: none;
+    float: left;
+    padding: 1% 2%;
+    margin: 2px 0.2rem 0;
+    cursor: pointer;
+}
+.menu-category ul li:hover{
+    transition: 0.4s;
+    background-color: #092532;
+    color: #e1ffc2;
+}
+
 
 
 @media (max-width: 767px){
