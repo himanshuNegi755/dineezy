@@ -16,7 +16,7 @@ class ShopPage extends Component{
         super(props);
 
         this.state = { userEmail: '', loggedIn: true, showModal: false, shopName: '', shopAddress: '', noOfTables: 1,
-                      shopList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: '',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBar: 'none', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', category: [], itemsByCategory: []}
+                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: '',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBar: 'none', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', category: [], itemsByCategory: []}
 
         this.showShopAddModal = this.showShopAddModal.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -46,6 +46,40 @@ class ShopPage extends Component{
             suggestions = this.state.itemNameList.sort().filter(v => regex.test(v));
         }
         this.setState(() => ({ suggestions, item: value }));
+    }
+    
+    /*getItemNamesFor = (shopId) => {
+        axios.get(`http://localhost:5000/items_name/for-autoComplete/${shopId}`)
+        .then(res => {
+            this.setState({itemNameAsObjectArr: res.data})
+            var arr = [];
+            //console.log(this.state.productSuggestions[0].productName)
+            for(var i=0; i<this.state.itemNameAsObjectArr.length; i++) {
+                arr[i] = this.state.itemNameAsObjectArr[i].itemName
+            }
+            this.setState({itemNameList: arr})
+        }) 
+    }*/
+    
+    getMenuFunction = (shopId) => {
+        this.setState({shopIdVar: shopId});
+        axios.get(`http://localhost:5000/menu/${shopId}`)
+        .then(res => {
+            //console.log(res.data[0].menu)
+            this.setState({menuItemList: res.data[0].menu})
+        })
+
+        axios.get(`http://localhost:5000/items_name/for-autoComplete/${shopId}`)
+        .then(res => {
+            this.setState({itemNameAsObjectArr: res.data})
+            var arr = [];
+            //console.log(this.state.productSuggestions[0].productName)
+            for(var i=0; i<this.state.itemNameAsObjectArr.length; i++) {
+                arr[i] = this.state.itemNameAsObjectArr[i].itemName
+            }
+            this.setState({itemNameList: arr})
+        })
+
     }
     
     suggestionSelected = (value) => {
@@ -190,7 +224,7 @@ class ShopPage extends Component{
     shopList = () => {
         const list = this.state.shopList.map((shop) =>
             <div key={shop._id}>
-                <ShopNameContainer shopName={shop.shopName} shopId={shop._id} showSearchBar={this.showSearchBarFunction} showCategory={this.loadCategoryFunction}/>
+                <ShopNameContainer shopName={shop.shopName} shopId={shop._id} showSearchBar={this.showSearchBarFunction} showCategory={this.loadCategoryFunction} menuForShop={this.getMenuFunction}/>
             </div>
         );
 
@@ -230,7 +264,7 @@ class ShopPage extends Component{
 
         })
     }
-
+    
     render() {
         if(!this.state.loggedIn) {
             return <Redirect to='/' />;
