@@ -16,7 +16,7 @@ class ShopPage extends Component{
         super(props);
 
         this.state = { userEmail: '', loggedIn: true, showModal: false, shopName: '', shopAddress: '', noOfTables: 1,
-                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: '',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBar: 'none', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', category: [], itemsByCategory: []}
+                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: '',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBar: 'none', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', category: [], itemsByCategory: [], currentItemCategory: ''}
 
         this.showShopAddModal = this.showShopAddModal.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -26,18 +26,23 @@ class ShopPage extends Component{
         this.deleteItemFunction = this.deleteItemFunction.bind(this);
     }    
     
+    
+    //function to show modal
     showShopAddModal() {
         this.setState({
             showModal: !this.state.showModal
         })
     }
 
+    //function to handle input change
     handleInputChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         });
     }
     
+    
+    //autocomplete functions
     onTextChanged = (e) => {
         const value = e.target.value;
         let suggestions = [];
@@ -110,6 +115,8 @@ class ShopPage extends Component{
         );
     }
 
+    
+    //add new show functions
     onSubmit() {
         this.setState({showModal: !this.state.showModal})
 
@@ -126,13 +133,15 @@ class ShopPage extends Component{
 
     }
 
+    //category functions
     loadCategoryFunction = (shopId) => {
-        this.setState({shopIdVar: shopId});
+        this.setState({shopIdVar: shopId, itemsByCategory: []});
         
         axios.get(`http://localhost:5000/item_categories/${shopId}`)
         .then(res => {
             this.setState({category: res.data})
         })
+        
     }
     
     renderItemCategory = () => {
@@ -149,7 +158,10 @@ class ShopPage extends Component{
                 const list = this.state.category.map((itemCategory) =>
                     <div key={itemCategory}>
                         <ul>
-                            <li className="category-ind"onClick={() => {this.loadItemFunction(itemCategory)}}>{itemCategory}</li>
+                            <li className="category-ind"onClick={() => {
+                                    this.loadItemFunction(itemCategory)
+                                    this.setState({currentItemCategory: itemCategory})
+                                }}>{itemCategory}</li>
                         </ul>
                     </div>
                 );
@@ -167,6 +179,7 @@ class ShopPage extends Component{
         })
     }
 
+    //shop functions
     addNewItemToMenuFunction = () => {
         
         this.setState({showNewItemAddModal: !this.state.showNewItemAddModal})
@@ -182,6 +195,7 @@ class ShopPage extends Component{
         .then(res => {
             console.log(res.data);
             this.getMenuFunction(this.state.shopIdVar);
+            this.loadItemFunction(this.state.currentItemCategory);
         })
     }
 
@@ -216,36 +230,13 @@ class ShopPage extends Component{
             })
         .then(res => {
             console.log(res.data);
+            this.getMenuFunction(this.state.shopIdVar);
+            this.loadItemFunction(this.state.currentItemCategory)
             //this.props.loadComponentAgain();
 
         })
     }
 
-    shopList = () => {
-        const list = this.state.shopList.map((shop) =>
-            <div key={shop._id}>
-                <ShopNameContainer shopName={shop.shopName} shopId={shop._id} showSearchBar={this.showSearchBarFunction} showCategory={this.loadCategoryFunction} menuForShop={this.getMenuFunction}/>
-            </div>
-        );
-
-        return (list);
-    }
-
-    menuItemList = () => {
-        const list = this.state.itemsByCategory.map((menuItem) =>
-            <div key={menuItem.menu._id}>
-                <MenuItems itemName={menuItem.menu.itemName} vegOrNonVeg={menuItem.menu.vegOrNonVeg} price={menuItem.menu.price} description={menuItem.menu.description} category={menuItem.menu.category} deleteItemFromMenu={this.deleteItemFunction}
-                itemId={menuItem._id} shopId={this.state.shopIdVar} menuReload={this.getMenuFunction} editItem={this.suggestionSelected}/>
-            </div>
-        );
-
-        return (list);
-    }
-    
-    showSearchBarFunction = () => {
-        this.setState({showSearchBar: 'inline-block'})
-    }
-    
     editItemDetails = () => {
         this.setState({showItemEditModal: !this.state.showItemEditModal});
         axios.put('http://localhost:5000/menu/item_update', {
@@ -259,10 +250,35 @@ class ShopPage extends Component{
             })
         .then(res => {
             console.log(res.data);
-            this.getMenuFunction(this.state.shopIdVar);
+            this.loadItemFunction(this.state.currentItemCategory);
             //this.props.loadComponentAgain();
 
         })
+    }
+
+    //UI update functions
+    shopList = () => {
+        const list = this.state.shopList.map((shop) =>
+            <div key={shop._id}>
+                <ShopNameContainer shopName={shop.shopName} shopId={shop._id} showSearchBar={this.showSearchBarFunction} showCategory={this.loadCategoryFunction} menuForShop={this.getMenuFunction}/>
+            </div>
+        );
+
+        return (list);
+    }
+
+    menuItemList = () => {
+        const list = this.state.itemsByCategory.map((menuItem) =>
+            <div key={menuItem.menu._id}>
+                <MenuItems itemName={menuItem.menu.itemName} vegOrNonVeg={menuItem.menu.vegOrNonVeg} price={menuItem.menu.price} description={menuItem.menu.description} category={menuItem.menu.category} itemId={menuItem.menu._id} deleteItemFromMenu={this.deleteItemFunction} shopId={this.state.shopIdVar} editItem={this.suggestionSelected}/>
+            </div>
+        );
+
+        return (list);
+    }
+    
+    showSearchBarFunction = () => {
+        this.setState({showSearchBar: 'inline-block'})
     }
     
     render() {
@@ -330,7 +346,7 @@ class ShopPage extends Component{
                         >
                             <Modal.Header closeButton>
                                 <Modal.Title id="contained-modal-title-vcenter">
-                                    ADD NEW ITEM DETAILS
+                                    EDIT ITEM DETAILS
                                 </Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
@@ -363,6 +379,9 @@ class ShopPage extends Component{
 
                                     <Button variant="primary" onClick={this.editItemDetails}>
                                         Submit
+                                    </Button>
+                                    <Button variant="primary" onClick={ () => {this.deleteItemFunction(this.state.editItemId)}}>
+                                        Delete
                                     </Button>
                                 </Form>
 

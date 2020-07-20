@@ -2,14 +2,7 @@ import React, {Component} from 'react';
 import { Button, Card } from 'react-bootstrap';
 import './menuItems.css';
 
-class MenuItems extends Component{
-
-    constructor(props) {
-        super(props);
-
-        this.deleteItemAndReloadMenu = this.deleteItemAndReloadMenu.bind(this);
-    }
-    
+class MenuItems extends Component{    
     
     showVegOrNonVegImage = (vegOrNonVeg) => {
         if(vegOrNonVeg === "non-veg") {
@@ -21,12 +14,6 @@ class MenuItems extends Component{
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAACU0lEQVRoge2ZzW5SYRCGn+FACxuadmWUuG2jG2M07UmPkRuw0CtRSSN214UG7eI0dufOSyi9AkxADDFxZ/dau1TaTTU9MC6KiTZQ6BzCT3KehBW8M/My33zf+YGIiIiIcSK9vljxPR1lIf34WKh2rTU26kKGTbzfD3o5HxX9VsLUdyAyMG6m3kDfIb4Kru8uIE4e1bU2siSQAVA4RDlA2E/8Zq+6Wf05rJxDMeD6bkrVKSg8Q0mD/HfACCwiLAL5YJadFf/BthDs1Av107C5Qy+h1der11Xj7xFeAOkBJHOgL9s4H7w33s2w+UMZWN7NZloJaSB6/6pagTtBi5rruzfC1GA24PpuSoKgDIQpIAPOXnYrm7QGMBtoS2wDuGvV/0Xh3mk6eGLVmwy4vrsgKhvWpBcReO6VvHmL1tiB2DqDDeygzAUzkjNVYkz4yKjrjeiaRWYyoMRuW3SXx+SWRWfsgF6z6Xojxt1skq6F2haR1cCRUTf0mLYZUL5YdH0wxbR1QNg36S4LqZQtOpOBGK0ycGzRdkOhORuLm/4Uk4F6of4DZNui7YaIlCpPK02L1rwLJU8cX+CTVf8PjeSxs2sVmw1Utiq/oJUHDq0xgG/Oma6fx7IR6hyoF+rfnTNdBhpXV+vnuINXK9ZCbcmhD7JasXaUPIk/VNhkgMFWaCJSnI+n3erj6tew+YdyT9xZAq+8kvc2mJGcojkRlujc1HO+zA5AyylJlK0D242hPpXoPG141/mMhEm6FjIRGRg3U2+g7xBP2puai0x9ByIiIiLGyx9AgJ3oyiyc0wAAAABJRU5ErkJggg==" alt="veg"/>
             )
         }
-    }
-    
-
-    deleteItemAndReloadMenu() {
-        this.props.deleteItemFromMenu(this.props.itemId);
-        this.props.menuReload(this.props.shopId);
     }
 
     render() {
@@ -48,7 +35,7 @@ class MenuItems extends Component{
                     </Card.Body>
                     <Card.Footer>
                         <Button variant="success" className="button-for-editing-items save-btn" onClick={ () => {this.props.editItem(this.props.itemName)}}>Edit</Button>
-                        <Button variant="danger" className="button-for-editing-items delete-btn" onClick={this.deleteItemAndReloadMenu}>Delete</Button>
+                        <Button variant="danger" className="button-for-editing-items delete-btn" onClick={ () => {this.props.deleteItemFromMenu(this.props.itemId);}}>Delete</Button>
                     </Card.Footer>
                 </Card>
 
