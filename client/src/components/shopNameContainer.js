@@ -25,6 +25,7 @@ class ShopNameContainer extends Component{
                     showOptions: !this.state.showOptions
                 });
             } else {
+                this.props.showSearchBar();
                 this.props.menuForShop(this.props.shopId);
                 this.setState({
                     showMenuOption: !this.state.showMenuOption

@@ -28,7 +28,7 @@ module.exports = app => {
                 response.send(shop); 
             }
         });
-  });
+    });
     
     //get shop by email address
     app.get('/shop/get_shops/:userEmail', function(request, response) {
@@ -39,7 +39,7 @@ module.exports = app => {
                 response.send(shop);
             }
         });
-  });
+    });
     
     //add item to shop menu
     app.put('/menu', function(request, response) {
@@ -50,7 +50,7 @@ module.exports = app => {
                 response.send(menu); 
             }
         });
-  });
+    });
     
     //get shop menu from shop id
     app.get('/menu/:shopId', function(request, response) {
@@ -62,7 +62,7 @@ module.exports = app => {
                 response.send(menu);
             }
         });
-  });
+    });
     
     //delete item from shop menu
     app.put('/menu/item/delete', function(request, response) {
@@ -74,7 +74,7 @@ module.exports = app => {
                 response.send(menu);
             }
         })
-});
+    });
     
     //update an item in shop menu
     app.put('/menu/item_update', function(request, response) {
@@ -85,7 +85,7 @@ module.exports = app => {
                 response.send(menuItem); 
             }
         });
-  });
+    });
     
     //get set of shop item_categories
     app.get('/item_categories/:shopId', function(request, response) {
@@ -96,7 +96,7 @@ module.exports = app => {
                 response.send(menuCategory);
             }
         });
-  });
+    });
     
     //get items by category from shop menu
     app.get('/items', function(request, response) {
@@ -108,7 +108,18 @@ module.exports = app => {
                 response.send(menu);
             }
         });
-  });    
+    });    
     
+    //get items Name for autocomplete
+    app.get('/items_name/for-autoComplete/:shopId', function(request, response) {
+        Menu.find({shopId: request.params.shopId}, {_id:0, "menu.itemName": 1}).exec(function(err, itemNameList) {
+            if(err) {
+                response.status(500).send({error: "No Menu For this Shop"});
+            } else {
+                //menu[0].menu
+                response.send(itemNameList[0].menu);
+            }
+        });
+    });
     
 };
