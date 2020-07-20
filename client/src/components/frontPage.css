@@ -12,6 +12,18 @@
 #front-carousel{
   box-shadow: 0 0 15px grey;
 }
+.carousel-indicators{
+  padding-bottom: 0.8rem;
+  margin-bottom: 0
+}
+.carousel-caption{
+  background-color: rgba(255, 255, 255, 0.16);
+  color: black;
+  bottom: 0;
+}
+.slide-btn{
+  background-color: rgba(255, 255, 255, 0.1);
+}
 
 #about-section{
   text-align: center;

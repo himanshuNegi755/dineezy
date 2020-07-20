@@ -48,85 +48,83 @@ class MenuItems extends Component{
         return (
             <div className="menu-item-design">
 
-                <Table striped bordered hover className="table-for-items">
-                    <tbody>
-                        <tr>
-                            <td className="item-detail">Item Name</td>
-                            <td className="item-input">
-                                <InputGroup>
-                                    <FormControl
-                                        placeholder="Item Name"
-                                        aria-label="Item Name"
-                                        aria-describedby="basic-addon1"
-                                        value={this.state.itemName}
-                                        name='itemName'
-                                        onChange={this.onTextChanged}
-                                    />
-                                </InputGroup>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className="item-detail">Veg Or Non-Veg</td>
-                            <td className="item-input">
-                                <InputGroup>
-                                    <FormControl
-                                        placeholder="Item Name"
-                                        aria-label="Item Name"
-                                        aria-describedby="basic-addon1"
-                                        value={this.state.vegOrNonVeg}
-                                        name='vegOrNonVeg'
-                                        onChange={this.onTextChanged}
-                                    />
-                                </InputGroup>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className="item-detail">Price</td>
-                            <td className="item-input">
-                                <InputGroup>
-                                    <FormControl
-                                        placeholder="Item Name"
-                                        aria-label="Item Name"
-                                        aria-describedby="basic-addon1"
-                                        value={this.state.price}
-                                        name='price'
-                                        onChange={this.onTextChanged}
-                                    />
-                                </InputGroup>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className="item-detail">Description</td>
-                            <td className="item-input">
-                                <InputGroup>
-                                    <FormControl
-                                        placeholder="Item Name"
-                                        aria-label="Item Name"
-                                        aria-describedby="basic-addon1"
-                                        value={this.state.description}
-                                        name='description'
-                                        onChange={this.onTextChanged}
-                                    />
-                                </InputGroup>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className="item-detail">Category</td>
-                            <td className="item-input">
-                                <InputGroup>
-                                    <FormControl
-                                        placeholder="Item Name"
-                                        aria-label="Item Name"
-                                        aria-describedby="basic-addon1"
-                                        value={this.state.category}
-                                        name='category'
-                                        onChange={this.onTextChanged}
-                                    />
-                                </InputGroup>
-                            </td>
-                        </tr>
-                      </tbody>
-                </Table>
+                <div className="rows-for-items row">
+                  <div className="col-lg-3 col-md-3 col-sm-4 item-detail">Item name</div>
+                  <div className="col-lg-9 col-md-9 col-sm-8 item-input">
+                    <InputGroup>
+                        <FormControl
+                            placeholder="Item Name"
+                            aria-label="Item Name"
+                            aria-describedby="basic-addon1"
+                            value={this.state.itemName}
+                            name='itemName'
+                            onChange={this.onTextChanged}
+                        />
+                    </InputGroup>
+                  </div>
+                </div>
+                <div className="rows-for-items row">
+                  <div className="col-lg-3 col-md-3 col-sm-4 item-detail">Veg Or Non-Veg</div>
+                  <div className="col-lg-9 col-md-9 col-sm-8 item-input">
+                    <InputGroup>
+                        <select class="custom-select form-control" placeholder="Item Category" aria-label="Item Category" aria-describedby="basic-addon1"
+                        value={this.state.vegOrNonVeg} name='vegOrNonVeg' onChange={this.onTextChanged} id="inputGroupSelect">
+                          <option selected>Choose...</option>
+                          <option value="veg">veg</option>
+                          <option value="non-veg">non-veg</option>
+                        </select>
+                    </InputGroup>
+                  </div>
+                </div>
+                <div className="rows-for-items row">
+                  <div className="col-lg-3 col-md-3 col-sm-4 item-detail">Price</div>
+                  <div className="col-lg-9 col-md-9 col-sm-8 item-input">
+                    <InputGroup>
+                        <InputGroup.Prepend>
+                          <InputGroup.Text>₹</InputGroup.Text>
+                        </InputGroup.Prepend>
+                        <FormControl
+                            placeholder="Item Price"
+                            aria-label="Item Price"
+                            aria-describedby="basic-addon1"
+                            value={this.state.price}
+                            name='price'
+                            onChange={this.onTextChanged}
+                        />
+                    </InputGroup>
+                  </div>
+                </div>
+                <div className="rows-for-items row">
+                  <div className="col-lg-3 col-md-3 col-sm-4 item-detail">Description</div>
+                  <div className="col-lg-9 col-md-9 col-sm-8 item-input">
+                    <InputGroup>
+                        <FormControl
+                            placeholder="Description or ingredients"
+                            aria-label="Item Description"
+                            aria-describedby="basic-addon1"
+                            value={this.state.description}
+                            name='description'
+                            onChange={this.onTextChanged}
+                        />
+                    </InputGroup>
+                  </div>
+                </div>
+                <div className="rows-for-items row">
+                  <div className="col-lg-3 col-md-3 col-sm-4 item-detail">Category</div>
+                  <div className="col-lg-9 col-md-9 col-sm-8 item-input">
+                    <InputGroup>
+                        <FormControl
+                            placeholder="Item Category"
+                            aria-label="Item Category"
+                            aria-describedby="basic-addon1"
+                            value={this.state.category}
+                            name='category'
+                            onChange={this.onTextChanged}
+                        />
+
+                    </InputGroup>
+                  </div>
+                </div>
 
                 <Button variant="success" className="button-for-editing-items save-btn" onClick={this.changeItemDetails}>Save</Button>
                 <Button variant="danger" className="button-for-editing-items delete-btn" onClick={this.deleteItemAndReloadMenu}>Delete</Button>

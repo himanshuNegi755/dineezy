@@ -20,7 +20,7 @@ class ItemCard extends Component{
         this.props.addItem({itemName: this.props.itemName, itemPrice: this.props.price, itemQuantity: 1});
         this.props.showCart();
     }
-    
+
     render() {
         return (
             <Card style={{ width: '49%' }} className="card-for-item" bg="light">
