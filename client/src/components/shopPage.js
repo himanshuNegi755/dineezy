@@ -16,17 +16,16 @@ class ShopPage extends Component{
         super(props);
 
         this.state = { userEmail: '', loggedIn: true, showModal: false, shopName: '', shopAddress: '', noOfTables: 1,
-                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: '',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBar: 'none', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: ''}
+                      shopList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: '',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBar: 'none', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', category: [], itemsByCategory: []}
 
         this.showShopAddModal = this.showShopAddModal.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.showShopAfterAdding = this.showShopAfterAdding.bind(this);
         this.shopList = this.shopList.bind(this);
         this.menuItemList = this.menuItemList.bind(this);
-        this.getMenuFunction = this.getMenuFunction.bind(this);
         this.deleteItemFunction = this.deleteItemFunction.bind(this);
-    }
-
+    }    
+    
     showShopAddModal() {
         this.setState({
             showModal: !this.state.showModal
@@ -93,6 +92,47 @@ class ShopPage extends Component{
 
     }
 
+    loadCategoryFunction = (shopId) => {
+        this.setState({shopIdVar: shopId});
+        
+        axios.get(`http://localhost:5000/item_categories/${shopId}`)
+        .then(res => {
+            this.setState({category: res.data})
+        })
+    }
+    
+    renderItemCategory = () => {
+        switch(this.state.category.length) {
+            case 0:
+                return (
+                    <React.Fragment>
+                        <div className="btn-div">
+                            <h5>Loading</h5>
+                        </div>
+                    </React.Fragment>
+                )
+            default:
+                const list = this.state.category.map((itemCategory) =>
+                    <div key={itemCategory}>
+                        <ul>
+                            <li className="category-ind"onClick={() => {this.loadItemFunction(itemCategory)}}>{itemCategory}</li>
+                        </ul>
+                    </div>
+                );
+
+        return (list);
+
+        }
+    } 
+
+    loadItemFunction = (itemCategory) => {
+        axios.get(`http://localhost:5000/items?shopId=${this.state.shopIdVar}&category=${itemCategory}`)
+        .then(res => {
+            console.log(res.data);
+            this.setState({itemsByCategory: res.data})
+        })
+    }
+
     addNewItemToMenuFunction = () => {
         
         this.setState({showNewItemAddModal: !this.state.showNewItemAddModal})
@@ -135,27 +175,6 @@ class ShopPage extends Component{
         }
     }
 
-    getMenuFunction(shopId) {
-        this.setState({shopIdVar: shopId});
-        axios.get(`http://localhost:5000/menu/${shopId}`)
-        .then(res => {
-            //console.log(res.data[0].menu)
-            this.setState({menuItemList: res.data[0].menu})
-        })
-        
-        axios.get(`http://localhost:5000/items_name/for-autoComplete/${shopId}`)
-        .then(res => {
-            this.setState({itemNameAsObjectArr: res.data})
-            var arr = [];
-            //console.log(this.state.productSuggestions[0].productName)
-            for(var i=0; i<this.state.itemNameAsObjectArr.length; i++) {
-                arr[i] = this.state.itemNameAsObjectArr[i].itemName
-            }
-            this.setState({itemNameList: arr})
-        }) 
-        
-    }
-
     deleteItemFunction(itemIdAttribute) {
         axios.put('http://localhost:5000/menu/item/delete/', {
                 shopId: this.state.shopIdVar,
@@ -171,7 +190,7 @@ class ShopPage extends Component{
     shopList = () => {
         const list = this.state.shopList.map((shop) =>
             <div key={shop._id}>
-                <ShopNameContainer shopName={shop.shopName} menuForShop={this.getMenuFunction} shopId={shop._id} showSearchBar={this.showSearchBarFunction}/>
+                <ShopNameContainer shopName={shop.shopName} shopId={shop._id} showSearchBar={this.showSearchBarFunction} showCategory={this.loadCategoryFunction}/>
             </div>
         );
 
@@ -179,10 +198,10 @@ class ShopPage extends Component{
     }
 
     menuItemList = () => {
-        const list = this.state.menuItemList.map((menuItem) =>
-            <div key={menuItem._id}>
-                <MenuItems itemName={menuItem.itemName} vegOrNonVeg={menuItem.vegOrNonVeg} price={menuItem.price} description={menuItem.description} category={menuItem.category} deleteItemFromMenu={this.deleteItemFunction}
-                itemId={menuItem._id} shopId={this.state.shopIdVar} menuReload={this.getMenuFunction}/>
+        const list = this.state.itemsByCategory.map((menuItem) =>
+            <div key={menuItem.menu._id}>
+                <MenuItems itemName={menuItem.menu.itemName} vegOrNonVeg={menuItem.menu.vegOrNonVeg} price={menuItem.menu.price} description={menuItem.menu.description} category={menuItem.menu.category} deleteItemFromMenu={this.deleteItemFunction}
+                itemId={menuItem._id} shopId={this.state.shopIdVar} menuReload={this.getMenuFunction} editItem={this.suggestionSelected}/>
             </div>
         );
 
@@ -252,6 +271,10 @@ class ShopPage extends Component{
                         <button className="add-new-item-button" onClick={() => {this.setState({showNewItemAddModal: !this.state.showNewItemAddModal})}}>Add New Item</button>
                             
                     </div>
+                        
+                        <div className="default-list" style={{display: this.state.showSearchBar}}>
+                            {this.renderItemCategory()}
+                        </div>
                             
                         
                         <div className="div-to-show-menu">

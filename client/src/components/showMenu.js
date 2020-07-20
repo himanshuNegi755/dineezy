@@ -34,7 +34,7 @@ class ShowMenu extends Component{
     loadItemFunction(itemCategory) {
         axios.get(`http://localhost:5000/items?shopId=${this.props.match.params.shopId}&category=${itemCategory}`)
         .then(res => {
-            //console.log(res.data)
+            console.log(res.data)
             this.setState({itemsByCategory: res.data})
         })
     }

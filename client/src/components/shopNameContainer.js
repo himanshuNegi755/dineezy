@@ -26,7 +26,7 @@ class ShopNameContainer extends Component{
                 });
             } else {
                 this.props.showSearchBar();
-                this.props.menuForShop(this.props.shopId);
+                this.props.showCategory(this.props.shopId);
                 this.setState({
                     showMenuOption: !this.state.showMenuOption
                 });
