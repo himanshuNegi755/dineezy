@@ -271,13 +271,12 @@ class ShopPage extends Component{
                         <button className="add-new-item-button" onClick={() => {this.setState({showNewItemAddModal: !this.state.showNewItemAddModal})}}>Add New Item</button>
                             
                     </div>
-                        
-                        <div className="default-list" style={{display: this.state.showSearchBar}}>
-                            {this.renderItemCategory()}
-                        </div>
-                            
+                                                    
                         
                         <div className="div-to-show-menu">
+                            <div className="default-list" style={{display: this.state.showSearchBar}}>
+                                {this.renderItemCategory()}
+                            </div>
                             {this.menuItemList()}
                         </div>
                     </div>

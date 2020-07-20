@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import axios from 'axios';
-import { Button, Table, InputGroup, FormControl, Card } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import './menuItems.css';
 
 class MenuItems extends Component{
