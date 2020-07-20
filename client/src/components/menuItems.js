@@ -18,7 +18,6 @@ class MenuItems extends Component{
 
     render() {
         return (
-            <div className="menu-item-design">
 
                 <Card style={{ width: '49%' }} className="card-for-item" bg="light">
                     <Card.Body>
@@ -39,7 +38,7 @@ class MenuItems extends Component{
                     </Card.Footer>
                 </Card>
 
-            </div>
+
         );
     }
 }

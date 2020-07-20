@@ -24,6 +24,7 @@ class ShopPage extends Component{
         this.shopList = this.shopList.bind(this);
         this.menuItemList = this.menuItemList.bind(this);
         this.deleteItemFunction = this.deleteItemFunction.bind(this);
+
     }    
     
     
@@ -40,7 +41,7 @@ class ShopPage extends Component{
             [e.target.name]: e.target.value
         });
     }
-    
+
     
     //autocomplete functions
     onTextChanged = (e) => {
@@ -52,7 +53,7 @@ class ShopPage extends Component{
         }
         this.setState(() => ({ suggestions, item: value }));
     }
-    
+
     /*getItemNamesFor = (shopId) => {
         axios.get(`http://localhost:5000/items_name/for-autoComplete/${shopId}`)
         .then(res => {
@@ -63,9 +64,9 @@ class ShopPage extends Component{
                 arr[i] = this.state.itemNameAsObjectArr[i].itemName
             }
             this.setState({itemNameList: arr})
-        }) 
+        })
     }*/
-    
+
     getMenuFunction = (shopId) => {
         this.setState({shopIdVar: shopId});
         axios.get(`http://localhost:5000/menu/${shopId}`)
@@ -86,12 +87,12 @@ class ShopPage extends Component{
         })
 
     }
-    
+
     suggestionSelected = (value) => {
         this.setState({item: value, suggestions: []});
-        
+
         var itemObj = this.state.menuItemList.filter(item => item.itemName === value)
-        
+
         this.setState({
             editItemName: itemObj[0].itemName,
             editVegOrNonVeg: itemObj[0].vegOrNonVeg,
@@ -101,14 +102,14 @@ class ShopPage extends Component{
             editItemId: itemObj[0]._id,
             showItemEditModal: !this.showItemEditModal
         });
-        
+
     }
-    
+
     renderSuggestions = () => {
         if(this.state.suggestions.length === 0) {
             return null;
         }
-        return (            
+        return (
             <ul>
                 {this.state.suggestions.map((item) => <li onClick = {() => this.suggestionSelected(item)} key={item}>{item}</li>)}
             </ul>
@@ -136,14 +137,13 @@ class ShopPage extends Component{
     //category functions
     loadCategoryFunction = (shopId) => {
         this.setState({shopIdVar: shopId, itemsByCategory: []});
-        
         axios.get(`http://localhost:5000/item_categories/${shopId}`)
         .then(res => {
             this.setState({category: res.data})
         })
         
     }
-    
+
     renderItemCategory = () => {
         switch(this.state.category.length) {
             case 0:
@@ -169,7 +169,7 @@ class ShopPage extends Component{
         return (list);
 
         }
-    } 
+    }
 
     loadItemFunction = (itemCategory) => {
         axios.get(`http://localhost:5000/items?shopId=${this.state.shopIdVar}&category=${itemCategory}`)
@@ -181,9 +181,9 @@ class ShopPage extends Component{
 
     //shop functions
     addNewItemToMenuFunction = () => {
-        
+
         this.setState({showNewItemAddModal: !this.state.showNewItemAddModal})
-        
+
         axios.put('http://localhost:5000/menu', {
             shopId: this.state.shopIdVar,
             itemName: this.state.itemName,
@@ -276,11 +276,11 @@ class ShopPage extends Component{
 
         return (list);
     }
-    
+
     showSearchBarFunction = () => {
         this.setState({showSearchBar: 'inline-block'})
     }
-    
+
     render() {
         if(!this.state.loggedIn) {
             return <Redirect to='/' />;
@@ -290,7 +290,7 @@ class ShopPage extends Component{
             <div className="parent-div">
                 <NavbarForSite />
                 <div className="main-container row">
-                    <div className="col-md-4 retaurant-col">
+                    <div className="col-md-3 retaurant-col">
                         <Button variant="danger" className="add-restaurant-button" onClick={() => {this.showShopAddModal()}}>Add Restaurant</Button>
 
                         <div className="restaurant-list">
@@ -298,44 +298,48 @@ class ShopPage extends Component{
                             {this.shopList()}
                         </div>
                     </div>
-                    <div className="col-md-8 menu-col">                           
-                            
-                        <div className="div-to-hold-searchBar" style={{display: this.state.showSearchBar}}>
-                        <InputGroup className="searchBar">
-                            <InputGroup.Prepend>
-                                <InputGroup.Text id="basic-addon1"><span role="img" aria-label="search">🔍</span></InputGroup.Text>
+                    <div className="col-md-9 menu-col">
+
+                        <div className="searchBar-div" style={{display: this.state.showSearchBar}}>
+                            <InputGroup className="searchBar">
+                                <InputGroup.Prepend>
+                                  <InputGroup.Text ><span role="img" aria-label="search"><i class="fas fa-search"></i></span></InputGroup.Text>
                                 </InputGroup.Prepend>
-                            <FormControl
-                                placeholder="What can we help you find?"
-                                aria-label="What can we help you find"
-                                onChange={this.onTextChanged}
-                                type='text'
-                                value={this.state.item}
-                            />
-                        </InputGroup>
-                            
-                        <div className="mb-3 suggestion">
-                            {this.renderSuggestions()}
+                                <FormControl
+                                    placeholder="What can we help you find?"
+                                    aria-label="What can we help you find"
+                                    onChange={this.onTextChanged}
+                                    type='text'
+                                    value={this.state.item}
+                                />
+                                <div className="mb-3 suggestion">
+                                    {this.renderSuggestions()}
+                                </div>
+                                <InputGroup.Append>
+                                  <button className="add-new-item-btn" onClick={() => {this.setState({showNewItemAddModal: !this.state.showNewItemAddModal})}}>
+                                    <span className="addItem-text">Add New Item</span>
+                                  </button>
+                                </InputGroup.Append>
+                            </InputGroup>
+
+
+
                         </div>
-                
-                        <button className="add-new-item-button" onClick={() => {this.setState({showNewItemAddModal: !this.state.showNewItemAddModal})}}>Add New Item</button>
-                            
-                    </div>
-                                                    
-                        
+
                         <div className="div-to-show-menu">
-                            <div className="default-list" style={{display: this.state.showSearchBar}}>
+
+                            <div className="menu-category" style={{display: this.state.showSearchBar}}>
                                 {this.renderItemCategory()}
                             </div>
                             {this.menuItemList()}
                         </div>
                     </div>
                 </div>
-                
+
                 <div id="footer">
                     <Footer />
                 </div>
-                
+
                 <div>
                     <Modal
                         size="md"
@@ -356,22 +360,22 @@ class ShopPage extends Component{
                                         <Form.Label>Item Name</Form.Label>
                                         <Form.Control type="text" placeholder="Item Name" name='editItemName' value={this.state.editItemName} onChange={this.handleInputChange}/>
                                     </Form.Group>
-                                    
+
                                     <Form.Group controlId="formBasicName">
                                         <Form.Label>Veg/Non-Veg</Form.Label>
                                         <Form.Control type="text" placeholder="Veg/Non-Veg" name='editVegOrNonVeg' value={this.state.editVegOrNonVeg} onChange={this.handleInputChange}/>
                                     </Form.Group>
-                                    
+
                                     <Form.Group controlId="formBasicName">
                                         <Form.Label>Price</Form.Label>
                                         <Form.Control type="number" placeholder="Item Price" name='editItemPrice' value={this.state.editItemPrice} onChange={this.handleInputChange}/>
                                     </Form.Group>
-                                    
+
                                     <Form.Group controlId="formBasicName">
                                         <Form.Label>Description</Form.Label>
                                         <Form.Control type="text" placeholder="One Line description of item" name='editItemDescription' value={this.state.editItemDescription} onChange={this.handleInputChange}/>
                                     </Form.Group>
-                                    
+
                                     <Form.Group controlId="formBasicName">
                                         <Form.Label>Item Category</Form.Label>
                                         <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='editItemCategory' value={this.state.editItemCategory} onChange={this.handleInputChange}/>
@@ -409,22 +413,22 @@ class ShopPage extends Component{
                                         <Form.Label>Item Name</Form.Label>
                                         <Form.Control type="text" placeholder="Item Name" name='itemName' value={this.state.itemName} onChange={this.handleInputChange}/>
                                     </Form.Group>
-                                    
+
                                     <Form.Group controlId="formBasicName">
                                         <Form.Label>Veg/Non-Veg</Form.Label>
                                         <Form.Control type="text" placeholder="Veg/Non-Veg" name='vegOrNonVeg' value={this.state.vegOrNonVeg} onChange={this.handleInputChange}/>
                                     </Form.Group>
-                                    
+
                                     <Form.Group controlId="formBasicName">
                                         <Form.Label>Price</Form.Label>
                                         <Form.Control type="number" placeholder="Item Price" name='itemPrice' value={this.state.itemPrice} onChange={this.handleInputChange}/>
                                     </Form.Group>
-                                    
+
                                     <Form.Group controlId="formBasicName">
                                         <Form.Label>Description</Form.Label>
                                         <Form.Control type="text" placeholder="One Line description of item" name='itemDescription' value={this.state.itemDescription} onChange={this.handleInputChange}/>
                                     </Form.Group>
-                                    
+
                                     <Form.Group controlId="formBasicName">
                                         <Form.Label>Item Category</Form.Label>
                                         <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='itemCategory' value={this.state.itemCategory} onChange={this.handleInputChange}/>
@@ -438,7 +442,7 @@ class ShopPage extends Component{
                             </Modal.Body>
                         </Modal>
                 </div>
-                
+
                 <div>
                     <Modal
                         size="md"

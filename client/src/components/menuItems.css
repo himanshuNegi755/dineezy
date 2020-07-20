@@ -1,23 +1,40 @@
-.menu-item-design {
-    padding: 1% 1% 0;
-    background-color: #c7e2b2;
-    margin: 0 1rem 1rem 0;
-    border: 1px solid grey;
+
+.rows-for-items{
+  padding: 2px auto;
 }
-.table-for-items .item-detail{
-    background-color: #e1ffc2;
-    border: 2px solid #c7e2b2;
-    border-radius: 2px;
+.item-detail{
+    padding-top: 0.5rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.2rem;
+    height: 2.2rem;
 }
-.table-for-items .item-input{
-    padding: 0.3rem;
-    background-color: #e1ffc2;
-    border: 2px solid #c7e2b2;
-    border-radius: 2px;
+.item-input{
+    padding-right: 5rem;
+}
+.item-input .input-group-text{
+    height: 2.2rem;
+    border: none;
+    border-bottom: 1px solid #d6d6d6;
+    border-radius: 0;
+    background-color: white;
+    padding-right: 0;
+    background-color: #f4ffe8;
+}
+.item-input .form-control{
+    height: 2.2rem;
+    border: none;
+    border-bottom: 1px solid #d6d6d6;
+    border-radius: 0;
+    background-color: #f4ffe8;
+}
+.item-input .form-control:hover{
+    background-color: #fff;
 }
 .button-for-editing-items {
-    margin: 0 2% 2%;
+    margin: 1.5% 2% 1%;
     width: 20%;
+    height: 2rem;
+    padding-top: 4px;
     background-color: #092532;
     border: 0;
     font-family: 'Ubuntu', sans-serif;

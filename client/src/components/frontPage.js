@@ -95,7 +95,7 @@ class FrontPage extends Component{
                           src="https://www.rotundakingston.co.uk/wp-content/uploads/2018/06/kung-fu-800x400px.jpg"
                           alt="First slide"/>
                           <div className="carousel-caption">
-                            <h3>First slide label</h3>
+                            <h3>Perks of a virtual menu.</h3>
                             <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                           </div>
                         </div>
@@ -120,11 +120,11 @@ class FrontPage extends Component{
                           </div>
                         </div>
                       </div>
-                      <a className="carousel-control-prev" href="#front-carousel" role="button" data-slide="prev">
+                      <a className="carousel-control-prev slide-btn" href="#front-carousel" role="button" data-slide="prev">
                       <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                       <span className="sr-only">Previous</span>
                       </a>
-                      <a className="carousel-control-next" href="#front-carousel" role="button" data-slide="next">
+                      <a className="carousel-control-next slide-btn" href="#front-carousel" role="button" data-slide="next">
                       <span className="carousel-control-next-icon" aria-hidden="true"></span>
                       <span className="sr-only">Next</span>
                       </a>
