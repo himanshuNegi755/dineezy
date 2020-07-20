@@ -38,7 +38,7 @@ class ShopPage extends Component{
             [e.target.name]: e.target.value
         });
     }
-    
+
     onTextChanged = (e) => {
         const value = e.target.value;
         let suggestions = [];
@@ -48,12 +48,12 @@ class ShopPage extends Component{
         }
         this.setState(() => ({ suggestions, item: value }));
     }
-    
+
     suggestionSelected = (value) => {
         this.setState({item: value, suggestions: []});
-        
+
         var itemObj = this.state.menuItemList.filter(item => item.itemName === value)
-        
+
         this.setState({
             editItemName: itemObj[0].itemName,
             editVegOrNonVeg: itemObj[0].vegOrNonVeg,
@@ -63,14 +63,14 @@ class ShopPage extends Component{
             editItemId: itemObj[0]._id,
             showItemEditModal: !this.showItemEditModal
         });
-        
+
     }
-    
+
     renderSuggestions = () => {
         if(this.state.suggestions.length === 0) {
             return null;
         }
-        return (            
+        return (
             <ul>
                 {this.state.suggestions.map((item) => <li onClick = {() => this.suggestionSelected(item)} key={item}>{item}</li>)}
             </ul>
@@ -94,9 +94,9 @@ class ShopPage extends Component{
     }
 
     addNewItemToMenuFunction = () => {
-        
+
         this.setState({showNewItemAddModal: !this.state.showNewItemAddModal})
-        
+
         axios.put('http://localhost:5000/menu', {
             shopId: this.state.shopIdVar,
             itemName: this.state.itemName,
@@ -142,7 +142,7 @@ class ShopPage extends Component{
             //console.log(res.data[0].menu)
             this.setState({menuItemList: res.data[0].menu})
         })
-        
+
         axios.get(`http://localhost:5000/items_name/for-autoComplete/${shopId}`)
         .then(res => {
             this.setState({itemNameAsObjectArr: res.data})
@@ -152,8 +152,8 @@ class ShopPage extends Component{
                 arr[i] = this.state.itemNameAsObjectArr[i].itemName
             }
             this.setState({itemNameList: arr})
-        }) 
-        
+        })
+
     }
 
     deleteItemFunction(itemIdAttribute) {
@@ -188,11 +188,11 @@ class ShopPage extends Component{
 
         return (list);
     }
-    
+
     showSearchBarFunction = () => {
         this.setState({showSearchBar: 'inline-block'})
     }
-    
+
     editItemDetails = () => {
         this.setState({showItemEditModal: !this.state.showItemEditModal});
         axios.put('http://localhost:5000/menu/item_update', {
@@ -229,41 +229,41 @@ class ShopPage extends Component{
                             {this.shopList()}
                         </div>
                     </div>
-                    <div className="col-md-8 menu-col">                           
-                            
-                        <div className="div-to-hold-searchBar" style={{display: this.state.showSearchBar}}>
-                        <InputGroup className="searchBar">
-                            <InputGroup.Prepend>
-                                <InputGroup.Text id="basic-addon1"><span role="img" aria-label="search">🔍</span></InputGroup.Text>
+                    <div className="col-md-8 menu-col">
+
+                        <div className="searchBar-div" style={{display: this.state.showSearchBar}}>
+                            <InputGroup className="searchBar">
+                                <InputGroup.Prepend>
+                                  <InputGroup.Text ><span role="img" aria-label="search"><i class="fas fa-search"></i></span></InputGroup.Text>
                                 </InputGroup.Prepend>
-                            <FormControl
-                                placeholder="What can we help you find?"
-                                aria-label="What can we help you find"
-                                onChange={this.onTextChanged}
-                                type='text'
-                                value={this.state.item}
-                            />
-                        </InputGroup>
+                                <FormControl
+                                    placeholder="What can we help you find?"
+                                    aria-label="What can we help you find"
+                                    onChange={this.onTextChanged}
+                                    type='text'
+                                    value={this.state.item}
+                                />
+                            </InputGroup>
+                            <button className="add-new-item-btn" onClick={() => {this.setState({showNewItemAddModal: !this.state.showNewItemAddModal})}}>
+                              Add New Item
+                            </button>
                             
-                        <div className="mb-3 suggestion">
-                            {this.renderSuggestions()}
+                            <div className="mb-3 suggestion">
+                                {this.renderSuggestions()}
+                            </div>
                         </div>
-                
-                        <button className="add-new-item-button" onClick={() => {this.setState({showNewItemAddModal: !this.state.showNewItemAddModal})}}>Add New Item</button>
-                            
-                    </div>
-                            
-                        
+
+
                         <div className="div-to-show-menu">
                             {this.menuItemList()}
                         </div>
                     </div>
                 </div>
-                
+
                 <div id="footer">
                     <Footer />
                 </div>
-                
+
                 <div>
                     <Modal
                         size="md"
@@ -284,22 +284,22 @@ class ShopPage extends Component{
                                         <Form.Label>Item Name</Form.Label>
                                         <Form.Control type="text" placeholder="Item Name" name='editItemName' value={this.state.editItemName} onChange={this.handleInputChange}/>
                                     </Form.Group>
-                                    
+
                                     <Form.Group controlId="formBasicName">
                                         <Form.Label>Veg/Non-Veg</Form.Label>
                                         <Form.Control type="text" placeholder="Veg/Non-Veg" name='editVegOrNonVeg' value={this.state.editVegOrNonVeg} onChange={this.handleInputChange}/>
                                     </Form.Group>
-                                    
+
                                     <Form.Group controlId="formBasicName">
                                         <Form.Label>Price</Form.Label>
                                         <Form.Control type="number" placeholder="Item Price" name='editItemPrice' value={this.state.editItemPrice} onChange={this.handleInputChange}/>
                                     </Form.Group>
-                                    
+
                                     <Form.Group controlId="formBasicName">
                                         <Form.Label>Description</Form.Label>
                                         <Form.Control type="text" placeholder="One Line description of item" name='editItemDescription' value={this.state.editItemDescription} onChange={this.handleInputChange}/>
                                     </Form.Group>
-                                    
+
                                     <Form.Group controlId="formBasicName">
                                         <Form.Label>Item Category</Form.Label>
                                         <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='editItemCategory' value={this.state.editItemCategory} onChange={this.handleInputChange}/>
@@ -334,22 +334,22 @@ class ShopPage extends Component{
                                         <Form.Label>Item Name</Form.Label>
                                         <Form.Control type="text" placeholder="Item Name" name='itemName' value={this.state.itemName} onChange={this.handleInputChange}/>
                                     </Form.Group>
-                                    
+
                                     <Form.Group controlId="formBasicName">
                                         <Form.Label>Veg/Non-Veg</Form.Label>
                                         <Form.Control type="text" placeholder="Veg/Non-Veg" name='vegOrNonVeg' value={this.state.vegOrNonVeg} onChange={this.handleInputChange}/>
                                     </Form.Group>
-                                    
+
                                     <Form.Group controlId="formBasicName">
                                         <Form.Label>Price</Form.Label>
                                         <Form.Control type="number" placeholder="Item Price" name='itemPrice' value={this.state.itemPrice} onChange={this.handleInputChange}/>
                                     </Form.Group>
-                                    
+
                                     <Form.Group controlId="formBasicName">
                                         <Form.Label>Description</Form.Label>
                                         <Form.Control type="text" placeholder="One Line description of item" name='itemDescription' value={this.state.itemDescription} onChange={this.handleInputChange}/>
                                     </Form.Group>
-                                    
+
                                     <Form.Group controlId="formBasicName">
                                         <Form.Label>Item Category</Form.Label>
                                         <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='itemCategory' value={this.state.itemCategory} onChange={this.handleInputChange}/>
@@ -363,7 +363,7 @@ class ShopPage extends Component{
                             </Modal.Body>
                         </Modal>
                 </div>
-                
+
                 <div>
                     <Modal
                         size="md"

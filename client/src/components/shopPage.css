@@ -46,58 +46,78 @@
     resize: none;
 }
 
-.div-to-hold-searchBar {
-    /*display: inline-block;*/
-    width: inherit;
-}
-
-.searchBar {
-    display: flex;
-    width: 400px;
-}
-
-.suggestion {
-    background-color: white;
-    position: absolute;
-    z-index: 1;
-}
-
-.suggestion ul {
-    list-style: none;
-    text-align: left;
-}
-
-.suggestion li {
-    cursor: pointer;
-}
-
-.suggestion li:hover {
-    text-decoration: underline;
-    background-color: rgba(128, 128, 128, 0.20);
-}
-
-.add-new-item-button {
-    margin-top: 0;
-    background-color: #ecffd9;
-    border-color: ##ecffd9;
-    float: right;
-}
-
 .div-to-show-menu {
     background-color: #f1ffe3;
-    height: 52rem;
+    height: 37rem;
     border: 1px solid grey;
     margin: 0;
     overflow-x: hidden;
     overflow-y: auto;
 }
 
+.searchBar-div {
+    padding: 2%;
+    width: inherit;
+}
+.searchBar-div.row{
+  margin: 0;
+}
+.search-col{
+  display: inline-block;
+}
+.searchBar{
+    width: 40rem;
+}
+.input-group-pretend{
+    width: auto;
+}
+.input-group-text{
+    width: auto;
+    background-color: #fff;
+    border-radius: 0;
+}
+.searchBar .form-control{
+    border-radius: 0;
+}
+
+
+
+
+
+.suggestion {
+    background-color: white;
+    position: absolute;
+    z-index: 1;
+}
+.suggestion ul {
+    list-style: none;
+    text-align: left;
+}
+.suggestion li {
+    cursor: pointer;
+}
+.suggestion li:hover {
+    text-decoration: underline;
+    background-color: rgba(128, 128, 128, 0.20);
+}
+
+.add-new-item-btn {
+    display: inline-block;
+    background-color: #ecffd9;
+    border-color: #ecffd9;
+    float: right;
+}
+.add-item-col{
+  padding: 0;
+}
+
+
 @media (max-width: 767px){
-    
+
   .parent-div{
     background-color: #092532;
   }
-    
+
   .main-container .menu-col{
       margin-top: 1rem;
   }
