@@ -59,12 +59,10 @@
     padding: 2%;
     width: inherit;
 }
-.searchBar-div.row{
+.searchBar-div{
   margin: 0;
 }
-.search-col{
-  display: inline-block;
-}
+
 .searchBar{
     width: 40rem;
 }
