@@ -1,8 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './googleButton.css';
 
-class GoogleButton extends Component{
-    render() {
+const GoogleButton = () => {
         return (
             <div className="log-in-btn">
                 <a href="http://localhost:5000/auth/google" className="button google-button-a-tag">
@@ -40,6 +39,5 @@ class GoogleButton extends Component{
             </div>
         );
     }
-}
 
 export default GoogleButton;

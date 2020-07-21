@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import './frontPage.css';
 import NavbarForSite from './navbar';
@@ -6,17 +6,10 @@ import Footer from './footer';
 import NOTch from '../images/no-touch.svg'
 import MobChk from '../images/onMobile.svg'
 
-class FrontPage extends Component{
+const FrontPage = (props) => {
 
-    constructor(props) {
-        super(props);
-
-        this.renderPricingContent = this.renderPricingContent.bind(this);
-        this.renderFreeContent = this.renderFreeContent.bind(this);
-    }
-
-    renderPricingContent = () => {
-        switch(this.props.user) {
+    const renderPricingContent = () => {
+        switch(props.user) {
             case null:
                 return (
                     <React.Fragment>
@@ -44,8 +37,8 @@ class FrontPage extends Component{
         }
     }
 
-    renderFreeContent = () => {
-        switch(this.props.user) {
+    const renderFreeContent = () => {
+        switch(props.user) {
             case null:
                 return (
                     <React.Fragment>
@@ -72,9 +65,7 @@ class FrontPage extends Component{
                 )
         }
     }
-
-    render() {
-
+    
         return (
             <div className="main-div">
                 <div>
@@ -169,7 +160,7 @@ class FrontPage extends Component{
                           <div className="card-body">
                             <h2 className="price-text">Free</h2>
                             <p className="trial-text">After the trail version you'll love to try our monthly and yearly packs.</p>
-                            {this.renderFreeContent()}
+                            {renderFreeContent()}
                           </div>
                         </div>
                       </div>
@@ -183,7 +174,7 @@ class FrontPage extends Component{
                             <h2 className="price-text">₹ 150 / mo</h2>
                             <p>Payment at the beginning of the month</p>
                             <p>Validity : 30 Days from the day of payment.</p>
-                            {this.renderPricingContent()}
+                            {renderPricingContent()}
                           </div>
                         </div>
                       </div>
@@ -196,7 +187,7 @@ class FrontPage extends Component{
                             <h2 className="price-text">₹ 1200 / yr</h2>
                             <p>Payment at the beginning of the year</p>
                             <p>Validity : 365 days from the day of payment</p>
-                            {this.renderPricingContent()}
+                            {renderPricingContent()}
                           </div>
                         </div>
                       </div>
@@ -210,7 +201,6 @@ class FrontPage extends Component{
                 </div>
             </div>
         );
-    }
 }
 
 const mapStateToProps = (state) => {

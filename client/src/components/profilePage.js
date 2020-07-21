@@ -15,11 +15,6 @@ class ProfilePage extends Component{
 
         this.state = { userName: null, userEmail: '', userImage: '', numberField: '', show: false, msg: '', otp: '',
                      verify: '', loggedIn: true}
-
-        this.verifyNumberFunction = this.verifyNumberFunction.bind(this);
-        this.onTextChanged = this.onTextChanged.bind(this);
-        this.showOTPEnterModal = this.showOTPEnterModal.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
     }
 
     onTextChanged = (e) => {
@@ -28,7 +23,7 @@ class ProfilePage extends Component{
         });
     }
 
-    verifyNumberFunction() {
+    verifyNumberFunction = () => {
 
         if(this.state.numberField === '') {
             alert('please enter your mobile number')
@@ -49,7 +44,7 @@ class ProfilePage extends Component{
 
     }
 
-    onSubmit() {
+    onSubmit = () => {
         this.setState({show: !this.state.show})
 
         axios.get(`http://localhost:5000/verify?phoneNo=${this.state.numberField}&code=${this.state.otp}&userId=${this.props.user._id}`)
@@ -64,7 +59,7 @@ class ProfilePage extends Component{
 
     }
 
-    showOTPEnterModal() {
+    showOTPEnterModal = () => {
 
         return (
             <React.Fragment>

@@ -18,7 +18,7 @@ function App(props) {
           <Route exact path="/" component={FrontPage} />
           <Route exact path="/profile" component={ProfilePage} />
           <Route exact path="/shops" component={ShopPage} />
-          <Route exact path="/show_menu/:shopId" component={ShowMenu} />
+          <Route exact path="/show_menu/:shopId/:tableNo" component={ShowMenu} />
       </Switch>
   );
 }

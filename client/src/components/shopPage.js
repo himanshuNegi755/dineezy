@@ -161,7 +161,8 @@ class ShopPage extends Component{
                             <li className="category-ind"onClick={() => {
                                     this.loadItemFunction(itemCategory)
                                     this.setState({currentItemCategory: itemCategory})
-                                }}>{itemCategory}</li>
+                                }}>{itemCategory}
+                            </li>
                         </ul>
                     </div>
                 );
@@ -481,7 +482,6 @@ class ShopPage extends Component{
                             </Modal.Body>
                         </Modal>
                 </div>
-
 
             </div>
         );

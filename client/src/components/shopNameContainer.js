@@ -11,12 +11,10 @@ class ShopNameContainer extends Component{
         super(props);
 
         this.state = { showOptions: false, showFileUpload: false, showMenuOption: false, showQRCode: false}
-        this.showDropDownOptions = this.showDropDownOptions.bind(this);
-        this.showFileUploadModal = this.showFileUploadModal.bind(this);
-        this.showOptionFunction = this.showOptionFunction.bind(this);
+        this.tableNo = 2;
     }
 
-    showOptionFunction() {
+    showOptionFunction = () => {
 
         axios.get(`http://localhost:5000/menu/${this.props.shopId}`)
         .then(res => {
@@ -36,7 +34,7 @@ class ShopNameContainer extends Component{
         })
     }
 
-    showDropDownOptions() {
+    showDropDownOptions = () => {
         if(this.state.showOptions) {
             return(
                 <React.Fragment>
@@ -65,12 +63,6 @@ class ShopNameContainer extends Component{
 
     }
 
-    showFileUploadModal() {
-        this.setState({
-            showFileUpload: !this.state.showFileUpload
-        })
-    }
-
     render() {
         return (
             <div>
@@ -79,10 +71,10 @@ class ShopNameContainer extends Component{
 
                 <Modal
                     size="md"
-                    aria-labelledby="contained-modal-title-vcenter"
+                    aria-labelledby="file-upload-modal"
                     centered
                     show={this.state.showFileUpload}
-                    onHide={this.showFileUploadModal}
+                    onHide={ () => {this.setState({showFileUpload: !this.state.showFileUpload})}}
                 >
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-vcenter">
@@ -117,7 +109,7 @@ class ShopNameContainer extends Component{
 
                 <Modal
                     size="md"
-                    aria-labelledby="contained-modal-title-vcenter"
+                    aria-labelledby="qr-code-modal"
                     centered
                     show={this.state.showQRCode}
                     onHide={() => {this.setState({showQRCode: !this.state.showQRCode})}}
@@ -129,10 +121,10 @@ class ShopNameContainer extends Component{
                     </Modal.Header>
                     <Modal.Body>
                         <div className="qr-code-div">
-                            <a href={"/show_menu/" + this.props.shopId}>
+                            <a href={"/show_menu/" + this.props.shopId + "/" + this.tableNo}>
                                 <QRCode
                                     id= "qr-code-for-shop"
-                                    value= {"http://localhost:3000/show_menu/" + this.props.shopId}
+                                    value= {"http://localhost:3000/show_menu/" + this.props.shopId + "/" + this.tableNo}
                                 />
                             </a>
 
