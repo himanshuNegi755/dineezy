@@ -1,5 +1,5 @@
 .restaurant-name-holder {
-    padding: 0.9rem 0;
+    padding: 0.9rem 1rem;
     margin: 0;
     cursor: pointer;
 }
@@ -8,11 +8,11 @@
 }
 
 .drop-down-options ul {
-    width: 40%;
+    width: auto;
     font-family: 'Ubuntu', sans-serif;
     font-weight: lighter;
     margin: 1% 30%;
-    padding: 0;
+    padding: 0.1rem 0.3rem;
     border-radius: 3px;
     text-align: center;
     list-style: none;

@@ -42,11 +42,11 @@
 }
 @media (max-width: 900px)
 {
-  .card-body{
-    height: 15rem
-  }
   .item-name{
     font-size: 1.3rem;
+  }
+  .vnv-id{
+    width: 2rem;
   }
   .item-description{
     font-size: 0.9rem;

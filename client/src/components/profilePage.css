@@ -34,6 +34,7 @@
 .verify-btn{
   background-color: #61ad99;
   border-color: #61ad99;
+  height: 2.5rem;
 }
 
 @media (max-width: 670px){

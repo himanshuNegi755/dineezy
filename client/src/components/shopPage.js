@@ -25,9 +25,9 @@ class ShopPage extends Component{
         this.menuItemList = this.menuItemList.bind(this);
         this.deleteItemFunction = this.deleteItemFunction.bind(this);
 
-    }    
-    
-    
+    }
+
+
     //function to show modal
     showShopAddModal() {
         this.setState({
@@ -42,7 +42,7 @@ class ShopPage extends Component{
         });
     }
 
-    
+
     //autocomplete functions
     onTextChanged = (e) => {
         const value = e.target.value;
@@ -116,7 +116,7 @@ class ShopPage extends Component{
         );
     }
 
-    
+
     //add new show functions
     onSubmit() {
         this.setState({showModal: !this.state.showModal})
@@ -141,7 +141,7 @@ class ShopPage extends Component{
         .then(res => {
             this.setState({category: res.data})
         })
-        
+
     }
 
     renderItemCategory = () => {
@@ -157,12 +157,10 @@ class ShopPage extends Component{
             default:
                 const list = this.state.category.map((itemCategory) =>
                     <div key={itemCategory}>
-                        <ul>
-                            <li className="category-ind"onClick={() => {
+                            <span className="category-ind"onClick={() => {
                                     this.loadItemFunction(itemCategory)
                                     this.setState({currentItemCategory: itemCategory})
-                                }}>{itemCategory}</li>
-                        </ul>
+                                }}>{itemCategory}</span>
                     </div>
                 );
 
@@ -290,7 +288,7 @@ class ShopPage extends Component{
             <div className="parent-div">
                 <NavbarForSite />
                 <div className="main-container row">
-                    <div className="col-md-3 retaurant-col">
+                    <div className="col-lg-3 col-md-4 retaurant-col">
                         <Button variant="danger" className="add-restaurant-button" onClick={() => {this.showShopAddModal()}}>Add Restaurant</Button>
 
                         <div className="restaurant-list">
@@ -298,7 +296,7 @@ class ShopPage extends Component{
                             {this.shopList()}
                         </div>
                     </div>
-                    <div className="col-md-9 menu-col">
+                    <div className="col-lg-9 col-md-8 menu-col">
 
                         <div className="searchBar-div" style={{display: this.state.showSearchBar}}>
                             <InputGroup className="searchBar">
@@ -331,7 +329,9 @@ class ShopPage extends Component{
                             <div className="menu-category" style={{display: this.state.showSearchBar}}>
                                 {this.renderItemCategory()}
                             </div>
-                            {this.menuItemList()}
+                            <div className="menu-list-div">
+                                {this.menuItemList()}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -348,22 +348,25 @@ class ShopPage extends Component{
                         show={this.state.showItemEditModal}
                         onHide={() => { this.setState({showItemEditModal: !this.state.showItemEditModal}) }}
                         >
-                            <Modal.Header closeButton>
-                                <Modal.Title id="contained-modal-title-vcenter">
+                            <Modal.Header className="form-header" closeButton>
+                                <div className="Form-title">
                                     EDIT ITEM DETAILS
-                                </Modal.Title>
+                                </div>
                             </Modal.Header>
                             <Modal.Body>
                                 <Form>
-
                                     <Form.Group controlId="formBasicName">
                                         <Form.Label>Item Name</Form.Label>
                                         <Form.Control type="text" placeholder="Item Name" name='editItemName' value={this.state.editItemName} onChange={this.handleInputChange}/>
                                     </Form.Group>
 
                                     <Form.Group controlId="formBasicName">
-                                        <Form.Label>Veg/Non-Veg</Form.Label>
-                                        <Form.Control type="text" placeholder="Veg/Non-Veg" name='editVegOrNonVeg' value={this.state.editVegOrNonVeg} onChange={this.handleInputChange}/>
+                                      <Form.Label>Item Veg/NonVeg</Form.Label>
+                                      <select class="custom-select" id="inputGroupSelect02" type="text" placeholder="Veg/Non-Veg" name='editVegOrNonVeg' value={this.state.editVegOrNonVeg} onChange={this.handleInputChange}>
+                                        <option value="veg">Veg</option>
+                                        <option value="non-veg">Non-veg</option>
+                                        <option value="egg">Egg</option>
+                                      </select>
                                     </Form.Group>
 
                                     <Form.Group controlId="formBasicName">
@@ -381,12 +384,15 @@ class ShopPage extends Component{
                                         <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='editItemCategory' value={this.state.editItemCategory} onChange={this.handleInputChange}/>
                                     </Form.Group>
 
-                                    <Button variant="primary" onClick={this.editItemDetails}>
+                                    <div className="btn-div">
+                                      <button type="button" className="submit-btn form-btn" onClick={this.editItemDetails}>
                                         Submit
-                                    </Button>
-                                    <Button variant="primary" onClick={ () => {this.deleteItemFunction(this.state.editItemId)}}>
+                                      </button>
+                                      <button type="button" className="delete-btn form-btn" onClick={ () => {this.deleteItemFunction(this.state.editItemId)}}>
                                         Delete
-                                    </Button>
+                                      </button>
+                                    </div>
+
                                 </Form>
 
                             </Modal.Body>
@@ -402,9 +408,9 @@ class ShopPage extends Component{
                         onHide={() => { this.setState({showNewItemAddModal: !this.state.showNewItemAddModal}) }}
                         >
                             <Modal.Header closeButton>
-                                <Modal.Title id="contained-modal-title-vcenter">
+                                <div className="Form-title">
                                     ADD NEW ITEM DETAILS
-                                </Modal.Title>
+                                </div>
                             </Modal.Header>
                             <Modal.Body>
                                 <Form>
@@ -414,9 +420,13 @@ class ShopPage extends Component{
                                         <Form.Control type="text" placeholder="Item Name" name='itemName' value={this.state.itemName} onChange={this.handleInputChange}/>
                                     </Form.Group>
 
-                                    <Form.Group controlId="formBasicName">
-                                        <Form.Label>Veg/Non-Veg</Form.Label>
-                                        <Form.Control type="text" placeholder="Veg/Non-Veg" name='vegOrNonVeg' value={this.state.vegOrNonVeg} onChange={this.handleInputChange}/>
+                                    <Form.Group controlId="formBasicName" className="input-group mb-3">
+                                      <select class="custom-select" id="inputGroupSelect02" type="text" placeholder="Veg/Non-Veg" name='vegOrNonVeg' value={this.state.vegOrNonVeg} onChange={this.handleInputChange}>
+                                        <option value="veg">Veg</option>
+                                        <option value="non-veg">Non-veg</option>
+                                        <option value="egg">Egg</option>
+                                      </select>
+
                                     </Form.Group>
 
                                     <Form.Group controlId="formBasicName">
@@ -433,10 +443,11 @@ class ShopPage extends Component{
                                         <Form.Label>Item Category</Form.Label>
                                         <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='itemCategory' value={this.state.itemCategory} onChange={this.handleInputChange}/>
                                     </Form.Group>
-
-                                    <Button variant="primary" onClick={this.addNewItemToMenuFunction}>
+                                    <div className="btn-div">
+                                      <button type="button" className="submit-btn form-btn" onClick={this.addNewItemToMenuFunction}>
                                         Submit
-                                    </Button>
+                                      </button>
+                                    </div>
                                 </Form>
 
                             </Modal.Body>
@@ -452,9 +463,9 @@ class ShopPage extends Component{
                         onHide={this.showShopAddModal}
                         >
                             <Modal.Header closeButton>
-                                <Modal.Title id="contained-modal-title-vcenter">
+                                <div className="Form-title">
                                     SHOP DETAILS
-                                </Modal.Title>
+                                </div>
                             </Modal.Header>
                             <Modal.Body>
                                 <Form onSubmit={this.handleSubmit}>
@@ -473,9 +484,11 @@ class ShopPage extends Component{
                                         <Form.Label>Number Of Table</Form.Label>
                                         <Form.Control type="number" placeholder="Number Of Tables" min="1" name='noOfTables' value={this.state.noOfTable} onChange={this.handleInputChange}/>
                                     </Form.Group>
-                                    <Button variant="primary" onClick={this.onSubmit} className="sign-up-button">
+                                    <div className="btn-div">
+                                      <button type="button" className="submit-btn form-btn" onClick={this.onSubmit}>
                                         Submit
-                                    </Button>
+                                      </button>
+                                    </div>
                                 </Form>
 
                             </Modal.Body>
