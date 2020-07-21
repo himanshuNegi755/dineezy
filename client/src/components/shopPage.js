@@ -16,7 +16,7 @@ class ShopPage extends Component{
         super(props);
 
         this.state = { userEmail: '', loggedIn: true, showModal: false, shopName: '', shopAddress: '', noOfTables: 1,
-                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: '',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBar: 'none', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', category: [], itemsByCategory: [], currentItemCategory: ''}
+                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: '',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBar: 'none', showCategory: 'none', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', category: [], itemsByCategory: [], currentItemCategory: ''}
 
         this.showShopAddModal = this.showShopAddModal.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -278,8 +278,10 @@ class ShopPage extends Component{
     }
 
     showSearchBarFunction = () => {
-        this.setState({showSearchBar: 'block'})
+        this.setState({showSearchBar: 'flex', showCategory: 'block'})
     }
+
+
 
     render() {
         if(!this.state.loggedIn) {
@@ -300,7 +302,7 @@ class ShopPage extends Component{
                     </div>
                     <div className="col-lg-9 col-md-8 menu-col">
 
-                        <div className="searchBar-div row">
+                        <div className="searchBar-div row" style={{display: this.state.showSearchBar}}>
                             <div className="col-lg-10 col-sm-8 searchBar">
                               <InputGroup>
                                   <InputGroup.Prepend>
@@ -328,7 +330,7 @@ class ShopPage extends Component{
 
                         <div className="div-to-show-menu">
 
-                            <div className="menu-category" style={{display: this.state.showSearchBar}}>
+                            <div className="menu-category" style={{display: this.state.showCategory}}>
                                 {this.renderItemCategory()}
                             </div>
                             <div className="menu-list-div">
