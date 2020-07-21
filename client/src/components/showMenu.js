@@ -24,6 +24,7 @@ class ShowMenu extends Component{
     }
 
     loadCategoryFunction() {
+        console.log(this.props.match.params);
         axios.get(`http://localhost:5000/item_categories/${this.props.match.params.shopId}`)
         .then(res => {
             //console.log(res.data)
@@ -167,7 +168,7 @@ class ShowMenu extends Component{
                         <span className="cart-items">0</span>
                     </div>
                     <div className="col-lg-11 col-md-10 col-sm-10 ">
-                        <div className="default-list">{this.renderItemCategory()}</div>
+                        <div>{this.renderItemCategory()}</div>
                         <div className="dropdown category-drop">
                           <button className="btn btn-secondary dropdown-toggle category-btn" type="button" id="categorydropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Category

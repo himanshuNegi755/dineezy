@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Nav } from 'react-bootstrap';
 import './navbar.css';
@@ -7,17 +7,10 @@ import LogoutButton from './logoutButton';
 import ProfileButton from './profileButton';
 import DMLogo from '../images/dmLogo.svg';
 
-class NavbarForSite extends Component{
+const NavbarForSite = (props) => {
 
-    constructor(props) {
-        super(props);
-
-        this.renderContent = this.renderContent.bind(this);
-        this.renderMidContent = this.renderMidContent.bind(this);
-    }
-
-    renderContent = () => {
-        switch(this.props.user) {
+    const renderContent = () => {
+        switch(props.user) {
             case null:
                 return (
                     <React.Fragment>
@@ -49,8 +42,8 @@ class NavbarForSite extends Component{
         }
     }
 
-    renderMidContent = () => {
-        switch(this.props.user) {
+    const renderMidContent = () => {
+        switch(props.user) {
             case null:
                 return (
                     <React.Fragment>
@@ -76,12 +69,14 @@ class NavbarForSite extends Component{
         }
     }
 
-    render() {
-
         return (
 
           <nav className="navbar navbar-expand-lg navbar-dark">
-            <a id="navbar-brand" href="http://localhost:3000/"><span><img id="brand-logo" src={DMLogo} alt="Company Logo"/></span></a>
+            <a id="navbar-brand" href="http://localhost:3000/">
+                <span>
+                    <img id="brand-logo" src={DMLogo} alt="Company Logo"/>
+                </span>
+            </a>
 
             <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#myNavigation" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span></button>
@@ -97,15 +92,14 @@ class NavbarForSite extends Component{
                   <a className="nav-link" href="#footer">Contact</a>
                 </li>
                 <li className="nav-item">
-                    {this.renderMidContent()}
+                    {renderMidContent()}
                 </li>
               </ul>
-                {this.renderContent()}
+                {renderContent()}
             </div>
           </nav>
 
         );
-    }
 }
 
 const mapStateToProps = (state) => {

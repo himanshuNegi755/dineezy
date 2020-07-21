@@ -495,7 +495,6 @@ class ShopPage extends Component{
                         </Modal>
                 </div>
 
-
             </div>
         );
     }

@@ -7,6 +7,7 @@
   border-radius: 5px;
   background-color: #e1ffc2;
   padding: 1rem;
+  height: 9rem;
 }
 .item-name{
   display: inline-block;
@@ -16,6 +17,9 @@
 .vnv-id{
   width: 3rem;
   float: right;
+}
+.card-footer{
+    padding: 0 0.5rem;
 }
 .item-price{
   display: inline-block;
@@ -67,9 +71,6 @@
   .item-price{
       font-family: 'Ubuntu', sans-serif;
       font-size: 0.9rem;
-  }
-  .cardBtn-div{
-      margin-top: 1rem;
   }
   .card-btn{
       font-size: 0.8rem;

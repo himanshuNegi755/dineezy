@@ -1,24 +1,20 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
 import './itemsInCart.css';
 
-class ItemsInCart extends Component{
+const ItemsInCart = (props) => {
     
-    render() {
-        return (
-            <div className="items-in-cart">
-                <div className="item-name">{this.props.itemName}</div>
-                <div className="item-qty">{this.props.quantity}</div>
-                <div className="item-price">₹ {this.props.price}</div>
+    return (
+        <div className="items-in-cart">
+            <div className="item-name">{props.itemName}</div>
+            <div className="item-qty">{props.quantity}</div>
+            <div className="item-price">₹ {props.price}</div>
 
-                <Button className="cart-btn remove-btn" onClick={() => {this.props.deleteItem(this.props.itemName)}}>Remove</Button>
-                <Button className="cart-btn minus-btn" onClick={() => {this.props.changeQuantity(this.props.itemName, "-")}}><i className="fas fa-minus"></i></Button>
-                <Button className="cart-btn plus-btn" onClick={() => {this.props.changeQuantity(this.props.itemName, "+")}}><i className="fas fa-plus"></i></Button>
-
-            </div>
-
-        );
-    }
+            <Button className="cart-btn remove-btn" onClick={() => {props.deleteItem(props.itemName)}}>Remove</Button>
+            <Button className="cart-btn minus-btn" onClick={() => {props.changeQuantity(props.itemName, "-")}}><i className="fas fa-minus"></i></Button>
+            <Button className="cart-btn plus-btn" onClick={() => {props.changeQuantity(props.itemName, "+")}}><i className="fas fa-plus"></i></Button>
+        </div>
+    );
 }
 
 export default ItemsInCart;
