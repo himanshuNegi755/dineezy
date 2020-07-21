@@ -62,16 +62,16 @@ class ShowMenu extends Component{
         return (list);
 
         }
-    }   
-    
+    }
+
     addItemsInCart = (itemObj) => {
         this.setState({
             itemsInCart: [...this.state.itemsInCart, itemObj]
         })
-        
+
         this.calculateTotalItemAndPrice();
     }
-    
+
     renderMenuItemList = () => {
         const list = this.state.itemsByCategory.map((menuItem) =>
             <div key={menuItem.menu._id}>
@@ -81,14 +81,14 @@ class ShowMenu extends Component{
 
         return (list);
     }
-    
+
     removeItemFromCart = (itemName) => {
         let itemArray = this.state.itemsInCart.filter(item => item.itemName !== itemName);
         this.setState({itemsInCart: itemArray});
     }
-    
+
     updateQuantity = (itemName, change) => {
-        
+
         var itemArray = [...this.state.itemsInCart];
         var indexOfObjectToChangeQuantity = itemArray.findIndex(x => x.itemName ===itemName);
         if (indexOfObjectToChangeQuantity !== -1) {
@@ -100,7 +100,7 @@ class ShowMenu extends Component{
                 if (itemArray[indexOfObjectToChangeQuantity].itemQuantity>0) {
                     itemArray[indexOfObjectToChangeQuantity].itemQuantity-=1;
                     if(itemArray[indexOfObjectToChangeQuantity].itemQuantity === 0) {
-                       this.removeItemFromCart(itemName); 
+                       this.removeItemFromCart(itemName);
                        this.calculateTotalItemAndPrice();
                     } else {
                         this.setState({itemsInCart: itemArray});
@@ -108,7 +108,7 @@ class ShowMenu extends Component{
                     }
                 }
             }
-        } 
+        }
     }
 
     closeCartSideBar() {
@@ -123,7 +123,7 @@ class ShowMenu extends Component{
             visibility: "visible",
             transform: "translateX(0)"
         })
-        
+
     }
 
     renderCartItems = () => {
@@ -135,22 +135,22 @@ class ShowMenu extends Component{
 
         return (list);
     }
-    
+
     calculateTotalItemAndPrice = () => {
         let noOfItemsInCartVar = 0;
         let totalPriceVar = 0;
-            
+
         this.state.itemsInCart.forEach(cartItem => {
             noOfItemsInCartVar+=cartItem.itemQuantity;
             totalPriceVar+=cartItem.itemQuantity*cartItem.itemPrice;
         });
-        
+
         this.setState({
             noOfItemsInCart: noOfItemsInCartVar,
             totalPrice: totalPriceVar
         })
     }
-    
+
     clearCartFunction = () => {
         let cartItems = this.state.itemsInCart.map(cartItem => cartItem.itemName);
         cartItems.forEach(itemName => this.removeItemFromCart(itemName));
@@ -168,7 +168,7 @@ class ShowMenu extends Component{
                         <span className="cart-items">0</span>
                     </div>
                     <div className="col-lg-11 col-md-10 col-sm-10 ">
-                        <div>{this.renderItemCategory()}</div>
+                        <div className="default-list">{this.renderItemCategory()}</div>
                         <div className="dropdown category-drop">
                           <button className="btn btn-secondary dropdown-toggle category-btn" type="button" id="categorydropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Category

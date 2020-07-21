@@ -62,11 +62,9 @@
 /* Search bar division */
 .searchBar-div {
     background-color: #c7e2b2;
-    padding: 15px 3% 11.7px 2%;
+    padding: 0.83rem 0.5rem;
     width: inherit;
-}
-.searchBar-div{
-  margin: 0;
+    margin: 0;
 }
 
 .input-group-text{
@@ -75,15 +73,17 @@
     border-radius: 0;
 }
 .form-control{
+    position: relative;
+    top: 1px;
+    height: 37px;
     border-radius: 0;
-    margin-right: 35%;
 }
 .suggestion {
+    padding-left: 40px;
     background-color: white;
-    width: 47%;
+    width: inherit;
     box-shadow: 0 0 4px #b0b0b0;
     position: absolute;
-    left: 3.5%;
     top: 2.35rem;
     z-index: 1;
 }
@@ -104,12 +104,14 @@
 }
 
 .add-new-item-btn {
+    width: 100%;
     font-family: 'Ubuntu', sans-serif;
     letter-spacing: 0.1rem;
     background-color: #f1ffe3;
     border: 0;
     border-radius: 3px;
     box-shadow: 0 0 3px #d0d0d0;
+    height: 38px;
 }
 .add-new-item-btn:hover {
     transition: 0.2s;
@@ -117,7 +119,6 @@
     color: #e1ffc2;
 }
 .addItem-text{
-    margin: auto 1.2rem;
 }
 
 /* Menu category */
@@ -142,11 +143,6 @@
     background-color: #092532;
     color: #e1ffc2;
 }
-/* ****************************Menu List********************** */
-
-.menu-list-div{
-}
-
 
 
 /* ********************Add new/Edit Forms****************************** */
@@ -209,38 +205,26 @@
 
 
 /* **********************Mobile compatibility************************** */
-@media (max-width: 1200px){
-  .form-control{
-      margin-right: 25%;
-  }
-}
-@media (max-width: 990px){
-  .form-control{
-      margin-right: 5%;
-  }
-  .add-new-item-btn {
-      font-size: 0.8rem;
-      border: 0;
-      margin-right: 5px;
 
-  }
-  .addItem-text{
-      margin: auto 0.4rem;
-    }
-}
 @media (max-width: 767px){
 
   .parent-div{
     background-color: #092532;
   }
-  .suggestion {
-      width: 50%;
-      left: 10%;
-  }
+
   .main-container .menu-col{
       margin-top: 1rem;
   }
   .menu-list-div{
     margin-left: 0.5rem;
   }
+}
+
+@media (max-width: 767px){
+  .searchBar{
+    margin-bottom: 0.5rem;
+  }
+
+
+
 }

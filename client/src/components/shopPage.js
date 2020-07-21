@@ -157,10 +157,12 @@ class ShopPage extends Component{
             default:
                 const list = this.state.category.map((itemCategory) =>
                     <div key={itemCategory}>
-                            <span className="category-ind"onClick={() => {
+                        <ul>
+                            <li className="category-ind"onClick={() => {
                                     this.loadItemFunction(itemCategory)
                                     this.setState({currentItemCategory: itemCategory})
-                                }}>{itemCategory}</span>
+                                }}>{itemCategory}</li>
+                        </ul>
                     </div>
                 );
 
@@ -258,7 +260,7 @@ class ShopPage extends Component{
     shopList = () => {
         const list = this.state.shopList.map((shop) =>
             <div key={shop._id}>
-                <ShopNameContainer shopName={shop.shopName} shopId={shop._id} showSearchBar={this.showSearchBarFunction} showCategory={this.loadCategoryFunction} menuForShop={this.getMenuFunction}/>
+                        <ShopNameContainer shopName={shop.shopName} shopId={shop._id} showSearchBar={this.showSearchBarFunction} showCategory={this.loadCategoryFunction} menuForShop={this.getMenuFunction}/>
             </div>
         );
 
@@ -276,7 +278,7 @@ class ShopPage extends Component{
     }
 
     showSearchBarFunction = () => {
-        this.setState({showSearchBar: 'inline-block'})
+        this.setState({showSearchBar: 'block'})
     }
 
     render() {
@@ -298,29 +300,29 @@ class ShopPage extends Component{
                     </div>
                     <div className="col-lg-9 col-md-8 menu-col">
 
-                        <div className="searchBar-div" style={{display: this.state.showSearchBar}}>
-                            <InputGroup className="searchBar">
-                                <InputGroup.Prepend>
-                                  <InputGroup.Text ><span role="img" aria-label="search"><i class="fas fa-search"></i></span></InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <FormControl
-                                    placeholder="What can we help you find?"
-                                    aria-label="What can we help you find"
-                                    onChange={this.onTextChanged}
-                                    type='text'
-                                    value={this.state.item}
-                                />
-                                <div className="mb-3 suggestion">
-                                    {this.renderSuggestions()}
-                                </div>
-                                <InputGroup.Append>
-                                  <button className="add-new-item-btn" onClick={() => {this.setState({showNewItemAddModal: !this.state.showNewItemAddModal})}}>
-                                    <span className="addItem-text">Add New Item</span>
-                                  </button>
-                                </InputGroup.Append>
-                            </InputGroup>
-
-
+                        <div className="searchBar-div row">
+                            <div className="col-lg-10 col-sm-8 searchBar">
+                              <InputGroup>
+                                  <InputGroup.Prepend>
+                                    <InputGroup.Text ><span role="img" aria-label="search"><i class="fas fa-search"></i></span></InputGroup.Text>
+                                  </InputGroup.Prepend>
+                                  <FormControl
+                                      placeholder="What can we help you find?"
+                                      aria-label="What can we help you find"
+                                      onChange={this.onTextChanged}
+                                      type='text'
+                                      value={this.state.item}
+                                  />
+                                  <div className="mb-3 suggestion">
+                                      {this.renderSuggestions()}
+                                  </div>
+                              </InputGroup>
+                            </div>
+                            <div className="col-lg-2 col-sm-4">
+                                <button className="add-new-item-btn" onClick={() => {this.setState({showNewItemAddModal: !this.state.showNewItemAddModal})}}>
+                                  <span className="addItem-text">Add New Item</span>
+                                </button>
+                            </div>
 
                         </div>
 
