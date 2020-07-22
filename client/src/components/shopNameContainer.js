@@ -10,8 +10,7 @@ class ShopNameContainer extends Component{
     constructor(props) {
         super(props);
 
-        this.state = { showOptions: false, showFileUploadModal: false, showMenuOption: false, showQRCodeModal: false}
-        this.tableNo = 2;
+        this.state = { showOptions: false, showFileUploadModal: false, showMenuOption: false, showQRCodeModal: false, noOfTables: 0}
     }
 
     showOptionFunction = () => {
@@ -23,6 +22,12 @@ class ShopNameContainer extends Component{
                     showOptions: !this.state.showOptions
                 });
             } else {
+                
+                axios.get(`http://localhost:5000/tables_no?userEmail=${this.props.userEmail}&shopId=${this.props.shopId}`)
+                .then(res => {
+                    this.setState({noOfTabes: res.data.noOfTables})
+                })
+                
                 this.props.menuForShop(this.props.shopId);
                 this.props.showSearchBar();
                 this.props.showCategory(this.props.shopId);

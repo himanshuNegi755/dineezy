@@ -16,7 +16,7 @@ class ShopPage extends Component{
         super(props);
 
         this.state = { userEmail: '', loggedIn: true, showModal: false, shopName: '', shopAddress: '', noOfTables: 1,
-                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: '',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBar: 'none', showCategory: 'none', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', category: [], itemsByCategory: [], currentItemCategory: ''}
+                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', category: [], itemsByCategory: [], currentItemCategory: ''}
 
         this.showShopAddModal = this.showShopAddModal.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -205,7 +205,6 @@ class ShopPage extends Component{
     showShopAfterAdding() {
         axios.get(`http://localhost:5000/shop/get_shops/${this.state.userEmail}`)
             .then(res => {
-                //console.log(res.data[0].shop);
                 this.setState({shopList: res.data[0].shop})
             })
     }
@@ -281,7 +280,7 @@ class ShopPage extends Component{
     }
 
     showSearchBarFunction = () => {
-        this.setState({showSearchBar: 'flex', showCategory: 'block'})
+        this.setState({showSearchBarAndCategory: 'visible'})
     }
 
 
@@ -305,11 +304,11 @@ class ShopPage extends Component{
                     </div>
                     <div className="col-lg-9 col-md-8 menu-col">
 
-                        <div className="searchBar-div row" style={{display: this.state.showSearchBar}}>
+                        <div className="searchBar-div row" style={{visibility: this.state.showSearchBarAndCategory}}>
                             <div className="col-lg-9 col-sm-8 searchBar">
                               <InputGroup>
                                   <InputGroup.Prepend>
-                                    <InputGroup.Text ><span role="img" aria-label="search"><i class="fas fa-search"></i></span></InputGroup.Text>
+                                    <InputGroup.Text ><span role="img" aria-label="search"><i className="fas fa-search"></i></span></InputGroup.Text>
                                   </InputGroup.Prepend>
                                   <FormControl
                                       placeholder="What can we help you find?"
@@ -333,7 +332,7 @@ class ShopPage extends Component{
 
                         <div className="div-to-show-menu">
 
-                            <div className="menu-category" style={{display: this.state.showCategory}}>
+                            <div className="menu-category" style={{visibility: this.state.showSearchBarAndCategory}}>
                                 {this.renderItemCategory()}
                             </div>
                             <div className="menu-list-div">
@@ -428,7 +427,7 @@ class ShopPage extends Component{
                                     </Form.Group>
                                     <Form.Group controlId="formBasicName">
                                       <Form.Label>Veg/NonVeg</Form.Label>
-                                      <select class="custom-select" id="inputGroupSelect02" type="text" placeholder="Veg/Non-Veg" name='VegOrNonVeg' value={this.state.vegOrNonVeg} onChange={this.handleInputChange}>
+                                      <select class="custom-select" id="inputGroupSelect02" type="text" placeholder="Veg/Non-Veg" name='vegOrNonVeg' value={this.state.vegOrNonVeg} onChange={this.handleInputChange}>
                                         <option value="veg">Veg</option>
                                         <option value="non-veg">Non-veg</option>
                                         <option value="egg">Egg</option>
