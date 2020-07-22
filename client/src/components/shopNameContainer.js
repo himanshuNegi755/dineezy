@@ -10,7 +10,7 @@ class ShopNameContainer extends Component{
     constructor(props) {
         super(props);
 
-        this.state = { showOptions: false, showFileUpload: false, showMenuOption: false, showQRCode: false}
+        this.state = { showOptions: false, showFileUploadModal: false, showMenuOption: false, showQRCodeModal: false}
         this.tableNo = 2;
     }
 
@@ -32,6 +32,8 @@ class ShopNameContainer extends Component{
             }
 
         })
+        
+        //this.props.userEmail
     }
 
     showDropDownOptions = () => {
@@ -40,7 +42,7 @@ class ShopNameContainer extends Component{
                 <React.Fragment>
                     <div className="drop-down-options">
                         <ul>
-                            <li onClick= {() => {this.setState({showFileUpload: !this.state.showFileUpload})}}>
+                            <li onClick= {() => {this.setState({showFileUploadModal: !this.state.showFileUploadModal})}}>
                                 <b>Add Menu</b>
                             </li>
                         </ul>
@@ -52,7 +54,7 @@ class ShopNameContainer extends Component{
                 <React.Fragment>
                     <div className="drop-down-options">
                         <ul>
-                            <li onClick= {() => {this.setState({showQRCode: !this.state.showQrCode})}}>
+                            <li onClick= {() => {this.setState({showQRCodeModal: !this.state.showQRCodeModal})}}>
                                 <b>Get Menu QR code</b>
                             </li>
                         </ul>
@@ -73,8 +75,8 @@ class ShopNameContainer extends Component{
                     size="md"
                     aria-labelledby="file-upload-modal"
                     centered
-                    show={this.state.showFileUpload}
-                    onHide={ () => {this.setState({showFileUpload: !this.state.showFileUpload})}}
+                    show={this.state.showFileUploadModal}
+                    onHide={ () => {this.setState({showFileUploadModal: !this.state.showFileUploadModal})}}
                 >
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-vcenter">
@@ -111,8 +113,8 @@ class ShopNameContainer extends Component{
                     size="md"
                     aria-labelledby="qr-code-modal"
                     centered
-                    show={this.state.showQRCode}
-                    onHide={() => {this.setState({showQRCode: !this.state.showQRCode})}}
+                    show={this.state.showQRCodeModal}
+                    onHide={() => {this.setState({showQRCodeModal: !this.state.showQRCodeModal})}}
                 >
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-vcenter">

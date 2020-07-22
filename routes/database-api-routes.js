@@ -122,4 +122,31 @@ module.exports = app => {
         });
     });
     
+    //get no. of tables for a restaurant
+    app.get('/tables_no', function(request, response) {
+        Shop.aggregate([{$match: {ownerEmail: request.query.userEmail}}, {$unwind: "$shop"}, {$match: {"shop._id": ObjectId(request.query.shopId)}}, {$project: {_id: 0, "shop.noOfTables": 1}}]).exec(function(err, shop) {
+            if(err) {
+                response.status(500).send({error: "No Such Shop"});
+            } else {
+                response.send(shop[0].shop);
+            }
+        });
+    });
+    
+    //delete shop
+    app.put('/shop/delete', function(request, response) {
+        Shop.updateOne({ownerEmail: request.body.userEmail}, {$pull : {"shop": {"_id": {$in : ObjectId(request.body.shopId)}}}}, function(err, shop) {
+            if (err) {
+                console.log(err);
+                response.status(500).send({error: "Could not find the item"});
+            } else {
+                Menu.deleteOne({shopId: request.body.shopId}).exec(function(err, menu) {
+                    console.log('menu deleted')
+                })
+                
+                response.send(shop);
+            }
+        })
+    });
+    
 };

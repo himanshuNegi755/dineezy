@@ -195,7 +195,10 @@ class ShopPage extends Component{
         .then(res => {
             console.log(res.data);
             this.getMenuFunction(this.state.shopIdVar);
+            this.loadCategoryFunction(this.state.shopIdVar);
             this.loadItemFunction(this.state.currentItemCategory);
+            
+            this.setState({itemName: '', vegOrNonVeg: '', itemPrice: 0, itemDescription: '', itemCategory: ''});
         })
     }
 
@@ -231,8 +234,8 @@ class ShopPage extends Component{
         .then(res => {
             console.log(res.data);
             this.getMenuFunction(this.state.shopIdVar);
+            this.loadCategoryFunction(this.state.shopIdVar);
             this.loadItemFunction(this.state.currentItemCategory)
-            //this.props.loadComponentAgain();
 
         })
     }
@@ -260,7 +263,7 @@ class ShopPage extends Component{
     shopList = () => {
         const list = this.state.shopList.map((shop) =>
             <div key={shop._id}>
-                        <ShopNameContainer shopName={shop.shopName} shopId={shop._id} showSearchBar={this.showSearchBarFunction} showCategory={this.loadCategoryFunction} menuForShop={this.getMenuFunction}/>
+                        <ShopNameContainer shopName={shop.shopName} shopId={shop._id} showSearchBar={this.showSearchBarFunction} showCategory={this.loadCategoryFunction} menuForShop={this.getMenuFunction} userEmail={this.props.user.userEmail}/>
             </div>
         );
 

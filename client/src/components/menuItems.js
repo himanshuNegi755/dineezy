@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import './menuItems.css';
 import NonVeg from '../images/nonVeg.svg';
 import Vegg from '../images/Veg.svg';
@@ -12,9 +12,13 @@ const MenuItems = (props) => {
             return (
                 <img src={NonVeg} alt="non-veg"/>
             )
-        } else {
+        } else if(vegOrNonVeg === "veg") {
             return(
                 <img src={Vegg} alt="veg"/>
+            )
+        } else {
+            return(
+                <img src={Eggi} alt="egg"/>
             )
         }
     }
