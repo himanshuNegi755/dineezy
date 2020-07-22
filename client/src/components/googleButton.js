@@ -5,7 +5,7 @@ const GoogleButton = () => {
         return (
             <div className="log-in-btn">
                 <a href="http://localhost:5000/auth/google" className="button google-button-a-tag">
-                    <div>
+                    <div className="btn-space">
                         <span className="svgIcon t-popup-svg">
                             <svg
                                 className="svgIcon-use"

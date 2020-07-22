@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import './menuItems.css';
 import NonVeg from '../images/nonVeg.svg';
 import Vegg from '../images/Veg.svg';
@@ -7,17 +7,22 @@ import Eggi from '../images/Egg.svg';
 
 const MenuItems = (props) => {
 
-    const showVegOrNonVegImage = (vegOrNonVeg) => {
-        if(vegOrNonVeg === "non-veg") {
-            return (
-                <img src={NonVeg} alt="non-veg"/>
-            )
-        } else {
-            return(
-                <img src={Vegg} alt="veg"/>
-            )
-        }
-    }
+  const showVegOrNonVegImage = (vegOrNonVeg) => {
+      if(vegOrNonVeg === "non-veg") {
+          return (
+              <img src={NonVeg} alt="non-veg"/>
+          )
+      } else if(vegOrNonVeg === "egg") {
+          return(
+              <img src={Eggi} alt="egg"/>
+          )
+      } else {
+          return(
+              <img src={Vegg} alt="veg"/>
+
+          )
+      }
+  }
 
 
         return (
@@ -31,7 +36,7 @@ const MenuItems = (props) => {
                         <Card.Text className="item-description">
                             {props.description}
                         </Card.Text>
-                        
+
                     </Card.Body>
                     <Card.Footer>
                       <div className="item-price">₹ {props.price}</div>

@@ -24,7 +24,7 @@
 .col-heading{
     padding: 1rem 0;
     margin: 0;
-    border: 1px solid #c7e2b2;
+    border-bottom: 1px solid #c7e2b2;
 }
 
 .main-container .retaurant-col{
@@ -38,7 +38,6 @@
 .restaurant-list {
     height: auto;
     margin: 0;
-    border: 1px solid #ccc;
     text-align: center;
     overflow-x: hidden;
     overflow-y: auto;
@@ -52,8 +51,7 @@
 
 .div-to-show-menu {
     background-color: #f1ffe3;
-    height: 37rem;
-    border: 1px solid #a0a0a0;
+    height: 100vh;
     margin: 0;
     overflow-x: hidden;
     overflow-y: auto;
@@ -62,7 +60,7 @@
 /* Search bar division */
 .searchBar-div {
     background-color: #c7e2b2;
-    padding: 0.83rem 0.5rem;
+    padding: 0.82rem 0.5rem;
     width: inherit;
     margin: 0;
 }
@@ -75,7 +73,7 @@
 .form-control{
     position: relative;
     top: 1px;
-    height: 37px;
+    height: 37.5px;
     border-radius: 0;
 }
 .suggestion {
@@ -98,9 +96,9 @@
     cursor: pointer;
 }
 .suggestion li:hover {
-    transition: 0.3s;
+    transition: 0.1s;
     font-size: 1.01rem;
-    background-color: rgba(200, 200, 200, 0.1);
+    background-color: #e0e0e0;
 }
 
 .add-new-item-btn {
@@ -118,8 +116,6 @@
     background-color: #092532;
     color: #e1ffc2;
 }
-.addItem-text{
-}
 
 /* Menu category */
 .menu-category {
@@ -127,18 +123,22 @@
     height: 3.7rem;
     margin: 0 1.5%;
 }
-.category-ind{
+.menu-category ul{
+    padding: 0;
+    margin: 2px 0 0;
+}
+.menu-category ul li{
     text-align: center;
+    width: auto;
     font-family: 'Ubuntu', sans-serif;
     font-size: 1.2rem;
     letter-spacing: 0.3rem;
-    display: inline-block;
     list-style: none;
     padding: 1% 2%;
     margin: 2px 0.2rem 0;
     cursor: pointer;
 }
-.category-ind:hover{
+.menu-category ul li:hover{
     transition: 0.4s;
     background-color: #092532;
     color: #e1ffc2;
@@ -172,6 +172,7 @@
     border: 0;
     border-bottom: 1px solid #d0d0d0;
     border-radius: 0;
+    display: block;
 }
 .form-control:hover, .custom-select:hover{
     transition: 0.2s;
