@@ -52,9 +52,8 @@ class ProfilePage extends Component{
                 //console.log(res)
                 alert(res.data.message)
                 this.setState({
-                    verify: <i class="fas fa-check-circle"></i>
+                    verify: <i className="fas fa-check-circle"></i>
                 })
-
             })
 
     }
@@ -103,7 +102,7 @@ class ProfilePage extends Component{
                               userEmail: this.props.user.userEmail,
                               userImage: this.props.user.userImage,
                               numberField: this.props.user.userPhoneNo[0].value,
-                              verify: <i class="fas fa-check-circle"></i>})
+                              verify: <i className="fas fa-check-circle"></i>})
                 } else {
                     this.setState({userName: this.props.user.userName,
                               userEmail: this.props.user.userEmail,

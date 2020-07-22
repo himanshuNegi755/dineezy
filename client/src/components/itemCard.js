@@ -12,7 +12,12 @@ const ItemCard = (props) => {
             return (
                 <img src={NonVeg} alt="non-veg"/>
             )
-        } else {
+        }
+        else if(vegOrNonVeg === "egg") {
+            return (
+                <img src={Eggi} alt="egg"/>
+            )
+        }else {
             return(
                 <img src={Vegg} alt="veg"/>
             )

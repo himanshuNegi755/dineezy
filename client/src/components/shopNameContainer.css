@@ -1,10 +1,11 @@
 .restaurant-name-holder {
     padding: 0.9rem 1rem;
     margin: 0;
+    color: white;
     cursor: pointer;
 }
 .restaurant-name-holder:hover{
-    background-color: #e7ffcf;
+    background-color: #282828;
 }
 
 .drop-down-options ul {
@@ -18,13 +19,14 @@
     list-style: none;
     position: relative;
     z-index: 1;
-    color: Black;
+    color: #ffe100;
     cursor: pointer;
-    background: #c7e2b2;
+    background: #202020;
+    box-shadow: 0 0 5px black;
 }
 .drop-down-options ul:hover{
-  background-color: #092532;
-  color: #e1ffc2;
+  background-color: black;
+  color: #ffe100;
 }
 .qr-code-div a canvas {
     display: block;

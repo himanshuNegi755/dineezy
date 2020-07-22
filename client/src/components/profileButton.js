@@ -6,7 +6,7 @@ const ProfileButton = () => {
         return (
                 <a href="/profile">
                     <Button variant="primary" className="profile-button">
-                        <b>Profile</b>
+                        <b className="profile-text">Profile</b>
                     </Button>
                 </a>
         );
