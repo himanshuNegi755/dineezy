@@ -1,0 +1,14 @@
+.profile-button {
+    background-color: unset;
+    border: 0.5px solid;
+    border-color: #092532;
+    color: #89c9b8;
+    margin-top: 0.35rem;
+}
+
+.profile-button:hover {
+    background-color: unset;
+    color: #c7e2b2;
+    border: 0.5px solid;
+    border-color: #89c9b8;
+}

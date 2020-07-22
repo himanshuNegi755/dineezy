@@ -9,7 +9,6 @@
     margin: 0 1.5%;
 }
 .menu-category ul{
-    display: block;
     padding: 0;
     margin: 2px 0 0;
 }
@@ -157,7 +156,7 @@
       padding: 1%;
       margin: 2px 0.1rem 0;
   }
-    
+
   .cart-items {
       text-align: center;
       font-size: 0.8rem;
@@ -177,7 +176,7 @@
   .default-list{
     display: none;
   }
-    
+
   .small-sc-list{
     margin-left: 0.1rem;
     width: 10.1rem;

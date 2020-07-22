@@ -7,21 +7,22 @@ import Eggi from '../images/Egg.svg';
 
 const MenuItems = (props) => {
 
-    const showVegOrNonVegImage = (vegOrNonVeg) => {
-        if(vegOrNonVeg === "non-veg") {
-            return (
-                <img src={NonVeg} alt="non-veg"/>
-            )
-        } else if(vegOrNonVeg === "veg") {
-            return(
-                <img src={Vegg} alt="veg"/>
-            )
-        } else {
-            return(
-                <img src={Eggi} alt="egg"/>
-            )
-        }
-    }
+  const showVegOrNonVegImage = (vegOrNonVeg) => {
+      if(vegOrNonVeg === "non-veg") {
+          return (
+              <img src={NonVeg} alt="non-veg"/>
+          )
+      } else if(vegOrNonVeg === "egg") {
+          return(
+              <img src={Eggi} alt="egg"/>
+          )
+      } else {
+          return(
+              <img src={Vegg} alt="veg"/>
+
+          )
+      }
+  }
 
 
         return (
@@ -35,7 +36,7 @@ const MenuItems = (props) => {
                         <Card.Text className="item-description">
                             {props.description}
                         </Card.Text>
-                        
+
                     </Card.Body>
                     <Card.Footer>
                       <div className="item-price">₹ {props.price}</div>

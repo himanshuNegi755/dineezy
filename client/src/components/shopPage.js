@@ -306,7 +306,7 @@ class ShopPage extends Component{
                     <div className="col-lg-9 col-md-8 menu-col">
 
                         <div className="searchBar-div row" style={{display: this.state.showSearchBar}}>
-                            <div className="col-lg-10 col-sm-8 searchBar">
+                            <div className="col-lg-9 col-sm-8 searchBar">
                               <InputGroup>
                                   <InputGroup.Prepend>
                                     <InputGroup.Text ><span role="img" aria-label="search"><i class="fas fa-search"></i></span></InputGroup.Text>
@@ -323,7 +323,7 @@ class ShopPage extends Component{
                                   </div>
                               </InputGroup>
                             </div>
-                            <div className="col-lg-2 col-sm-4">
+                            <div className="col-lg-3 col-sm-4">
                                 <button className="add-new-item-btn" onClick={() => {this.setState({showNewItemAddModal: !this.state.showNewItemAddModal})}}>
                                   <span className="addItem-text">Add New Item</span>
                                 </button>
@@ -368,7 +368,7 @@ class ShopPage extends Component{
                                     </Form.Group>
 
                                     <Form.Group controlId="formBasicName">
-                                      <Form.Label>Item Veg/NonVeg</Form.Label>
+                                      <Form.Label>Veg/NonVeg</Form.Label>
                                       <select class="custom-select" id="inputGroupSelect02" type="text" placeholder="Veg/Non-Veg" name='editVegOrNonVeg' value={this.state.editVegOrNonVeg} onChange={this.handleInputChange}>
                                         <option value="veg">Veg</option>
                                         <option value="non-veg">Non-veg</option>
@@ -426,15 +426,15 @@ class ShopPage extends Component{
                                         <Form.Label>Item Name</Form.Label>
                                         <Form.Control type="text" placeholder="Item Name" name='itemName' value={this.state.itemName} onChange={this.handleInputChange}/>
                                     </Form.Group>
-
-                                    <Form.Group controlId="formBasicName" className="input-group mb-3">
-                                      <select class="custom-select" id="inputGroupSelect02" type="text" placeholder="Veg/Non-Veg" name='vegOrNonVeg' value={this.state.vegOrNonVeg} onChange={this.handleInputChange}>
+                                    <Form.Group controlId="formBasicName">
+                                      <Form.Label>Veg/NonVeg</Form.Label>
+                                      <select class="custom-select" id="inputGroupSelect02" type="text" placeholder="Veg/Non-Veg" name='VegOrNonVeg' value={this.state.vegOrNonVeg} onChange={this.handleInputChange}>
                                         <option value="veg">Veg</option>
                                         <option value="non-veg">Non-veg</option>
                                         <option value="egg">Egg</option>
                                       </select>
-
                                     </Form.Group>
+
 
                                     <Form.Group controlId="formBasicName">
                                         <Form.Label>Price</Form.Label>

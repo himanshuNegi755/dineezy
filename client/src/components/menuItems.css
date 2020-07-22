@@ -19,7 +19,7 @@
   float: right;
 }
 .card-footer{
-    padding: 0 0.5rem;
+    padding: 0 0.5rem 0 1rem;
 }
 .item-price{
   display: inline-block;
@@ -28,7 +28,7 @@
 }
 .cardBtn-div{
   float: right;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 .card-btn{
     font-family: 'Ubuntu', sans-serif;

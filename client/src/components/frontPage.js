@@ -65,7 +65,7 @@ const FrontPage = (props) => {
                 )
         }
     }
-    
+
         return (
             <div className="main-div">
                 <div>
@@ -153,7 +153,7 @@ const FrontPage = (props) => {
 
                     <div className="row">
                       <div className="pricing-col col-lg-4 col-md-6">
-                        <div className="card">
+                        <div className="card pricing-card">
                           <div className="card-header">
                             <h3>14 Days trial</h3>
                           </div>
@@ -166,7 +166,7 @@ const FrontPage = (props) => {
                       </div>
 
                       <div className="pricing-col col-lg-4 col-md-6">
-                        <div className="card">
+                        <div className="card pricing-card">
                           <div className="card-header">
                             <h3>Monthly Pack</h3>
                           </div>
@@ -179,7 +179,7 @@ const FrontPage = (props) => {
                         </div>
                       </div>
                       <div className="pricing-col col-lg-4">
-                        <div className="card">
+                        <div className="card pricing-card">
                           <div className="card-header">
                             <h3>Yearly Pack</h3>
                           </div>

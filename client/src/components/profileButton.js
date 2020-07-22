@@ -4,16 +4,13 @@ import './profileButton.css';
 
 const ProfileButton = () => {
         return (
-            <div>
                 <a href="/profile">
-                    <Button variant="primary" className="log-out-button">
+                    <Button variant="primary" className="profile-button">
                         <b>Profile</b>
                     </Button>
                 </a>
-            </div>
         );
 }
 
 
 export default ProfileButton;
-                

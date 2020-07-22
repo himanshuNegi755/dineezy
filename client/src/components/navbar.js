@@ -22,21 +22,16 @@ const NavbarForSite = (props) => {
             case false:
                 return (
                     <React.Fragment>
-                        <div>
+                        <li className="nav-item">
                             <GoogleButton />
-                        </div>
-
+                        </li>
                     </React.Fragment>
                 )
             default:
                 return (
                     <React.Fragment>
-                        <div>
-                            <ProfileButton />
-                        </div>
-                        <div>
-                            <LogoutButton />
-                        </div>
+                            <li className="nav-item"><ProfileButton/></li>
+                            <li className="nav-item"><LogoutButton /></li>
                     </React.Fragment>
                 )
         }
@@ -94,8 +89,10 @@ const NavbarForSite = (props) => {
                 <li className="nav-item">
                     {renderMidContent()}
                 </li>
+                    {renderContent()}
+
               </ul>
-                {renderContent()}
+
             </div>
           </nav>
 
