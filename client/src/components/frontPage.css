@@ -5,7 +5,7 @@
 }
 
 .front-parent-div {
-    background-color: #e1ffc2;
+    background-color: #303030;
     padding: 0 15% 2%;
 }
 .btn-div{
@@ -14,14 +14,14 @@
 }
 
 #front-carousel{
-  box-shadow: 0 0 15px grey;
+  box-shadow: 0 0 10px black;
 }
 .carousel-indicators{
   padding-bottom: 0.8rem;
   margin-bottom: 0
 }
 .carousel-caption{
-  background-color: rgba(255, 255, 255, 0.16);
+  background-color: rgba(255, 255, 255, 0.1);
   color: black;
   bottom: 0;
 }
@@ -30,6 +30,7 @@
 }
 
 #about-section{
+  background-color: #f0f0f0;
   text-align: center;
   padding: 8% 7%;
 }
@@ -48,13 +49,15 @@
 }
 
 #pricing-section {
-    box-shadow: -1px 0 5px grey;
-    background: #c7e2b2;
+    box-shadow: -1px 0 5px black;
+    background: #202020;
+    color: white;
     padding: 5% 7%;
     text-align: center;
 }
 
 .pricing-heading{
+    color: #ffef00;
     font-family: 'Righteous', cursive;
     font-size: 4rem;
     font-weight: bold;
@@ -63,12 +66,13 @@
 }
 
 .pricing-card{
-    background-color: #e1ffc2;
+    background-color: #101010;
     border-radius: 2%;
     height: 19rem;
 }
 
 .card-header{
+    color: #ffe100;
     font-family: 'Ubuntu', sans-serif;
 }
 .card-body{

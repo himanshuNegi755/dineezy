@@ -162,7 +162,7 @@ class ShowMenu extends Component{
 
                 <NavbarForSite/>
 
-                <div className="menu-category row">
+                <div className="category-menu row">
                     <div className="col-lg-1 col-md-2 col-sm-2 cart-option" onClick={this.showCartSideBar}>
                         <i className="fas fa-cart-plus cart-icon"></i>
                         <span className="cart-items">0</span>

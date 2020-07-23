@@ -157,12 +157,12 @@ class ShopPage extends Component{
             default:
                 const list = this.state.category.map((itemCategory) =>
                     <div key={itemCategory}>
-                        <ul>
+
                             <li className="category-ind"onClick={() => {
                                     this.loadItemFunction(itemCategory)
                                     this.setState({currentItemCategory: itemCategory})
                                 }}>{itemCategory}</li>
-                        </ul>
+
                     </div>
                 );
 
@@ -336,11 +336,11 @@ class ShopPage extends Component{
                                 Item Category
                                 </button>
                                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    {this.renderItemCategory()}
+                                    <ul>{this.renderItemCategory()}</ul>
                                 </div>
                             </div>
                             <div className="menu-category" style={{visibility: this.state.showSearchBarAndCategory}}>
-                                {this.renderItemCategory()}
+                                <ul>{this.renderItemCategory()}</ul>
                             </div>
                             <hr/>
                             <div className="menu-list-div">
