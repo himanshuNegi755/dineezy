@@ -1,5 +1,5 @@
 .footer {
-    background-color: #092532;
+    background-color: black;
     padding: 4% 10% 2%;
 }
 .contact-details{
@@ -7,8 +7,8 @@
 }
 
 .contact-us {
-    font-family: 'Ubuntu', sans-serif;
-    letter-spacing: 1rem;
+    font-family: 'Lexend Zetta', sans-serif;
+    letter-spacing: 0.5rem;
     color: white;
     padding: 2% 15%;
 }
@@ -18,39 +18,35 @@
     line-height: 1.5;
     letter-spacing: 0.2rem;
     color: white;
-    opacity: 0.5;
+    opacity: 0.6;
 }
 
 .contact-divider{
   width: 40%;
   padding: 1rem;
-  border-color: #c7e2b2;
+  border-color: #d0d0d0;
   opacity: 0.5;
 }
 
 .contact-icons{
-    color: #c7e2b2;
+    color: #b0b0b0;
     padding: 0 3% 1%;
 }
 
 .fa-facebook-square:hover{
     color: #3b5998;
-    transition: 0.3s;
 }
 
 .fa-instagram:hover{
     color: white;
-    transition: 0.3s;
 }
 
 .fa-envelope:hover{
     color: #D44638;
-    transition: 0.3s;
 }
 
 .fa-twitter:hover{
     color: #00acee;
-    transition: 0.3s;
 }
 
 .copyright{
@@ -66,13 +62,10 @@
   .footer {
       padding: 2% 5%;
   }
-    
+
   .contact-us {
       font-family: 'Ubuntu', sans-serif;
-      letter-spacing: 0.7rem;
-      color: white;
+      letter-spacing: 0.3rem;
       padding: 2% 7%;
   }
-
-
 }

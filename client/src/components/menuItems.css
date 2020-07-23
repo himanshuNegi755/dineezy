@@ -2,10 +2,12 @@
     margin: 1% 0.5% 2rem;
     float: left;
     border: 0;
+    box-shadow: 0 0 5px #202020;
 }
 .card-body{
-  border-radius: 5px;
-  background-color: #e1ffc2;
+  border-radius: 3px 3px 0 0;
+  background-color: #202020;
+  color: white;
   padding: 1rem;
   height: 9rem;
 }
@@ -20,6 +22,8 @@
 }
 .card-footer{
     padding: 0 0.5rem 0 1rem;
+    background-color: #303030;
+    color: white;
 }
 .item-price{
   display: inline-block;
@@ -32,8 +36,8 @@
 }
 .card-btn{
     font-family: 'Ubuntu', sans-serif;
-    background-color: #092532;
-    color: #e1ffc2;
+    background-color: #202020;
+    color: white;
     border: 0;
     border-radius: 3px;
     padding: 0.5rem 1rem;
@@ -41,7 +45,7 @@
 }
 .edit-btn:hover{
     transition: 0.2s;
-    background-color: #efff0d;
+    background-color: #ffe100;
     color: #092532;
 }
 

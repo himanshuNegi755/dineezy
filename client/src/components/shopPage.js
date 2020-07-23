@@ -197,7 +197,7 @@ class ShopPage extends Component{
             this.getMenuFunction(this.state.shopIdVar);
             this.loadCategoryFunction(this.state.shopIdVar);
             this.loadItemFunction(this.state.currentItemCategory);
-            
+
             this.setState({itemName: '', vegOrNonVeg: '', itemPrice: 0, itemDescription: '', itemCategory: ''});
         })
     }
@@ -331,10 +331,18 @@ class ShopPage extends Component{
                         </div>
 
                         <div className="div-to-show-menu">
-
+                            <div className="hidden dropdown" style={{visibility: this.state.showSearchBarAndCategory}}>
+                                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Item Category
+                                </button>
+                                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    {this.renderItemCategory()}
+                                </div>
+                            </div>
                             <div className="menu-category" style={{visibility: this.state.showSearchBarAndCategory}}>
                                 {this.renderItemCategory()}
                             </div>
+                            <hr/>
                             <div className="menu-list-div">
                                 {this.menuItemList()}
                             </div>
@@ -368,7 +376,7 @@ class ShopPage extends Component{
 
                                     <Form.Group controlId="formBasicName">
                                       <Form.Label>Veg/NonVeg</Form.Label>
-                                      <select class="custom-select" id="inputGroupSelect02" type="text" placeholder="Veg/Non-Veg" name='editVegOrNonVeg' value={this.state.editVegOrNonVeg} onChange={this.handleInputChange}>
+                                      <select className="custom-select" id="inputGroupSelect02" type="text" placeholder="Veg/Non-Veg" name='editVegOrNonVeg' value={this.state.editVegOrNonVeg} onChange={this.handleInputChange}>
                                         <option value="veg">Veg</option>
                                         <option value="non-veg">Non-veg</option>
                                         <option value="egg">Egg</option>
@@ -427,7 +435,7 @@ class ShopPage extends Component{
                                     </Form.Group>
                                     <Form.Group controlId="formBasicName">
                                       <Form.Label>Veg/NonVeg</Form.Label>
-                                      <select class="custom-select" id="inputGroupSelect02" type="text" placeholder="Veg/Non-Veg" name='vegOrNonVeg' value={this.state.vegOrNonVeg} onChange={this.handleInputChange}>
+                                      <select className="custom-select" id="inputGroupSelect02" type="text" placeholder="Veg/Non-Veg" name='vegOrNonVeg' value={this.state.vegOrNonVeg} onChange={this.handleInputChange}>
                                         <option value="veg">Veg</option>
                                         <option value="non-veg">Non-veg</option>
                                         <option value="egg">Egg</option>

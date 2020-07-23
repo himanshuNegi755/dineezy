@@ -1,14 +1,18 @@
 .profile-button {
     background-color: unset;
     border: 0.5px solid;
-    border-color: #092532;
-    color: #89c9b8;
+    border-color: #202020;
+    border-radius: 20px;
+    color: #e0e0e0;
     margin-top: 0.35rem;
 }
-
+.profile-text{
+    margin: auto 0.5rem;
+    letter-spacing: 1px;
+}
 .profile-button:hover {
     background-color: unset;
-    color: #c7e2b2;
+    color: #fff;
     border: 0.5px solid;
-    border-color: #89c9b8;
+    border-color: #d0d0d0;
 }

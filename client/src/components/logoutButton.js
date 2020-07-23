@@ -6,7 +6,7 @@ const LogoutButton = () =>{
     return (
             <a href="http://localhost:5000/auth/logout">
                 <Button variant="primary" className="log-out-button">
-                    <b>LOG OUT</b>
+                    <b className="logOut-text">LOG OUT</b>
                 </Button>
             </a>
     );

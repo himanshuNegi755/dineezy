@@ -54,7 +54,6 @@ class ProfilePage extends Component{
                 this.setState({
                     verify: <i className="fas fa-check-circle"></i>
                 })
-
             })
 
     }

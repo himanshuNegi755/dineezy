@@ -10,8 +10,10 @@
     -webkit-tap-highlight-color: transparent;
     text-decoration: none !important;
 }
+.button-label:hover{
+    color: white;
 
-
+}
 .button {
     display: inline-block;
     border: 0;
@@ -21,16 +23,15 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -moz-font-feature-settings: "liga" on;
-    color: #89c9b8 !important;
+    color: #d0d0d0 !important;
     font: inherit;
     outline: none;
 }
 
-.google-button-a-tag .button-label{
+.button-label{
   position: relative;
   top: 0.15rem;
   margin-top: 5%;
-
 }
 
 .button .svgIcon {
