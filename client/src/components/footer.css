@@ -9,7 +9,7 @@
 .contact-us {
     font-family: 'Lexend Zetta', sans-serif;
     letter-spacing: 0.5rem;
-    color: white;
+    color: #ffe100;;
     padding: 2% 15%;
 }
 
@@ -23,7 +23,7 @@
 
 .contact-divider{
   width: 40%;
-  padding: 1rem;
+  padding: 1rem 0;
   border-color: #d0d0d0;
   opacity: 0.5;
 }

@@ -1,33 +1,37 @@
-/*.show-menu-main-div {
-    overflow: hidden;
-    background-color: #c7e2b2;
+.show-menu-main-div {
+    overflow: category-drop;
+    background-color: #404040;
+    color: white;
     height: 45rem;
 }
 
-.menu-category {
+.category-menu {
     height: 3.7rem;
     margin: 0 1.5%;
 }
-.menu-category ul{
+.category-menu ul{
     padding: 0;
     margin: 2px 0 0;
 }
-.menu-category ul li{
+.category-menu ul li{
     text-align: center;
+    width: auto;
     font-family: 'Ubuntu', sans-serif;
+    color: #e0e0e0;
+    background-color: #303030;
     font-size: 1.2rem;
+    float: left;
     letter-spacing: 0.3rem;
     list-style: none;
-    float: left;
     padding: 1% 2%;
     margin: 2px 0.2rem 0;
     cursor: pointer;
 }
-.menu-category ul li:hover{
-    transition: 0.4s;
-    background-color: #092532;
-    color: #e1ffc2;
+.category-menu ul li:hover{
+    background-color: #ffe100;
+    color: black;
 }
+
 .category-drop{
   text-align: center;
   font-family: 'Ubuntu', sans-serif;
@@ -40,22 +44,22 @@
   cursor: pointer;
 }
 .category-btn{
-  background-color: #c7e2b2;
-  color: #092532;
+  background-color: #202020;
 }
 .category-btn:hover{
-  background-color: #092532;
-  color: #e1ffc2;
+  background-color: #ffe100;
+  color: #202020;
 }
 .category-list{
-  background-color: #c7e2b2;
-  box-shadow: 1px 1px 3px black;
+  background-color: #303030;
+  box-shadow: 1px 1px 3px #101010;
 }
 .items-card {
     margin: 0 1%;
 }
 
 .cart-option {
+    background-color:  #202020;
     border-radius: 3px 28px 28px 3px;
     margin: 5px 0 0;
     font-size: 1.3rem;
@@ -63,12 +67,11 @@
     cursor: pointer;
 }
 .cart-option:hover{
-    transition: 0.4s;
-    background-color:  #092532;
-    color: #e1ffc2;
+    background-color:  #ffe100;
+    color: #202020;
 }
 .cart-icon{
-    padding: 1.5rem 0 0;
+    padding: 1.2rem 0 0.7rem;
 }
 .cart-items {
     text-align: center;
@@ -81,7 +84,6 @@
     color: #fff;
 }
 
-*/
 /* show Cart Css */
 
 
@@ -94,7 +96,7 @@
     transition: all 0.3s linear;
     background: rgb(0, 0, 0, 0.5);
     z-index: 2;
-    /*visibility: hidden;*/
+    /*visibility: category-drop;*/
 }
 
 .cart-side-bar {
@@ -105,19 +107,18 @@
     height: 100%;
     overflow: scroll;
     z-index: 3;
-    background: #c7e2b2;
+    background-color: #404040;
     padding: 1.2rem;
     transition: all 0.3s linear;
     /*transform: translateX(100%);*/
 }
 
 .back-btn{
-  color: #092532;
   margin-bottom: 2rem;
   padding: 0;
 }
 .back-btn:hover{
-  color: #fff;
+  color: #ffe100;
 }
 
 .cart-footer{
@@ -128,8 +129,7 @@
   font-family: 'Ubuntu', sans-serif;
   width: 50%;
   height: 3rem;
-  background-color: #092532;
-  color: #e1ffc2;
+  background-color: #202020;
   border-radius: 3px;
   border: 0;
 }
@@ -150,7 +150,7 @@
   .items-card {
       margin: 3rem 1% 0;
   }
-  .menu-category ul li{
+  .category-menu ul li{
       font-size: 1.1rem;
       letter-spacing: 0.2rem;
       padding: 1%;
@@ -176,13 +176,37 @@
   .default-list{
     display: none;
   }
-
-  .small-sc-list{
-    margin-left: 0.1rem;
-    width: 10.1rem;
+  .category-drop .btn.btn-secondary{
+      background-color: #202020;
+      border: 0;
   }
-  .category-ind{
-    width: 9.8rem;
+  .category-drop .dropdown-menu{
+      background-color: #303030;
+      color: white;
+      width: 15rem;
+      padding: 0;
+  }
+  .category-drop .dropdown-menu ul{
+      padding: 0;
+      margin: 0;
+  }
+  .category-drop .dropdown-menu ul li{
+      text-align: left;
+      font-family: 'Ubuntu', sans-serif;
+      color: #e0e0e0;
+      background-color: #303030;
+      font-size: 1.1rem;
+      float: left;
+      letter-spacing: 0.3rem;
+      list-style: none;
+      width: 100%;
+      padding: 0.8rem 0.5rem;
+      margin: 0;
+      cursor: pointer;
+  }
+  .category-drop .dropdown-menu ul li:hover{
+    background-color: #202020;
+    font-size: 1.2rem;
   }
 }
 

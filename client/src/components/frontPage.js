@@ -51,7 +51,7 @@ const FrontPage = (props) => {
                 return (
                     <React.Fragment>
                         <a href="http://localhost:5000/auth/google" className="signUp-button-from-pricing">
-                            <button type="button" className="btn btn-outline-dark btn-lg btn-block">Sign Up</button>
+                            <button type="button" className="btn btn-outline-light btn-lg btn-block">Sign Up</button>
                         </a>
 
                     </React.Fragment>

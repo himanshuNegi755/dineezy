@@ -17,7 +17,7 @@
 }
 
 .add-restaurant-button:hover{
-    background-color: #ffee00;
+    background-color: #ffff33;
     color: #202020;
     box-shadow: 0 0 4px #999999;
 }
@@ -156,9 +156,12 @@
 
 
 /* ********************Add new/Edit Forms****************************** */
+.modal-content{
+    background-color: #202020;
+    color: white;
+}
 .modal-header{
-  background-color: #c7e2b2;
-  color: #092532;
+    border: 0;
 }
 .Form-title{
     font-family: 'Ubuntu', sans-serif;
@@ -166,9 +169,9 @@
     padding-left: 0.5rem;
     letter-spacing: 0.2rem;
 }
-
 .modal-body{
-    background-color: #e1ffc2;
+    background-color: #303030;
+    border: 0;
 }
 .form-group{
   padding: 0 0.5rem;
@@ -215,13 +218,15 @@
   padding: 0 0.8rem;
 }
 
-
+.qr-code-div a canvas{
+  border: 5px solid white;
+}
 /* **********************Mobile compatibility************************** */
 
 @media (max-width: 767px){
 
   .parent-div{
-    background-color: #092532;
+    background-color: #202020;
   }
   .searchBar{
     margin-bottom: 0.5rem;

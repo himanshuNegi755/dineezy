@@ -25,7 +25,7 @@ const ItemCard = (props) => {
     }
 
         return (
-            <Card style={{ width: '49%' }} className="card-for-item" bg="light">
+            <Card style={{ width: '49%' }} className="show-menu-cards" bg="light">
                 <Card.Body>
                     <Card.Title>
                         <div className="item-name">{props.itemName}</div>

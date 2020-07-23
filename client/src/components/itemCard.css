@@ -1,4 +1,4 @@
-/*.card-for-item {
+/*.show-menu-cards {
     margin: 1% 0.5%;
     float: left;
     border: 0;
@@ -24,21 +24,26 @@
 .item-quantity{
   float: right;
   padding-right: 0.5rem;
+}*/
+.show-menu-cards .card-footer{
+  background-color: #202020;
+  padding: 0;
 }
-.card-footer{
-  background-color: #e1ffc2;
-}
-.add-to-cart{
+.show-menu-cards .add-to-cart{
   font-family: 'Ubuntu', sans-serif;
   width: 100%;
-  background-color: #092532;
-  color: #e1ffc2;
+  background-color: #202020;
   border-radius: 2px;
   border: 0;
 }
 .add-to-cart:hover{
-  background-color: #8be0ca;
+  background-color: #64d115;
+  color: black;
 }
+.show-menu-cards .add-to-cart::after{
+  background-color: #64d115;
+}
+/*
 @media (max-width: 900px)
 {
   .item-name{

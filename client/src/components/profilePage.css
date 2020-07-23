@@ -1,9 +1,10 @@
 .parent-div {
+    background-color: #404040;
+    color: white;
     overflow: hidden;
 }
 .profile-info{
   font-family: 'Ubuntu', sans-serif;
-  background-color: #e1ffc2;
   padding: 5% 9% 10%;
 }
 .profile-image {
@@ -20,21 +21,28 @@
   opacity: 0.5;
 }
 .email-container{
-  color: #737373;
+  color: #d0d0d0;
   padding-left: 1rem;
-  background-color: #fff;
+  background-color: #303030;
   width: 69%;
-  border: 1px solid;
-  border-radius: 3px;
-  border-color: #d9d9d9;
+  border: 0;
+  border-radius: 0;
+  border-color: #202020;
 }
 .phno-container{
   width: 100%;
 }
 .verify-btn{
-  background-color: #61ad99;
-  border-color: #61ad99;
+  background-color: #ffe100;
+  border: 0;
+  color: #202020;
   height: 2.5rem;
+}
+.verify-btn:hover{
+  background-color: #ffff80;
+  color: black;
+  transition: 0.2s;
+  font-size: 1.01rem;
 }
 
 @media (max-width: 670px){
