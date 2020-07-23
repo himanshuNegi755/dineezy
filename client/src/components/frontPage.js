@@ -68,7 +68,7 @@ const FrontPage = (props) => {
 
         return (
             <div className="main-div">
-                <div>
+                <div className="nav-div-fixed">
                     <NavbarForSite />
                 </div>
 
@@ -86,7 +86,7 @@ const FrontPage = (props) => {
                           src="https://www.rotundakingston.co.uk/wp-content/uploads/2018/06/kung-fu-800x400px.jpg"
                           alt="First slide"/>
                           <div className="carousel-caption">
-                            <h3>Perks of a virtual menu.</h3>
+                            <h3>Less contact, less germs.</h3>
                             <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                           </div>
                         </div>
@@ -96,8 +96,8 @@ const FrontPage = (props) => {
                           src="https://i2.wp.com/www.caffeladro.com/wp-content/uploads/2017/11/blog2017tday-800x400px.jpg?ssl=1"
                           alt="Second slide"/>
                           <div className="carousel-caption">
-                            <h3>Second slide label</h3>
-                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                            <h3>No delay in customer service.</h3>
+                            <p>less worries about any complaint regarding customer services.</p>
                           </div>
                         </div>
                         <div className="carousel-item">
@@ -106,8 +106,8 @@ const FrontPage = (props) => {
                           src="https://www.webbsdirect.co.uk/images/stores/Bakery-Counter-800x400px.jpg"
                           alt="Third slide"/>
                           <div className="carousel-caption">
-                            <h3>Third slide label</h3>
-                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                            <h3>No miss calculations.</h3>
+                            <p>No more confusions while taking bills. All the items will be recorded and saved untill the payment is done.</p>
                           </div>
                         </div>
                       </div>
