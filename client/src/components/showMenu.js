@@ -191,7 +191,6 @@ class ShowMenu extends Component{
                             <h3>your total: ₹ {this.state.totalPrice}</h3>
                             <Button className="clear-cart" onClick={this.clearCartFunction}>Clear cart</Button>
                         </div>
-
                     </div>
                 </div>
 

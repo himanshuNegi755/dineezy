@@ -149,7 +149,6 @@
     cursor: pointer;
 }
 .menu-category ul li:hover{
-    transition: 0.4s;
     background-color: black;
     color: white;
 }

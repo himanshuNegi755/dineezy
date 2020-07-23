@@ -1,7 +1,7 @@
 .nav-div-fixed{
     width: 100%;
     position: fixed;
-    z-index: 20;
+    z-index: 18;
 }
 .main-div {
     overflow: hidden;

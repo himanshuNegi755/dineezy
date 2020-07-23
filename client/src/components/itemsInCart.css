@@ -1,46 +1,38 @@
-<<<<<<< HEAD
+
 .items-in-cart{
-  box-shadow: 0 0 3px #94bd75;
-  background-color: #e1ffc2;
-  padding: 0.5rem;
+  box-shadow: 0 0 2px #101010;
+  background-color: #303030;
+  color: white;
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
   border-radius: 3px;
-  margin: 2%;
 }
-
-=======
-
-.items-in-cart{
-    box-shadow: 0 0 3px #94bd75;
-    background-color: #e1ffc2;
-    padding: 0.5rem;
-    border-radius: 3px;
-  }
->>>>>>> 3b66251407da2c2eb5d84d926857c0972aec56f6
+.items-in-cart .row{
+    margin: 0;
+}
 .item-name{
-  display: inline-block;
   font-family: 'Noto Serif', serif;
   font-size: 1.5rem;
 }
-
-.item-qty{
-  padding: 0.5rem 0.5rem 0;
-  font-family: 'Ubuntu', sans-serif;
-  float: right;
-  font-size: 1.2rem;
+.xPlate{
+  margin: 0.4rem 0 0;
 }
-
-.item-price{
+.item-qty, .item-price, .multi-x{
   margin: 1rem 0;
   font-family: 'Ubuntu', sans-serif;
   font-size: 1.2rem;
 }
-
+.xPrice, .xPlate{
+  float: right;
+}
+.calc-btn{
+  padding: 0 0.2rem;
+}
 .cart-btn{
-  margin: 0 1.1%;
+  margin: 0;
+  width: 100%;
   font-family: 'Ubuntu', sans-serif;
-  width: 31%;
-  background-color: #092532;
-  color: #e1ffc2;
+  width: 100%;
+  background-color: #202020;
   border-radius: 3px;
   border: 0;
 }

@@ -171,7 +171,7 @@ const FrontPage = (props) => {
                             <h3>Monthly Pack</h3>
                           </div>
                           <div className="card-body">
-                            <h2 className="price-text">₹ 150 / mo</h2>
+                            <h2 className="price-text">₹ 149 / mo</h2>
                             <p>Payment at the beginning of the month</p>
                             <p>Validity : 30 Days from the day of payment.</p>
                             {renderPricingContent()}
@@ -184,7 +184,7 @@ const FrontPage = (props) => {
                             <h3>Yearly Pack</h3>
                           </div>
                           <div className="card-body">
-                            <h2 className="price-text">₹ 1200 / yr</h2>
+                            <h2 className="price-text">₹ 1199 / yr</h2>
                             <p>Payment at the beginning of the year</p>
                             <p>Validity : 365 days from the day of payment</p>
                             {renderPricingContent()}
