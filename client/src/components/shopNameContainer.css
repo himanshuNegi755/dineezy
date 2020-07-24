@@ -25,20 +25,77 @@
     box-shadow: 0 0 5px black;
 }
 
-.dropdown-table-no ul{
+
+
+.dropdown-table-no{
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.dropdown-table-no .btn{
+    background-color: #303030;
+    width: 15.4rem;
+    border: 0;
+    border-radius: 30px;
+    padding: 1rem 1.5rem;
+    color: white;
+}
+.dropdown-table-no .btn.btn-secondary:hover{
+    background-color: #ffe100;
+    color: black;
+}
+.dropdown-table-no .btn.btn-secondary{
+    background-color: #202020;
+    border: 0;
+}
+.dropdown-table-no .dropdown-menu{
+    background-color: #303030;
+    color: white;
+    width: 16rem;
+    padding: 0;
+    border: 0.2rem solid #202020;
+    padding: 0.2rem;
+}
+.dropdown-table-no .dropdown-menu ul{
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+.dropdown-table-no .dropdown-menu ul li{
+    width: 3rem;
+    font-family: 'Ubuntu', sans-serif;
+    color: #e0e0e0;
+    background-color: #303030;
+    font-size: 1.1rem;
+    float: left;
+    letter-spacing: 0.3rem;
     list-style: none;
+    padding: 0.5rem 0;
+    margin: 0;
     cursor: pointer;
+    border-radius: 10px;
+}
+.dropdown-table-no .dropdown-menu ul li:hover{
+  background-color: #ffe100;
+  color: black;
 }
 
-.drop-down-options ul:hover{
-  background-color: black;
-  color: #ffe100;
-}
 .qr-code-div a canvas {
-    display: block;
-    margin: auto;
+    margin: 0.8rem 0;
 }
-
-.qr-code-div {
+.current-tableNo div{
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 0 4px black;
+    color: black;
+    width: 2rem;
+    height: auto;
+    padding: 0.2rem;
+    border-radius: 1rem;
+    display: inline-block;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.1rem;
+}
+.qr-code-div, .current-tableNo {
     text-align: center;
 }

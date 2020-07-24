@@ -278,6 +278,7 @@
       margin: 0;
   }
   .hidden .dropdown-menu ul li{
+      display: block;
       width: auto;
       font-family: 'Ubuntu', sans-serif;
       color: #e0e0e0;

@@ -21,10 +21,10 @@ class ShopNameContainer extends Component{
                 this.setState({
                     showOptions: !this.state.showOptions
                 });
-                
+
                 this.props.hideSearchBar();
             } else {
-                
+
                 axios.get(`http://localhost:5000/tables_no?userEmail=${this.props.userEmail}&shopId=${this.props.shopId}`)
                 .then(res => {
                     let arr = []
@@ -33,7 +33,7 @@ class ShopNameContainer extends Component{
                     }
                     this.setState({noOfTablesArr: arr})
                 })
-                
+
                 this.props.menuForShop(this.props.shopId);
                 this.props.showSearchBar();
                 this.props.showCategory(this.props.shopId);
@@ -43,13 +43,13 @@ class ShopNameContainer extends Component{
             }
 
         })
-    }    
-    
-    renderItemCategory = () => {
+    }
+
+    renderTableNo = () => {
         const list = this.state.noOfTablesArr.map((tableNo) =>
             <div key={tableNo}>
 
-                <li className="category-ind" onClick={() => {
+                <li className="table-ind" onClick={() => {
                     this.setState({currentTable: tableNo})
                 }}>{tableNo}</li>
 
@@ -58,7 +58,7 @@ class ShopNameContainer extends Component{
         return (list);
 
     }
-    
+
     showTableQRCode = (tableNo) => {
         return (
             <div className="qr-code-div">
@@ -161,9 +161,14 @@ class ShopNameContainer extends Component{
                     </Modal.Header>
                     <Modal.Body>
                         <div className="dropdown-table-no">
-                            <ul>{this.renderItemCategory()}</ul>
+                            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Select Table Number
+                            </button>
+                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <ul>{this.renderTableNo()}</ul>
+                            </div>
                         </div>
-                         
+                        <div className="current-tableNo">QR code of Table number <div>{this.state.currentTable}</div></div>
                         {this.showTableQRCode(this.state.currentTable)}
                     </Modal.Body>
                 </Modal>
