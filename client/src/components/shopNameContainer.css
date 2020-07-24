@@ -24,6 +24,12 @@
     background: #202020;
     box-shadow: 0 0 5px black;
 }
+
+.dropdown-table-no ul{
+    list-style: none;
+    cursor: pointer;
+}
+
 .drop-down-options ul:hover{
   background-color: black;
   color: #ffe100;

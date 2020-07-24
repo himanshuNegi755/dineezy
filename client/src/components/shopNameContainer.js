@@ -10,7 +10,7 @@ class ShopNameContainer extends Component{
     constructor(props) {
         super(props);
 
-        this.state = { showOptions: false, showFileUploadModal: false, showMenuOption: false, showQRCodeModal: false, noOfTables: 0}
+        this.state = { showOptions: false, showFileUploadModal: false, showMenuOption: false, showQRCodeModal: false, noOfTablesArr: [], currentTable: 1}
     }
 
     showOptionFunction = () => {
@@ -21,11 +21,17 @@ class ShopNameContainer extends Component{
                 this.setState({
                     showOptions: !this.state.showOptions
                 });
+                
+                this.props.hideSearchBar();
             } else {
                 
                 axios.get(`http://localhost:5000/tables_no?userEmail=${this.props.userEmail}&shopId=${this.props.shopId}`)
                 .then(res => {
-                    this.setState({noOfTabes: res.data.noOfTables})
+                    let arr = []
+                    for(var i=0; i<res.data.noOfTables; i++) {
+                        arr[i] = i+1;
+                    }
+                    this.setState({noOfTablesArr: arr})
                 })
                 
                 this.props.menuForShop(this.props.shopId);
@@ -37,8 +43,35 @@ class ShopNameContainer extends Component{
             }
 
         })
-        
-        //this.props.userEmail
+    }    
+    
+    renderItemCategory = () => {
+        const list = this.state.noOfTablesArr.map((tableNo) =>
+            <div key={tableNo}>
+
+                <li className="category-ind" onClick={() => {
+                    this.setState({currentTable: tableNo})
+                }}>{tableNo}</li>
+
+            </div>
+            );
+        return (list);
+
+    }
+    
+    showTableQRCode = (tableNo) => {
+        return (
+            <div className="qr-code-div">
+                <a href={"/show_menu/" + this.props.shopId + "/" + tableNo}>
+                    <QRCode
+                        id= "qr-code-for-shop"
+                        value= {"http://localhost:3000/show_menu/" + this.props.shopId + "/" + tableNo}
+                    />
+                </a>
+
+                <p>To Download QR, just right click and save image.</p>
+            </div>
+        )
     }
 
     showDropDownOptions = () => {
@@ -127,16 +160,11 @@ class ShopNameContainer extends Component{
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div className="qr-code-div">
-                            <a href={"/show_menu/" + this.props.shopId + "/" + this.tableNo}>
-                                <QRCode
-                                    id= "qr-code-for-shop"
-                                    value= {"http://localhost:3000/show_menu/" + this.props.shopId + "/" + this.tableNo}
-                                />
-                            </a>
-
-                            <p>To Download QR, just right click and save image.</p>
+                        <div className="dropdown-table-no">
+                            <ul>{this.renderItemCategory()}</ul>
                         </div>
+                         
+                        {this.showTableQRCode(this.state.currentTable)}
                     </Modal.Body>
                 </Modal>
             </div>
