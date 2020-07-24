@@ -48,8 +48,11 @@ class ShopPage extends Component{
         const value = e.target.value;
         let suggestions = [];
         if (value.length > 0) {
-            const regex = new RegExp(`^${value}`, 'i');
-            suggestions = this.state.itemNameList.sort().filter(v => regex.test(v));
+            /*const regex = new RegExp(`^${value}`, 'i');
+            
+            suggestions = this.state.itemNameList.sort().filter(v => regex.test(v));*/
+            
+            suggestions = this.state.itemNameList.sort().filter(v => v.toLowerCase().includes(value));
         }
         this.setState(() => ({ suggestions, item: value }));
     }
@@ -262,7 +265,7 @@ class ShopPage extends Component{
     shopList = () => {
         const list = this.state.shopList.map((shop) =>
             <div key={shop._id}>
-                        <ShopNameContainer shopName={shop.shopName} shopId={shop._id} showSearchBar={this.showSearchBarFunction} showCategory={this.loadCategoryFunction} menuForShop={this.getMenuFunction} userEmail={this.props.user.userEmail}/>
+                        <ShopNameContainer shopName={shop.shopName} shopId={shop._id} showSearchBar={this.showSearchBarAndCategoryFunction} showCategory={this.loadCategoryFunction} menuForShop={this.getMenuFunction} userEmail={this.props.user.userEmail} hideSearchBar={this.hideSearchBarAndCategoryFunction}/>
             </div>
         );
 
@@ -279,8 +282,12 @@ class ShopPage extends Component{
         return (list);
     }
 
-    showSearchBarFunction = () => {
+    showSearchBarAndCategoryFunction = () => {
         this.setState({showSearchBarAndCategory: 'visible'})
+    }
+    
+    hideSearchBarAndCategoryFunction = () => {
+        this.setState({showSearchBarAndCategory: 'hidden'})
     }
 
 
