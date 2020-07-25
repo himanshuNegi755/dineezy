@@ -52,7 +52,7 @@ class ShopPage extends Component{
             
             suggestions = this.state.itemNameList.sort().filter(v => regex.test(v));*/
             
-            suggestions = this.state.itemNameList.sort().filter(v => v.toLowerCase().includes(value));
+            suggestions = this.state.itemNameList.sort().filter(v => v.toLowerCase().includes(value.toLowerCase()));
         }
         this.setState(() => ({ suggestions, item: value }));
     }

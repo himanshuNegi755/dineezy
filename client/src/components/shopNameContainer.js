@@ -45,7 +45,7 @@ class ShopNameContainer extends Component{
         })
     }    
     
-    renderItemCategory = () => {
+    renderTableNo = () => {
         const list = this.state.noOfTablesArr.map((tableNo) =>
             <div key={tableNo}>
 
@@ -161,9 +161,9 @@ class ShopNameContainer extends Component{
                     </Modal.Header>
                     <Modal.Body>
                         <div className="dropdown-table-no">
-                            <ul>{this.renderItemCategory()}</ul>
+                            <ul>{this.renderTableNo()}</ul>
                         </div>
-                         
+                         {this.state.currentTable}
                         {this.showTableQRCode(this.state.currentTable)}
                     </Modal.Body>
                 </Modal>
