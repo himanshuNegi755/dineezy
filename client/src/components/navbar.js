@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 import './navbar.css';
 import GoogleButton from './googleButton';
@@ -67,11 +68,11 @@ const NavbarForSite = (props) => {
         return (
 
           <nav className="navbar navbar-expand-lg navbar-dark">
-            <a id="navbar-brand" href="/">
+            <Link id="navbar-brand" to="/">
                 <span>
                     <img id="brand-logo" src={DMLogo} alt="Company Logo"/>
                 </span>
-            </a>
+            </Link>
 
             <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#myNavigation" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span></button>

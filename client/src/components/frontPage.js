@@ -21,7 +21,7 @@ const FrontPage = (props) => {
             case false:
                 return (
                     <React.Fragment>
-                        <a href="http://localhost:5000/auth/google" className="signUp-button-from-pricing">
+                        <a href={`${process.env.REACT_APP_BACKEND_API}/auth/google`} className="signUp-button-from-pricing">
                             <button type="button" className="btn btn-dark btn-lg btn-block">Sign Up</button>
                         </a>
 
@@ -50,7 +50,7 @@ const FrontPage = (props) => {
             case false:
                 return (
                     <React.Fragment>
-                        <a href="http://localhost:5000/auth/google" className="signUp-button-from-pricing">
+                        <a href={`${process.env.REACT_APP_BACKEND_API}/auth/google`} className="signUp-button-from-pricing">
                             <button type="button" className="btn btn-outline-light btn-lg btn-block">Sign Up</button>
                         </a>
 

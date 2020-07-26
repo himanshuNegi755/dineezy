@@ -72,13 +72,13 @@ class ShopPage extends Component{
 
     getMenuFunction = (shopId) => {
         this.setState({shopIdVar: shopId});
-        axios.get(`http://localhost:5000/menu/${shopId}`)
+        axios.get(`${process.env.REACT_APP_BACKEND_API}/menu/${shopId}`)
         .then(res => {
             //console.log(res.data[0].menu)
             this.setState({menuItemList: res.data[0].menu})
         })
 
-        axios.get(`http://localhost:5000/items_name/for-autoComplete/${shopId}`)
+        axios.get(`${process.env.REACT_APP_BACKEND_API}/items_name/for-autoComplete/${shopId}`)
         .then(res => {
             this.setState({itemNameAsObjectArr: res.data})
             var arr = [];
@@ -124,7 +124,7 @@ class ShopPage extends Component{
     onSubmit() {
         this.setState({showModal: !this.state.showModal})
 
-        axios.put('http://localhost:5000/shop', {
+        axios.put(`${process.env.REACT_APP_BACKEND_API}/shop`, {
             userEmail: this.state.userEmail,
             shopName: this.state.shopName,
             shopAddress: this.state.shopAddress,
@@ -140,7 +140,7 @@ class ShopPage extends Component{
     //category functions
     loadCategoryFunction = (shopId) => {
         this.setState({shopIdVar: shopId, itemsByCategory: []});
-        axios.get(`http://localhost:5000/item_categories/${shopId}`)
+        axios.get(`${process.env.REACT_APP_BACKEND_API}/item_categories/${shopId}`)
         .then(res => {
             this.setState({category: res.data})
         })
@@ -175,7 +175,7 @@ class ShopPage extends Component{
     }
 
     loadItemFunction = (itemCategory) => {
-        axios.get(`http://localhost:5000/items?shopId=${this.state.shopIdVar}&category=${itemCategory}`)
+        axios.get(`${process.env.REACT_APP_BACKEND_API}/items?shopId=${this.state.shopIdVar}&category=${itemCategory}`)
         .then(res => {
             console.log(res.data);
             this.setState({itemsByCategory: res.data})
@@ -187,7 +187,7 @@ class ShopPage extends Component{
 
         this.setState({showNewItemAddModal: !this.state.showNewItemAddModal})
 
-        axios.put('http://localhost:5000/menu', {
+        axios.put(`${process.env.REACT_APP_BACKEND_API}/menu`, {
             shopId: this.state.shopIdVar,
             itemName: this.state.itemName,
             vegOrNonVeg: this.state.vegOrNonVeg,
@@ -206,7 +206,7 @@ class ShopPage extends Component{
     }
 
     showShopAfterAdding() {
-        axios.get(`http://localhost:5000/shop/get_shops/${this.state.userEmail}`)
+        axios.get(`${process.env.REACT_APP_BACKEND_API}/shop/get_shops/${this.state.userEmail}`)
             .then(res => {
                 this.setState({shopList: res.data[0].shop})
             })
@@ -217,7 +217,7 @@ class ShopPage extends Component{
             if(!prevState.userName) {
                 this.setState({userName: this.props.user.userName,
                               userEmail: this.props.user.userEmail})
-                axios.get(`http://localhost:5000/shop/get_shops/${this.state.userEmail}`)
+                axios.get(`${process.env.REACT_APP_BACKEND_API}/shop/get_shops/${this.state.userEmail}`)
                     .then(res => {
                         //console.log(res.data[0].shop);
                         this.setState({shopList: res.data[0].shop})
@@ -229,7 +229,7 @@ class ShopPage extends Component{
     }
 
     deleteItemFunction(itemIdAttribute) {
-        axios.put('http://localhost:5000/menu/item/delete/', {
+        axios.put(`${process.env.REACT_APP_BACKEND_API}/menu/item/delete/`, {
                 shopId: this.state.shopIdVar,
                 itemId: itemIdAttribute
             })
@@ -244,7 +244,7 @@ class ShopPage extends Component{
 
     editItemDetails = () => {
         this.setState({showItemEditModal: !this.state.showItemEditModal});
-        axios.put('http://localhost:5000/menu/item_update', {
+        axios.put(`${process.env.REACT_APP_BACKEND_API}/menu/item_update`, {
             shopId: this.state.shopIdVar,
             menuItemId: this.state.editItemId,
             itemName: this.state.editItemName,
