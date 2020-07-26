@@ -8,7 +8,6 @@
 .show-menu-cards .card-body{
   border-radius: 5px 5px 0 0;
   background-color: #303030;
-  padding: 0.5rem 1rem;
 }
 .show-menu-cards .item-name{
   display: inline-block;
@@ -79,4 +78,10 @@
     display: inline-block;
     height: 3rem;
   }
+}
+@media (max-width: 476px){
+  .show-menu-cards .card-body{
+    height: 12rem;
+  }
+
 }

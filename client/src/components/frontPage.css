@@ -10,7 +10,7 @@
 
 .front-parent-div {
     margin-top: 82px;
-    background-color: #303030;
+    background-color: #202020;
     padding: 0 15% 2%;
 }
 .btn-div{
@@ -21,41 +21,35 @@
 #front-carousel{
   box-shadow: 0 0 10px black;
 }
+.carousel-item{
+  height: 85vh;
+}
+.d-block{
+  height: 100%;
+  width: auto;
+}
 .carousel-indicators{
   padding-bottom: 0.8rem;
   margin-bottom: 0
 }
 .carousel-caption{
-  background-color: rgba(255, 255, 255, 0.1);
-  color: black;
-  bottom: 0;
+  text-align: left;
+  bottom: 13rem;
+  text-shadow: 0 0 3px black;
 }
-.slide-btn{
-  background-color: rgba(255, 255, 255, 0.1);
+.carousel-caption h3{
+  font-family: 'Exo 2', sans-serif;
+  font-size: 3rem;
+}
+.carousel-caption p{
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.5rem;
 }
 
-#about-section{
-  background-color: #f0f0f0;
-  text-align: center;
-  padding: 8% 7%;
-}
-
-.about-heading{
-  font-family: 'Righteous', cursive;
-  font-size: 3.5rem;
-  font-weight: bold;
-  letter-spacing: 0.6rem;
-  padding: 0 0 3%;
-}
-.about-img{
-  padding: 3%;
-  width: 100px;
-  height: 100px;
-}
 
 #pricing-section {
     box-shadow: -1px 0 5px black;
-    background: #202020;
+    background: #303030;
     color: white;
     padding: 5% 7%;
     text-align: center;
@@ -100,9 +94,26 @@
 .signUp-button-from-pricing {
     text-decoration: none !important;
 }
+@media (max-width: 1000px){
 
+
+  .carousel-caption{
+    bottom: 15rem;
+  }
+  .carousel-caption h3{
+    font-size: 2.5rem;
+  }
+  .carousel-caption p{
+    font-size: 1.2rem;
+  }
+
+
+}
 @media (max-width: 991px) {
 
+  .carousel-item{
+    height: 80vh;
+  }
   .front-parent-div{
     padding: 0 0;
   }
@@ -120,6 +131,18 @@
 
 @media (max-width: 600px) {
 
+  .carousel-item{
+    height: 60vh;
+  }
+  .carousel-caption{
+    bottom: 12rem;
+  }
+  .carousel-caption h3{
+    font-size: 2rem;
+  }
+  .carousel-caption p{
+    font-size: 1rem;
+  }
   .about-heading{
     font-size: 2rem;
     letter-spacing: 0.3rem;

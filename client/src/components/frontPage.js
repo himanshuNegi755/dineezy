@@ -5,6 +5,9 @@ import NavbarForSite from './navbar';
 import Footer from './footer';
 import NOTch from '../images/no-touch.svg'
 import MobChk from '../images/onMobile.svg'
+import MenuGerms from '../images/menu-germs.jpg'
+import Service from '../images/service.jpg'
+import ScanMenu from '../images/menu-scan.jpg'
 
 const FrontPage = (props) => {
 
@@ -82,32 +85,33 @@ const FrontPage = (props) => {
                       </ol>
                       <div className="carousel-inner">
                         <div className="carousel-item active">
-                          <img className="d-block w-100"
-                          src="https://www.rotundakingston.co.uk/wp-content/uploads/2018/06/kung-fu-800x400px.jpg"
+                          <img className="d-block"
+                          src={ScanMenu}
                           alt="First slide"/>
                           <div className="carousel-caption">
-                            <h3>Less contact, less germs.</h3>
-                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                            <h3>A faster and efficient way to order in a restaurant.</h3>
+                            <p>Scan the QR code on the table, order what you want on your mobile. No more miscalculations in bills.</p>
                           </div>
                         </div>
                         <div className="carousel-item">
                           <img
-                          className="d-block w-100"
-                          src="https://i2.wp.com/www.caffeladro.com/wp-content/uploads/2017/11/blog2017tday-800x400px.jpg?ssl=1"
+                          className="d-block"
+                          src={Service}
                           alt="Second slide"/>
                           <div className="carousel-caption">
                             <h3>No delay in customer service.</h3>
-                            <p>less worries about any complaint regarding customer services.</p>
+                            <p>Less worries about any complaint regarding customer services.</p>
                           </div>
                         </div>
                         <div className="carousel-item">
                           <img
-                          className="d-block w-100"
-                          src="https://www.webbsdirect.co.uk/images/stores/Bakery-Counter-800x400px.jpg"
+                          className="d-block"
+                          src= {MenuGerms}
                           alt="Third slide"/>
                           <div className="carousel-caption">
-                            <h3>No miss calculations.</h3>
-                            <p>No more confusions while taking bills. All the items will be recorded and saved untill the payment is done.</p>
+                            <h3>What's wrong with a menu card?</h3>
+                            <p>According to a study, a restaurant menu can contain <strong>185,000</strong> germs per sq cm.
+                            For reference, a public toilet has about <strong>500 - 1,000</strong> germs per sq cm.</p>
                           </div>
                         </div>
                       </div>
@@ -123,28 +127,7 @@ const FrontPage = (props) => {
 
                 </section>
 
-                <section id="about-section">
-                    <h1 className="about-heading">Perks of a digital menu.</h1>
-                    <div className="row">
-                        <div className="col-lg-4 col-md-4 about-col">
-                            <img className="about-img" src={NOTch} alt="Less Contact"/>
-                            <h3>Less contact, less germs.</h3>
-                            <p className="about-text">According to a study, a restaurant menu can contain 185,000 germs per square centimeter.
-                            For reference, a public toilet has about 500 - 1,000 germs per square centimeter.</p>
-                        </div>
-                        <div className="col-lg-4 col-md-4 about-col">
-                            <img className="about-img" src={MobChk} alt="Order on Mobile"/>
-                            <h3>No delay in customer service.</h3>
-                            <p className="about-text">As a customer, no more waiting for a waiter in a crowded day you can order in the digital menu itself.
-                             As a restaurant, less worries about any complaint regarding bad services.</p>
-                        </div>
-                        <div className="col-lg-4 col-md-4 about-col">
-                            <i className="fas fa-calculator fa-5x about-img"></i>
-                            <h3>No miss calculations.</h3>
-                            <p className="about-text">No more confusions while taking bills. All the items will be recorded and saved untill the payment is done.</p>
-                        </div>
-                    </div>
-                </section>
+                
 
                 <section id="pricing-section">
                     <div>

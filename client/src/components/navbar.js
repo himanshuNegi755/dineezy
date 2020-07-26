@@ -78,9 +78,6 @@ const NavbarForSite = (props) => {
             <div className="collapse navbar-collapse" id="myNavigation">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <a className="nav-link" href="/#about-section">About</a>
-                </li>
-                <li className="nav-item">
                   <a className="nav-link" href="/#pricing-section">Pricing</a>
                 </li>
                 <li className="nav-item">
