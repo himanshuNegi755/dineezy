@@ -25,7 +25,7 @@ class ShowMenu extends Component{
 
     loadCategoryFunction() {
         console.log(this.props.match.params);
-        axios.get(`http://localhost:5000/item_categories/${this.props.match.params.shopId}`)
+        axios.get(`${process.env.REACT_APP_BACKEND_API}/item_categories/${this.props.match.params.shopId}`)
         .then(res => {
             //console.log(res.data)
             this.setState({category: res.data})
@@ -33,7 +33,7 @@ class ShowMenu extends Component{
     }
 
     loadItemFunction(itemCategory) {
-        axios.get(`http://localhost:5000/items?shopId=${this.props.match.params.shopId}&category=${itemCategory}`)
+        axios.get(`${process.env.REACT_APP_BACKEND_API}/items?shopId=${this.props.match.params.shopId}&category=${itemCategory}`)
         .then(res => {
             console.log(res.data)
             this.setState({itemsByCategory: res.data})

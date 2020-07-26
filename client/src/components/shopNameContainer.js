@@ -15,7 +15,7 @@ class ShopNameContainer extends Component{
 
     showOptionFunction = () => {
 
-        axios.get(`http://localhost:5000/menu/${this.props.shopId}`)
+        axios.get(`${process.env.REACT_APP_BACKEND_API}/menu/${this.props.shopId}`)
         .then(res => {
             if(res.data[0].menu.length === 0) {
                 this.setState({
@@ -25,7 +25,7 @@ class ShopNameContainer extends Component{
                 this.props.hideSearchBar();
             } else {
 
-                axios.get(`http://localhost:5000/tables_no?userEmail=${this.props.userEmail}&shopId=${this.props.shopId}`)
+                axios.get(`${process.env.REACT_APP_BACKEND_API}/tables_no?userEmail=${this.props.userEmail}&shopId=${this.props.shopId}`)
                 .then(res => {
                     let arr = []
                     for(var i=0; i<res.data.noOfTables; i++) {
@@ -43,8 +43,8 @@ class ShopNameContainer extends Component{
             }
 
         })
-    }
-
+    }    
+    
     renderTableNo = () => {
         const list = this.state.noOfTablesArr.map((tableNo) =>
             <div key={tableNo}>

@@ -28,7 +28,7 @@ class ProfilePage extends Component{
         if(this.state.numberField === '') {
             alert('please enter your mobile number')
         }else{
-            axios.get(`http://localhost:5000/phoneNo/${this.state.numberField}`)
+            axios.get(`${process.env.REACT_APP_BACKEND_API}/${this.state.numberField}`)
             .then(res => {
                 this.setState({show: !this.state.show,
                               msg: res.data.message})
@@ -47,7 +47,7 @@ class ProfilePage extends Component{
     onSubmit = () => {
         this.setState({show: !this.state.show})
 
-        axios.get(`http://localhost:5000/verify?phoneNo=${this.state.numberField}&code=${this.state.otp}&userId=${this.props.user._id}`)
+        axios.get(`${process.env.REACT_APP_BACKEND_API}/verify?phoneNo=${this.state.numberField}&code=${this.state.otp}&userId=${this.props.user._id}`)
             .then(res => {
                 //console.log(res)
                 alert(res.data.message)

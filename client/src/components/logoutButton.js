@@ -4,7 +4,7 @@ import './logoutButton.css';
 
 const LogoutButton = () =>{
     return (
-            <a href="http://localhost:5000/auth/logout">
+            <a href={`${process.env.REACT_APP_BACKEND_API}/auth/logout`}>
                 <Button variant="primary" className="log-out-button">
                     <b className="logOut-text">LOG OUT</b>
                 </Button>

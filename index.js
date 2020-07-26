@@ -19,7 +19,7 @@ require('./config/passport-setup');
 var passport = require('passport');
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -40,6 +40,7 @@ require("./routes/database-api-routes")(app);
 
 
 if(process.env.NODE_ENV === 'production') {
+    console.log('production')
     app.use(express.static('client/build'))
     const path = require('path');
     app.get('*', (req, res) => {
