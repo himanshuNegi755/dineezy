@@ -9,6 +9,8 @@ require('./model/menu');
 var keys = require('./config/keys');
 var cookieSession = require('cookie-session');
 
+require('dotenv').config();
+
 const corsOptions = {
   credentials: true,
   origin: true
@@ -21,7 +23,7 @@ mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: tru
 
 const PORT = process.env.PORT || 8000;
 
-//console.log(process.env);
+//console.log(process.env.PORT);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));

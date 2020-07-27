@@ -9,7 +9,7 @@ module.exports = app => {
   );
 
     
-  app.get('/', (req, res) => res.redirect('http://localhost:3000'));
+  app.get('/', (req, res) => res.redirect(process.env.CLIENT_URI || 'http://localhost:3000'));
     
   app.get(
     "/auth/google/callback",
