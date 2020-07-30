@@ -7,26 +7,48 @@
 .restaurant-name-holder:hover{
     background-color: #282828;
 }
-
-.drop-down-options ul {
-    width: auto;
-    font-family: 'Ubuntu', sans-serif;
-    font-weight: lighter;
-    margin: 1% 30%;
-    padding: 0.1rem 0.3rem;
-    border-radius: 3px;
-    text-align: center;
-    list-style: none;
-    position: relative;
-    z-index: 1;
-    color: #ffe100;
-    cursor: pointer;
-    background: #202020;
-    box-shadow: 0 0 5px black;
+.restaurant-name-holder .col-2{
+    padding: 1rem;
+}
+.restaurant-name-holder .col-2:hover{
+    background-color: #ffe100;
+    color: black;
+}
+.drop-down-options{
+    background-color: #ffe100;
+    color: black;
+    border-radius: 5px 0 5px 5px;;
+    position: absolute;
+    top: 3.7rem;
+    right: 0rem;
+    width: 13rem;
+    padding: 0.5rem 0;
+}
+.drop-down-options b{
+    font-size: 0.9rem;
+    display: block;
+    margin: 0.1rem;
+}
+.drop-down-options b:hover{
+    font-size: 1rem; 
 }
 
+/*width: auto;
+font-family: 'Ubuntu', sans-serif;
+font-weight: lighter;
+margin: 1% 30%;
+padding: 0.1rem 0.3rem;
+border-radius: 3px;
+text-align: center;
+list-style: none;
+position: relative;
+z-index: 1;
+color: #ffe100;
+cursor: pointer;
+background: #202020;
+box-shadow: 0 0 5px black;*/
 
-
+/* **********************Modal Styling*********************** */
 .dropdown-table-no{
     text-align: center;
     margin-bottom: 1rem;
@@ -79,22 +101,23 @@
   color: black;
 }
 
-.qr-code-div a canvas {
+.qr-code-div canvas {
     margin: 0.8rem 0;
+    border: 5px solid white;
 }
-.current-tableNo div{
+.current-tableNo span{
     text-align: center;
     background-color: white;
     box-shadow: 0 0 4px black;
     color: black;
-    width: 2rem;
-    height: auto;
-    padding: 0.2rem;
+    width: 1.9rem;
+    height: 1.9rem;
+    padding: 0.1rem 0.2rem 0.3rem;
     border-radius: 1rem;
     display: inline-block;
     font-family: 'Ubuntu', sans-serif;
     font-size: 1.1rem;
-    letter-spacing: 0.1rem;
+    letter-spacing: 0.5px;
 }
 .qr-code-div, .current-tableNo {
     text-align: center;

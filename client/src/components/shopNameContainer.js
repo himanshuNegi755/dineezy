@@ -43,8 +43,8 @@ class ShopNameContainer extends Component{
             }
 
         })
-    }    
-    
+    }
+
     renderTableNo = () => {
         const list = this.state.noOfTablesArr.map((tableNo) =>
             <div key={tableNo}>
@@ -78,12 +78,8 @@ class ShopNameContainer extends Component{
         if(this.state.showOptions) {
             return(
                 <React.Fragment>
-                    <div className="drop-down-options">
-                        <ul>
-                            <li onClick= {() => {this.setState({showFileUploadModal: !this.state.showFileUploadModal})}}>
-                                <b>Add Menu</b>
-                            </li>
-                        </ul>
+                    <div className="drop-down-options" onClick= {() => {this.setState({showFileUploadModal: !this.state.showFileUploadModal})}}>
+                        <b>Add Menu</b>
                     </div>
                 </React.Fragment>
             )
@@ -91,21 +87,19 @@ class ShopNameContainer extends Component{
             return(
                 <React.Fragment>
                     <div className="drop-down-options">
-                        <ul>
-                            <li onClick= {() => {this.setState({showQRCodeModal: !this.state.showQRCodeModal, showQRCodeForTables: !this.state.showQRCodeForTables})}}>
-                                <b>Get Menu QR code</b>
-                            </li>
-                            <li onClick= {() => {this.setState({showQRCodeModal: !this.state.showQRCodeModal, showQRCodeForKitchen: !this.state.showQRCodeForKitchen})}}>
-                                <b>Get QR Code for Kitchen</b>
-                            </li>
-                        </ul>
+                            <b onClick= {() => {this.setState({showQRCodeModal: !this.state.showQRCodeModal, showQRCodeForTables: !this.state.showQRCodeForTables})}}>
+                                Get Menu QR code
+                            </b>
+                            <b onClick= {() => {this.setState({showQRCodeModal: !this.state.showQRCodeModal, showQRCodeForKitchen: !this.state.showQRCodeForKitchen})}}>
+                                Get QR Code for Kitchen
+                            </b>
                     </div>
                 </React.Fragment>
             )
         }
 
     }
-    
+
     showTableOrKitchenQRCodeInModal = () => {
         if (this.state.showQRCodeForTables) {
             return (
@@ -119,10 +113,7 @@ class ShopNameContainer extends Component{
                         </div>
                     </div>
                     <div className="current-tableNo">
-                        QR code of Table number 
-                        <div>
-                            {this.state.currentTable}
-                        </div>
+                        QR code of Table number  <span>{this.state.currentTable}</span>
                     </div>
                     {this.showTableQRCode(this.state.currentTable)}
                 </React.Fragment>
@@ -143,8 +134,15 @@ class ShopNameContainer extends Component{
     render() {
         return (
             <div>
-                <h5 className="restaurant-name-holder" onClick = {() => {this.showOptionFunction()}}>{this.props.shopName}</h5>
-                {this.showDropDownOptions()}
+                <div className="row restaurant-name-holder">
+                  <div className="col-10">
+                      <h5 className="restaurant-name-holder">{this.props.shopName}</h5>
+                  </div>
+                  <div className="col-2" onClick = {() => {this.showOptionFunction()}}>
+                      <i class="fas fa-chevron-down"></i>{this.showDropDownOptions()}
+                  </div>
+                </div>
+
 
                 <Modal
                     size="md"
@@ -195,7 +193,7 @@ class ShopNameContainer extends Component{
                 >
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-vcenter">
-                            QR Code For Your Shop
+                            QR Code For Your Kitchen
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
