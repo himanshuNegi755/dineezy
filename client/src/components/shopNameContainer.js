@@ -19,7 +19,7 @@ class ShopNameContainer extends Component{
             [e.target.name]: e.target.value
         });
     }
-    
+
     showOptionFunction = () => {
         axios.get(`${process.env.REACT_APP_BACKEND_API}/menu/${this.props.shopId}`)
         .then(res => {
@@ -39,7 +39,7 @@ class ShopNameContainer extends Component{
                     }
                     this.setState({noOfTablesArr: arr})
                 })
-                
+
                 this.getEmailListForKitchenAccessFunction();
 
                 this.props.menuForShop(this.props.shopId);
@@ -71,10 +71,12 @@ class ShopNameContainer extends Component{
         const list = this.state.kitchenAccessEmailList.map((email) =>
             <div key={email}>
 
-                <li className="table-ind">
-                    {email}
+                <li className="email-ind">
+                    <span className="accesser-email">{email}</span>
                     <button type="button" onClick={ () => {this.deleteEmailFromKitchenAccessListFunction(email)
-                                                           this.getEmailListForKitchenAccessFunction()}}>REMOVE</button>
+                                                           this.getEmailListForKitchenAccessFunction()}}>
+                        Remove
+                    </button>
                 </li>
 
             </div>
@@ -82,7 +84,7 @@ class ShopNameContainer extends Component{
         return (list);
 
     }
-    
+
     showTableQRCode = (tableNo) => {
         return (
             <div className="qr-code-div">
@@ -145,15 +147,16 @@ class ShopNameContainer extends Component{
         } else if (this.state.showQRCodeForKitchen) {
             return (
                 <div className="qr-code-div">
-                    
-                    <div>
-                        {this.renderEmailListForKitchenAccess()}
+                    <button className="btn dropdown-toggle email-access-btn" type="button" id="dropdownEmailButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Emails with access
+                    </button>
+                    <div className="dropdown-menu email-dropdown" aria-labelledby="dropdownEmailButton">
+                        <ul>{this.renderEmailListForKitchenAccess()}</ul>
                     </div>
-                    
+
                     <Form.Group controlId="formBasicName">
-                        <Form.Label>Enter Email for Kitchen Access</Form.Label>
-                        <Form.Control type="text" placeholder="exapmle@gmail.com" name='emailToAdd' value={this.state.emailToAdd} onChange={this.handleInputChange}/>
-                        <button type="button" onClick={ () => {this.addEmailToAccessListFunction(this.state.emailToAdd)
+                        <Form.Control type="text" placeholder="Enter Email for Kitchen Access" name='emailToAdd' value={this.state.emailToAdd} onChange={this.handleInputChange}/>
+                        <button className="add-email" type="button" onClick={ () => {this.addEmailToAccessListFunction(this.state.emailToAdd)
                                                                this.getEmailListForKitchenAccessFunction()
                                                                this.setState({emailToAdd: ''})}}>
                             ADD
@@ -168,8 +171,8 @@ class ShopNameContainer extends Component{
             )
         }
     }
-    
-    addEmailToAccessListFunction = (emailToAdd) => {        
+
+    addEmailToAccessListFunction = (emailToAdd) => {
         axios.put(`${process.env.REACT_APP_BACKEND_API}/add/email_access`, {
             userEmail: this.props.userEmail,
             shopId: this.props.shopId,
@@ -180,14 +183,14 @@ class ShopNameContainer extends Component{
             //this.showShopAfterAdding();
         })
     }
-    
+
     getEmailListForKitchenAccessFunction = () => {
         axios.get(`${process.env.REACT_APP_BACKEND_API}/get/email_access/list?userEmail=${this.props.userEmail}&shopId=${this.props.shopId}`)
         .then(res => {
             this.setState({kitchenAccessEmailList: res.data});
         })
     }
-    
+
     deleteEmailFromKitchenAccessListFunction = (emailToRemove) => {
         axios.put(`${process.env.REACT_APP_BACKEND_API}/delete/email_access`, {
             userEmail: this.props.userEmail,
