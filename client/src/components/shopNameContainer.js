@@ -121,16 +121,14 @@ class ShopNameContainer extends Component{
         } else if (this.state.showQRCodeForKitchen) {
             return (
                 <div className="qr-code-div">
-                    
+
                     <Form.Group controlId="formBasicName">
                         <Form.Label>Enter Email for Kitchen Access</Form.Label>
                         <Form.Control type="text" placeholder="exapmle@gmail.com" />
+                        <button type="button" onClick={this.onSubmit}>
+                            Submit
+                        </button>
                     </Form.Group>
-                    
-                    <button type="button" className="submit-btn form-btn" onClick={this.onSubmit}>
-                        Submit
-                    </button>
-                    
                     <QRCode
                         id= "qr-code-for-shop"
                         value= {`http://localhost:3000/shop?ownerEmail=${this.props.userEmail}&shopId=${this.props.shopId}`}
