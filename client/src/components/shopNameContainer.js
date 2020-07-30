@@ -10,7 +10,7 @@ class ShopNameContainer extends Component{
     constructor(props) {
         super(props);
 
-        this.state = { showOptions: false, showFileUploadModal: false, showMenuOption: false, showQRCodeModal: false, noOfTablesArr: [], currentTable: 1}
+        this.state = { showOptions: false, showFileUploadModal: false, showMenuOption: false, showQRCodeModal: false, noOfTablesArr: [], currentTable: 1, showQRCodeForTables: false, showQRCodeForKitchen: false}
     }
 
     showOptionFunction = () => {
@@ -92,8 +92,11 @@ class ShopNameContainer extends Component{
                 <React.Fragment>
                     <div className="drop-down-options">
                         <ul>
-                            <li onClick= {() => {this.setState({showQRCodeModal: !this.state.showQRCodeModal})}}>
+                            <li onClick= {() => {this.setState({showQRCodeModal: !this.state.showQRCodeModal, showQRCodeForTables: !this.state.showQRCodeForTables})}}>
                                 <b>Get Menu QR code</b>
+                            </li>
+                            <li onClick= {() => {this.setState({showQRCodeModal: !this.state.showQRCodeModal, showQRCodeForKitchen: !this.state.showQRCodeForKitchen})}}>
+                                <b>Get QR Code for Kitchen</b>
                             </li>
                         </ul>
                     </div>
@@ -101,6 +104,40 @@ class ShopNameContainer extends Component{
             )
         }
 
+    }
+    
+    showTableOrKitchenQRCodeInModal = () => {
+        if (this.state.showQRCodeForTables) {
+            return (
+                <React.Fragment>
+                    <div className="dropdown-table-no">
+                        <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Select Table Number
+                        </button>
+                        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <ul>{this.renderTableNo()}</ul>
+                        </div>
+                    </div>
+                    <div className="current-tableNo">
+                        QR code of Table number 
+                        <div>
+                            {this.state.currentTable}
+                        </div>
+                    </div>
+                    {this.showTableQRCode(this.state.currentTable)}
+                </React.Fragment>
+            )
+        } else if (this.state.showQRCodeForKitchen) {
+            return (
+                <div className="qr-code-div">
+                        <QRCode
+                            id= "qr-code-for-shop"
+                            value= {`http://localhost:3000/shop?ownerEmail=${this.props.userEmail}&shopId=${this.props.shopId}`}
+                        />
+                    <p>To Download QR, just right click and save image.</p>
+                </div>
+            )
+        }
     }
 
     render() {
@@ -152,7 +189,9 @@ class ShopNameContainer extends Component{
                     aria-labelledby="qr-code-modal"
                     centered
                     show={this.state.showQRCodeModal}
-                    onHide={() => {this.setState({showQRCodeModal: !this.state.showQRCodeModal})}}
+                    onHide={() => {this.setState({showQRCodeModal: !this.state.showQRCodeModal,
+                                                   showQRCodeForTables: false,
+                                                   showQRCodeForKitchen: false})}}
                 >
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-vcenter">
@@ -160,16 +199,7 @@ class ShopNameContainer extends Component{
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div className="dropdown-table-no">
-                            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Select Table Number
-                            </button>
-                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <ul>{this.renderTableNo()}</ul>
-                            </div>
-                        </div>
-                        <div className="current-tableNo">QR code of Table number <div>{this.state.currentTable}</div></div>
-                        {this.showTableQRCode(this.state.currentTable)}
+                        {this.showTableOrKitchenQRCodeInModal()}
                     </Modal.Body>
                 </Modal>
             </div>

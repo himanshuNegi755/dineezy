@@ -6,10 +6,11 @@ var mongoose = require('mongoose');
 require('./model/user');
 require('./model/shop');
 require('./model/menu');
-var keys = require('./config/keys');
-var cookieSession = require('cookie-session');
 
 require('dotenv').config();
+
+var keys = require('./config/keys');
+var cookieSession = require('cookie-session');
 
 const corsOptions = {
   credentials: true,
