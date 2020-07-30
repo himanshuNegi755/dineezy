@@ -68,7 +68,6 @@ module.exports = app => {
     app.put('/menu/item/delete', function(request, response) {
         Menu.updateOne({shopId: request.body.shopId}, {$pull : {"menu": {"_id": {$in : ObjectId(request.body.itemId)}}}}, function(err, menu) {
             if (err) {
-                console.log(err);
                 response.status(500).send({error: "Could not find the item"});
             } else {
                 response.send(menu);
@@ -150,8 +149,8 @@ module.exports = app => {
     });
     
     //add email for kitchen access
-    app.put('/email_access', function(request, response) {
-        Shop.updateOne({ownerEmail: request.body.userEmail, "shop._id": request.body.shopId}, {$addToSet: {emailAccessList: request.body.email}}, function(err, emailList) {
+    app.put('/add/email_access', function(request, response) {
+        Shop.updateOne({ownerEmail: request.body.userEmail, "shop._id": request.body.shopId}, {$addToSet: {"shop.$.emailAccessList": request.body.email}}, function(err, emailList) {
             if (err) {
                 response.status(500).send({error: "Could not update the email List. Check your shopId or email"});
             } else {
@@ -160,5 +159,27 @@ module.exports = app => {
         });
     });
     
+    //get all the email list for kitchen access
+    app.get('/get/email_access/list', function(request, response) {
+        Shop.aggregate([{$match: {ownerEmail: request.query.userEmail}}, {$unwind: "$shop"}, {$match: {"shop._id": ObjectId(request.query.shopId)}}, {$project: {_id: 0, "shop.emailAccessList": 1}}]).exec(function(err, emailList) {
+            if(err) {
+                response.status(500).send({error: "No Such Shop. Check your email and shopId"});
+            } else {
+                response.send(emailList[0].shop.emailAccessList);
+            }
+        });
+    });
+    
+    //delete the email from email list for kitchen access
+    app.put('/delete/email_access', function(request, response) {
+        Shop.updateOne({ownerEmail: request.body.userEmail, "shop._id": request.body.shopId}, {$pull : {"shop.$.emailAccessList": {$in : request.body.email}}}, function(err, emailList) {
+            if (err) {
+                console.log(err);
+                response.status(500).send({error: "Could not find the email. Check your email and shopId"});
+            } else {
+                response.send(emailList);
+            }
+        })
+    });
     
 };
