@@ -68,6 +68,7 @@ class ShopNameContainer extends Component{
     }
 
     renderEmailListForKitchenAccess = () => {
+        if( this.state.kitchenAccessEmailList.length>0) {
         const list = this.state.kitchenAccessEmailList.map((email) =>
             <div key={email}>
 
@@ -79,7 +80,9 @@ class ShopNameContainer extends Component{
 
             </div>
             );
-        return (list);
+            return (list);
+        } else { return (<div></div>) }
+        
 
     }
     
