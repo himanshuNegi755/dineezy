@@ -3,11 +3,9 @@ import { connect } from 'react-redux';
 import './frontPage.css';
 import NavbarForSite from './navbar';
 import Footer from './footer';
-import NOTch from '../images/no-touch.svg'
-import MobChk from '../images/onMobile.svg'
-import MenuGerms from '../images/menu-germs.jpg'
-import Service from '../images/service.jpg'
-import ScanMenu from '../images/menu-scan.jpg'
+import MenuGerms from '../images/menu-germs.jpg';
+import Service from '../images/service.jpg';
+import ScanMenu from '../images/menu-scan.jpg';
 
 const FrontPage = (props) => {
 

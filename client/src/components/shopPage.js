@@ -217,11 +217,7 @@ class ShopPage extends Component{
             if(!prevState.userName) {
                 this.setState({userName: this.props.user.userName,
                               userEmail: this.props.user.userEmail})
-                axios.get(`${process.env.REACT_APP_BACKEND_API}/shop/get_shops/${this.state.userEmail}`)
-                    .then(res => {
-                        //console.log(res.data[0].shop);
-                        this.setState({shopList: res.data[0].shop})
-                    })
+                this.showShopAfterAdding();
             }
         } catch(err) {
             this.setState({loggedIn: false})
