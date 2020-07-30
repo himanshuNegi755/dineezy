@@ -149,4 +149,16 @@ module.exports = app => {
         })
     });
     
+    //add email for kitchen access
+    app.put('/email_access', function(request, response) {
+        Shop.updateOne({ownerEmail: request.body.userEmail, "shop._id": request.body.shopId}, {$addToSet: {emailAccessList: request.body.email}}, function(err, emailList) {
+            if (err) {
+                response.status(500).send({error: "Could not update the email List. Check your shopId or email"});
+            } else {
+                response.send(emailList); 
+            }
+        });
+    });
+    
+    
 };

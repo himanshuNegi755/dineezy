@@ -6,7 +6,8 @@ var shop = new Schema({
     shop: [ {shopName: String,
              shopAddress: { value: String, verified: {type: Boolean, default: false}},
              //shopMenu: String
-             noOfTables: Number
+             noOfTables: Number,
+             emailAccessList: [{type: String}]
             } ]
 });
 
