@@ -116,12 +116,12 @@ class ShopNameContainer extends Component{
             return(
                 <React.Fragment>
                     <div className="drop-down-options">
-                            <b onClick= {() => {this.setState({showQRCodeModal: !this.state.showQRCodeModal, showQRCodeForTables: !this.state.showQRCodeForTables})}}>
-                                Get Menu QR code
-                            </b>
-                            <b onClick= {() => {this.setState({showQRCodeModal: !this.state.showQRCodeModal, showQRCodeForKitchen: !this.state.showQRCodeForKitchen})}}>
-                                Get QR Code for Kitchen
-                            </b>
+                        <b onClick= {() => {this.setState({showQRCodeModal: !this.state.showQRCodeModal, showQRCodeForTables: !this.state.showQRCodeForTables})}}>
+                            Get Menu QR code
+                        </b>
+                        <b onClick= {() => {this.setState({showQRCodeModal: !this.state.showQRCodeModal, showQRCodeForKitchen: !this.state.showQRCodeForKitchen})}}>
+                            Get QR Code for Kitchen
+                        </b>
                     </div>
                 </React.Fragment>
             )
@@ -165,10 +165,13 @@ class ShopNameContainer extends Component{
                             ADD
                         </button>
                     </Form.Group>
-                    <QRCode
-                        id= "qr-code-for-shop"
-                        value= {`${process.env.REACT_APP_FRONTEND}/shop?ownerEmail=${this.props.userEmail}&shopId=${this.props.shopId}`}
-                    />
+                    <a href={`/kitchen/${this.props.userEmail}/${this.props.shopId}`}>
+                        <QRCode
+                            id= "qr-code-for-shop"
+                            value= {`${process.env.REACT_APP_FRONTEND}/kitchen/${this.props.userEmail}/${this.props.shopId}`}
+                            /*value= {`${process.env.REACT_APP_FRONTEND}/shop?ownerEmail=${this.props.userEmail}&shopId=${this.props.shopId}`}*/
+                        />
+                    </a>
                     <p>To Download QR, just right click and save image.</p>
                 </div>
             )

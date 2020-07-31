@@ -182,4 +182,18 @@ module.exports = app => {
         })
     });
     
+    
+    /////////////////////////// api operations for kitchen alone //////////////////////////////
+    
+    //get shop name by owner email and shop id
+    app.get('/shop_name_from_shopId', function(request, response) {
+        Shop.aggregate([{$match: {ownerEmail: request.query.ownerEmail}}, {$unwind: "$shop"}, {$match: {"shop._id": ObjectId(request.query.shopId)}}, {$project: {_id: 0, "shop.shopName": 1}}]).exec(function(err, shop) {
+            if(err) {
+                response.status(500).send({error: "No Such Shop"});
+            } else {
+                response.send(shop[0].shop);
+            }
+        });
+    });
+    
 };
