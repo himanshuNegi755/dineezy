@@ -17,7 +17,7 @@ const ShopPage = (props) => {
             //console.log(res.data.noOfTables);
             setNoOfTables(res.data.noOfTables);
         })
-    }, [])
+    }, [props.match.params.email, props.match.params.shopId])
     
     const loadTablesFunction = (noOfTables) => {
         let tableArr = []

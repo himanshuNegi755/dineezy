@@ -14,7 +14,7 @@ const FrontPage = (props) => {
             //console.log(res.data.shopName);
             setShopName(res.data.shopName);
         })
-    }, [])
+    }, [props.match.params.email, props.match.params.shopId])
     
     return (
         <div className="main-div">
