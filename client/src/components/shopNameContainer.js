@@ -167,7 +167,8 @@ class ShopNameContainer extends Component{
                     </Form.Group>
                     <QRCode
                         id= "qr-code-for-shop"
-                        value= {`${process.env.REACT_APP_FRONTEND}/shop?ownerEmail=${this.props.userEmail}&shopId=${this.props.shopId}`}
+                        value= {`${process.env.REACT_APP_FRONTEND}/kitchen/${this.props.userEmail}/${this.props.shopId}`}
+                        /*value= {`${process.env.REACT_APP_FRONTEND}/shop?ownerEmail=${this.props.userEmail}&shopId=${this.props.shopId}`}*/
                     />
                     <p>To Download QR, just right click and save image.</p>
                 </div>
