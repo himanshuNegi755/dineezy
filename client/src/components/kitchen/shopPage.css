@@ -1,15 +1,17 @@
 /* ********************Restaurant list column***************************** */
-
+.main-container{
+  margin: 0;
+}
 .tableNo-col{
+    border-right: 1px solid rgb(0, 0, 0, 0.01);
     background-color: #303030;
 }
-
 .tableNo-heading {
     font-family: 'Ubuntu', sans-serif;
     font-size: 1.5rem;
     text-align: center;
     padding-top: 0.9rem;
-    letter-spacing: 0.4rem;
+    letter-spacing: 0.2rem;
     width: 100%;
     height: 4rem;
     background-color: #ffe100;
@@ -17,7 +19,6 @@
     border: 0;
     border-radius: 0;
 }
-
 .main-container .tableNo-col{
     padding: 0;
 }
@@ -26,17 +27,31 @@
     background-color: #353535;
 }
 .tableNo-list {
-    height: auto;
+    height: 91vh;
     margin: 0;
     text-align: center;
     overflow-x: hidden;
     overflow-y: auto;
 }
-
+.tableNo-ind{
+    transition: 0.3s;
+    list-style: none;
+    font-size: 1.2rem;
+    height: 3rem;
+    padding-top: 0.5rem;
+    /* padding-bottom: 0.7rem; */
+    margin: 1px;
+    background-color: #282828;
+}
+.tableNo-ind:hover{
+    transition: 0.1s;
+    font-size: 1.4rem;
+    background-color: #101010;
+}
 /* ********************Menu container column************************* */
 
 .chatBox {
-    height: 100vh;
+    height: 91vh;
     margin: 0;
     padding: 1rem;
     color: white;
@@ -49,9 +64,15 @@
 .tableNo-name {
     display: flex;
     background-color: #ffe100;
-    padding: 0.82rem 0.5rem;
+    padding: 0.8rem 0.5rem;
     width: inherit;
     margin: 0;
+}
+.tableNo-text{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.2rem;
+    color: black;
 }
 .add-new-item-btn {
     width: 100%;
@@ -68,7 +89,27 @@
     background-color: black;
     color: #ffe100;
 }
+/* *************************Scroll Bar******************** */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+  background: #2d2d2d;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #111;
+}
 
 @media (max-width: 767px){
 
