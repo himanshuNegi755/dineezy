@@ -1,0 +1,46 @@
+.main-div{
+   background-color: #404040;
+}
+.kitchen-signIn form{
+    text-align: center;
+    background-color: #303030;
+    border-radius: 20px;
+    box-shadow: 0 0 4px black;
+    color: white;
+    width: 35rem;
+    margin: 8% auto;
+    padding: 2rem 1.2rem 1.5rem;
+}
+.kitchen-signIn form input{
+  background-color: #262626;
+  border-radius: 20px;
+}
+.kitchen-signIn form .form-check{
+  margin-left: 1.3rem;
+}
+.kitchen-signIn .btn{
+    background-color: #101010;
+    color: white;
+    border: 0;
+    border-radius: 20px;
+    padding: 0.375rem 2rem;
+}
+.kitchen-signIn form button:hover{
+    background-color: #ffe100;
+    color: black;
+}
+
+@media (max-width: 1000px){
+  .kitchen-signIn form{
+      border-radius: 15px;
+      width: 28rem;
+  }
+}
+@media (max-width: 600px) {
+
+  .kitchen-signIn form{
+      border-radius: 10px;
+      width: 25rem;
+      margin: 12% auto;
+  }
+}

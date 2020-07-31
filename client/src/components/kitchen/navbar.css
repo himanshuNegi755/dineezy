@@ -1,0 +1,66 @@
+/*.bg-light {
+    background-color: #f2f2ea !important;
+}*/
+
+.navbar{
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  background-color: #000;
+  position: relative;
+  z-index: 4;
+  padding: 0;
+}
+#brand-logo{
+  width: 4.5rem;
+  height: 4.55rem;
+}
+#navbar-brand{
+  position: relative;
+  z-index: 5;
+  width: auto;
+  padding: 0;
+  margin: 0.3rem auto 0.3rem 3%;
+}
+.restaurant-name{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  color: #ffe100;
+}
+.navbar-dark .navbar-nav .nav-link{
+  color: #b0b0b0;
+}
+.nav-item{
+  text-align: center;
+  position: relative;
+  z-index: 5;
+  padding: 0 15px;
+}
+.nav-link{
+  font-size: 1.2rem;
+  font-weight: lighter;
+}
+.navbar-toggler{
+  margin-right: 5%;
+}
+.navbar-toggler-icon{
+  position: relative;
+  z-index: 5;
+}
+
+
+
+/*############### Mobile ################*/
+
+@media screen and (max-width: 1000px) {
+  .restaurant-name{
+    font-size: 1.7rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  .restaurant-name{
+    font-size: 1rem;
+  }
+  #brand-logo{
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
