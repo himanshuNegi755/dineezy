@@ -1,9 +1,7 @@
 /* ********************Restaurant list column***************************** */
-
 .retaurant-col{
     background-color: #303030;
 }
-
 .add-restaurant-button {
     font-family: 'Ubuntu', sans-serif;
     font-size: 1.2rem;
@@ -15,13 +13,11 @@
     border: 0;
     border-radius: 0;
 }
-
 .add-restaurant-button:hover{
     background-color: #ffff33;
     color: #202020;
     box-shadow: 0 0 4px #999999;
 }
-
 .col-heading{
     padding: 1rem 0;
     margin: 0;
@@ -32,12 +28,10 @@
 .main-container .retaurant-col{
     padding: 0;
 }
-
 .main-container .menu-col{
     padding: 0;
     background-color: #353535;
 }
-
 .restaurant-list {
     height: 100%;
     margin: 0;
@@ -45,20 +39,17 @@
     overflow-x: hidden;
     overflow-y: auto;
 }
-
 .address-text-area {
     resize: none;
 }
 
 /* ********************Menu container column************************* */
-
 .div-to-show-menu {
     height: 100vh;
     margin: 0;
     overflow-x: hidden;
     overflow-y: auto;
 }
-
 /* Search bar division */
 .searchBar-div {
     display: flex;
@@ -67,7 +58,6 @@
     width: inherit;
     margin: 0;
 }
-
 .input-group-prepend{
     margin: 0;
 }
@@ -107,7 +97,6 @@
     font-size: 1.01rem;
     background-color: #303030;
 }
-
 .add-new-item-btn {
     width: 100%;
     font-family: 'Ubuntu', sans-serif;
@@ -123,7 +112,6 @@
     background-color: black;
     color: #ffe100;
 }
-
 /* ***********************Menu category*************************** */
 .menu-category {
     display: block;

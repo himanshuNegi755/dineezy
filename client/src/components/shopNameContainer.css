@@ -121,6 +121,7 @@
     color: black;
     width: 90%;
     padding: 0;
+    box-shadow: 0 0 4px black;
 }
 .qr-code-div .email-access-btn{
   width: 96.5%;
@@ -141,7 +142,7 @@
     border-radius: 20px;
 }
 .email-ind:hover{
-    background-color: #d0d0d0;
+    background-color: #fff;
 }
 .email-ind button{
   transition: 0.2s;

@@ -5,7 +5,7 @@ import './navbar.css';
 import DMLogo from '../../images/dmLogo.svg';
 
 const NavbarForSite = (props) => {
-    
+
     return (
         <nav className="navbar navbar-expand-lg navbar-dark">
             <a id="navbar-brand" href="/">
@@ -16,6 +16,9 @@ const NavbarForSite = (props) => {
             <span className="restaurant-name">{props.shopName}<i className="fas fa-cauldron"></i></span>
 
             <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                    <a className="nav-link" href="#"><strong>Table Orders</strong></a>
+                </li>
                 <li className="nav-item">
                     <a className="nav-link" href="#footer">Help ?</a>
                 </li>

@@ -49,9 +49,9 @@ class ShopPage extends Component{
         let suggestions = [];
         if (value.length > 0) {
             /*const regex = new RegExp(`^${value}`, 'i');
-            
+
             suggestions = this.state.itemNameList.sort().filter(v => regex.test(v));*/
-            
+
             suggestions = this.state.itemNameList.sort().filter(v => v.toLowerCase().includes(value.toLowerCase()));
         }
         this.setState(() => ({ suggestions, item: value }));
@@ -281,7 +281,7 @@ class ShopPage extends Component{
     showSearchBarAndCategoryFunction = () => {
         this.setState({showSearchBarAndCategory: 'visible'})
     }
-    
+
     hideSearchBarAndCategoryFunction = () => {
         this.setState({showSearchBarAndCategory: 'hidden'})
     }
@@ -298,7 +298,7 @@ class ShopPage extends Component{
                 <NavbarForSite />
                 <div className="main-container row">
                     <div className="col-lg-3 col-md-4 retaurant-col">
-                        <Button variant="danger" className="add-restaurant-button" onClick={() => {this.showShopAddModal()}}>Add Restaurant</Button>
+                        <button className="add-restaurant-button" onClick={() => {this.showShopAddModal()}}>Add Restaurant</button>
 
                         <div className="restaurant-list">
                             <h3 className="col-heading">Restaurants</h3>
