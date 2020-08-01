@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-//import { Button, InputGroup, FormControl } from 'react-bootstrap';
 import axios from 'axios';
 import './shopPage.css';
 import NavbarForSite from './navbar';
@@ -38,7 +37,7 @@ const ShopPage = (props) => {
 
     return (
         <div className="parent-div">
-            <NavbarForSite />
+            <NavbarForSite email={props.match.params.email} shopId={props.match.params.shopId}/>
             <div className="main-container row">
                 <div className="col-lg-3 col-md-4 tableNo-col">
                     <div className="tableNo-heading">Tables Numbers</div>

@@ -1,25 +1,14 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import React from 'react';
 import './frontPage.css';
 import NavbarForSite from './navbar';
 import Footer from '../footer';
 
 const FrontPage = (props) => {
     
-    const [shopName, setShopName] = useState('');
-    
-    useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BACKEND_API}/shop_name_from_shopId?ownerEmail=${props.match.params.email}&shopId=${props.match.params.shopId}`)
-        .then(res => {
-            //console.log(res.data.shopName);
-            setShopName(res.data.shopName);
-        })
-    }, [props.match.params.email, props.match.params.shopId])
-    
     return (
         <div className="main-div">
             <div className="nav-div-fixed">
-                <NavbarForSite shopName={shopName}/>
+                <NavbarForSite email={props.match.params.email} shopId={props.match.params.shopId}/>
             </div>
             <div className="kitchen-signIn">
                 <form>

@@ -22,7 +22,7 @@ function App(props) {
           <Route path="/shops" component={ShopPage} />
           <Route path="/show_menu/:shopId/:tableNo" component={ShowMenu} />
           <Route exact path="/kitchen/:email/:shopId" component={KitchenFrontPage} />
-          <Route path="/kitchen/tables/:email/:shopId" component={KitchenShopPage} />
+          <Route path="/kitchen/orders/:email/:shopId" component={KitchenShopPage} />
           
       </Switch>
   );
