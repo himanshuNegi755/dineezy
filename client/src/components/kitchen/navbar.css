@@ -7,26 +7,28 @@
   background-color: #000;
   position: relative;
   z-index: 4;
-  padding: 0;
+  padding: 0 1rem;
 }
-#brand-logo{
-  width: 4.5rem;
-  height: 4.55rem;
-}
+
 #navbar-brand{
+  height: 4rem;
   position: relative;
   z-index: 5;
   width: auto;
   padding: 0;
-  margin: 0.3rem auto 0.3rem 3%;
+  margin: 0.5rem 3%;
 }
 .restaurant-name{
+  text-align: center;
   font-family: 'Montserrat', sans-serif;
   font-size: 2rem;
   color: #ffe100;
 }
 .navbar-dark .navbar-nav .nav-link{
   color: #b0b0b0;
+}
+.navbar-nav{
+  float: right;
 }
 .nav-item{
   text-align: center;
@@ -45,8 +47,6 @@
   position: relative;
   z-index: 5;
 }
-
-
 
 /*############### Mobile ################*/
 

@@ -5,21 +5,20 @@
 .navbar{
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
   background-color: #000;
-  padding: 10px 100px;
   position: relative;
   z-index: 4;
   padding: 0;
 }
 #brand-logo{
-  width: 4.5rem;
-  height: 4.55rem;
+  width: auto;
+  height: 4rem;
 }
 #navbar-brand{
   position: relative;
   z-index: 5;
   width: auto;
   padding: 0;
-  margin: 0.3rem 5%;
+  margin: 0.3rem auto 0.3rem 3%;
 }
 .navbar-dark .navbar-nav .nav-link{
   color: #b0b0b0;
