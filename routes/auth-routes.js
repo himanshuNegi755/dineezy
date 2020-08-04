@@ -1,4 +1,5 @@
 var passport = require('passport');
+const logger = require('../config/logger');
 
 module.exports = app => {
   app.get(
@@ -15,6 +16,7 @@ module.exports = app => {
     "/auth/google/callback",
     passport.authenticate("google"),
     (req, res) => {
+      logger.info('logged in successfully');
       res.redirect("/");
     }
   );
@@ -25,6 +27,7 @@ module.exports = app => {
 
   app.get("/auth/logout", (req, res) => {
     req.logout();
+    logger.info('user logged out successfully');
     res.redirect('/');
   });
 };
