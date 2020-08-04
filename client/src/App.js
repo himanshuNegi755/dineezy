@@ -8,13 +8,13 @@ import ProfilePage from './components/profilePage';
 import ShopPage from './components/shopPage';
 import ShowMenu from './components/showMenu';
 import KitchenFrontPage from './components/kitchen/frontPage';
-import KitchenShopPage from './components/kitchen/shopPage';
+import KitchenShopPage from './components/kitchen/kitchenPage';
 
 function App(props) {
     useEffect(() => {
         props.fetch_user();
     }, [props])
-    
+
   return (
       <Switch>
           <Route exact path="/" component={FrontPage} />
@@ -23,7 +23,7 @@ function App(props) {
           <Route path="/show_menu/:shopId/:tableNo" component={ShowMenu} />
           <Route exact path="/kitchen/:email/:shopId" component={KitchenFrontPage} />
           <Route path="/kitchen/orders/:email/:shopId" component={KitchenShopPage} />
-          
+
       </Switch>
   );
 }

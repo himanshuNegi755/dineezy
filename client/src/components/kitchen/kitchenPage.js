@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import './shopPage.css';
-import NavbarForSite from './navbar';
+import './kitchenPage.css';
+import NavbarForSite from './navforkitchen';
 import Footer from '../footer';
 
 
@@ -17,7 +17,7 @@ const ShopPage = (props) => {
             setNoOfTables(res.data.noOfTables);
         })
     }, [props.match.params.email, props.match.params.shopId])
-    
+
     const loadTablesFunction = (noOfTables) => {
         let tableArr = []
         for (var i=1; i<=noOfTables; i++) {

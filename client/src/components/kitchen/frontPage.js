@@ -1,7 +1,7 @@
 import React from 'react';
 import './frontPage.css';
 import { connect } from 'react-redux';
-import NavbarForSite from './navbar';
+import NavbarForSite from './navforkitchen';
 import Footer from '../footer';
 import GoogleButton from '../googleButton';
 

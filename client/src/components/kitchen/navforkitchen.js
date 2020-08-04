@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import './navbar.css';
+import './navforkitchen.css';
 //import LogoutButton from '../logoutButton';
 import DMLogo from '../../images/dineezyLogo.svg';
 import GoogleButton from '../googleButton';
