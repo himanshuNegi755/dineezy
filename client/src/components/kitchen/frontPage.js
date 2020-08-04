@@ -43,7 +43,8 @@ const FrontPage = (props) => {
                 <button>
                     {renderContentForGoogleButton()}
                 </button>
-                <p>Make sure you have access to the kitchen part beforehand.</p>
+                <p>Make sure you have access to the kitchen section beforehand.</p>
+                <p>You are logged in to the kitchen section. Go to the <strong>Orders</strong> tab in the navigation bar above to check orders.</p>
               </div>
             </div>
             <div id="footer">
