@@ -2,3 +2,4 @@
 dev_keys.js
 .env
 README.md
+logFile.log

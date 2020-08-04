@@ -1,4 +1,5 @@
 var express = require('express');
+var logger = require('./config/logger');
 var cors = require('cors')
 var app = express();
 var bodyParser = require('body-parser');

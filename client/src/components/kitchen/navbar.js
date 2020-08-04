@@ -31,9 +31,8 @@ const NavbarForSite = (props) => {
             case false:
                 return (
                     <React.Fragment>
-                        <li className="nav-item">
-                            <GoogleButton />
-                        </li>
+                         <div>
+                         </div>
                     </React.Fragment>
                 )
             default:

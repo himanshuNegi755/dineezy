@@ -1,9 +1,37 @@
 import React from 'react';
 import './frontPage.css';
+import { connect } from 'react-redux';
 import NavbarForSite from './navbar';
 import Footer from '../footer';
+import GoogleButton from '../googleButton';
 
 const FrontPage = (props) => {
+    
+    const renderContentForGoogleButton = () => {
+        switch(props.user) {
+            case null:
+                return (
+                    <React.Fragment>
+                        <div className="btn-div">
+                            <h5>Loading</h5>
+                        </div>
+                    </React.Fragment>
+                )
+            case false:
+                return (
+                    <React.Fragment>
+                        <GoogleButton />
+                    </React.Fragment>
+                )
+            default:
+                return (
+                    <React.Fragment>
+                        <div>
+                        </div>
+                    </React.Fragment>
+                )
+        }
+    }
     
     return (
         <div className="main-div">
@@ -22,6 +50,7 @@ const FrontPage = (props) => {
                     </div>
                     <br/>
                     <button type="submit" className="btn">Sign In</button>
+                    {renderContentForGoogleButton()}
                 </form>
             </div>
             <div id="footer">
@@ -31,4 +60,10 @@ const FrontPage = (props) => {
         );
 }
 
-export default FrontPage;
+const mapStateToProps = (state) => {
+    return {
+        user: state.auth
+    }
+}
+
+export default connect(mapStateToProps)(FrontPage);
