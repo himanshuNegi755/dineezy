@@ -1,7 +1,6 @@
 .log-in-btn{
     text-align: center;
-    padding-bottom: 0.4rem;
-    margin-top: 0.19rem;
+    padding: 0;
 }
 .btn-space{
     text-align: center;
@@ -12,18 +11,17 @@
 }
 .button-label:hover{
     color: white;
-
 }
 .button {
     display: inline-block;
     border: 0;
-    padding: 2px 18px;
+    padding: 4px 18px;
     text-align: left;
     border-radius: 4px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -moz-font-feature-settings: "liga" on;
-    color: #d0d0d0 !important;
+    color: #e0e0e0 !important;
     font: inherit;
     outline: none;
 }

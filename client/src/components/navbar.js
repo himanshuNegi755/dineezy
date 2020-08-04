@@ -6,7 +6,7 @@ import './navbar.css';
 import GoogleButton from './googleButton';
 import LogoutButton from './logoutButton';
 import ProfileButton from './profileButton';
-import DMLogo from '../images/dmLogo.svg';
+import DMLogo from '../images/dineezyLogo.svg';
 
 const NavbarForSite = (props) => {
 

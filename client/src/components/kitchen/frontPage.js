@@ -1,12 +1,12 @@
 import React from 'react';
 import './frontPage.css';
 import { connect } from 'react-redux';
-import NavbarForSite from './navbar';
+import NavbarForSite from './navforkitchen';
 import Footer from '../footer';
 import GoogleButton from '../googleButton';
 
 const FrontPage = (props) => {
-    
+
     const renderContentForGoogleButton = () => {
         switch(props.user) {
             case null:
@@ -32,26 +32,20 @@ const FrontPage = (props) => {
                 )
         }
     }
-    
+
     return (
         <div className="main-div">
             <div className="nav-div-fixed">
                 <NavbarForSite email={props.match.params.email} shopId={props.match.params.shopId}/>
             </div>
             <div className="kitchen-signIn">
-                <form>
-                    <div className="form-group">
-                        <label htmlFor="exampleInputEmail1">Email address</label>
-                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="exampleInputPassword1">Password</label>
-                        <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
-                    </div>
-                    <br/>
-                    <button type="submit" className="btn">Sign In</button>
+              <div className="kitchen-text">
+                <button>
                     {renderContentForGoogleButton()}
-                </form>
+                </button>
+                <p>Make sure you have access to the kitchen section beforehand.</p>
+                <p>You are logged in to the kitchen section. Go to the <strong>Orders</strong> tab in the navigation bar above to check orders.</p>
+              </div>
             </div>
             <div id="footer">
                 <Footer />

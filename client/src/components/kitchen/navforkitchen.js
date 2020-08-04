@@ -1,15 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import './navbar.css';
+import './navforkitchen.css';
 //import LogoutButton from '../logoutButton';
-import DMLogo from '../../images/dmLogo.svg';
+import DMLogo from '../../images/dineezyLogo.svg';
 import GoogleButton from '../googleButton';
 
 const NavbarForSite = (props) => {
-    
+
     const [shopName, setShopName] = useState('');
-    
+
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_BACKEND_API}/shop_name_from_shopId?ownerEmail=${props.email}&shopId=${props.shopId}`)
         .then(res => {
@@ -17,7 +17,7 @@ const NavbarForSite = (props) => {
             setShopName(res.data.shopName);
         })
     }, [props.email, props.shopId])
-    
+
     const renderContent = () => {
         switch(props.user) {
             case null:
@@ -51,23 +51,22 @@ const NavbarForSite = (props) => {
     }
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark">
-            <a id="navbar-brand" href="/">
+        <nav className="navbar navbar-expand-lg navbar-dark row">
+            <div className="col-3"><a id="navbar-brand" href="/">
                 <span>
                     <img id="brand-logo" src={DMLogo} alt="Company Logo"/>
                 </span>
-            </a>
-            <span className="restaurant-name">{shopName}<i className="fas fa-cauldron"></i></span>
+            </a></div>
+            <div className="restaurant-name col-6">{shopName} Kitchen</div>
 
-            <ul className="navbar-nav ml-auto">
-                
+            <div className="col-3"><ul className="navbar-nav ml-auto">
+
                 {renderContent()}
-                
+
                 <li className="nav-item">
                     <a className="nav-link" href="#footer">Help ?</a>
                 </li>
-            </ul>
-
+            </ul></div>
         </nav>
 
         );
