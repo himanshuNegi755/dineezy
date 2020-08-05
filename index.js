@@ -8,11 +8,6 @@ require('./model/user');
 require('./model/shop');
 require('./model/menu');
 
-//import routes
-const authRoutes = require("./routes/auth-routes");
-const phoneVerificationRoutes = require("./routes/phone-verification-routes");
-const databaseApiRoutes = require("./routes/database-api-routes");
-
 require('dotenv').config();
 
 var keys = require('./config/keys');
@@ -27,6 +22,11 @@ require('./config/passport-setup');
 
 var passport = require('passport');
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+//import routes
+const authRoutes = require("./routes/auth-routes");
+const phoneVerificationRoutes = require("./routes/phone-verification-routes");
+const databaseApiRoutes = require("./routes/database-api-routes");
 
 const PORT = process.env.PORT || 8000;
 
