@@ -51,6 +51,11 @@
     font-size: 1.7rem;
   }
 }
+@media screen and (max-width: 991px) {
+    .nav-item{
+        align-items: center;
+    }
+}
 @media screen and (max-width: 600px) {
   .restaurant-name{
     font-size: 1rem;

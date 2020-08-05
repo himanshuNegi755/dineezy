@@ -23,6 +23,11 @@ require('./config/passport-setup');
 var passport = require('passport');
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
+//import routes
+const authRoutes = require("./routes/auth-routes");
+const phoneVerificationRoutes = require("./routes/phone-verification-routes");
+const databaseApiRoutes = require("./routes/database-api-routes");
+
 const PORT = process.env.PORT || 8000;
 
 //console.log(process.env.PORT);
@@ -40,11 +45,31 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-require("./routes/auth-routes")(app);
-require("./routes/phone-verification-routes")(app);
-require("./routes/database-api-routes")(app);
+//set up routes
+app.use('/api', authRoutes);
+app.use('/api', phoneVerificationRoutes);
+app.use('/api', databaseApiRoutes);
 
+app.get('/', (req, res) => res.redirect(process.env.CLIENT_URI || 'http://localhost:3000'));
 
+//unknown path
+app.use((req, res, next) => {
+    const err = new Error('Not found');
+    err.status = 404;
+    next(err);
+});
+
+//error handler
+app.use((err, req, res, next) => {
+    res.status(err.status || 500);
+    logger.log('error', `${err.message}, status: ${err.status}`);
+    res.send({
+        error: {
+            status: err.status || 500,
+            message: err.message
+        }
+    });
+});
 /*if(process.env.NODE_ENV === 'production') {
     console.log('production')
     app.use(express.static('client/build'))
@@ -53,7 +78,6 @@ require("./routes/database-api-routes")(app);
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     })
 }*/
-
 
 // listining for port
 app.listen(PORT, function() {

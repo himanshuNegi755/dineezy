@@ -46,7 +46,7 @@
 /*############### Mobile ################*/
 
 @media screen and (max-width: 991px) {
-    .nav-item{
-        align-items: center;
+    .navbar-collapse{
+        text-align: center;
     }
 }

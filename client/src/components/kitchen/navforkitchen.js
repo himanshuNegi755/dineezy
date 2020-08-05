@@ -4,7 +4,6 @@ import axios from 'axios';
 import './navforkitchen.css';
 //import LogoutButton from '../logoutButton';
 import DMLogo from '../../images/dineezyLogo.svg';
-import GoogleButton from '../googleButton';
 
 const NavbarForSite = (props) => {
 

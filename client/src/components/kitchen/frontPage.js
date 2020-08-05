@@ -21,13 +21,17 @@ const FrontPage = (props) => {
             case false:
                 return (
                     <React.Fragment>
-                        <GoogleButton />
+                        <button>
+                          <GoogleButton />
+                        </button>
+                        <p>Make sure you have access to the kitchen section beforehand.</p>
                     </React.Fragment>
                 )
             default:
                 return (
                     <React.Fragment>
                         <div>
+                            <p>You are logged in to the kitchen section. Go to the <strong>Orders</strong> tab in the navigation bar above to check orders.</p>
                         </div>
                     </React.Fragment>
                 )
@@ -42,11 +46,7 @@ const FrontPage = (props) => {
             <div className="kitchen-signIn">
               <div className="kitchen-text">
                 <img src={Deco}/><br/>
-                <button>
-                    {renderContentForGoogleButton()}
-                </button>
-                <p>Make sure you have access to the kitchen section beforehand.</p>
-                <p>You are logged in to the kitchen section. Go to the <strong>Orders</strong> tab in the navigation bar above to check orders.</p>
+                {renderContentForGoogleButton()}
               </div>
             </div>
             <div id="footer">
