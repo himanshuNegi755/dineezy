@@ -8,15 +8,12 @@ module.exports = app => {
       scope: ["profile", "email"]
     })
   );
-
-    
-  app.get('/', (req, res) => res.redirect(process.env.CLIENT_URI || 'http://localhost:3000'));
     
   app.get(
     "/auth/google/callback",
     passport.authenticate("google"),
     (req, res) => {
-      logger.info('logged in successfully');
+      logger.log('info', 'logged in successfully');
       res.redirect("/");
     }
   );
@@ -27,7 +24,10 @@ module.exports = app => {
 
   app.get("/auth/logout", (req, res) => {
     req.logout();
-    logger.info('user logged out successfully');
+    logger.log('info', 'user logged out successfully');
     res.redirect('/');
   });
+    
+  app.get('/', (req, res) => res.redirect(process.env.CLIENT_URI || 'http://localhost:3000'));
+    
 };

@@ -20,13 +20,17 @@ const FrontPage = (props) => {
             case false:
                 return (
                     <React.Fragment>
-                        <GoogleButton />
+                        <button>
+                          <GoogleButton />
+                        </button>
+                        <p>Make sure you have access to the kitchen section beforehand.</p>
                     </React.Fragment>
                 )
             default:
                 return (
                     <React.Fragment>
                         <div>
+                            <p>You are logged in to the kitchen section. Go to the <strong>Orders</strong> tab in the navigation bar above to check orders.</p>
                         </div>
                     </React.Fragment>
                 )
@@ -39,12 +43,8 @@ const FrontPage = (props) => {
                 <NavbarForSite email={props.match.params.email} shopId={props.match.params.shopId}/>
             </div>
             <div className="kitchen-signIn">
-              <div className="kitchen-text">
-                <button>
-                    {renderContentForGoogleButton()}
-                </button>
-                <p>Make sure you have access to the kitchen section beforehand.</p>
-                <p>You are logged in to the kitchen section. Go to the <strong>Orders</strong> tab in the navigation bar above to check orders.</p>
+              <div className="kitchen-text">                
+                {renderContentForGoogleButton()}
               </div>
             </div>
             <div id="footer">

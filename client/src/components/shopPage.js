@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import { Button, Modal, Form, InputGroup, FormControl } from 'react-bootstrap';
+import { Modal, Form, InputGroup, FormControl } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import './shopPage.css';

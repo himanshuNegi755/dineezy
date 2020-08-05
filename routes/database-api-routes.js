@@ -11,7 +11,9 @@ module.exports = app => {
     app.put('/shop', function(request, response, next) {
         Shop.updateOne({ownerEmail: request.body.userEmail}, {$push: {shop: {shopName: request.body.shopName, shopAddress: {value: request.body.shopAddress}, noOfTables: request.body.noOfTables}}}, function(err, shop) {
             if (err) {
-                response.status(500).send({error: "Could not complete the shop registration"});
+                const error = new Error('Could not complete the shop registration');
+                next(error);
+                //response.status(500).send({error: "Could not complete the shop registration"});
             } else {
                 //db.users.find({awards: {$elemMatch: {award:'National Medal', year:1975}}})
                 //var shopIdVar = 
@@ -34,7 +36,9 @@ module.exports = app => {
     app.get('/shop/get_shops/:userEmail', function(request, response, next) {
         Shop.find({ownerEmail: request.params.userEmail}, {_id:0, shop: 1}).exec(function(err, shop) {
             if(err) {
-                response.status(500).send({error: "No Shop List"});
+                const error = new Error('No Shop List');
+                next(error);
+                //response.status(500).send({error: "No Shop List"});
             } else {
                 response.send(shop);
             }
@@ -45,7 +49,9 @@ module.exports = app => {
     app.put('/menu', function(request, response, next) {
         Menu.updateOne({shopId: request.body.shopId}, {$push: {menu: {itemName: request.body.itemName, vegOrNonVeg: request.body.vegOrNonVeg, price: request.body.price, description: request.body.description, category: request.body.category}}}, function(err, menu) {
             if (err) {
-                response.status(500).send({error: "Could not update the menu"});
+                const error = new Error('Could not update the menu');
+                next(error);
+                //response.status(500).send({error: "Could not update the menu"});
             } else {
                 response.send(menu); 
             }
@@ -56,7 +62,9 @@ module.exports = app => {
     app.get('/menu/:shopId', function(request, response, next) {
         Menu.find({shopId: request.params.shopId}, {_id:0, menu: 1}).exec(function(err, menu) {
             if(err) {
-                response.status(500).send({error: "No Menu For this Shop"});
+                const error = new Error('No Menu For this Shop');
+                next(error);
+                //response.status(500).send({error: "No Menu For this Shop"});
             } else {
                 //menu[0].menu
                 response.send(menu);
@@ -68,7 +76,9 @@ module.exports = app => {
     app.put('/menu/item/delete', function(request, response, next) {
         Menu.updateOne({shopId: request.body.shopId}, {$pull : {"menu": {"_id": {$in : ObjectId(request.body.itemId)}}}}, function(err, menu) {
             if (err) {
-                response.status(500).send({error: "Could not find the item"});
+                const error = new Error('Could not find the item');
+                next(error);
+                //response.status(500).send({error: "Could not find the item"});
             } else {
                 response.send(menu);
             }
@@ -79,7 +89,9 @@ module.exports = app => {
     app.put('/menu/item_update', function(request, response, next) {
         Menu.updateOne({shopId: request.body.shopId, "menu._id": request.body.menuItemId}, {$set: {"menu.$.itemName": request.body.itemName, "menu.$.vegOrNonVeg": request.body.vegOrNonVeg, "menu.$.price": request.body.price, "menu.$.description": request.body.description, "menu.$.category": request.body.category}}, function(err, menuItem) {
             if (err) {
-                response.status(500).send({error: "Could not update the menu Item"});
+                const error = new Error('Could not update the menu Item');
+                next(error);
+                //response.status(500).send({error: "Could not update the menu Item"});
             } else {
                 response.send(menuItem); 
             }
@@ -90,7 +102,9 @@ module.exports = app => {
     app.get('/item_categories/:shopId', function(request, response, next) {
         Menu.distinct("menu.category", {shopId: request.params.shopId}).exec(function(err, menuCategory) {
             if(err) {
-                response.status(500).send({error: "No Shop List"});
+                const error = new Error('No categories for this shop');
+                next(error);
+                //response.status(500).send({error: "No Shop List"});
             } else {
                 response.send(menuCategory);
             }
@@ -101,7 +115,9 @@ module.exports = app => {
     app.get('/items', function(request, response, next) {
         Menu.aggregate([{$match: {shopId: request.query.shopId}}, {$unwind: "$menu"}, {$match: {"menu.category": request.query.category}}, {$project: {_id: 0, menu: 1}}]).exec(function(err, menu) {
             if(err) {
-                response.status(500).send({error: "No Such item in Menu"});
+                const error = new Error('No Such item in Menu Category');
+                next(error);
+                //response.status(500).send({error: "No Such item in Menu"});
             } else {
                 //menu[0].menu
                 response.send(menu);
@@ -113,7 +129,9 @@ module.exports = app => {
     app.get('/items_name/for-autoComplete/:shopId', function(request, response, next) {
         Menu.find({shopId: request.params.shopId}, {_id:0, "menu.itemName": 1}).exec(function(err, itemNameList) {
             if(err) {
-                response.status(500).send({error: "No Menu For this Shop"});
+                const error = new Error('No Menu For this Shop');
+                next(error);
+                //response.status(500).send({error: "No Menu For this Shop"});
             } else {
                 //menu[0].menu
                 response.send(itemNameList[0].menu);
@@ -125,7 +143,9 @@ module.exports = app => {
     app.get('/tables_no', function(request, response, next) {
         Shop.aggregate([{$match: {ownerEmail: request.query.userEmail}}, {$unwind: "$shop"}, {$match: {"shop._id": ObjectId(request.query.shopId)}}, {$project: {_id: 0, "shop.noOfTables": 1}}]).exec(function(err, shop) {
             if(err) {
-                response.status(500).send({error: "No Such Shop"});
+                const error = new Error('No Such Shop');
+                next(error);
+                //response.status(500).send({error: "No Such Shop"});
             } else {
                 response.send(shop[0].shop);
             }
@@ -136,8 +156,10 @@ module.exports = app => {
     app.put('/shop/delete', function(request, response, next) {
         Shop.updateOne({ownerEmail: request.body.userEmail}, {$pull : {"shop": {"_id": {$in : ObjectId(request.body.shopId)}}}}, function(err, shop) {
             if (err) {
-                console.log(err);
-                response.status(500).send({error: "Could not find the item"});
+                const error = new Error('No Such Shop');
+                next(error);
+                //console.log(err);
+                //response.status(500).send({error: "Could not find the item"});
             } else {
                 Menu.deleteOne({shopId: request.body.shopId}).exec(function(err, menu) {
                     console.log('menu deleted')
@@ -152,7 +174,9 @@ module.exports = app => {
     app.put('/add/email_access', function(request, response, next) {
         Shop.updateOne({ownerEmail: request.body.userEmail, "shop._id": request.body.shopId}, {$addToSet: {"shop.$.emailAccessList": request.body.email}}, function(err, emailList) {
             if (err) {
-                response.status(500).send({error: "Could not update the email List. Check your shopId or email"});
+                const error = new Error('Could not update the email List. Check your shopId or email');
+                next(error);
+                //response.status(500).send({error: "Could not update the email List. Check your shopId or email"});
             } else {
                 response.send(emailList); 
             }
@@ -163,7 +187,9 @@ module.exports = app => {
     app.get('/get/email_access/list', function(request, response, next) {
         Shop.aggregate([{$match: {ownerEmail: request.query.userEmail}}, {$unwind: "$shop"}, {$match: {"shop._id": ObjectId(request.query.shopId)}}, {$project: {_id: 0, "shop.emailAccessList": 1}}]).exec(function(err, emailList) {
             if(err) {
-                response.status(500).send({error: "No Such Shop. Check your email and shopId"});
+                const error = new Error('No Such Shop. Check your email and shopId');
+                next(error);
+                //response.status(500).send({error: "No Such Shop. Check your email and shopId"});
             } else {
                 response.send(emailList[0].shop.emailAccessList);
             }
@@ -174,8 +200,10 @@ module.exports = app => {
     app.put('/delete/email_access', function(request, response, next) {
         Shop.updateOne({ownerEmail: request.body.userEmail, "shop._id": request.body.shopId}, {$pull : {"shop.$.emailAccessList": {$in : request.body.email}}}, function(err, emailList) {
             if (err) {
-                console.log(err);
-                response.status(500).send({error: "Could not find the email. Check your email and shopId"});
+                const error = new Error('Could not find the email. Check your email and shopId');
+                next(error);
+                //console.log(err);
+                //response.status(500).send({error: "Could not find the email. Check your email and shopId"});
             } else {
                 response.send(emailList);
             }
@@ -189,7 +217,9 @@ module.exports = app => {
     app.get('/shop_name_from_shopId', function(request, response, next) {
         Shop.aggregate([{$match: {ownerEmail: request.query.ownerEmail}}, {$unwind: "$shop"}, {$match: {"shop._id": ObjectId(request.query.shopId)}}, {$project: {_id: 0, "shop.shopName": 1}}]).exec(function(err, shop) {
             if(err) {
-                response.status(500).send({error: "No Such Shop"});
+                const error = new Error('No Such Shop');
+                next(error);
+                //response.status(500).send({error: "No Such Shop"});
             } else {
                 response.send(shop[0].shop);
             }

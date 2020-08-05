@@ -44,7 +44,24 @@ require("./routes/auth-routes")(app);
 require("./routes/phone-verification-routes")(app);
 require("./routes/database-api-routes")(app);
 
+//unknown path
+app.use((req, res, next) => {
+    const err = new Error('Not found');
+    err.status = 404;
+    next(err);
+});
 
+//error handler
+app.use((err, req, res, next) => {
+    res.status(err.status || 500);
+    logger.log('error', `${err.message}, status: ${err.status}`);
+    res.send({
+        error: {
+            status: err.status || 500,
+            message: err.message
+        }
+    });
+});
 /*if(process.env.NODE_ENV === 'production') {
     console.log('production')
     app.use(express.static('client/build'))
