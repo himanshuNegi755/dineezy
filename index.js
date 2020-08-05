@@ -8,6 +8,11 @@ require('./model/user');
 require('./model/shop');
 require('./model/menu');
 
+//import routes
+const authRoutes = require("./routes/auth-routes");
+const phoneVerificationRoutes = require("./routes/phone-verification-routes");
+const databaseApiRoutes = require("./routes/database-api-routes");
+
 require('dotenv').config();
 
 var keys = require('./config/keys');
@@ -40,9 +45,12 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-require("./routes/auth-routes")(app);
-require("./routes/phone-verification-routes")(app);
-require("./routes/database-api-routes")(app);
+//set up routes
+app.use('/api', authRoutes);
+app.use('/api', phoneVerificationRoutes);
+app.use('/api', databaseApiRoutes);
+
+app.get('/', (req, res) => res.redirect(process.env.CLIENT_URI || 'http://localhost:3000'));
 
 //unknown path
 app.use((req, res, next) => {
@@ -70,7 +78,6 @@ app.use((err, req, res, next) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     })
 }*/
-
 
 // listining for port
 app.listen(PORT, function() {

@@ -24,7 +24,7 @@ passport.use(
  new GoogleStrategy({
    clientID: keys.google.clientID,
    clientSecret: keys.google.clientSecret,
-   callbackURL: '/auth/google/callback',
+   callbackURL: '/api/auth/google/callback',
    proxy: true
   }, (accessToken, refreshToken, profile, done) => {
      // check if user already exists in our db

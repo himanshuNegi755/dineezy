@@ -1,14 +1,13 @@
+const router = require('express').Router();
 var mongoose = require('mongoose');
 // model
 var Shop = mongoose.model('Shop');
 var Menu = mongoose.model('Menu');
 const {ObjectId} = require('mongodb');
 
-
-module.exports = app => {  
     
-    //post/add new shop
-    app.put('/shop', function(request, response, next) {
+//post/add new shop
+router.put('/shop', function(request, response, next) {
         Shop.updateOne({ownerEmail: request.body.userEmail}, {$push: {shop: {shopName: request.body.shopName, shopAddress: {value: request.body.shopAddress}, noOfTables: request.body.noOfTables}}}, function(err, shop) {
             if (err) {
                 const error = new Error('Could not complete the shop registration');
@@ -32,8 +31,8 @@ module.exports = app => {
         });
     });
     
-    //get shop by email address
-    app.get('/shop/get_shops/:userEmail', function(request, response, next) {
+//get shop by email address
+router.get('/shop/get_shops/:userEmail', function(request, response, next) {
         Shop.find({ownerEmail: request.params.userEmail}, {_id:0, shop: 1}).exec(function(err, shop) {
             if(err) {
                 const error = new Error('No Shop List');
@@ -45,8 +44,8 @@ module.exports = app => {
         });
     });
     
-    //add item to shop menu
-    app.put('/menu', function(request, response, next) {
+//add item to shop menu
+router.put('/menu', function(request, response, next) {
         Menu.updateOne({shopId: request.body.shopId}, {$push: {menu: {itemName: request.body.itemName, vegOrNonVeg: request.body.vegOrNonVeg, price: request.body.price, description: request.body.description, category: request.body.category}}}, function(err, menu) {
             if (err) {
                 const error = new Error('Could not update the menu');
@@ -58,8 +57,8 @@ module.exports = app => {
         });
     });
     
-    //get shop menu from shop id
-    app.get('/menu/:shopId', function(request, response, next) {
+//get shop menu from shop id
+router.get('/menu/:shopId', function(request, response, next) {
         Menu.find({shopId: request.params.shopId}, {_id:0, menu: 1}).exec(function(err, menu) {
             if(err) {
                 const error = new Error('No Menu For this Shop');
@@ -72,8 +71,8 @@ module.exports = app => {
         });
     });
     
-    //delete item from shop menu
-    app.put('/menu/item/delete', function(request, response, next) {
+//delete item from shop menu
+router.put('/menu/item/delete', function(request, response, next) {
         Menu.updateOne({shopId: request.body.shopId}, {$pull : {"menu": {"_id": {$in : ObjectId(request.body.itemId)}}}}, function(err, menu) {
             if (err) {
                 const error = new Error('Could not find the item');
@@ -85,8 +84,8 @@ module.exports = app => {
         })
     });
     
-    //update an item in shop menu
-    app.put('/menu/item_update', function(request, response, next) {
+//update an item in shop menu
+router.put('/menu/item_update', function(request, response, next) {
         Menu.updateOne({shopId: request.body.shopId, "menu._id": request.body.menuItemId}, {$set: {"menu.$.itemName": request.body.itemName, "menu.$.vegOrNonVeg": request.body.vegOrNonVeg, "menu.$.price": request.body.price, "menu.$.description": request.body.description, "menu.$.category": request.body.category}}, function(err, menuItem) {
             if (err) {
                 const error = new Error('Could not update the menu Item');
@@ -98,8 +97,8 @@ module.exports = app => {
         });
     });
     
-    //get set of shop item_categories
-    app.get('/item_categories/:shopId', function(request, response, next) {
+//get set of shop item_categories
+router.get('/item_categories/:shopId', function(request, response, next) {
         Menu.distinct("menu.category", {shopId: request.params.shopId}).exec(function(err, menuCategory) {
             if(err) {
                 const error = new Error('No categories for this shop');
@@ -111,8 +110,8 @@ module.exports = app => {
         });
     });
     
-    //get items by category from shop menu
-    app.get('/items', function(request, response, next) {
+//get items by category from shop menu
+router.get('/items', function(request, response, next) {
         Menu.aggregate([{$match: {shopId: request.query.shopId}}, {$unwind: "$menu"}, {$match: {"menu.category": request.query.category}}, {$project: {_id: 0, menu: 1}}]).exec(function(err, menu) {
             if(err) {
                 const error = new Error('No Such item in Menu Category');
@@ -125,8 +124,8 @@ module.exports = app => {
         });
     });    
     
-    //get items Name for autocomplete
-    app.get('/items_name/for-autoComplete/:shopId', function(request, response, next) {
+//get items Name for autocomplete
+router.get('/items_name/for-autoComplete/:shopId', function(request, response, next) {
         Menu.find({shopId: request.params.shopId}, {_id:0, "menu.itemName": 1}).exec(function(err, itemNameList) {
             if(err) {
                 const error = new Error('No Menu For this Shop');
@@ -139,8 +138,8 @@ module.exports = app => {
         });
     });
     
-    //get no. of tables for a restaurant
-    app.get('/tables_no', function(request, response, next) {
+//get no. of tables for a restaurant
+router.get('/tables_no', function(request, response, next) {
         Shop.aggregate([{$match: {ownerEmail: request.query.userEmail}}, {$unwind: "$shop"}, {$match: {"shop._id": ObjectId(request.query.shopId)}}, {$project: {_id: 0, "shop.noOfTables": 1}}]).exec(function(err, shop) {
             if(err) {
                 const error = new Error('No Such Shop');
@@ -152,8 +151,8 @@ module.exports = app => {
         });
     });
     
-    //delete shop
-    app.put('/shop/delete', function(request, response, next) {
+//delete shop
+router.put('/shop/delete', function(request, response, next) {
         Shop.updateOne({ownerEmail: request.body.userEmail}, {$pull : {"shop": {"_id": {$in : ObjectId(request.body.shopId)}}}}, function(err, shop) {
             if (err) {
                 const error = new Error('No Such Shop');
@@ -170,8 +169,8 @@ module.exports = app => {
         })
     });
     
-    //add email for kitchen access
-    app.put('/add/email_access', function(request, response, next) {
+//add email for kitchen access
+router.put('/add/email_access', function(request, response, next) {
         Shop.updateOne({ownerEmail: request.body.userEmail, "shop._id": request.body.shopId}, {$addToSet: {"shop.$.emailAccessList": request.body.email}}, function(err, emailList) {
             if (err) {
                 const error = new Error('Could not update the email List. Check your shopId or email');
@@ -183,8 +182,8 @@ module.exports = app => {
         });
     });
     
-    //get all the email list for kitchen access
-    app.get('/get/email_access/list', function(request, response, next) {
+//get all the email list for kitchen access
+router.get('/get/email_access/list', function(request, response, next) {
         Shop.aggregate([{$match: {ownerEmail: request.query.userEmail}}, {$unwind: "$shop"}, {$match: {"shop._id": ObjectId(request.query.shopId)}}, {$project: {_id: 0, "shop.emailAccessList": 1}}]).exec(function(err, emailList) {
             if(err) {
                 const error = new Error('No Such Shop. Check your email and shopId');
@@ -196,8 +195,8 @@ module.exports = app => {
         });
     });
     
-    //delete the email from email list for kitchen access
-    app.put('/delete/email_access', function(request, response, next) {
+//delete the email from email list for kitchen access
+router.put('/delete/email_access', function(request, response, next) {
         Shop.updateOne({ownerEmail: request.body.userEmail, "shop._id": request.body.shopId}, {$pull : {"shop.$.emailAccessList": {$in : request.body.email}}}, function(err, emailList) {
             if (err) {
                 const error = new Error('Could not find the email. Check your email and shopId');
@@ -211,10 +210,10 @@ module.exports = app => {
     });
     
     
-    /////////////////////////// api operations for kitchen alone //////////////////////////////
+/////////////////////////// api operations for kitchen alone //////////////////////////////
     
-    //get shop name by owner email and shop id
-    app.get('/shop_name_from_shopId', function(request, response, next) {
+//get shop name by owner email and shop id
+router.get('/shop_name_from_shopId', function(request, response, next) {
         Shop.aggregate([{$match: {ownerEmail: request.query.ownerEmail}}, {$unwind: "$shop"}, {$match: {"shop._id": ObjectId(request.query.shopId)}}, {$project: {_id: 0, "shop.shopName": 1}}]).exec(function(err, shop) {
             if(err) {
                 const error = new Error('No Such Shop');
@@ -226,4 +225,4 @@ module.exports = app => {
         });
     });
     
-};
+module.exports = router;
