@@ -5,9 +5,13 @@
   text-align: center;
 }
 .kitchen-text{
-  margin: 15% auto;
+  margin: 12% auto;
   color: white;
-
+}
+.kitchen-text img{
+  width: 35rem;
+  height: auto;
+  opacity: 0.5;
 }
 .kitchen-text button{
   border: 0;

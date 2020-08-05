@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import NavbarForSite from './navforkitchen';
 import Footer from '../footer';
 import GoogleButton from '../googleButton';
+import Deco from '../../images/kitchenDeco.svg'
 
 const FrontPage = (props) => {
 
@@ -40,6 +41,7 @@ const FrontPage = (props) => {
             </div>
             <div className="kitchen-signIn">
               <div className="kitchen-text">
+                <img src={Deco}/><br/>
                 <button>
                     {renderContentForGoogleButton()}
                 </button>
@@ -53,7 +55,6 @@ const FrontPage = (props) => {
         </div>
         );
 }
-
 const mapStateToProps = (state) => {
     return {
         user: state.auth
