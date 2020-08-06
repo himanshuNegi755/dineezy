@@ -7,7 +7,6 @@
     overflow: hidden;
     margin: 0;
 }
-
 .front-parent-div {
     margin-top: 82px;
     background-color: #202020;
@@ -17,7 +16,6 @@
     color: #e0e0e0;
     margin: 0.5rem 1rem 0 0;
 }
-
 #front-carousel{
   box-shadow: 0 0 10px black;
 }
@@ -45,8 +43,6 @@
   font-family: 'Rajdhani', sans-serif;
   font-size: 1.5rem;
 }
-
-
 #pricing-section {
     box-shadow: -1px 0 5px black;
     background: #303030;
@@ -95,10 +91,8 @@
     text-decoration: none !important;
 }
 @media (max-width: 1000px){
-
-
   .carousel-caption{
-    bottom: 15rem;
+    bottom: 12rem;
   }
   .carousel-caption h3{
     font-size: 2.5rem;
@@ -106,51 +100,49 @@
   .carousel-caption p{
     font-size: 1.2rem;
   }
-
-
 }
 @media (max-width: 991px) {
-
   .carousel-item{
     height: 80vh;
   }
   .front-parent-div{
     padding: 0 0;
   }
-  .about-heading{
-    font-size: 2.5rem;
-    letter-spacing: 0.4rem;
-    padding: 2% 0 4%;
-  }
   .pricing-heading{
     font-size: 3rem;
     letter-spacing: 0.8rem;
   }
-
 }
-
 @media (max-width: 600px) {
-
   .carousel-item{
     height: 60vh;
   }
   .carousel-caption{
-    bottom: 12rem;
+    bottom: 8rem;
   }
   .carousel-caption h3{
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
   .carousel-caption p{
     font-size: 1rem;
-  }
-  .about-heading{
-    font-size: 2rem;
-    letter-spacing: 0.3rem;
-    padding: 2% 0 3%;
   }
   .pricing-heading{
     font-size: 2.7rem;
     letter-spacing: 0.6rem;
   }
-
+}
+@media (max-width: 450px) {
+  .carousel-caption{
+    bottom: 6rem;
+  }
+  .carousel-caption h3{
+    font-size: 1.5rem;
+  }
+  .carousel-caption p{
+    font-size: 0.8rem;
+  }
+  .pricing-heading{
+    font-size: 2rem;
+    letter-spacing: 0.4rem;
+  }
 }

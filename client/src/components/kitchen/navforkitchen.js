@@ -51,14 +51,14 @@ const NavbarForSite = (props) => {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark row">
-            <div className="col-3"><a id="navbar-brand" href="/">
+            <div className="col-lg-3 col-md-3 col-sm-3"><a id="navbar-brand" href="/">
                 <span>
                     <img id="brand-logo" src={DMLogo} alt="Company Logo"/>
                 </span>
             </a></div>
-            <div className="restaurant-name col-6">{shopName} Kitchen</div>
+            <div className="restaurant-name col-lg-6 col-md-5 col-sm-5">{shopName} Kitchen</div>
 
-            <div className="col-3"><ul className="navbar-nav ml-auto">
+            <div className="col-lg-3 col-md-4 col-sm-4 kitchen-part"><ul className="navbar-nav ml-auto">
 
                 {renderContent()}
 

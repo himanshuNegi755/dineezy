@@ -1,10 +1,7 @@
-.show-menu-main-div {
-    overflow: category-drop;
-    background-color: #404040;
-    color: white;
-    height: 100vh;
+body{
+  background-color: #404040;
+  color: white;
 }
-
 .category-menu {
     height: 3.7rem;
     margin: 0 1.5%;

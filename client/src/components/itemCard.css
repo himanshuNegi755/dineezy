@@ -2,6 +2,7 @@
     margin: 1% 0.5%;
     float: left;
     border: 0;
+    width: 49%;
     border-radius: 6px;
 }
 
@@ -82,6 +83,13 @@
 @media (max-width: 476px){
   .show-menu-cards .card-body{
     height: 12rem;
+  }
+  .show-menu-cards {
+      margin: 1% 0.5%;
+      float: left;
+      border: 0;
+      width: 98%;
+      border-radius: 6px;
   }
 
 }
