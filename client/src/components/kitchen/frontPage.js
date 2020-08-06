@@ -45,7 +45,7 @@ const FrontPage = (props) => {
             </div>
             <div className="kitchen-signIn">
               <div className="kitchen-text">
-                <img src={Deco}/><br/>
+                <img src={Deco} alt="Spoon and salt Img"/><br/>
                 {renderContentForGoogleButton()}
               </div>
             </div>

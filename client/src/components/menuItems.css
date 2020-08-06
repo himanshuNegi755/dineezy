@@ -2,6 +2,7 @@
     margin: 1% 0.5% 2rem;
     float: left;
     border: 0;
+    width: 48%;
     box-shadow: 0 0 5px #202020;
 }
 .card-body{
@@ -73,6 +74,9 @@
 }
 
 @media (max-width: 600px){
+  .card-for-item {
+      width: 96%;
+  }
   .item-price{
       font-family: 'Ubuntu', sans-serif;
       font-size: 0.9rem;

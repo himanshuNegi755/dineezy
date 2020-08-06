@@ -88,9 +88,7 @@ const NavbarForSite = (props) => {
                     {renderMidContent()}
                 </li>
                     {renderContent()}
-
               </ul>
-
             </div>
           </nav>
 

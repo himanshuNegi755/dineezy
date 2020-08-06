@@ -33,22 +33,13 @@
     margin: 0 3% 1%;
 }
 
-.fa-facebook-square:hover{
-    color: #3b5998;
-}
-
-.fa-instagram:hover{
-    color: white;
-}
-
 .fa-envelope:hover{
     color: #D44638;
 }
 
-.fa-twitter:hover{
-    color: #00acee;
+.fa-whatsapp:hover{
+    color: #25d366;
 }
-
 .copyright{
     font-size: 0.7rem;
     line-height: 0;

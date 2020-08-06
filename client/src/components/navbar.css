@@ -1,13 +1,9 @@
-/*.bg-light {
-    background-color: #f2f2ea !important;
-}*/
-
 .navbar{
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
   background-color: #000;
   position: relative;
   z-index: 4;
-  padding: 0;
+  padding: 0 1rem;
 }
 .nag {
     padding: 0;
@@ -21,7 +17,7 @@
   z-index: 5;
   width: auto;
   padding: 0;
-  margin: 0.3rem auto 0.3rem 3%;
+  margin: 0.3rem 3%;
 }
 .navbar-dark .navbar-nav .nav-link{
   color: #b0b0b0;
@@ -43,13 +39,12 @@
   position: relative;
   z-index: 5;
 }
-
-
-
 /*############### Mobile ################*/
-
 @media screen and (max-width: 991px) {
-    .navbar-collapse{
-        text-align: center;
-    }
+  #navbar-brand{
+    margin: 0.1rem 3%;
+  }
+    .navbar-nav{
+        float: none;
+  }
 }

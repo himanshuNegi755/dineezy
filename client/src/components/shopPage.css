@@ -231,10 +231,8 @@
   .hidden{
     display: none;
   }
-
 }
-@media (max-width: 991px)
-{
+@media (max-width: 991px){
   .menu-category{
       display: none;
   }
@@ -284,5 +282,9 @@
     background-color: #202020;
     font-size: 1.2rem;
   }
-
+}
+@media (max-width: 600px){
+  .div-to-show-menu {
+      height: auto;
+  }
 }

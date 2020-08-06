@@ -27,7 +27,7 @@ const MenuItems = (props) => {
 
         return (
 
-                <Card style={{ width: '48%' }} className="card-for-item" bg="light">
+                <Card className="card-for-item" bg="light">
                     <Card.Body>
                         <Card.Title>
                             <div className="item-name">{props.itemName}</div>

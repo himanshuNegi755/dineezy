@@ -125,7 +125,7 @@ const FrontPage = (props) => {
 
                 </section>
 
-                
+
 
                 <section id="pricing-section">
                     <div>
@@ -136,7 +136,7 @@ const FrontPage = (props) => {
                       <div className="pricing-col col-lg-4 col-md-6">
                         <div className="card pricing-card">
                           <div className="card-header">
-                            <h3>14 Days trial</h3>
+                            <h3>21 Days trial</h3>
                           </div>
                           <div className="card-body">
                             <h2 className="price-text">Free</h2>
@@ -152,7 +152,7 @@ const FrontPage = (props) => {
                             <h3>Monthly Pack</h3>
                           </div>
                           <div className="card-body">
-                            <h2 className="price-text">₹ 149 / mo</h2>
+                            <h2 className="price-text">N/A</h2>
                             <p>Payment at the beginning of the month</p>
                             <p>Validity : 30 Days from the day of payment.</p>
                             {renderPricingContent()}
@@ -165,7 +165,7 @@ const FrontPage = (props) => {
                             <h3>Yearly Pack</h3>
                           </div>
                           <div className="card-body">
-                            <h2 className="price-text">₹ 1199 / yr</h2>
+                            <h2 className="price-text">N/A</h2>
                             <p>Payment at the beginning of the year</p>
                             <p>Validity : 365 days from the day of payment</p>
                             {renderPricingContent()}

@@ -1,11 +1,3 @@
-.navbar{
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
-  background-color: #000;
-  position: relative;
-  z-index: 4;
-  padding: 0 1rem;
-}
-
 #navbar-brand{
   height: 4rem;
   position: relative;
@@ -23,7 +15,7 @@
 .navbar-dark .navbar-nav .nav-link{
   color: #b0b0b0;
 }
-.navbar-nav{
+.kitchen-part .navbar-nav{
   float: right;
 }
 .nav-item{
@@ -52,16 +44,13 @@
   }
 }
 @media screen and (max-width: 991px) {
-    .nav-item{
-        align-items: center;
-    }
+  #brand-logo{
+    height: 3.5rem;
+  }
 }
 @media screen and (max-width: 600px) {
   .restaurant-name{
     font-size: 1rem;
   }
-  #brand-logo{
-    width: 3.5rem;
-    height: 3.5rem;
-  }
+
 }
