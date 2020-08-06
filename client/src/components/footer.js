@@ -11,7 +11,7 @@ const Footer = () => {
                   <a className="contact-icons" href="mailto:thekatohome@gmail.com"><i className="fas fa-envelope fa-2x" aria-hidden="true"></i></a>
                   <a className="contact-icons" href="https://wa.me/message/MRZMBG4DLYZ2I1"><i class="fab fa-whatsapp fa-2x contact-icons"></i></a>
                   <hr className="contact-divider"></hr>
-                  <p className="copyright">© COPYRIGHT 2020 VIRTUAL MENU.</p>
+                  <p className="copyright">© COPYRIGHT 2020 DINEEZY.</p>
               </div>
           </footer>
         );
