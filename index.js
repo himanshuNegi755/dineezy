@@ -50,6 +50,7 @@ app.use('/api', authRoutes);
 app.use('/api', phoneVerificationRoutes);
 app.use('/api', databaseApiRoutes);
 
+app.get('/shops', (req, res) => res.redirect(process.env.CLIENT_URI+'/shops' || 'http://localhost:3000/shops'));
 app.get('/', (req, res) => res.redirect(process.env.CLIENT_URI || 'http://localhost:3000'));
 
 //unknown path
