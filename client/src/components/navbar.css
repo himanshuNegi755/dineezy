@@ -5,6 +5,9 @@
   z-index: 4;
   padding: 0;
 }
+.nag {
+    padding: 0;
+}
 #brand-logo{
   width: auto;
   height: 4rem;

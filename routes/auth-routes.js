@@ -14,7 +14,7 @@ router.get(
   passport.authenticate("google"),
   (req, res) => {
     logger.log('info', 'logged in successfully');
-    res.redirect("/");
+    res.redirect("/shops");
   }
 );
 
