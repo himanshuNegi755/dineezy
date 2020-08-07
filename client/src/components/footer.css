@@ -5,14 +5,12 @@
 .contact-details{
   text-align: center;
 }
-
 .contact-us {
     font-family: 'Lexend Zetta', sans-serif;
     letter-spacing: 0.5rem;
     color: #ffe100;;
     padding: 2% 15%;
 }
-
 .contact-text {
     font-size: 0.8rem;
     line-height: 1.5;
@@ -27,16 +25,13 @@
   border-color: #d0d0d0;
   opacity: 0.5;
 }
-
 .contact-icons{
     color: #b0b0b0;
     margin: 0 3% 1%;
 }
-
 .fa-envelope:hover{
     color: #D44638;
 }
-
 .fa-whatsapp:hover{
     color: #25d366;
 }
@@ -47,13 +42,11 @@
     color: white;
     opacity: 0.5;
 }
-
 @media (max-width: 600px) {
 
   .footer {
       padding: 2% 5%;
   }
-
   .contact-us {
       font-family: 'Ubuntu', sans-serif;
       letter-spacing: 0.3rem;

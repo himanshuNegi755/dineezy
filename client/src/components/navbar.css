@@ -1,9 +1,9 @@
-.navbar{
+.home-nav.navbar{
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
   background-color: #000;
   position: relative;
   z-index: 4;
-  padding: 0 1rem;
+  padding: 0;
 }
 #brand-logo{
   width: auto;

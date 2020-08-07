@@ -146,7 +146,22 @@ class ProfilePage extends Component{
                                 <Form.Control className="phno-container" type="number" value={this.state.numberField} name='numberField' onChange={this.onTextChanged} placeholder="Enter Phone Number without 0 or +91" />
                             </Col>
                             <Button className="verify-btn" onClick={this.verifyNumberFunction}> Verify Number </Button>
-
+                        </Form.Group>
+                        <Form.Group as={Row} controlId="formPlaintextPassword">
+                            <Form.Label column sm="2">
+                                Package type
+                            </Form.Label>
+                            <Form.Label column sm="10">
+                                Free Trial
+                            </Form.Label>
+                        </Form.Group>
+                        <Form.Group as={Row} controlId="formPlaintextPassword">
+                            <Form.Label column sm="2">
+                                Validity
+                            </Form.Label>
+                            <Form.Label column sm="10">
+                                31st August
+                            </Form.Label>
                         </Form.Group>
                     </Form>
                 </div>

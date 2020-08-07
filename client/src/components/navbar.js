@@ -67,7 +67,7 @@ const NavbarForSite = (props) => {
 
         return (
 
-          <nav className="navbar navbar-expand-lg navbar-dark">
+          <nav className="home-nav navbar navbar-expand-lg navbar-dark">
             <Link id="navbar-brand" to="/">
                 <span>
                     <img id="brand-logo" src={DMLogo} alt="Company Logo"/>

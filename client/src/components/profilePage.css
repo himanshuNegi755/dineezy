@@ -24,7 +24,7 @@
   color: #d0d0d0;
   padding-left: 1rem;
   background-color: #303030;
-  width: 69%;
+  width: 69.18%;
   border: 0;
   border-radius: 0;
   border-color: #202020;
@@ -44,9 +44,7 @@
   transition: 0.2s;
   font-size: 1.01rem;
 }
-
 @media (max-width: 670px){
-
   .profile-info{
     padding: 20% 10%;
   }
