@@ -10,7 +10,7 @@ class ShopNameContainer extends Component{
     constructor(props) {
         super(props);
 
-        this.state = { showOptions: false, showFileUploadModal: false, showMenuOption: false, showQRCodeModal: false, noOfTablesArr: [], currentTable: 1, showQRCodeForTables: false, showQRCodeForKitchen: false, kitchenAccessEmailList: [], emailToAdd: ''}
+        this.state = { showOptions: false, showFileUploadModal: false, showMenuOption: false, showQRCodeModal: false, noOfTablesArr: [], currentTable: 1, showQRCodeForTables: false, showQRCodeForKitchen: false, kitchenAccessEmailList: [], emailToAdd: '', file: null}
     }
 
     //function to handle input change
@@ -20,6 +20,17 @@ class ShopNameContainer extends Component{
         });
     }
 
+    //file upload function    
+    onFileUploadHandler = () => {
+        const fd = new FormData();
+        fd.append('shopMenu', this.state.file, this.props.shopId+this.state.file.name)
+        axios.post(`${process.env.REACT_APP_BACKEND_API}/file_upload`, fd)
+        .then(res => {
+            console.log(res.data);
+            this.setState({file: null, showFileUploadModal: !this.state.showFileUploadModal})
+        })
+    }
+    
     showOptionFunction = () => {
         axios.get(`${process.env.REACT_APP_BACKEND_API}/menu/${this.props.shopId}`)
         .then(res => {
@@ -234,7 +245,7 @@ class ShopNameContainer extends Component{
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Form onSubmit={this.handleSubmit}>
+                        <Form>
 
                             <Form.Group controlId="formBasicEmail">
                                 <Form.File
@@ -244,14 +255,15 @@ class ShopNameContainer extends Component{
                                     label="File"
                                     id="validationFormik107"
                                     feedbackTooltip
-                                    multiple
+                                    single="true"
+                                    onChange={ (e) => {this.setState({file: e.target.files[0]})}}
                                 />
                             </Form.Group>
                             <Form.Label>
                                 The digital Menu will be uploaded within next 24 hours.
                             </Form.Label>
 
-                            <Button variant="primary" onClick={this.onSubmit} className="sign-up-button">
+                            <Button variant="primary" onClick={this.onFileUploadHandler} className="sign-up-button">
                                 Upload
                             </Button>
                         </Form>
