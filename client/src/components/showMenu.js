@@ -1,47 +1,65 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import io from 'socket.io-client';
 import { Button } from 'react-bootstrap';
 import './showMenu.css';
 import NavbarForSite from './navbar';
 import ItemCard from './itemCard';
 import ItemsInCart from './itemsInCart';
 
+let socket;
 
-class ShowMenu extends Component{
+const ShowMenu = (props) => {
 
-    constructor(props) {
-        super(props);
-
-        this.state = { category: [], itemsByCategory: [], visibility: "hidden", transform: "translateX(100)", itemsInCart: [], noOfItemsInCart: 0, totalPrice: 0 }
-
-        this.loadCategoryFunction = this.loadCategoryFunction.bind(this);
-        this.loadCategoryFunction();
-        this.renderItemCategory = this.renderItemCategory.bind(this);
-        this.loadItemFunction = this.loadItemFunction.bind(this);
-        this.showCartSideBar = this.showCartSideBar.bind(this);
-        this.closeCartSideBar = this.closeCartSideBar.bind(this);
-        this.renderCartItems = this.renderCartItems.bind(this);
-    }
-
-    loadCategoryFunction() {
-        console.log(this.props.match.params);
-        axios.get(`${process.env.REACT_APP_BACKEND_API}/item_categories/${this.props.match.params.shopId}`)
+    const [category, setCategory] = useState([]);
+    const [itemsByCategory, setItemsByCategory] = useState([]);
+    const [visibility, setVisibility] = useState('hidden');
+    const [transform, setTransform] = useState('translateX(100)');
+    const [itemsInCart, setItemsInCart] = useState([]);
+    const [noOfItemsInCart, setNoOfItemsInCart] = useState(0);
+    const [totalPrice, setTotalPrice] = useState(0);
+    const ENDPOINT = `http://localhost:8000`;
+    const [currentCategory, setCurrentCategory] = useState('');
+    const [cartItemIdArr, setCartItemIdArr] = useState([]);
+    
+    useEffect(() => {
+        //console.log(this.props.match.params);
+        axios.get(`${process.env.REACT_APP_BACKEND_API}/item_categories/${props.match.params.shopId}`)
         .then(res => {
-            //console.log(res.data)
-            this.setState({category: res.data})
+            setCategory(res.data);
+        })  
+        
+        socket = io(ENDPOINT);
+        socket.emit('join', {shopId: props.match.params.shopId, tableNo: props.match.params.tableNo});
+        
+    }, [props.match.params.shopId, props.match.params.tableNo, ENDPOINT]);
+    
+    useEffect(() => {
+        
+        let noOfItemsInCartVar = 0;
+        let totalPriceVar = 0;
+
+        itemsInCart.forEach(cartItem => {
+            noOfItemsInCartVar+=cartItem.itemQuantity;
+            totalPriceVar+=cartItem.itemQuantity*cartItem.itemPrice;
+        });
+
+        setNoOfItemsInCart(noOfItemsInCartVar);
+        setTotalPrice(totalPriceVar);
+        
+        loadItemFunction(currentCategory);
+        
+    }, [itemsInCart])
+
+    const loadItemFunction = (itemCategory) => {
+        axios.get(`${process.env.REACT_APP_BACKEND_API}/items?shopId=${props.match.params.shopId}&category=${itemCategory}`)
+        .then(res => {
+            setItemsByCategory(res.data);
         })
     }
 
-    loadItemFunction(itemCategory) {
-        axios.get(`${process.env.REACT_APP_BACKEND_API}/items?shopId=${this.props.match.params.shopId}&category=${itemCategory}`)
-        .then(res => {
-            console.log(res.data)
-            this.setState({itemsByCategory: res.data})
-        })
-    }
-
-    renderItemCategory = () => {
-        switch(this.state.category.length) {
+    const renderItemCategory = () => {
+        switch(category.length) {
             case 0:
                 return (
                     <React.Fragment>
@@ -51,10 +69,11 @@ class ShowMenu extends Component{
                     </React.Fragment>
                 )
             default:
-                const list = this.state.category.map((itemCategory) =>
+                const list = category.map((itemCategory) =>
                     <div key={itemCategory}>
                         <ul>
-                            <li className="category-ind"onClick={() => {this.loadItemFunction(itemCategory)}}>{itemCategory}</li>
+                            <li className="category-ind"onClick={() => {loadItemFunction(itemCategory)
+                                                                       setCurrentCategory(itemCategory)}}>{itemCategory}</li>
                         </ul>
                     </div>
                 );
@@ -64,140 +83,116 @@ class ShowMenu extends Component{
         }
     }
 
-    addItemsInCart = (itemObj) => {
-        this.setState({
-            itemsInCart: [...this.state.itemsInCart, itemObj]
-        })
-
-        this.calculateTotalItemAndPrice();
+    const addItemsInCart = (itemObj) => {
+        setCartItemIdArr([...cartItemIdArr, itemObj.itemId]);
+        setItemsInCart([...itemsInCart, itemObj]);
+        
+        setVisibility("visible");
+        setTransform("translateX(0)");
     }
-
-    renderMenuItemList = () => {
-        const list = this.state.itemsByCategory.map((menuItem) =>
+    
+    const renderMenuItemList = () => {
+        const list = itemsByCategory.map((menuItem) =>
             <div key={menuItem.menu._id}>
-                <ItemCard itemName={menuItem.menu.itemName} vegOrNonVeg={menuItem.menu.vegOrNonVeg} price={menuItem.menu.price} description={menuItem.menu.description} itemId={menuItem.menu._id} showCart={this.showCartSideBar} addItem={this.addItemsInCart}/>
+                <ItemCard itemName={menuItem.menu.itemName} vegOrNonVeg={menuItem.menu.vegOrNonVeg} price={menuItem.menu.price} description={menuItem.menu.description} itemId={menuItem.menu._id} addItem={addItemsInCart} showAddToCartButton={cartItemIdArr.includes(menuItem.menu._id)}/>
             </div>
         );
 
         return (list);
     }
 
-    removeItemFromCart = (itemName) => {
-        let itemArray = this.state.itemsInCart.filter(item => item.itemName !== itemName);
-        this.setState({itemsInCart: itemArray});
+    const removeItemFromCart = (itemId) => {
+        let itemIdArr = cartItemIdArr.filter(item => item !== itemId);
+        setCartItemIdArr(itemIdArr);
+        
+        let itemArray = itemsInCart.filter(item => item.itemId !== itemId);
+        setItemsInCart(itemArray);
     }
 
-    updateQuantity = (itemName, change) => {
+    const updateQuantity = (itemId, change) => {
 
-        var itemArray = [...this.state.itemsInCart];
-        var indexOfObjectToChangeQuantity = itemArray.findIndex(x => x.itemName ===itemName);
+        var itemArray = [...itemsInCart];
+        var indexOfObjectToChangeQuantity = itemArray.findIndex(x => x.itemId === itemId);
         if (indexOfObjectToChangeQuantity !== -1) {
             if(change === "+") {
                 itemArray[indexOfObjectToChangeQuantity].itemQuantity+=1;
-                this.setState({itemsInCart: itemArray});
-                this.calculateTotalItemAndPrice();
+                setItemsInCart(itemArray);
             } else {
                 if (itemArray[indexOfObjectToChangeQuantity].itemQuantity>0) {
                     itemArray[indexOfObjectToChangeQuantity].itemQuantity-=1;
                     if(itemArray[indexOfObjectToChangeQuantity].itemQuantity === 0) {
-                       this.removeItemFromCart(itemName);
-                       this.calculateTotalItemAndPrice();
+                       removeItemFromCart(itemId);
                     } else {
-                        this.setState({itemsInCart: itemArray});
-                        this.calculateTotalItemAndPrice();
+                        setItemsInCart(itemArray);
                     }
                 }
             }
         }
     }
 
-    closeCartSideBar() {
-        this.setState({
-            visibility: "hidden",
-            transform: "translateX(100)"
-        })
-    }
-
-    showCartSideBar() {
-        this.setState({
-            visibility: "visible",
-            transform: "translateX(0)"
-        })
-
-    }
-
-    renderCartItems = () => {
-        const list = this.state.itemsInCart.map((cartItem) =>
-            <div key={cartItem.itemName}>
-                <ItemsInCart itemName={cartItem.itemName} price={cartItem.itemPrice} quantity={cartItem.itemQuantity} deleteItem={this.removeItemFromCart} changeQuantity={this.updateQuantity}/>
+    const renderCartItems = () => {
+        const list = itemsInCart.map((cartItem) =>
+            <div key={cartItem.itemId}>
+                <ItemsInCart itemName={cartItem.itemName} price={cartItem.itemPrice} quantity={cartItem.itemQuantity} deleteItem={removeItemFromCart} changeQuantity={updateQuantity} itemId={cartItem.itemId}/>
             </div>
         );
 
         return (list);
     }
 
-    calculateTotalItemAndPrice = () => {
-        let noOfItemsInCartVar = 0;
-        let totalPriceVar = 0;
-
-        this.state.itemsInCart.forEach(cartItem => {
-            noOfItemsInCartVar+=cartItem.itemQuantity;
-            totalPriceVar+=cartItem.itemQuantity*cartItem.itemPrice;
-        });
-
-        this.setState({
-            noOfItemsInCart: noOfItemsInCartVar,
-            totalPrice: totalPriceVar
-        })
+    const clearCartFunction = () => {
+        //let cartItems = itemsInCart.map(cartItem => cartItem.itemName);
+        //cartItems.forEach(itemName => removeItemFromCart(itemName));
+        setItemsInCart([]);
+        
     }
 
-    clearCartFunction = () => {
-        let cartItems = this.state.itemsInCart.map(cartItem => cartItem.itemName);
-        cartItems.forEach(itemName => this.removeItemFromCart(itemName));
-    }
+    return (
+        <div className="show-menu-main-div">
 
-    render() {
-        return (
-            <div className="show-menu-main-div">
+            <NavbarForSite/>
 
-                <NavbarForSite/>
-
-                <div className="category-menu row">
-                    <div className="col-lg-1 col-md-2 col-sm-2 cart-option" onClick={this.showCartSideBar}>
-                        <i className="fas fa-cart-plus cart-icon"></i>
-                        <span className="cart-items">0</span>
-                    </div>
-                    <div className="col-lg-11 col-md-10 col-sm-10 ">
-                        <div className="default-list">{this.renderItemCategory()}</div>
-                        <div className="dropdown category-drop">
-                          <button className="btn btn-secondary dropdown-toggle category-btn" type="button" id="categorydropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Category
-                          </button>
-                          <div className="dropdown-menu category-list" aria-labelledby="categorydropdown">
-                            <div className="small-sc-list">{this.renderItemCategory()}</div>
-                          </div>
-                        </div>
+            <div className="category-menu row">
+                <div className="col-lg-1 col-md-2 col-sm-2 cart-option" onClick={ () => {
+                        setVisibility('visible');
+                        setTransform('translateX(0)');
+                    }}>
+                    <i className="fas fa-cart-plus cart-icon"></i>
+                    <span className="cart-items">{noOfItemsInCart}</span>
+                </div>
+                <div className="col-lg-11 col-md-10 col-sm-10 ">
+                    <div className="default-list">{renderItemCategory()}</div>
+                    <div className="dropdown category-drop">
+                      <button className="btn btn-secondary dropdown-toggle category-btn" type="button" id="categorydropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Category
+                      </button>
+                      <div className="dropdown-menu category-list" aria-labelledby="categorydropdown">
+                        <div className="small-sc-list">{renderItemCategory()}</div>
+                      </div>
                     </div>
                 </div>
-                <div className="items-card">
-                    {this.renderMenuItemList()}
-                </div>
-
-                <div className="cart-overlay transparentBcg" style={{visibility: this.state.visibility}}>
-                    <div className="cart-side-bar showCart" style={{transform: this.state.transform}}>
-                        <i className="back-btn fas fa-arrow-circle-left fa-2x" onClick={this.closeCartSideBar}></i>
-                            {this.renderCartItems()}
-                        <div className="cart-footer">
-                            <h3>your total: ₹ {this.state.totalPrice}</h3>
-                            <Button className="clear-cart" onClick={this.clearCartFunction}>Clear cart</Button>
-                        </div>
-                    </div>
-                </div>
-
-
             </div>
-        );
-    }
+            <div className="items-card">
+                {renderMenuItemList()}
+            </div>
+
+            <div className="cart-overlay transparentBcg" style={{visibility: visibility}}>
+                <div className="cart-side-bar showCart" style={{transform: transform}}>
+                    <i className="back-btn fas fa-arrow-circle-left fa-2x" onClick={() => {
+                            setVisibility("hidden");
+                            setTransform("translateX(100)");
+                        }}></i>
+                        {renderCartItems()}
+                    <div className="cart-footer">
+                        <h3>your total: ₹ {totalPrice}</h3>
+                        <Button className="clear-cart" onClick={clearCartFunction}>Clear cart</Button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    );
 }
 
 export default ShowMenu;

@@ -85,8 +85,7 @@ class ShopNameContainer extends Component{
 
                 <li className="email-ind">
                     <span className="accesser-email">{email}</span>
-                    <button type="button" onClick={ () => {this.deleteEmailFromKitchenAccessListFunction(email)
-                                                           this.getEmailListForKitchenAccessFunction()}}>
+                    <button type="button" onClick={ () => {this.deleteEmailFromKitchenAccessListFunction(email)}}>
                         Remove
                     </button>
                 </li>
@@ -171,8 +170,7 @@ class ShopNameContainer extends Component{
                     <Form.Group controlId="formBasicName">
                         <Form.Control type="text" placeholder="Enter Email for Kitchen Access" name='emailToAdd' value={this.state.emailToAdd} onChange={this.handleInputChange}/>
                         <button className="add-email" type="button" onClick={ () => {this.addEmailToAccessListFunction(this.state.emailToAdd)
-                                                               this.getEmailListForKitchenAccessFunction()
-                                                               this.setState({emailToAdd: ''})}}>
+                        this.setState({emailToAdd: ''})}}>
                             ADD
                         </button>
                     </Form.Group>
@@ -197,6 +195,7 @@ class ShopNameContainer extends Component{
         })
         .then(res => {
             console.log(res.data);
+            this.getEmailListForKitchenAccessFunction();
             //this.showShopAfterAdding();
         })
     }
@@ -216,6 +215,7 @@ class ShopNameContainer extends Component{
         })
         .then(res => {
             console.log(res.data);
+            this.getEmailListForKitchenAccessFunction();
         })
     }
 
