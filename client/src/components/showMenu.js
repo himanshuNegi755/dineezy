@@ -143,6 +143,7 @@ const ShowMenu = (props) => {
     const clearCartFunction = () => {
         //let cartItems = itemsInCart.map(cartItem => cartItem.itemName);
         //cartItems.forEach(itemName => removeItemFromCart(itemName));
+        setCartItemIdArr([]);
         setItemsInCart([]);
         
     }
