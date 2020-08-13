@@ -1,6 +1,6 @@
 .footer {
     background-color: black;
-    padding: 4% 10% 2%;
+    padding: 3% 10% 1%;
 }
 .contact-details{
   text-align: center;
@@ -18,10 +18,9 @@
     color: white;
     opacity: 0.6;
 }
-
 .contact-divider{
   width: 40%;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   border-color: #d0d0d0;
   opacity: 0.5;
 }
@@ -43,9 +42,8 @@
     opacity: 0.5;
 }
 @media (max-width: 600px) {
-
   .footer {
-      padding: 2% 5%;
+      padding: 2% 4% 1%;
   }
   .contact-us {
       font-family: 'Ubuntu', sans-serif;

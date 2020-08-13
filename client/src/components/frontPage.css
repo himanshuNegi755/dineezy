@@ -1,16 +1,28 @@
 .nav-div-fixed{
     width: 100%;
-    position: fixed;
     z-index: 18;
 }
 .main-div {
     overflow: hidden;
     margin: 0;
 }
+.front-title-div{
+  background-color: #ffe100;
+  padding: 10% 10%;
+  color: #101010;
+  text-align: center;
+}
+.front-title-div h1{
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.2rem;
+
+}
 .front-parent-div {
-    margin-top: 82px;
     background-color: #202020;
-    padding: 0 15% 2%;
+    padding: 0 10% 2%;
+}
+.front-row{
+  margin: 1rem 0;
 }
 .btn-div{
     color: #e0e0e0;
@@ -23,8 +35,7 @@
   height: 85vh;
 }
 .d-block{
-  height: 100%;
-  width: auto;
+  width: inherit;
 }
 .carousel-indicators{
   padding-bottom: 0.8rem;
@@ -70,9 +81,6 @@
     color: #ffe100;
     font-family: 'Ubuntu', sans-serif;
 }
-.card-body{
-
-}
 .price-text{
     padding: 2%;
     font-size: 2.8rem;
@@ -86,7 +94,6 @@
     line-height: 2;
     padding: 0 10%;
 }
-
 .signUp-button-from-pricing {
     text-decoration: none !important;
 }
