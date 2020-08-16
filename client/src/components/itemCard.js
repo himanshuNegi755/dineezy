@@ -22,11 +22,11 @@ const ItemCard = (props) => {
             )
         }
     }
-    
+
     const showAddToCartButton = () => {
         if(props.showAddToCartButton) {
             return(
-                <div>IN CART</div>
+                <div className="in-cart">In cart</div>
             )
         } else {
             return(

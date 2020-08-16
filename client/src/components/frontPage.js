@@ -73,59 +73,50 @@ const FrontPage = (props) => {
                     <NavbarForSite />
                 </div>
 
-                <section className="front-parent-div">
+                <section className="front-title-div">
 
-                    <div id="front-carousel" className="carousel slide" data-ride="carousel">
-                      <ol className="carousel-indicators">
-                        <li data-target="#front-carousel" data-slide-to="0" className="active"></li>
-                        <li data-target="#front-carousel" data-slide-to="1"></li>
-                        <li data-target="#front-carousel" data-slide-to="2"></li>
-                      </ol>
-                      <div className="carousel-inner">
-                        <div className="carousel-item active">
+                    <h1>A safe and efficient POS for restaurants.</h1>
+                    <h3>Go digital with ordering by just a scan.</h3>
+
+                </section>
+
+                <section className="front-parent-div">
+                    <div className="row front-row">
+                      <div className="col-5 ">
                           <img className="d-block"
                           src={ScanMenu}
                           alt="First slide"/>
-                          <div className="carousel-caption">
-                            <h3>A faster and efficient way to order in a restaurant.</h3>
-                            <p>Scan the QR code on the table, order what you want on your mobile. No more miscalculations in bills.</p>
-                          </div>
-                        </div>
-                        <div className="carousel-item">
-                          <img
-                          className="d-block"
+                      </div>
+                      <div className="col-7">
+                        <h3>A faster and efficient way to order in a restaurant.</h3>
+                        <p>Scan the QR code on the table, order what you want on your mobile. No more miscalculations in bills.</p>
+                      </div>
+                    </div>
+                    <div className="row front-row">
+                      <div className="col-7">
+                          <h3>No delay in customer service.</h3>
+                          <p>Less worries about any complaint regarding customer services.</p>
+                      </div>
+                      <div className="col-5 ">
+                          <img className="d-block"
                           src={Service}
                           alt="Second slide"/>
-                          <div className="carousel-caption">
-                            <h3>No delay in customer service.</h3>
-                            <p>Less worries about any complaint regarding customer services.</p>
-                          </div>
-                        </div>
-                        <div className="carousel-item">
+                      </div>
+                    </div>
+                    <div className="row front-row">
+                      <div className="col-5 ">
                           <img
                           className="d-block"
                           src= {MenuGerms}
                           alt="Third slide"/>
-                          <div className="carousel-caption">
-                            <h3>What's wrong with a menu card?</h3>
-                            <p>According to a study, a restaurant menu can contain <strong>185,000</strong> germs per sq cm.
-                            For reference, a public toilet has about <strong>500 - 1,000</strong> germs per sq cm.</p>
-                          </div>
-                        </div>
                       </div>
-                      <a className="carousel-control-prev slide-btn" href="#front-carousel" role="button" data-slide="prev">
-                      <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span className="sr-only">Previous</span>
-                      </a>
-                      <a className="carousel-control-next slide-btn" href="#front-carousel" role="button" data-slide="next">
-                      <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span className="sr-only">Next</span>
-                      </a>
+                      <div className="col-7">
+                          <h3>What's wrong with a menu card?</h3>
+                          <p>According to a study, a restaurant menu can contain <strong>185,000</strong> germs per sq cm.
+                          For reference, a public toilet has about <strong>500 - 1000</strong> germs per sq cm.</p>
+                      </div>
                     </div>
-
                 </section>
-
-
 
                 <section id="pricing-section">
                     <div>
