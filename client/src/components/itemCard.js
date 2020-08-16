@@ -23,6 +23,22 @@ const ItemCard = (props) => {
         }
     }
 
+    const showAddToCartButton = () => {
+        if(props.showAddToCartButton) {
+            return(
+                <div className="in-cart">In cart</div>
+            )
+        } else {
+            return(
+                <Button className="add-to-cart" onClick={ () => {
+                        props.addItem({itemId: props.itemId, itemName: props.itemName, itemPrice: props.price, itemQuantity: 1});
+                        }}>
+                    Add to Cart
+                </Button>
+            )
+        }
+    }
+
         return (
             <Card className="show-menu-cards" bg="light">
                 <Card.Body>
@@ -38,11 +54,7 @@ const ItemCard = (props) => {
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer>
-                    <Button className="add-to-cart" onClick={ () => {
-                            props.addItem({itemName: props.itemName, itemPrice: props.price, itemQuantity: 1});
-                            props.showCart();}}>
-                        Add to Cart
-                    </Button>
+                    {showAddToCartButton()}
                 </Card.Footer>
             </Card>
         );

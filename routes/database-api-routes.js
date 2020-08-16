@@ -1,10 +1,39 @@
 const router = require('express').Router();
 var mongoose = require('mongoose');
+
 // model
 var Shop = mongoose.model('Shop');
 var Menu = mongoose.model('Menu');
 const {ObjectId} = require('mongodb');
 
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, './uploads/');
+  },
+  filename: function(req, file, cb) {
+    cb(null, Date.now() + file.originalname);
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  // accept a file
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'application/pdf' || file.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessing' || file.mimetype === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+    cb(null, true);
+  } else {
+      // reject a file
+    cb(null, false);
+  }
+};
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5 //5 mb
+  },
+  fileFilter: fileFilter
+});
     
 //post/add new shop
 router.put('/shop', function(request, response, next) {
@@ -208,7 +237,11 @@ router.put('/delete/email_access', function(request, response, next) {
             }
         })
     });
-    
+
+//file upload
+router.post("/file_upload", upload.single('shopMenu'), (req, res, next) => {
+    res.send('file uploaded');
+});
     
 /////////////////////////// api operations for kitchen alone //////////////////////////////
     

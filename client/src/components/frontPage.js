@@ -113,7 +113,7 @@ const FrontPage = (props) => {
                       <div className="col-7">
                           <h3>What's wrong with a menu card?</h3>
                           <p>According to a study, a restaurant menu can contain <strong>185,000</strong> germs per sq cm.
-                          For reference, a public toilet has about <strong>500 - 1,000</strong> germs per sq cm.</p>
+                          For reference, a public toilet has about <strong>500 - 1000</strong> germs per sq cm.</p>
                       </div>
                     </div>
                 </section>

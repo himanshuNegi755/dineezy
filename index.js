@@ -1,4 +1,5 @@
 var express = require('express');
+var socketio = require('socket.io');
 var logger = require('./config/logger');
 var cors = require('cors')
 var app = express();
@@ -27,6 +28,7 @@ mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: tru
 const authRoutes = require("./routes/auth-routes");
 const phoneVerificationRoutes = require("./routes/phone-verification-routes");
 const databaseApiRoutes = require("./routes/database-api-routes");
+const socketRoutes = require("./routes/socket-routes");
 
 const PORT = process.env.PORT || 8000;
 
@@ -49,6 +51,7 @@ app.use(passport.session());
 app.use('/api', authRoutes);
 app.use('/api', phoneVerificationRoutes);
 app.use('/api', databaseApiRoutes);
+app.use('/api', socketRoutes);
 
 app.get('/shops', (req, res) => res.redirect(process.env.CLIENT_URI+'/shops' || 'http://localhost:3000/shops'));
 app.get('/', (req, res) => res.redirect(process.env.CLIENT_URI || 'http://localhost:3000'));
@@ -71,16 +74,28 @@ app.use((err, req, res, next) => {
         }
     });
 });
-/*if(process.env.NODE_ENV === 'production') {
-    console.log('production')
-    app.use(express.static('client/build'))
-    const path = require('path');
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-    })
-}*/
 
 // listining for port
-app.listen(PORT, function() {
-    console.log("Digi Menu API running on port " + PORT + "....");
+var server = app.listen(PORT, function() {
+    console.log(`DineEzy API running on port ${PORT}....`);
+});
+
+// socket setup
+var io = socketio(server);
+
+io.on('connection', function(socket){
+    //console.log('made socket connection');
+    
+    socket.on('join', (data) => {
+        if(data.tableNo){
+            socket.emit('tableTaken', {tableNo: data.tableNo, status: 'taken'});
+            console.log(data.shopId, data.tableNo);
+        } else {
+            console.log(data.shopId);
+        }
+    })
+    
+    socket.on('disconnect', () => {
+        console.log('user left');
+    })
 });

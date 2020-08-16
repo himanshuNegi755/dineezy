@@ -7,7 +7,7 @@
     margin: 0;
 }
 .front-title-div{
-  background-color: #ffe100;
+  background-color: #fff110;
   padding: 10% 10%;
   color: #101010;
   text-align: center;
@@ -56,14 +56,14 @@
 }
 #pricing-section {
     box-shadow: -1px 0 5px black;
-    background: #303030;
+    background-color: #fff110;
     color: white;
     padding: 5% 7%;
     text-align: center;
 }
 
 .pricing-heading{
-    color: #ffef00;
+    color: #101010;
     font-family: 'Righteous', cursive;
     font-size: 4rem;
     font-weight: bold;

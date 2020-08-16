@@ -134,7 +134,9 @@ class ProfilePage extends Component{
                                 Email
                             </Form.Label>
                             <Col sm="10">
-                                <Form.Label className="email-container">{this.state.userEmail}</Form.Label>
+                                <Form.Label className="email-container">
+                                    {this.state.userEmail}
+                                </Form.Label>
                             </Col>
                         </Form.Group>
 
