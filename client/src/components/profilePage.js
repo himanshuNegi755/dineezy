@@ -28,8 +28,9 @@ class ProfilePage extends Component{
         if(this.state.numberField === '') {
             alert('please enter your mobile number')
         }else{
-            axios.get(`${process.env.REACT_APP_BACKEND_API}/${this.state.numberField}`)
+            axios.get(`${process.env.REACT_APP_BACKEND_API}/phoneNo/${this.state.numberField}`)
             .then(res => {
+                //console.log(res);
                 this.setState({show: !this.state.show,
                               msg: res.data.message})
                 this.showOTPEnterModal();

@@ -88,11 +88,15 @@ io.on('connection', function(socket){
     
     socket.on('join', (data) => {
         if(data.tableNo){
-            socket.emit('tableTaken', {tableNo: data.tableNo, status: 'taken'});
+            
+            socket.join(data.shopId);
+            //('CH6IL9pF44T6kBujAAAA').emit('tableTaken', {tableNo: data.tableNo, status: 'taken'});
+            //socket.emit('tableTaken', {tableNo: data.tableNo, status: 'taken'});
             console.log(data.shopId, data.tableNo);
         } else {
             console.log(data.shopId);
         }
+        console.log(socket.id);
     })
     
     socket.on('disconnect', () => {

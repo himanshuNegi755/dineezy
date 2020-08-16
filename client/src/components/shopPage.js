@@ -16,7 +16,7 @@ class ShopPage extends Component{
         super(props);
 
         this.state = { userEmail: '', loggedIn: true, showModal: false, shopName: '', shopAddress: '', noOfTables: 1,
-                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', category: [], itemsByCategory: [], currentItemCategory: ''}
+                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', category: [], itemsByCategory: [], currentItemCategory: '', userPhoneNo: [], noOfShop: 0}
 
         this.showShopAddModal = this.showShopAddModal.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -30,9 +30,15 @@ class ShopPage extends Component{
 
     //function to show modal
     showShopAddModal() {
-        this.setState({
-            showModal: !this.state.showModal
-        })
+        if(this.state.userPhoneNo.length === 0) {
+            alert('Please update the PhoneNo in your profile first');
+        } else if (this.state.shopList.length >= this.state.noOfShop) {
+            alert('upgrade your current plan, to add more shops');
+        } else {
+            this.setState({
+                showModal: !this.state.showModal
+            })
+        }
     }
 
     //function to handle input change
@@ -216,7 +222,9 @@ class ShopPage extends Component{
         try{
             if(!prevState.userName) {
                 this.setState({userName: this.props.user.userName,
-                              userEmail: this.props.user.userEmail})
+                              userEmail: this.props.user.userEmail,
+                              userPhoneNo: this.props.user.userPhoneNo,
+                              noOfShop: this.props.user.noOfShop})
                 this.showShopAfterAdding();
             }
         } catch(err) {

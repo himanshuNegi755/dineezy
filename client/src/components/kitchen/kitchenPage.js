@@ -12,7 +12,8 @@ const ShopPage = (props) => {
     //const [noOfTables, setNoOfTables] = useState(1);
     const [currentTable, setCurrentTable] = useState(1);
     const [tableTakenArr, setTableTakenArr] = useState([]);
-    const ENDPOINT = `http://localhost:8000`; 
+    const ENDPOINT = `http://localhost:8000`;
+    const [ordersArr, setOrdersArr] = useState([]);
 
     useEffect(() => {
         let tableArr = []
@@ -30,10 +31,11 @@ const ShopPage = (props) => {
     
     useEffect(() => {
         socket.on('tableTaken', (data) => {
-            console.log(data);
+            setOrdersArr([...ordersArr, data]);
         })
+        console.log(ordersArr);
     }, []);
-
+    
     const loadTablesFunction = () => {
         
         const list = tableTakenArr.map((table) =>

@@ -7,7 +7,8 @@ var menu = new Schema({
              vegOrNonVeg: {type: String, default: 'veg'},
              price: Number,
              description: String,
-             category: String
+             category: String,
+             availability: {type: Boolean, default: true}
             } ]
 });
 
