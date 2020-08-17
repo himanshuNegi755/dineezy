@@ -300,17 +300,15 @@ class ShopPage extends Component{
         if(!this.state.loggedIn) {
             return <Redirect to='/' />;
         }
-
         return (
             <div className="parent-div">
                 <NavbarForSite />
                 <div className="main-container row">
                     <div className="col-lg-3 col-md-4 retaurant-col">
-                        <button className="add-restaurant-button" onClick={() => {this.showShopAddModal()}}>Add Restaurant</button>
-
                         <div className="restaurant-list">
                             <h3 className="col-heading">Restaurants</h3>
                             {this.shopList()}
+                            <button className="add-restaurant-button" onClick={() => {this.showShopAddModal()}}>Add Restaurant <i class="fas fa-plus-circle"></i></button>
                         </div>
                     </div>
                     <div className="col-lg-9 col-md-8 menu-col">

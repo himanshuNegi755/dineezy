@@ -13,15 +13,18 @@
 }
 .restaurant-name-holder .col-2{
     padding: 1rem;
+    transition: 0.1s;
 }
 .restaurant-name-holder .col-2:hover{
+    transition: 0.2s;
+    border-radius: 30px 30px 2px 30px;
     background-color: #ffe100;
     color: black;
 }
 .drop-down-options{
     background-color: #ffe100;
     color: black;
-    border-radius: 5px 0 5px 5px;;
+    border-radius: 5px 2px 5px 5px;;
     position: absolute;
     top: 3.7rem;
     right: 0;
