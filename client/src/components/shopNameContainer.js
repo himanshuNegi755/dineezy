@@ -11,6 +11,8 @@ class ShopNameContainer extends Component{
         super(props);
 
         this.state = { showOptions: false, showFileUploadModal: false, showMenuOption: false, showQRCodeModal: false, noOfTablesArr: [], currentTable: 1, showQRCodeForTables: false, showQRCodeForKitchen: false, kitchenAccessEmailList: [], emailToAdd: '', file: null}
+        
+        this.shopDropDownRef = React.createRef();
     }
 
     //function to handle input change
@@ -218,6 +220,20 @@ class ShopNameContainer extends Component{
             this.getEmailListForKitchenAccessFunction();
         })
     }
+    
+    componentDidMount() {
+        document.addEventListener('mousedown', this.handleClickOutsideForShopNameContainer);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClickOutsideForShopNameContainer);
+    }
+
+    handleClickOutsideForShopNameContainer = (event) => {
+        if (this.shopDropDownRef && !this.shopDropDownRef.current.contains(event.target)) {
+            this.setState({showOptions: false, showMenuOption: false});
+        }
+    }
 
     render() {
         return (
@@ -227,7 +243,10 @@ class ShopNameContainer extends Component{
                       <h5 className="restaurant-name-holder">{this.props.shopName}</h5>
                   </div>
                   <div className="col-2" onClick = {() => {this.showOptionFunction()}}>
-                      <i className="fas fa-chevron-down"></i>{this.showDropDownOptions()}
+                      <i className="fas fa-chevron-down"></i>
+                      <div ref={this.shopDropDownRef}>
+                          {this.showDropDownOptions()}
+                      </div>
                   </div>
                 </div>
 
@@ -295,3 +314,5 @@ class ShopNameContainer extends Component{
 }
 
 export default ShopNameContainer;
+
+//ref={this.suggestionRef}

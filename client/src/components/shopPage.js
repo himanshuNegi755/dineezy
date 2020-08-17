@@ -17,19 +17,13 @@ class ShopPage extends Component{
 
         this.state = { userEmail: '', loggedIn: true, showModal: false, shopName: '', shopAddress: '', noOfTables: 1,
                       shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', category: [], itemsByCategory: [], currentItemCategory: '', userPhoneNo: [], noOfShop: 0}
-
-        this.showShopAddModal = this.showShopAddModal.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-        this.showShopAfterAdding = this.showShopAfterAdding.bind(this);
-        this.shopList = this.shopList.bind(this);
-        this.menuItemList = this.menuItemList.bind(this);
-        this.deleteItemFunction = this.deleteItemFunction.bind(this);
-
+        
+        this.suggestionRef = React.createRef();
     }
 
 
     //function to show modal
-    showShopAddModal() {
+    showShopAddModal = () => {
         if(this.state.userPhoneNo.length === 0) {
             alert('Please update the PhoneNo in your profile first');
         } else if (this.state.shopList.length >= this.state.noOfShop) {
@@ -51,6 +45,7 @@ class ShopPage extends Component{
 
     //autocomplete functions
     onTextChanged = (e) => {
+        document.addEventListener('mousedown', this.handleClickOutside);
         const value = e.target.value;
         let suggestions = [];
         if (value.length > 0) {
@@ -127,7 +122,7 @@ class ShopPage extends Component{
 
 
     //add new show functions
-    onSubmit() {
+    onSubmit = () => {
         this.setState({showModal: !this.state.showModal})
 
         axios.put(`${process.env.REACT_APP_BACKEND_API}/shop`, {
@@ -211,7 +206,7 @@ class ShopPage extends Component{
         })
     }
 
-    showShopAfterAdding() {
+    showShopAfterAdding = () => {
         axios.get(`${process.env.REACT_APP_BACKEND_API}/shop/get_shops/${this.state.userEmail}`)
             .then(res => {
                 this.setState({shopList: res.data[0].shop})
@@ -232,7 +227,7 @@ class ShopPage extends Component{
         }
     }
 
-    deleteItemFunction(itemIdAttribute) {
+    deleteItemFunction = (itemIdAttribute) => {
         axios.put(`${process.env.REACT_APP_BACKEND_API}/menu/item/delete/`, {
                 shopId: this.state.shopIdVar,
                 itemId: itemIdAttribute
@@ -291,10 +286,25 @@ class ShopPage extends Component{
     }
 
     hideSearchBarAndCategoryFunction = () => {
-        this.setState({showSearchBarAndCategory: 'hidden'})
+        this.setState({showSearchBarAndCategory: 'hidden',
+                      itemsByCategory: []});
     }
 
+    /*componentDidMount() {
+        document.addEventListener('mousedown', this.handleClickOutside);
+    }
 
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClickOutside);
+    }*/
+
+    handleClickOutside = (event) => {
+        if (this.suggestionRef && !this.suggestionRef.current.contains(event.target)) {
+            this.setState({item: '', suggestions: []});
+            //alert('You clicked outside of me!');
+        }
+    }
+    
 
     render() {
         if(!this.state.loggedIn) {
@@ -328,7 +338,7 @@ class ShopPage extends Component{
                                       type='text'
                                       value={this.state.item}
                                   />
-                                  <div className="mb-3 suggestion">
+                                  <div className="mb-3 suggestion" ref={this.suggestionRef}>
                                       {this.renderSuggestions()}
                                   </div>
                               </InputGroup>
