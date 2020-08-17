@@ -15,44 +15,44 @@
 .front-title-div h1{
   font-family: 'Montserrat', sans-serif;
   letter-spacing: 0.2rem;
-
 }
 .front-parent-div {
     background-color: #202020;
-    padding: 0 10% 2%;
+    padding: 7% 10%;
 }
-.front-row{
-  margin: 1rem 0;
+
+.front-row .col-7{
+  padding: 5rem 2rem;
+  font-size: 1.5rem;
+  font-family: 'Nunito Sans', sans-serif;
+  text-shadow: 2px 2px 4px black;
+}
+.h3-left, .h3-right{
+  position: absolute;
+  z-index: 1;
+  bottom: 1rem;
+  font-family: 'Permanent Marker', cursive;
+  background-color: rgb(255, 225, 0, 0.9);
+  color: black;
+  padding: 0.5rem 1.5rem;
+  width: 100%;
+  border-radius: 2px;
+  box-shadow: 0 0 4px rgb(0, 0, 0, 0.5);
+}
+.h3-left{
+  left: 3rem;
+}
+.h3-right{
+  right: 3rem;
 }
 .btn-div{
     color: #e0e0e0;
     margin: 0.5rem 1rem 0 0;
 }
-#front-carousel{
-  box-shadow: 0 0 10px black;
-}
-.carousel-item{
-  height: 85vh;
-}
 .d-block{
   width: inherit;
-}
-.carousel-indicators{
-  padding-bottom: 0.8rem;
-  margin-bottom: 0
-}
-.carousel-caption{
-  text-align: left;
-  bottom: 13rem;
-  text-shadow: 0 0 3px black;
-}
-.carousel-caption h3{
-  font-family: 'Exo 2', sans-serif;
-  font-size: 3rem;
-}
-.carousel-caption p{
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 1.5rem;
+  border-radius: 3px;
+  box-shadow: 2px 2px 4px black;
 }
 #pricing-section {
     box-shadow: -1px 0 5px black;
@@ -61,7 +61,6 @@
     padding: 5% 7%;
     text-align: center;
 }
-
 .pricing-heading{
     color: #101010;
     font-family: 'Righteous', cursive;
@@ -70,13 +69,11 @@
     letter-spacing: 1rem;
     padding: 2% 0;
 }
-
 .pricing-card{
     background-color: #101010;
     border-radius: 2%;
     height: 19rem;
 }
-
 .card-header{
     color: #ffe100;
     font-family: 'Ubuntu', sans-serif;
@@ -97,17 +94,6 @@
 .signUp-button-from-pricing {
     text-decoration: none !important;
 }
-@media (max-width: 1000px){
-  .carousel-caption{
-    bottom: 12rem;
-  }
-  .carousel-caption h3{
-    font-size: 2.5rem;
-  }
-  .carousel-caption p{
-    font-size: 1.2rem;
-  }
-}
 @media (max-width: 991px) {
   .carousel-item{
     height: 80vh;
@@ -121,33 +107,12 @@
   }
 }
 @media (max-width: 600px) {
-  .carousel-item{
-    height: 60vh;
-  }
-  .carousel-caption{
-    bottom: 8rem;
-  }
-  .carousel-caption h3{
-    font-size: 1.8rem;
-  }
-  .carousel-caption p{
-    font-size: 1rem;
-  }
   .pricing-heading{
     font-size: 2.7rem;
     letter-spacing: 0.6rem;
   }
 }
 @media (max-width: 450px) {
-  .carousel-caption{
-    bottom: 6rem;
-  }
-  .carousel-caption h3{
-    font-size: 1.5rem;
-  }
-  .carousel-caption p{
-    font-size: 0.8rem;
-  }
   .pricing-heading{
     font-size: 2rem;
     letter-spacing: 0.4rem;
