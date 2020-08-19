@@ -20,12 +20,18 @@
     background-color: #202020;
     padding: 7% 10%;
 }
-
 .front-row .col-7{
-  padding: 5rem 2rem;
+  padding-top: 3rem;
+  padding-bottom: 2rem;
   font-size: 1.5rem;
   font-family: 'Nunito Sans', sans-serif;
   text-shadow: 2px 2px 4px black;
+}
+.p-right{
+  padding-left: 4rem;
+}
+.p-left{
+  padding-right: 4rem;
 }
 .h3-left, .h3-right{
   position: absolute;
@@ -94,22 +100,50 @@
 .signUp-button-from-pricing {
     text-decoration: none !important;
 }
+@media (max-width: 1200px){
+  .h3-left, .h3-right{
+    font-size: 1.2rem;
+  }
+  .front-row .col-7{
+    font-size: 0.9rem;
+  }
+}
 @media (max-width: 991px) {
   .carousel-item{
     height: 80vh;
   }
   .front-parent-div{
-    padding: 0 0;
+    padding: 3% 5%;
   }
   .pricing-heading{
     font-size: 3rem;
     letter-spacing: 0.8rem;
   }
 }
+@media (max-width: 751px){
+  .h3-left, .h3-right{
+    font-size: 0.8rem;
+  }
+  .front-row .col-7{
+    font-size: 0.7rem;
+  }
+  .front-row .col-7{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
 @media (max-width: 600px) {
   .pricing-heading{
     font-size: 2.7rem;
     letter-spacing: 0.6rem;
+  }
+  .h3-left{
+    left: 2rem;
+    bottom: 1rem;
+  }
+  .h3-right{
+    right: 2rem;
+    bottom: 1rem;
   }
 }
 @media (max-width: 450px) {

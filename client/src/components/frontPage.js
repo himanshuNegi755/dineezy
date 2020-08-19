@@ -88,15 +88,15 @@ const FrontPage = (props) => {
                           alt="First slide"/>
                           <h3 className="h3-left">A faster and efficient way to order in a restaurant.</h3>
                       </div>
-                      <div className="col-7">
+                      <div className="col-7 p-right">
                         <p>Scan the QR code on the table, order what you want on your mobile. No more miscalculations in bills.</p>
                       </div>
                     </div>
                     <div className="row front-row">
-                      <div className="col-7">
+                      <div className="col-7 p-left">
                           <p>Less worries about any complaint regarding customer services.</p>
                       </div>
-                      <div className="col-5 ">
+                      <div className="col-5">
                           <img className="d-block"
                           src={Service}
                           alt="Second slide"/>
@@ -111,7 +111,7 @@ const FrontPage = (props) => {
                           alt="Third slide"/>
                           <h3 className="h3-left">What's wrong with a menu card?</h3>
                       </div>
-                      <div className="col-7">
+                      <div className="col-7 p-right">
                           <p>According to a study, a restaurant menu can contain <strong>185,000</strong> germs per sq cm.
                           For reference, a public toilet has about <strong>500 - 1000</strong> germs per sq cm.</p>
                       </div>
