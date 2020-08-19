@@ -16,7 +16,7 @@ class ShopPage extends Component{
         super(props);
 
         this.state = { userEmail: '', loggedIn: true, showModal: false, shopName: '', shopAddress: '', noOfTables: 1,
-                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', category: [], itemsByCategory: [], currentItemCategory: '', userPhoneNo: [], noOfShop: 0}
+                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', editItemAvailability: '', category: [], itemsByCategory: [], currentItemCategory: '', userPhoneNo: [], noOfShop: 0}
 
         this.suggestionRef = React.createRef();
     }
@@ -104,6 +104,7 @@ class ShopPage extends Component{
             editItemDescription: itemObj[0].description,
             editItemCategory: itemObj[0].category,
             editItemId: itemObj[0]._id,
+            editItemAvailability: itemObj[0].availability,
             showItemEditModal: !this.showItemEditModal
         });
 
@@ -178,7 +179,6 @@ class ShopPage extends Component{
     loadItemFunction = (itemCategory) => {
         axios.get(`${process.env.REACT_APP_BACKEND_API}/items?shopId=${this.state.shopIdVar}&category=${itemCategory}`)
         .then(res => {
-            console.log(res.data);
             this.setState({itemsByCategory: res.data})
         })
     }
@@ -250,7 +250,8 @@ class ShopPage extends Component{
             vegOrNonVeg: this.state.editVegOrNonVeg,
             price: this.state.editItemPrice,
             description: this.state.editItemDescription,
-            category: this.state.editItemCategory
+            category: this.state.editItemCategory,
+            availability: this.state.editItemAvailability
             })
         .then(res => {
             console.log(res.data);
@@ -318,7 +319,7 @@ class ShopPage extends Component{
                         <div className="restaurant-list">
                             <h3 className="col-heading">Restaurants</h3>
                             {this.shopList()}
-                            <button className="add-restaurant-button" onClick={() => {this.showShopAddModal()}}>Add Restaurant <i class="fas fa-plus-circle"></i></button>
+                            <button className="add-restaurant-button" onClick={() => {this.showShopAddModal()}}>Add Restaurant <i className="fas fa-plus-circle"></i></button>
                         </div>
                     </div>
                     <div className="col-lg-9 col-md-8 menu-col">
@@ -388,12 +389,12 @@ class ShopPage extends Component{
                             </Modal.Header>
                             <Modal.Body>
                                 <Form>
-                                    <Form.Group controlId="formBasicName">
+                                    <Form.Group>
                                         <Form.Label>Item Name</Form.Label>
                                         <Form.Control type="text" placeholder="Item Name" name='editItemName' value={this.state.editItemName} onChange={this.handleInputChange}/>
                                     </Form.Group>
 
-                                    <Form.Group controlId="formBasicName">
+                                    <Form.Group>
                                       <Form.Label>Veg/NonVeg</Form.Label>
                                       <select className="custom-select" id="inputGroupSelect02" type="text" placeholder="Veg/Non-Veg" name='editVegOrNonVeg' value={this.state.editVegOrNonVeg} onChange={this.handleInputChange}>
                                         <option value="veg">Veg</option>
@@ -402,26 +403,31 @@ class ShopPage extends Component{
                                       </select>
                                     </Form.Group>
 
-                                    <Form.Group controlId="formBasicName">
+                                    <Form.Group>
                                         <Form.Label>Price</Form.Label>
                                         <Form.Control type="number" placeholder="Item Price" name='editItemPrice' value={this.state.editItemPrice} onChange={this.handleInputChange}/>
                                     </Form.Group>
 
-                                    <Form.Group controlId="formBasicName">
+                                    <Form.Group>
                                         <Form.Label>Description</Form.Label>
                                         <Form.Control type="text" placeholder="One Line description of item" name='editItemDescription' value={this.state.editItemDescription} onChange={this.handleInputChange}/>
                                     </Form.Group>
 
-                                    <Form.Group controlId="formBasicName">
+                                    <Form.Group>
                                         <Form.Label>Item Category</Form.Label>
                                         <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='editItemCategory' value={this.state.editItemCategory} onChange={this.handleInputChange}/>
                                     </Form.Group>
 
-                                    <Form.Group controlId="formBasicName">
-                                        <Form.Label>Availability <div class="custom-control custom-switch">
-                                          <input type="checkbox" class="custom-control-input" id="customSwitch1" />
-                                          <label class="custom-control-label" for="customSwitch1"></label>
-                                        </div></Form.Label>
+                                    <Form.Group>
+                                        <Form.Label>Availability</Form.Label>
+                                        <Form.Check 
+                                            type="switch"
+                                            id="custom-switch"
+                                            label=""
+                                            name='editItemAvailability'
+                                            checked={this.state.editItemAvailability}
+                                            onChange={ (e) => {this.setState({[e.target.name]: e.target.checked})}}
+                                          />
 
                                     </Form.Group>
 
