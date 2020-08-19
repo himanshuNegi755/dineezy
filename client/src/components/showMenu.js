@@ -19,7 +19,6 @@ const ShowMenu = (props) => {
     const [noOfItemsInCart, setNoOfItemsInCart] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
     const ENDPOINT = `http://localhost:8000`;
-    const [currentCategory, setCurrentCategory] = useState('');
     const [cartItemIdArr, setCartItemIdArr] = useState([]);
     
     useEffect(() => {
@@ -47,8 +46,6 @@ const ShowMenu = (props) => {
         setNoOfItemsInCart(noOfItemsInCartVar);
         setTotalPrice(totalPriceVar);
         
-        loadItemFunction(currentCategory);
-        
     }, [itemsInCart])
 
     const loadItemFunction = (itemCategory) => {
@@ -72,8 +69,7 @@ const ShowMenu = (props) => {
                 const list = category.map((itemCategory) =>
                     <div key={itemCategory}>
                         <ul>
-                            <li className="category-ind"onClick={() => {loadItemFunction(itemCategory)
-                                                                       setCurrentCategory(itemCategory)}}>{itemCategory}</li>
+                            <li className="category-ind"onClick={() => {loadItemFunction(itemCategory)}}>{itemCategory}</li>
                         </ul>
                     </div>
                 );
@@ -94,7 +90,7 @@ const ShowMenu = (props) => {
     const renderMenuItemList = () => {
         const list = itemsByCategory.map((menuItem) =>
             <div key={menuItem.menu._id}>
-                <ItemCard itemName={menuItem.menu.itemName} vegOrNonVeg={menuItem.menu.vegOrNonVeg} price={menuItem.menu.price} description={menuItem.menu.description} itemId={menuItem.menu._id} addItem={addItemsInCart} showAddToCartButton={cartItemIdArr.includes(menuItem.menu._id)}/>
+                <ItemCard itemName={menuItem.menu.itemName} vegOrNonVeg={menuItem.menu.vegOrNonVeg} price={menuItem.menu.price} description={menuItem.menu.description} itemId={menuItem.menu._id} addItem={addItemsInCart} showAddToCartButton={cartItemIdArr.includes(menuItem.menu._id)} itemAvailability={menuItem.menu.availability}/>
             </div>
         );
 

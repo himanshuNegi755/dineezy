@@ -115,7 +115,7 @@ router.put('/menu/item/delete', function(request, response, next) {
     
 //update an item in shop menu
 router.put('/menu/item_update', function(request, response, next) {
-        Menu.updateOne({shopId: request.body.shopId, "menu._id": request.body.menuItemId}, {$set: {"menu.$.itemName": request.body.itemName, "menu.$.vegOrNonVeg": request.body.vegOrNonVeg, "menu.$.price": request.body.price, "menu.$.description": request.body.description, "menu.$.category": request.body.category}}, function(err, menuItem) {
+        Menu.updateOne({shopId: request.body.shopId, "menu._id": request.body.menuItemId}, {$set: {"menu.$.itemName": request.body.itemName, "menu.$.vegOrNonVeg": request.body.vegOrNonVeg, "menu.$.price": request.body.price, "menu.$.description": request.body.description, "menu.$.category": request.body.category, "menu.$.availability": request.body.availability}}, function(err, menuItem) {
             if (err) {
                 const error = new Error('Could not update the menu Item');
                 next(error);
