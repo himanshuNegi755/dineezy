@@ -99,13 +99,11 @@
 ::-webkit-scrollbar-track {
   background: #2d2d2d;
 }
-
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: black;
   border-radius: 10px;
 }
-
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #111;
@@ -122,12 +120,4 @@
   .menu-list-div{
     margin-left: 0.5rem;
   }
-}
-@media (min-width: 992px){
-
-
-}
-@media (max-width: 991px)
-{
-
 }

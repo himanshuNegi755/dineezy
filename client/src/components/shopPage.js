@@ -17,7 +17,7 @@ class ShopPage extends Component{
 
         this.state = { userEmail: '', loggedIn: true, showModal: false, shopName: '', shopAddress: '', noOfTables: 1,
                       shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', category: [], itemsByCategory: [], currentItemCategory: '', userPhoneNo: [], noOfShop: 0}
-        
+
         this.suggestionRef = React.createRef();
     }
 
@@ -304,7 +304,7 @@ class ShopPage extends Component{
             //alert('You clicked outside of me!');
         }
     }
-    
+
 
     render() {
         if(!this.state.loggedIn) {
@@ -415,6 +415,14 @@ class ShopPage extends Component{
                                     <Form.Group controlId="formBasicName">
                                         <Form.Label>Item Category</Form.Label>
                                         <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='editItemCategory' value={this.state.editItemCategory} onChange={this.handleInputChange}/>
+                                    </Form.Group>
+
+                                    <Form.Group controlId="formBasicName">
+                                        <Form.Label>Availability <div class="custom-control custom-switch">
+                                          <input type="checkbox" class="custom-control-input" id="customSwitch1" />
+                                          <label class="custom-control-label" for="customSwitch1"></label>
+                                        </div></Form.Label>
+
                                     </Form.Group>
 
                                     <div className="btn-div">
