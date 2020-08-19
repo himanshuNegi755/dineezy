@@ -255,6 +255,7 @@ class ShopPage extends Component{
             })
         .then(res => {
             console.log(res.data);
+            this.getMenuFunction(this.state.shopIdVar);
             this.loadItemFunction(this.state.currentItemCategory);
             //this.props.loadComponentAgain();
 
@@ -275,7 +276,7 @@ class ShopPage extends Component{
     menuItemList = () => {
         const list = this.state.itemsByCategory.map((menuItem) =>
             <div key={menuItem.menu._id}>
-                <MenuItems itemName={menuItem.menu.itemName} vegOrNonVeg={menuItem.menu.vegOrNonVeg} price={menuItem.menu.price} description={menuItem.menu.description} category={menuItem.menu.category} itemId={menuItem.menu._id} deleteItemFromMenu={this.deleteItemFunction} shopId={this.state.shopIdVar} editItem={this.suggestionSelected}/>
+                <MenuItems itemName={menuItem.menu.itemName} vegOrNonVeg={menuItem.menu.vegOrNonVeg} price={menuItem.menu.price} description={menuItem.menu.description} category={menuItem.menu.category} itemId={menuItem.menu._id} deleteItemFromMenu={this.deleteItemFunction} shopId={this.state.shopIdVar} editItem={this.suggestionSelected} itemAvailability={menuItem.menu.availability}/>
             </div>
         );
 
