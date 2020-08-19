@@ -24,18 +24,24 @@ const ItemCard = (props) => {
     }
 
     const showAddToCartButton = () => {
-        if(props.showAddToCartButton) {
-            return(
-                <div className="in-cart">In cart</div>
-            )
+        if(props.itemAvailability) {
+            if(props.showAddToCartButton) {
+                return(
+                    <div className="in-cart">In cart</div>
+                    )
+            } else {
+                return(
+                    <Button className="add-to-cart" onClick={ () => {
+                            props.addItem({itemId: props.itemId, itemName: props.itemName, itemPrice: props.price, itemQuantity: 1});
+                            }}>
+                        Add to Cart
+                    </Button>
+                    )
+            }
         } else {
             return(
-                <Button className="add-to-cart" onClick={ () => {
-                        props.addItem({itemId: props.itemId, itemName: props.itemName, itemPrice: props.price, itemQuantity: 1});
-                        }}>
-                    Add to Cart
-                </Button>
-            )
+                <div className="in-cart">Item Unavailable</div>
+                )
         }
     }
 
