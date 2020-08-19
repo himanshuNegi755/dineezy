@@ -45,7 +45,7 @@
 
 /* ********************Menu container column************************* */
 .div-to-show-menu {
-    height: 100vh;
+    height: 120vh;
     margin: 0;
     overflow-x: hidden;
     overflow-y: auto;
@@ -168,7 +168,6 @@
 .form-label{
     font-family: 'Quattrocento Sans', sans-serif;
     font-size: 1.1rem;
-
 }
 .form-control, .custom-select{
     background-color: #303030;
@@ -180,6 +179,24 @@
 .form-control:hover, .custom-select:hover{
     transition: 0.2s;
     background-color: #202020;
+}
+.custom-switch{
+  display: inline-block;
+  margin-left: 1rem;
+}
+.custom-switch{
+  display: inline-block;
+  margin-left: 1rem;
+}
+.custom-switch .custom-control-label::before{
+  background-color: red;
+}
+.custom-switch .custom-control-label::after{
+  background-color: white;
+}
+.custom-control-input:checked~.custom-control-label::before {
+    border-color: #00e004;
+    background-color: #00e004;
 }
 .btn-div{
     text-align: center;

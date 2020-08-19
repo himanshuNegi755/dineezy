@@ -11,7 +11,7 @@ class ShopNameContainer extends Component{
         super(props);
 
         this.state = { showOptions: false, showFileUploadModal: false, showMenuOption: false, showQRCodeModal: false, noOfTablesArr: [], currentTable: 1, showQRCodeForTables: false, showQRCodeForKitchen: false, kitchenAccessEmailList: [], emailToAdd: '', file: null}
-        
+
         this.shopDropDownRef = React.createRef();
     }
 
@@ -22,7 +22,7 @@ class ShopNameContainer extends Component{
         });
     }
 
-    //file upload function    
+    //file upload function
     onFileUploadHandler = () => {
         const fd = new FormData();
         fd.append('shopMenu', this.state.file, this.props.shopId+this.state.file.name)
@@ -32,7 +32,7 @@ class ShopNameContainer extends Component{
             this.setState({file: null, showFileUploadModal: !this.state.showFileUploadModal})
         })
     }
-    
+
     showOptionFunction = () => {
         axios.get(`${process.env.REACT_APP_BACKEND_API}/menu/${this.props.shopId}`)
         .then(res => {
@@ -96,7 +96,7 @@ class ShopNameContainer extends Component{
             );
             return (list);
         } else { return (<div></div>) }
-        
+
 
     }
 
@@ -220,7 +220,7 @@ class ShopNameContainer extends Component{
             this.getEmailListForKitchenAccessFunction();
         })
     }
-    
+
     componentDidMount() {
         document.addEventListener('mousedown', this.handleClickOutsideForShopNameContainer);
     }
@@ -238,7 +238,7 @@ class ShopNameContainer extends Component{
     render() {
         return (
             <div>
-                <div className="row restaurant-name-holder">
+                <div className="row restaurant-name-holder" >
                   <div className="col-10">
                       <h5 className="restaurant-name-holder">{this.props.shopName}</h5>
                   </div>
