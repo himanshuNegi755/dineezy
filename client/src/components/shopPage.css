@@ -1,3 +1,14 @@
+/* ********************To remove auto increment and decrement icon***************************** */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
 /* ********************Restaurant list column***************************** */
 .retaurant-col{
     background-color: #303030;
@@ -147,11 +158,17 @@
 .modal-content{
     background-color: #202020;
     color: white;
+    align-content: center;
 }
 .modal-header{
   background-color: #202020;
   color: white;
   border: 0;
+  border-radius: 10px 10px 0 0;
+  width: 160%;
+  position: relative;
+  right: 30%;
+  box-shadow: 0 -1px 2px black;
 }
 .Form-title{
     font-family: 'Ubuntu', sans-serif;
@@ -162,6 +179,11 @@
 .modal-body{
     background-color: #303030;
     border: 0;
+    border-radius: 0 0 10px 10px;
+    width: 160%;
+    position: relative;
+    right: 30%;
+    box-shadow: 0 2px 4px black;
 }
 .form-group{
   padding: 0 0.5rem;
@@ -171,15 +193,27 @@
     font-size: 1.1rem;
 }
 .form-control, .custom-select{
-    background-color: #303030;
+    background-color: #404040;
     color: #f0f0f0;
     border: 0;
-    border-radius: 0;
+    border-radius: 20px;
     display: block;
 }
 .form-control:hover, .custom-select:hover{
     transition: 0.2s;
     background-color: #202020;
+}
+.adv-opt{
+  padding-left: 0.75rem;
+}
+.fa-angle-down{
+  position: relative;
+  padding: 0.35rem 0.5rem 0.25rem;
+  box-shadow: 0 0 2px #101010;
+  background-color: #404040;
+  border-radius: 15px;
+  top: 2px;
+  left: 3px;
 }
 .custom-switch{
   display: inline-block;
@@ -294,7 +328,6 @@
   }
   .hidden .dropdown-menu ul li{
       display: block;
-      width: auto;
       font-family: 'Ubuntu', sans-serif;
       color: #e0e0e0;
       background-color: #303030;

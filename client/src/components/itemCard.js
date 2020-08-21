@@ -23,7 +23,7 @@ const ItemCard = (props) => {
         }
     }
 
-    const showAddToCartButton = () => {
+    const showAddToCartButtonOrStatus = () => {
         if(props.itemAvailability) {
             if(props.showAddToCartButton) {
                 return(
@@ -60,7 +60,7 @@ const ItemCard = (props) => {
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer>
-                    {showAddToCartButton()}
+                    {showAddToCartButtonOrStatus()}
                 </Card.Footer>
             </Card>
         );

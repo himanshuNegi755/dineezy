@@ -1,3 +1,14 @@
+/* ********************To remove auto increment and decrement icon***************************** */ 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* ************************************************* */ 
 .parent-div {
     background-color: #404040;
     color: white;

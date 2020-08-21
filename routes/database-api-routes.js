@@ -8,6 +8,7 @@ const {ObjectId} = require('mongodb');
 
 const multer = require('multer');
 
+//prerequisite for file upload
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, './uploads/');
