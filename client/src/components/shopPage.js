@@ -7,6 +7,9 @@ import './shopPage.css';
 import NavbarForSite from './navbar';
 import ShopNameContainer from './shopNameContainer';
 import MenuItems from './menuItems';
+import PopularItem from '../images/popularItem.svg';
+import NewItem from '../images/newItem.svg';
+import SpecialItem from '../images/specialItem.svg';
 import Footer from './footer';
 
 
@@ -391,12 +394,10 @@ class ShopPage extends Component{
                             <Modal.Body>
                                 <Form>
                                     <Form.Group>
-                                        <Form.Label>Item Name</Form.Label>
                                         <Form.Control type="text" placeholder="Item Name" name='editItemName' value={this.state.editItemName} onChange={this.handleInputChange}/>
                                     </Form.Group>
 
                                     <Form.Group>
-                                      <Form.Label>Veg/NonVeg</Form.Label>
                                       <select className="custom-select" id="inputGroupSelect02" type="text" placeholder="Veg/Non-Veg" name='editVegOrNonVeg' value={this.state.editVegOrNonVeg} onChange={this.handleInputChange}>
                                         <option value="veg">Veg</option>
                                         <option value="non-veg">Non-veg</option>
@@ -405,23 +406,20 @@ class ShopPage extends Component{
                                     </Form.Group>
 
                                     <Form.Group>
-                                        <Form.Label>Price</Form.Label>
                                         <Form.Control type="number" placeholder="Item Price" name='editItemPrice' value={this.state.editItemPrice} onChange={this.handleInputChange}/>
                                     </Form.Group>
 
                                     <Form.Group>
-                                        <Form.Label>Description</Form.Label>
                                         <Form.Control type="text" placeholder="One Line description of item" name='editItemDescription' value={this.state.editItemDescription} onChange={this.handleInputChange}/>
                                     </Form.Group>
 
                                     <Form.Group>
-                                        <Form.Label>Item Category</Form.Label>
                                         <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='editItemCategory' value={this.state.editItemCategory} onChange={this.handleInputChange}/>
                                     </Form.Group>
 
                                     <Form.Group>
                                         <Form.Label>Availability</Form.Label>
-                                        <Form.Check 
+                                        <Form.Check
                                             type="switch"
                                             id="custom-switch"
                                             label=""
@@ -432,6 +430,9 @@ class ShopPage extends Component{
 
                                     </Form.Group>
 
+                                    <Form.Group>
+                                        <img className="itemNotif" src={NewItem} /> <img className="itemNotif" src={PopularItem} /> <img className="itemNotif" src={SpecialItem} />
+                                    </Form.Group>
                                     <div className="btn-div">
                                       <button type="button" className="submit-btn form-btn" onClick={this.editItemDetails}>
                                         Submit
@@ -464,11 +465,9 @@ class ShopPage extends Component{
                                 <Form>
 
                                     <Form.Group controlId="formBasicName">
-                                        <Form.Label>Item Name</Form.Label>
                                         <Form.Control type="text" placeholder="Item Name" name='itemName' value={this.state.itemName} onChange={this.handleInputChange}/>
                                     </Form.Group>
                                     <Form.Group controlId="formBasicName">
-                                      <Form.Label>Veg/NonVeg</Form.Label>
                                       <select className="custom-select" id="inputGroupSelect02" type="text" placeholder="Veg/Non-Veg" name='vegOrNonVeg' value={this.state.vegOrNonVeg} onChange={this.handleInputChange}>
                                         <option value="veg">Veg</option>
                                         <option value="non-veg">Non-veg</option>
@@ -478,17 +477,14 @@ class ShopPage extends Component{
 
 
                                     <Form.Group controlId="formBasicName">
-                                        <Form.Label>Price</Form.Label>
                                         <Form.Control type="number" placeholder="Item Price" name='itemPrice' value={this.state.itemPrice} onChange={this.handleInputChange}/>
                                     </Form.Group>
 
                                     <Form.Group controlId="formBasicName">
-                                        <Form.Label>Description</Form.Label>
                                         <Form.Control type="text" placeholder="One Line description of item" name='itemDescription' value={this.state.itemDescription} onChange={this.handleInputChange}/>
                                     </Form.Group>
 
                                     <Form.Group controlId="formBasicName">
-                                        <Form.Label>Item Category</Form.Label>
                                         <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='itemCategory' value={this.state.itemCategory} onChange={this.handleInputChange}/>
                                     </Form.Group>
                                     <div className="btn-div">
@@ -509,7 +505,7 @@ class ShopPage extends Component{
                         centered
                         show={this.state.showModal}
                         onHide={this.showShopAddModal}
-                        >
+                    >
                             <Modal.Header closeButton>
                                 <div className="Form-title">
                                     SHOP DETAILS
@@ -519,17 +515,14 @@ class ShopPage extends Component{
                                 <Form onSubmit={this.handleSubmit}>
 
                                     <Form.Group controlId="formBasicName">
-                                        <Form.Label>Shop Name</Form.Label>
                                         <Form.Control type="text" placeholder="Shop Name" name='shopName' value={this.state.shopName} onChange={this.handleInputChange}/>
                                     </Form.Group>
 
                                     <Form.Group controlId="formBasicEmail">
-                                        <Form.Label>Address</Form.Label>
                                         <Form.Control as="textarea" rows="3" placeholder="Address" name='shopAddress' className="address-text-area" value={this.state.shopAddress} onChange={this.handleInputChange}/>
                                     </Form.Group>
 
                                     <Form.Group controlId="formBasicPassword">
-                                        <Form.Label>Number Of Table</Form.Label>
                                         <Form.Control type="number" placeholder="Number Of Tables" min="1" name='noOfTables' value={this.state.noOfTable} onChange={this.handleInputChange}/>
                                     </Form.Group>
                                     <div className="btn-div">

@@ -30,7 +30,7 @@ const MenuItems = (props) => {
                 <Card className="card-for-item" bg="light">
                     <Card.Body>
                         <Card.Title>
-                            <div className="item-name">{props.itemName}{props.itemAvailability ? null : ' (NOT AVAILABLE)'}</div>
+                            <div className="item-name">{props.itemName} {props.itemAvailability ? null : <i class="fas fa-low-vision na-icon"></i>}</div>
                             <div className="vnv-id">{showVegOrNonVegImage(props.vegOrNonVeg)}</div>
                         </Card.Title>
                         <Card.Text className="item-description">

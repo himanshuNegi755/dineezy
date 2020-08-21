@@ -1,32 +1,37 @@
 .card-for-item {
-    margin: 1% 0.5% 2rem;
+    margin: 1% 0.5%;
     float: left;
     border: 0;
     width: 48%;
-    box-shadow: 0 0 5px #202020;
+    box-shadow: 0 0 3px #ffe100;
+    border-radius: 8px;
 }
 .card-body{
-    border-radius: 3px 3px 0 0;
+    border-radius: 7px 7px 0 0;
     background-color: #202020;
     color: white;
     padding: 0 1rem;
     height: 9rem;
 }
-.item-name{
+.card-for-item .item-name{
     display: inline-block;
     font-family: 'Noto Serif', serif;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     padding-top: 0.6rem;
 }
+.na-icon{
+  color: red;
+}
 .vnv-id{
-    width: 3rem;
+    width: 2rem;
     float: right;
     padding-top: 0.5rem;
 }
-.card-footer{
+.card-for-item .card-footer{
     padding: 0 0.5rem 0 1rem;
     background-color: #303030;
     color: white;
+    border-radius: 0 0 7px 7px;
 }
 .item-price{
     display: inline-block;
