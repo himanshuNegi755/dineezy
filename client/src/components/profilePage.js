@@ -78,7 +78,7 @@ class ProfilePage extends Component{
                             OTP
                         </Form.Label>
                         <Col sm="6">
-                            <Form.Control type="number" value={this.state.otp} name='otp' onChange={this.onTextChanged} placeholder="OTP" />
+                            <Form.Control type="number" value={this.state.otp} name='otp' onChange={this.onTextChanged} placeholder="OTP" min="1"/>
                         </Col>
                     </Form.Group>
                 </Modal.Body>

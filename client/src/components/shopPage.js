@@ -16,7 +16,7 @@ class ShopPage extends Component{
         super(props);
 
         this.state = { userEmail: '', loggedIn: true, showModal: false, shopName: '', shopAddress: '', noOfTables: 1,
-                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', editItemAvailability: '', category: [], itemsByCategory: [], currentItemCategory: '', userPhoneNo: [], noOfShop: 0}
+                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', editItemAvailability: '', category: [], itemsByCategory: [], currentItemCategory: '', userPhoneNo: [], noOfShop: 0, subcategory: [{subcategoryItemName: '', subcategoryItemHalfPrice: '', subcategoryItemFullPrice: ''}]}
 
         this.suggestionRef = React.createRef();
     }
@@ -307,7 +307,24 @@ class ShopPage extends Component{
         }
     }
 
+    //all functions related to subcategory
+    addSubcategory = () => {
+        this.setState({subcategory: [...this.state.subcategory, {subcategoryItemName: '', subcategoryItemHalfPrice: '', subcategoryItemFullPrice: ''}]});
+    }
+    
+    handleChangeInSub = (index, event) => {
+        const values = [...this.state.subcategory];
+        values[index][event.target.name] = event.target.value;
+        this.setState({subcategory: values});
+    }
 
+    deleteSubcategory = (index) => {
+        const values = [...this.state.subcategory];
+        values.splice(index, 1);
+        this.setState({subcategory: values});
+    }
+    
+    
     render() {
         if(!this.state.loggedIn) {
             return <Redirect to='/' />;
@@ -406,7 +423,7 @@ class ShopPage extends Component{
 
                                     <Form.Group>
                                         <Form.Label>Price</Form.Label>
-                                        <Form.Control type="number" placeholder="Item Price" name='editItemPrice' value={this.state.editItemPrice} onChange={this.handleInputChange}/>
+                                        <Form.Control type="number" placeholder="Item Price" name='editItemPrice' value={this.state.editItemPrice} onChange={this.handleInputChange} min="1"/>
                                     </Form.Group>
 
                                     <Form.Group>
@@ -479,7 +496,7 @@ class ShopPage extends Component{
 
                                     <Form.Group controlId="formBasicName">
                                         <Form.Label>Price</Form.Label>
-                                        <Form.Control type="number" placeholder="Item Price" name='itemPrice' value={this.state.itemPrice} onChange={this.handleInputChange}/>
+                                        <Form.Control type="number" placeholder="Item Price" name='itemPrice' value={this.state.itemPrice} onChange={this.handleInputChange} min="1"/>
                                     </Form.Group>
 
                                     <Form.Group controlId="formBasicName">
@@ -534,6 +551,93 @@ class ShopPage extends Component{
                                     </Form.Group>
                                     <div className="btn-div">
                                       <button type="button" className="submit-btn form-btn" onClick={this.onSubmit}>
+                                        Submit
+                                      </button>
+                                    </div>
+                                </Form>
+
+                            </Modal.Body>
+                        </Modal>
+                </div>
+                
+                <div>
+                    <Modal
+                        size="md"
+                        aria-labelledby="test-new-item-add-modal"
+                        centered
+                        show={true}
+                        onHide={() => { this.setState({showNewItemAddModal: !this.state.showNewItemAddModal}) }}
+                        >
+                            <Modal.Header closeButton>
+                                <div className="Form-title">
+                                    TEST ADD NEW ITEM DETAILS
+                                </div>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <Form>
+
+                                    <Form.Group>
+                                        <Form.Control type="text" placeholder="Item Name" name='itemName' value={this.state.itemName} onChange={this.handleInputChange}/>
+                                    </Form.Group>
+                                    <Form.Group>
+                                      <select className="custom-select" id="inputGroupSelect02" type="text" placeholder="Veg/Non-Veg" name='vegOrNonVeg' value={this.state.vegOrNonVeg} onChange={this.handleInputChange}>
+                                        <option value="veg">Veg</option>
+                                        <option value="non-veg">Non-veg</option>
+                                        <option value="egg">Egg</option>
+                                      </select>
+                                    </Form.Group>
+
+
+                                    <Form.Group>
+                                        <Form.Label style={{color: 'red'}}>If You don't have half/full option, only enter full price <strong>leave half price field empty</strong></Form.Label>
+                                        
+                                        <div className="row">
+                                            <div className="col">
+                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='itemPrice' onChange={this.handleInputChange} min="1"/>
+                                            </div>
+                                            <div className="col">
+                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='itemPrice' onChange={this.handleInputChange} min="1"/>
+                                            </div>
+                                        </div>
+                                    </Form.Group>
+                                    
+                                    {
+                                        this.state.subcategory.map((subcategory, index) => {
+                                            return(
+                                                <div key={index} className="row">
+                                                    <div className="col">
+                                                        <Form.Control type="text" placeholder="subcategory name" name='subcategoryItemName' onChange={event => this.handleChangeInSub(index, event)} value={subcategory.subcategoryItemName}/>
+                                                    </div>
+                                                    <div className="col">
+                                                        <Form.Control type="number" placeholder="full Price (Rs.)" name='subcategoryItemFullPrice' onChange={event => this.handleChangeInSub(index, event)} min="1"/>
+                                                    </div>
+                                                    <div className="col">
+                                                        <Form.Control type="number" placeholder="half Price (Rs.)" name='subcategoryItemHalfPrice' onChange={event => this.handleChangeInSub(index, event)} min="1"/>
+                                                    </div>
+                                                    <div className="col">
+                                                        <button type="button" className="submit-btn form-btn" onClick={() => this.deleteSubcategory(index)}>
+                                                            <i styel={{color: 'white'}} className="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </div>
+                                                
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                    
+                                    <button type="button" className="submit-btn form-btn" onClick={(e) => this.addSubcategory(e)}>
+                                        Add Subcategory
+                                    </button>
+
+                                    <Form.Group>
+                                        <Form.Control type="text" placeholder="One Line description of item" name='itemDescription' value={this.state.itemDescription} onChange={this.handleInputChange}/>
+                                    </Form.Group>
+
+                                    <Form.Group>
+                                        <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='itemCategory' value={this.state.itemCategory} onChange={this.handleInputChange}/>
+                                    </Form.Group>
+                                    <div className="btn-div">
+                                      <button type="button" className="submit-btn form-btn" onClick={this.addNewItemToMenuFunction}>
                                         Submit
                                       </button>
                                     </div>
