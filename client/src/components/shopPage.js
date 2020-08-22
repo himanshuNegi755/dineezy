@@ -19,7 +19,7 @@ class ShopPage extends Component{
         super(props);
 
         this.state = { userEmail: '', loggedIn: true, showModal: false, shopName: '', shopAddress: '', noOfTables: 1,
-                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', editItemAvailability: '', category: [], itemsByCategory: [], currentItemCategory: '', userPhoneNo: [], noOfShop: 0, subcategory: [{subcategoryItemName: '', subcategoryItemHalfPrice: '', subcategoryItemFullPrice: ''}]}
+                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', editItemAvailability: '', category: [], itemsByCategory: [], currentItemCategory: '', userPhoneNo: [], noOfShop: 0, subcategory: [{subcategoryItemName: '', subcategoryItemHalfPrice: '', subcategoryItemFullPrice: ''}], showSubcategoryDisplay: 'none', showHalfFullPriceDisplay: 'block'}
 
         this.suggestionRef = React.createRef();
     }
@@ -327,7 +327,6 @@ class ShopPage extends Component{
         this.setState({subcategory: values});
     }
 
-
     render() {
         if(!this.state.loggedIn) {
             return <Redirect to='/' />;
@@ -448,7 +447,9 @@ class ShopPage extends Component{
                                     </Form.Group>
 
                                     <Form.Group>
-                                        <img className="itemNotif" src={NewItem} /> <img className="itemNotif" src={PopularItem} /> <img className="itemNotif" src={SpecialItem} />
+                                        <img className="itemNotif" src={NewItem} alt="new item"/>
+                                        <img className="itemNotif" src={PopularItem} alt="popular item"/>
+                                        <img className="itemNotif" src={SpecialItem} alt="chef speciality"/>
                                     </Form.Group>
                                     <div className="btn-div">
                                       <button type="button" className="submit-btn form-btn" onClick={this.editItemDetails}>
@@ -579,10 +580,11 @@ class ShopPage extends Component{
                                       </select>
                                     </Form.Group>
 
-
                                     <Form.Group>
                                         <Form.Label style={{color: 'red'}}>If You don't have half/full option, only enter full price <strong>leave half price field empty</strong></Form.Label>
-
+                                    </Form.Group>
+                                    
+                                    <Form.Group style={{display: this.state.showHalfFullPriceDisplay}}>
                                         <div className="row">
                                             <div className="col">
                                                 <Form.Control type="number" placeholder="full Price (Rs.)" name='itemPrice' onChange={this.handleInputChange} min="1"/>
@@ -594,40 +596,48 @@ class ShopPage extends Component{
                                     </Form.Group>
 
                                     <Form.Group>
-                                        <span className="adv-opt">Advance Options <i class="fas fa-angle-down"></i></span>
+                                        <span className="adv-opt">Advance Options <i class="fas fa-angle-down" onClick={()=>{
+                                                    if(this.state.showSubcategoryDisplay === 'none'){
+                                                        this.setState({showSubcategoryDisplay: 'block', showHalfFullPriceDisplay: 'none'})
+                                                    } else {
+                                                        this.setState({showSubcategoryDisplay: 'none', showHalfFullPriceDisplay: 'block'})
+                                                    }
+                                                    }}></i></span>
                                     </Form.Group>
+                                    
+                                    <div className="div-for-subcategory" style={{display: this.state.showSubcategoryDisplay}}>
+                                        <Form.Group>
+                                            {
+                                                this.state.subcategory.map((subcategory, index) => {
+                                                    return(
+                                                        <div key={index} className="row">
+                                                            <div className="col-4">
+                                                                <Form.Control type="text" placeholder="subcategory name" name='subcategoryItemName' onChange={event => this.handleChangeInSub(index, event)} value={subcategory.subcategoryItemName}/>
+                                                            </div>
+                                                            <div className="col-3">
+                                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='subcategoryItemFullPrice' onChange={event => this.handleChangeInSub(index, event)} min="1"/>
+                                                            </div>
+                                                            <div className="col-3">
+                                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='subcategoryItemHalfPrice' onChange={event => this.handleChangeInSub(index, event)} min="1"/>
+                                                            </div>
+                                                            <div className="col-2">
+                                                                <button type="button" className="submit-btn form-btn" onClick={() => this.deleteSubcategory(index)}>
+                                                                    <i styel={{color: 'white'}} className="fas fa-trash-alt"></i>
+                                                                </button>
+                                                            </div>
 
-                                    <Form.Group>
-                                    {
-                                        this.state.subcategory.map((subcategory, index) => {
-                                            return(
-                                                <div key={index} className="row">
-                                                    <div className="col">
-                                                        <Form.Control type="text" placeholder="subcategory name" name='subcategoryItemName' onChange={event => this.handleChangeInSub(index, event)} value={subcategory.subcategoryItemName}/>
-                                                    </div>
-                                                    <div className="col">
-                                                        <Form.Control type="number" placeholder="full Price (Rs.)" name='subcategoryItemFullPrice' onChange={event => this.handleChangeInSub(index, event)} min="1"/>
-                                                    </div>
-                                                    <div className="col">
-                                                        <Form.Control type="number" placeholder="half Price (Rs.)" name='subcategoryItemHalfPrice' onChange={event => this.handleChangeInSub(index, event)} min="1"/>
-                                                    </div>
-                                                    <div className="col">
-                                                        <button type="button" className="submit-btn form-btn" onClick={() => this.deleteSubcategory(index)}>
-                                                            <i styel={{color: 'white'}} className="fas fa-trash-alt"></i>
-                                                        </button>
-                                                    </div>
-
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                    </Form.Group>
-                                    <div className="btn-div">
-                                      <button type="button" className="submit-btn form-btn" onClick={(e) => this.addSubcategory(e)}>
-                                          Add Subcategory
-                                      </button>
+                                                        </div>
+                                                        )
+                                                })
+                                            }
+                                        </Form.Group>
+                                        <div className="btn-div">
+                                            <button type="button" className="submit-btn form-btn" onClick={(e) => this.addSubcategory(e)}>
+                                                Add Subcategory
+                                            </button>
+                                        </div>
                                     </div>
-
+                                    
                                     <Form.Group>
                                         <Form.Control type="text" placeholder="One Line description of item" name='itemDescription' value={this.state.itemDescription} onChange={this.handleInputChange}/>
                                     </Form.Group>

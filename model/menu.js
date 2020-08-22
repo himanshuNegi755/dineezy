@@ -10,7 +10,7 @@ var menu = new Schema({
              category: String,
              availability: {type: Boolean, default: true},
              volume: {half: Number, full: Number},
-             subCategory: [{itemName: String, volume: {half: Number, full: Number}, price: Number}]
+             subCategory: [{itemName: String, volume: {half: Number, full: Number}}]
             } ]
 });
 
