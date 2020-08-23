@@ -23,6 +23,20 @@ const MenuItems = (props) => {
           )
       }
   }
+  
+  const showSubcategoryIfHave = () => {
+      if(props.subcategory) {
+          const list = props.subcategory.map((subcategoryItem) =>
+            <div key={subcategoryItem._id}>
+                {subcategoryItem.half ? <li>{subcategoryItem.itemName} H: {subcategoryItem.half} F: {subcategoryItem.full}</li> : <li>{subcategoryItem.itemName} {subcategoryItem.full}</li>}
+            </div>
+        );
+
+        return (list);
+      } else {
+          return(<div className="item-price">₹ {props.price}</div>)
+      }
+  }
 
 
         return (
@@ -39,7 +53,7 @@ const MenuItems = (props) => {
 
                     </Card.Body>
                     <Card.Footer>
-                      <div className="item-price">₹ {props.price}</div>
+                      {showSubcategoryIfHave()}
                       <div className="cardBtn-div">
                         <button type="button" className="edit-btn card-btn" onClick={ () => {props.editItem(props.itemName)}}>
                           Edit
