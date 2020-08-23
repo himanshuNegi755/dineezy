@@ -182,6 +182,7 @@ class ShopPage extends Component{
     loadItemFunction = (itemCategory) => {
         axios.get(`${process.env.REACT_APP_BACKEND_API}/items?shopId=${this.state.shopIdVar}&category=${itemCategory}`)
         .then(res => {
+            console.log(res.data);
             this.setState({itemsByCategory: res.data})
         })
     }
@@ -279,7 +280,7 @@ class ShopPage extends Component{
     menuItemList = () => {
         const list = this.state.itemsByCategory.map((menuItem) =>
             <div key={menuItem.menu._id}>
-                <MenuItems itemName={menuItem.menu.itemName} vegOrNonVeg={menuItem.menu.vegOrNonVeg} price={menuItem.menu.price} description={menuItem.menu.description} category={menuItem.menu.category} itemId={menuItem.menu._id} deleteItemFromMenu={this.deleteItemFunction} shopId={this.state.shopIdVar} editItem={this.suggestionSelected} itemAvailability={menuItem.menu.availability}/>
+                <MenuItems itemName={menuItem.menu.itemName} vegOrNonVeg={menuItem.menu.vegOrNonVeg} price={menuItem.menu.price} description={menuItem.menu.description} category={menuItem.menu.category} itemId={menuItem.menu._id} subcategory={menuItem.menu.subcategory} deleteItemFromMenu={this.deleteItemFunction} shopId={this.state.shopIdVar} editItem={this.suggestionSelected} itemAvailability={menuItem.menu.availability}/>
             </div>
         );
 

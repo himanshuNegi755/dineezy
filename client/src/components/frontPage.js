@@ -73,7 +73,7 @@ const FrontPage = (props) => {
                     <NavbarForSite />
                 </div>
 
-                <section className="front-title-div">
+                <section className="front-title-div" >
 
                     <h1>A safe and efficient POS for restaurants.</h1>
                     <h3>Go digital with ordering by just a scan.</h3>

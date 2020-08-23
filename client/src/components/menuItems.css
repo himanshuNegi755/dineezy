@@ -25,10 +25,10 @@
 .vnv-id{
     width: 2rem;
     float: right;
-    padding-top: 0.5rem;
+    padding-top: 0.3rem;
 }
 .card-for-item .card-footer{
-    padding: 0 0.5rem 0 1rem;
+    padding: 0 0.5rem;
     background-color: #303030;
     color: white;
     border-radius: 0 0 7px 7px;
@@ -40,7 +40,60 @@
 }
 .cardBtn-div{
     float: right;
-    margin-top: 0.5rem;
+    margin: 0.5rem 0;
+}
+.sub-drop{
+    display: inline;
+}
+.sub-drop .btn.btn-secondary{
+    background-color: #202020;
+    border: 0;
+    border-radius: 3px;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    color: white;
+}
+.sub-drop .btn:hover{
+    background-color: #181818;
+}
+.sub-drop .btn{
+    background-color: #202020;
+    border: 0;
+}
+.sub-drop .dropdown-menu{
+    background-color: #303030;
+    border-radius: 5px;
+    box-shadow: 0 0 3px #ffe100;
+    width: 300%;
+    padding: 0.5rem;
+    margin: 0;
+}
+.sub-drop .dropdown-item{
+    margin: 0;
+    padding: 0;
+}
+.sub-drop-head{
+    display: flex;
+    color: white;
+}
+.sub-drop-head:hover{
+    background-color: #303030;
+    color: white;
+    cursor: default;
+}
+.sub-drop .dropdown-menu li{
+    color: white;
+    background-color: #303030;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 5px;
+}
+.sub-row{
+    margin: 0;
+}
+.sub-price-col{
+    text-align: right;
 }
 .card-btn{
     font-family: 'Ubuntu', sans-serif;

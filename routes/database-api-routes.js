@@ -243,7 +243,21 @@ router.put('/delete/email_access', function(request, response, next) {
 router.post("/file_upload", upload.single('shopMenu'), (req, res, next) => {
     res.send('file uploaded');
 });
-    
+
+//subcategory new item add to shop menu
+router.put('/menu/sub', function(request, response, next) {
+        Menu.updateOne({shopId: request.body.shopId}, {$push: {menu: {itemName: request.body.itemName, vegOrNonVeg: request.body.vegOrNonVeg, description: request.body.description, category: request.body.category, subcategory: request.body.subcategory}}}, function(err, menu) {
+            if (err) {
+                const error = new Error('Could not update the menu');
+                next(error);
+                response.send(err)
+                //response.status(500).send({error: "Could not update the menu"});
+            } else {
+                response.send(menu); 
+            }
+        });
+    });
+
 /////////////////////////// api operations for kitchen alone //////////////////////////////
     
 //get shop name by owner email and shop id

@@ -7,9 +7,14 @@
     margin: 0;
 }
 .front-title-div{
-  background-color: #fff110;
-  padding: 8% 10%;
+  background-image: url("../images/chillyBg.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-color: #202020;
+  padding: 10%;
   color: #101010;
+  text-shadow: 1px 1px 3px #ffa100;
   text-align: center;
 }
 .front-title-div h1{
