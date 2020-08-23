@@ -206,14 +206,32 @@ input[type=number] {
 .adv-opt{
   padding-left: 0.75rem;
 }
+.adv-opt:hover{
+  cursor: pointer;
+}
 .fa-angle-down{
   position: relative;
   padding: 0.35rem 0.5rem 0.25rem;
-  box-shadow: 0 0 2px #101010;
-  background-color: #404040;
   border-radius: 15px;
   top: 2px;
   left: 3px;
+}
+.sub-row{
+  padding: 0 0.75rem;
+}
+.sub-col{
+  padding: 0.2rem 0.25rem;
+}
+.del-btn{
+  background-color: #202020;
+  color: white;
+  border: 0;
+  border-radius: 30px;
+  padding: 0.5rem 0.8rem;
+}
+.add-sub-div{
+  text-align: center;
+  padding-bottom: 0.5rem;
 }
 .custom-switch{
   display: inline-block;
@@ -248,6 +266,7 @@ input[type=number] {
     text-align: center;
 }
 .form-btn{
+  transition: 0.2s;
     font-family: 'Ubuntu', sans-serif;
     background-color: #202020;
     color: white;
@@ -256,12 +275,17 @@ input[type=number] {
     padding: 0.5rem 1rem;
     margin: 0.2rem 1.5rem;
 }
+.add-sub-btn:hover{
+  transition: 0.2s;
+  background-color: #ffe100;
+  color: black;
+}
 .submit-btn:hover{
     transition: 0.2s;
     background-color: #64d115;
     color: black;
 }
-.delete-btn:hover{
+.delete-btn:hover, .del-btn:hover{
     transition: 0.2s;
     background-color: #e30a07;
     color: black;

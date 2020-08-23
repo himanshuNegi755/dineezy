@@ -19,7 +19,7 @@ class ShopPage extends Component{
         super(props);
 
         this.state = { userEmail: '', loggedIn: true, showModal: false, shopName: '', shopAddress: '', noOfTables: 1,
-                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', editItemAvailability: '', category: [], itemsByCategory: [], currentItemCategory: '', userPhoneNo: [], noOfShop: 0, subcategory: [{subcategoryItemName: '', subcategoryItemHalfPrice: '', subcategoryItemFullPrice: ''}], showSubcategoryDisplay: 'none', showHalfFullPriceDisplay: 'block'}
+                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', editItemAvailability: '', category: [], itemsByCategory: [], currentItemCategory: '', userPhoneNo: [], noOfShop: 0, subcategory: [{subcategoryItemName: '', subcategoryItemHalfPrice: '', subcategoryItemFullPrice: ''}], showSubcategoryDisplay: 'none', showHalfFullPriceDisplay: 'block', advRotate: 'rotate(0turn)'}
 
         this.suggestionRef = React.createRef();
     }
@@ -558,7 +558,7 @@ class ShopPage extends Component{
                         size="md"
                         aria-labelledby="test-new-item-add-modal"
                         centered
-                        show={true}
+                        show={false}
                         onHide={() => { this.setState({showNewItemAddModal: !this.state.showNewItemAddModal}) }}
                         >
                             <Modal.Header closeButton>
@@ -583,7 +583,7 @@ class ShopPage extends Component{
                                     <Form.Group>
                                         <Form.Label style={{color: 'red'}}>If You don't have half/full option, only enter full price <strong>leave half price field empty</strong></Form.Label>
                                     </Form.Group>
-                                    
+
                                     <Form.Group style={{display: this.state.showHalfFullPriceDisplay}}>
                                         <div className="row">
                                             <div className="col">
@@ -596,32 +596,32 @@ class ShopPage extends Component{
                                     </Form.Group>
 
                                     <Form.Group>
-                                        <span className="adv-opt">Advance Options <i class="fas fa-angle-down" onClick={()=>{
+                                        <span className="adv-opt" onClick={()=>{
                                                     if(this.state.showSubcategoryDisplay === 'none'){
-                                                        this.setState({showSubcategoryDisplay: 'block', showHalfFullPriceDisplay: 'none'})
+                                                        this.setState({showSubcategoryDisplay: 'block', showHalfFullPriceDisplay: 'none', advRotate: 'rotate(0.5turn)'})
                                                     } else {
-                                                        this.setState({showSubcategoryDisplay: 'none', showHalfFullPriceDisplay: 'block'})
+                                                        this.setState({showSubcategoryDisplay: 'none', showHalfFullPriceDisplay: 'block', advRotate: 'rotate(0turn)'})
                                                     }
-                                                    }}></i></span>
+                                                  }}>Advance Options <i class="fas fa-angle-down" style={{transform: this.state.advRotate}}></i></span>
                                     </Form.Group>
-                                    
+
                                     <div className="div-for-subcategory" style={{display: this.state.showSubcategoryDisplay}}>
                                         <Form.Group>
                                             {
                                                 this.state.subcategory.map((subcategory, index) => {
                                                     return(
-                                                        <div key={index} className="row">
-                                                            <div className="col-4">
+                                                        <div key={index} className="row sub-row">
+                                                            <div className="sub-col col-5">
                                                                 <Form.Control type="text" placeholder="subcategory name" name='subcategoryItemName' onChange={event => this.handleChangeInSub(index, event)} value={subcategory.subcategoryItemName}/>
                                                             </div>
-                                                            <div className="col-3">
+                                                            <div className="sub-col col-3">
                                                                 <Form.Control type="number" placeholder="full Price (Rs.)" name='subcategoryItemFullPrice' onChange={event => this.handleChangeInSub(index, event)} min="1"/>
                                                             </div>
-                                                            <div className="col-3">
+                                                            <div className="sub-col col-3">
                                                                 <Form.Control type="number" placeholder="half Price (Rs.)" name='subcategoryItemHalfPrice' onChange={event => this.handleChangeInSub(index, event)} min="1"/>
                                                             </div>
-                                                            <div className="col-2">
-                                                                <button type="button" className="submit-btn form-btn" onClick={() => this.deleteSubcategory(index)}>
+                                                            <div className="sub-col col-1">
+                                                                <button type="button" className="del-btn" onClick={() => this.deleteSubcategory(index)}>
                                                                     <i styel={{color: 'white'}} className="fas fa-trash-alt"></i>
                                                                 </button>
                                                             </div>
@@ -631,13 +631,13 @@ class ShopPage extends Component{
                                                 })
                                             }
                                         </Form.Group>
-                                        <div className="btn-div">
-                                            <button type="button" className="submit-btn form-btn" onClick={(e) => this.addSubcategory(e)}>
+                                        <div className="add-sub-div">
+                                            <button type="button" className="add-sub-btn form-btn" onClick={(e) => this.addSubcategory(e)}>
                                                 Add Subcategory
                                             </button>
                                         </div>
                                     </div>
-                                    
+
                                     <Form.Group>
                                         <Form.Control type="text" placeholder="One Line description of item" name='itemDescription' value={this.state.itemDescription} onChange={this.handleInputChange}/>
                                     </Form.Group>
