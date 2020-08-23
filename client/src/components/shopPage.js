@@ -19,7 +19,7 @@ class ShopPage extends Component{
         super(props);
 
         this.state = { userEmail: '', loggedIn: true, showModal: false, shopName: '', shopAddress: '', noOfTables: 1,
-                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', editItemAvailability: '', category: [], itemsByCategory: [], currentItemCategory: '', userPhoneNo: [], noOfShop: 0, subcategory: [{subcategoryItemName: '', subcategoryItemHalfPrice: '', subcategoryItemFullPrice: ''}], showSubcategoryDisplay: 'none', showHalfFullPriceDisplay: 'block', advRotate: 'rotate(0turn)'}
+                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', editItemAvailability: '', category: [], itemsByCategory: [], currentItemCategory: '', userPhoneNo: [], noOfShop: 0, subcategory: [{itemName: '', half: '', full: ''}], showSubcategoryDisplay: 'none', showHalfFullPriceDisplay: 'block', advRotate: 'rotate(0turn)'}
 
         this.suggestionRef = React.createRef();
     }
@@ -191,23 +191,43 @@ class ShopPage extends Component{
     addNewItemToMenuFunction = () => {
 
         this.setState({showNewItemAddModal: !this.state.showNewItemAddModal})
-
-        axios.put(`${process.env.REACT_APP_BACKEND_API}/menu`, {
+        console.log(this.state.subcategory.length);
+        if(this.state.subcategory[0].itemName !== '') {
+            axios.put(`${process.env.REACT_APP_BACKEND_API}/menu/sub`, {
+            shopId: this.state.shopIdVar,
+            itemName: this.state.itemName,
+            vegOrNonVeg: this.state.vegOrNonVeg,
+            description: this.state.itemDescription,
+            category: this.state.itemCategory,
+            subcategory: this.state.subcategory
+                })
+            .then(res => {
+                console.log(res.data);
+                this.getMenuFunction(this.state.shopIdVar);
+                this.loadCategoryFunction(this.state.shopIdVar);
+                this.loadItemFunction(this.state.currentItemCategory);
+            })
+            
+        } else {
+            axios.put(`${process.env.REACT_APP_BACKEND_API}/menu`, {
             shopId: this.state.shopIdVar,
             itemName: this.state.itemName,
             vegOrNonVeg: this.state.vegOrNonVeg,
             price: this.state.itemPrice,
             description: this.state.itemDescription,
             category: this.state.itemCategory
-        })
-        .then(res => {
-            console.log(res.data);
-            this.getMenuFunction(this.state.shopIdVar);
-            this.loadCategoryFunction(this.state.shopIdVar);
-            this.loadItemFunction(this.state.currentItemCategory);
+                })
+            .then(res => {
+                console.log(res.data);
+                this.getMenuFunction(this.state.shopIdVar);
+                this.loadCategoryFunction(this.state.shopIdVar);
+                this.loadItemFunction(this.state.currentItemCategory);
 
-            this.setState({itemName: '', vegOrNonVeg: '', itemPrice: 0, itemDescription: '', itemCategory: ''});
-        })
+                //this.setState({itemName: '', vegOrNonVeg: '', itemPrice: 0, itemDescription: '', itemCategory: ''});
+            })
+        }
+        
+        this.setState({itemName: '', vegOrNonVeg: '', itemPrice: 0, itemDescription: '', itemCategory: '', subcategory: [{itemName: '', half: '', full: ''}]});
     }
 
     showShopAfterAdding = () => {
@@ -313,7 +333,7 @@ class ShopPage extends Component{
 
     //all functions related to subcategory
     addSubcategory = () => {
-        this.setState({subcategory: [...this.state.subcategory, {subcategoryItemName: '', subcategoryItemHalfPrice: '', subcategoryItemFullPrice: ''}]});
+        this.setState({subcategory: [...this.state.subcategory, {itemName: '', half: '', full: ''}]});
     }
 
     handleChangeInSub = (index, event) => {
@@ -483,10 +503,10 @@ class ShopPage extends Component{
                             <Modal.Body>
                                 <Form>
 
-                                    <Form.Group controlId="formBasicName">
+                                    <Form.Group>
                                         <Form.Control type="text" placeholder="Item Name" name='itemName' value={this.state.itemName} onChange={this.handleInputChange}/>
                                     </Form.Group>
-                                    <Form.Group controlId="formBasicName">
+                                    <Form.Group>
                                       <select className="custom-select" id="inputGroupSelect02" type="text" placeholder="Veg/Non-Veg" name='vegOrNonVeg' value={this.state.vegOrNonVeg} onChange={this.handleInputChange}>
                                         <option value="veg">Veg</option>
                                         <option value="non-veg">Non-veg</option>
@@ -494,15 +514,69 @@ class ShopPage extends Component{
                                       </select>
                                     </Form.Group>
 
-                                    <Form.Group controlId="formBasicName">
-                                        <Form.Control type="number" placeholder="Item Price" name='itemPrice' value={this.state.itemPrice} onChange={this.handleInputChange} min="1"/>
+                                    <Form.Group>
+                                        <Form.Label style={{color: 'red'}}>If You don't have half/full option, only enter full price <strong>leave half price field empty</strong></Form.Label>
                                     </Form.Group>
 
-                                    <Form.Group controlId="formBasicName">
+                                    <Form.Group style={{display: this.state.showHalfFullPriceDisplay}}>
+                                        <div className="row">
+                                            <div className="col">
+                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='itemPrice' onChange={this.handleInputChange} min="1"/>
+                                            </div>
+                                            <div className="col">
+                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='itemPrice' onChange={this.handleInputChange} min="1"/>
+                                            </div>
+                                        </div>
+                                    </Form.Group>
+
+                                    <Form.Group>
+                                        <span className="adv-opt" onClick={()=>{
+                                                if(this.state.showSubcategoryDisplay === 'none'){
+                                                    this.setState({showSubcategoryDisplay: 'block', showHalfFullPriceDisplay: 'none', advRotate: 'rotate(0.5turn)'})
+                                                } else {
+                                                    this.setState({showSubcategoryDisplay: 'none', showHalfFullPriceDisplay: 'block', advRotate: 'rotate(0turn)'})
+                                                }
+                                            }}>Advance Options <i className="fas fa-angle-down" style={{transform: this.state.advRotate}}></i></span>
+                                    </Form.Group>
+
+                                    <div className="div-for-subcategory" style={{display: this.state.showSubcategoryDisplay}}>
+                                        <Form.Group>
+                                            {
+                                                this.state.subcategory.map((subcategory, index) => {
+                                                    return(
+                                                        <div key={index} className="row sub-row">
+                                                            <div className="sub-col col-5">
+                                                                <Form.Control type="text" placeholder="subcategory name" name='itemName' onChange={event => this.handleChangeInSub(index, event)} value={subcategory.itemName}/>
+                                                            </div>
+                                                            <div className="sub-col col-3">
+                                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='full' onChange={event => this.handleChangeInSub(index, event)} min="1"/>
+                                                            </div>
+                                                            <div className="sub-col col-3">
+                                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='half' onChange={event => this.handleChangeInSub(index, event)} min="1"/>
+                                                            </div>
+                                                            <div className="sub-col col-1">
+                                                                <button type="button" className="del-btn" onClick={() => this.deleteSubcategory(index)}>
+                                                                    <i styel={{color: 'white'}} className="fas fa-trash-alt"></i>
+                                                                </button>
+                                                            </div>
+
+                                                        </div>
+                                                        )
+                                                })
+                                            }
+                                        </Form.Group>
+                                        <div className="add-sub-div">
+                                            <button type="button" className="add-sub-btn form-btn" onClick={(e) => this.addSubcategory(e)}>
+                                                Add Subcategory
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <Form.Group>
                                         <Form.Control type="text" placeholder="One Line description of item" name='itemDescription' value={this.state.itemDescription} onChange={this.handleInputChange}/>
                                     </Form.Group>
 
-                                    <Form.Group controlId="formBasicName">
+                                    <Form.Group>
                                         <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='itemCategory' value={this.state.itemCategory} onChange={this.handleInputChange}/>
                                     </Form.Group>
                                     <div className="btn-div">
@@ -545,109 +619,6 @@ class ShopPage extends Component{
                                     </Form.Group>
                                     <div className="btn-div">
                                       <button type="button" className="submit-btn form-btn" onClick={this.onSubmit}>
-                                        Submit
-                                      </button>
-                                    </div>
-                                </Form>
-
-                            </Modal.Body>
-                        </Modal>
-                </div>
-
-                <div>
-                    <Modal
-                        size="md"
-                        aria-labelledby="test-new-item-add-modal"
-                        centered
-                        show={false}
-                        onHide={() => { this.setState({showNewItemAddModal: !this.state.showNewItemAddModal}) }}
-                        >
-                            <Modal.Header closeButton>
-                                <div className="Form-title">
-                                    TEST ADD NEW ITEM DETAILS
-                                </div>
-                            </Modal.Header>
-                            <Modal.Body>
-                                <Form>
-
-                                    <Form.Group>
-                                        <Form.Control type="text" placeholder="Item Name" name='itemName' value={this.state.itemName} onChange={this.handleInputChange}/>
-                                    </Form.Group>
-                                    <Form.Group>
-                                      <select className="custom-select" id="inputGroupSelect02" type="text" placeholder="Veg/Non-Veg" name='vegOrNonVeg' value={this.state.vegOrNonVeg} onChange={this.handleInputChange}>
-                                        <option value="veg">Veg</option>
-                                        <option value="non-veg">Non-veg</option>
-                                        <option value="egg">Egg</option>
-                                      </select>
-                                    </Form.Group>
-
-                                    <Form.Group>
-                                        <Form.Label style={{color: 'red'}}>If You don't have half/full option, only enter full price <strong>leave half price field empty</strong></Form.Label>
-                                    </Form.Group>
-
-                                    <Form.Group style={{display: this.state.showHalfFullPriceDisplay}}>
-                                        <div className="row">
-                                            <div className="col">
-                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='itemPrice' onChange={this.handleInputChange} min="1"/>
-                                            </div>
-                                            <div className="col">
-                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='itemPrice' onChange={this.handleInputChange} min="1"/>
-                                            </div>
-                                        </div>
-                                    </Form.Group>
-
-                                    <Form.Group>
-                                        <span className="adv-opt" onClick={()=>{
-                                                    if(this.state.showSubcategoryDisplay === 'none'){
-                                                        this.setState({showSubcategoryDisplay: 'block', showHalfFullPriceDisplay: 'none', advRotate: 'rotate(0.5turn)'})
-                                                    } else {
-                                                        this.setState({showSubcategoryDisplay: 'none', showHalfFullPriceDisplay: 'block', advRotate: 'rotate(0turn)'})
-                                                    }
-                                                  }}>Advance Options <i class="fas fa-angle-down" style={{transform: this.state.advRotate}}></i></span>
-                                    </Form.Group>
-
-                                    <div className="div-for-subcategory" style={{display: this.state.showSubcategoryDisplay}}>
-                                        <Form.Group>
-                                            {
-                                                this.state.subcategory.map((subcategory, index) => {
-                                                    return(
-                                                        <div key={index} className="row sub-row">
-                                                            <div className="sub-col col-5">
-                                                                <Form.Control type="text" placeholder="subcategory name" name='subcategoryItemName' onChange={event => this.handleChangeInSub(index, event)} value={subcategory.subcategoryItemName}/>
-                                                            </div>
-                                                            <div className="sub-col col-3">
-                                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='subcategoryItemFullPrice' onChange={event => this.handleChangeInSub(index, event)} min="1"/>
-                                                            </div>
-                                                            <div className="sub-col col-3">
-                                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='subcategoryItemHalfPrice' onChange={event => this.handleChangeInSub(index, event)} min="1"/>
-                                                            </div>
-                                                            <div className="sub-col col-1">
-                                                                <button type="button" className="del-btn" onClick={() => this.deleteSubcategory(index)}>
-                                                                    <i styel={{color: 'white'}} className="fas fa-trash-alt"></i>
-                                                                </button>
-                                                            </div>
-
-                                                        </div>
-                                                        )
-                                                })
-                                            }
-                                        </Form.Group>
-                                        <div className="add-sub-div">
-                                            <button type="button" className="add-sub-btn form-btn" onClick={(e) => this.addSubcategory(e)}>
-                                                Add Subcategory
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <Form.Group>
-                                        <Form.Control type="text" placeholder="One Line description of item" name='itemDescription' value={this.state.itemDescription} onChange={this.handleInputChange}/>
-                                    </Form.Group>
-
-                                    <Form.Group>
-                                        <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='itemCategory' value={this.state.itemCategory} onChange={this.handleInputChange}/>
-                                    </Form.Group>
-                                    <div className="btn-div">
-                                      <button type="button" className="submit-btn form-btn" onClick={this.addNewItemToMenuFunction}>
                                         Submit
                                       </button>
                                     </div>

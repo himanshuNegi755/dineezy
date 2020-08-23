@@ -27,18 +27,18 @@ const MenuItems = (props) => {
   const showSubcategoryIfHave = () => {
       if(props.subcategory) {
           const list = props.subcategory.map((subcategoryItem) =>
-            <div key={subcategoryItem._id} class="dropdown-item">
+            <div key={subcategoryItem._id} className="dropdown-item">
                 {subcategoryItem.half ? <li className="row sub-row"><div className="col-8">{subcategoryItem.itemName}</div><div className="col-4 sub-price-col">{subcategoryItem.full}/{subcategoryItem.half}</div></li> : <li className="row sub-row"><div className="col-9">{subcategoryItem.itemName}</div><div className="col-3 sub-price-col">{subcategoryItem.full}/(n.a)</div></li>}
             </div>
         );
 
         return (
-          <div class="sub-drop dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div className="sub-drop dropdown">
+            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Subcategories
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <div class="dropdown-item row sub-row sub-drop-head">
+            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <div className="dropdown-item row sub-row sub-drop-head">
                   <div className="col-8">Subcategory Name</div><div className="col-4 sub-price-col">Price: ₹ (F/H)</div>
               </div>
               {list}
