@@ -76,7 +76,7 @@ router.get('/shop/get_shops/:userEmail', function(request, response, next) {
     
 //add item to shop menu
 router.put('/menu', function(request, response, next) {
-        Menu.updateOne({shopId: request.body.shopId}, {$push: {menu: {itemName: request.body.itemName, vegOrNonVeg: request.body.vegOrNonVeg, price: request.body.price, description: request.body.description, category: request.body.category}}}, function(err, menu) {
+        Menu.updateOne({shopId: request.body.shopId}, {$push: {menu: {itemName: request.body.itemName, vegOrNonVeg: request.body.vegOrNonVeg, price: request.body.price, description: request.body.description, category: request.body.category, volume: request.body.volume}}}, function(err, menu) {
             if (err) {
                 const error = new Error('Could not update the menu');
                 next(error);

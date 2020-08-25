@@ -19,7 +19,7 @@ class ShopPage extends Component{
         super(props);
 
         this.state = { userEmail: '', loggedIn: true, showModal: false, shopName: '', shopAddress: '', noOfTables: 1,
-                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', editItemAvailability: '', category: [], itemsByCategory: [], currentItemCategory: '', userPhoneNo: [], noOfShop: 0, subcategory: [{itemName: '', half: '', full: ''}], showSubcategoryDisplay: 'none', showHalfFullPriceDisplay: 'block', advRotate: 'rotate(0turn)'}
+                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', editItemAvailability: '', category: [], itemsByCategory: [], currentItemCategory: '', userPhoneNo: [], noOfShop: 0, subcategory: [{itemName: '', half: '', full: ''}], showSubcategoryDisplay: 'none', showHalfFullPriceDisplay: 'block', advRotate: 'rotate(0turn)', volume: {full: '', half: ''}}
 
         this.suggestionRef = React.createRef();
     }
@@ -40,9 +40,13 @@ class ShopPage extends Component{
 
     //function to handle input change
     handleInputChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
+        if (e.target.name === 'full' || e.target.name === 'half'){
+            this.setState({volume: {...this.state.volume, [e.target.name]: e.target.value}})
+        } else {
+            this.setState({
+                [e.target.name]: e.target.value
+            });
+        }
     }
 
 
@@ -182,7 +186,6 @@ class ShopPage extends Component{
     loadItemFunction = (itemCategory) => {
         axios.get(`${process.env.REACT_APP_BACKEND_API}/items?shopId=${this.state.shopIdVar}&category=${itemCategory}`)
         .then(res => {
-            console.log(res.data);
             this.setState({itemsByCategory: res.data})
         })
     }
@@ -191,8 +194,8 @@ class ShopPage extends Component{
     addNewItemToMenuFunction = () => {
 
         this.setState({showNewItemAddModal: !this.state.showNewItemAddModal})
-        console.log(this.state.subcategory.length);
         if(this.state.subcategory[0].itemName !== '') {
+            console.log('this is the one with category');
             axios.put(`${process.env.REACT_APP_BACKEND_API}/menu/sub`, {
             shopId: this.state.shopIdVar,
             itemName: this.state.itemName,
@@ -209,13 +212,15 @@ class ShopPage extends Component{
             })
             
         } else {
+            console.log('this is not the category one');
             axios.put(`${process.env.REACT_APP_BACKEND_API}/menu`, {
             shopId: this.state.shopIdVar,
             itemName: this.state.itemName,
             vegOrNonVeg: this.state.vegOrNonVeg,
-            price: this.state.itemPrice,
+            //price: this.state.itemPrice,
             description: this.state.itemDescription,
-            category: this.state.itemCategory
+            category: this.state.itemCategory,
+            volume: this.state.volume
                 })
             .then(res => {
                 console.log(res.data);
@@ -227,7 +232,7 @@ class ShopPage extends Component{
             })
         }
         
-        this.setState({itemName: '', vegOrNonVeg: '', itemPrice: 0, itemDescription: '', itemCategory: '', subcategory: [{itemName: '', half: '', full: ''}]});
+        this.setState({itemName: '', vegOrNonVeg: '', itemPrice: 0, itemDescription: '', itemCategory: '', subcategory: [{itemName: '', half: '', full: ''}], volume: {full: '', half: ''}});
     }
 
     showShopAfterAdding = () => {
@@ -300,7 +305,7 @@ class ShopPage extends Component{
     menuItemList = () => {
         const list = this.state.itemsByCategory.map((menuItem) =>
             <div key={menuItem.menu._id}>
-                <MenuItems itemName={menuItem.menu.itemName} vegOrNonVeg={menuItem.menu.vegOrNonVeg} price={menuItem.menu.price} description={menuItem.menu.description} category={menuItem.menu.category} itemId={menuItem.menu._id} subcategory={menuItem.menu.subcategory} deleteItemFromMenu={this.deleteItemFunction} shopId={this.state.shopIdVar} editItem={this.suggestionSelected} itemAvailability={menuItem.menu.availability}/>
+                <MenuItems itemName={menuItem.menu.itemName} vegOrNonVeg={menuItem.menu.vegOrNonVeg} price={menuItem.menu.price} description={menuItem.menu.description} category={menuItem.menu.category} itemId={menuItem.menu._id} subcategory={menuItem.menu.subcategory} itemVolume={menuItem.menu.volume} deleteItemFromMenu={this.deleteItemFunction} shopId={this.state.shopIdVar} editItem={this.suggestionSelected} itemAvailability={menuItem.menu.availability}/>
             </div>
         );
 
@@ -521,10 +526,10 @@ class ShopPage extends Component{
                                     <Form.Group style={{display: this.state.showHalfFullPriceDisplay}}>
                                         <div className="row">
                                             <div className="col">
-                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='itemPrice' onChange={this.handleInputChange} min="1"/>
+                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='full' onChange={this.handleInputChange} min="1"/>
                                             </div>
                                             <div className="col">
-                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='itemPrice' onChange={this.handleInputChange} min="1"/>
+                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='half' onChange={this.handleInputChange} min="1"/>
                                             </div>
                                         </div>
                                     </Form.Group>

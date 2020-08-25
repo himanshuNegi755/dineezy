@@ -25,7 +25,14 @@ const MenuItems = (props) => {
   }
 
   const showSubcategoryIfHave = () => {
-      if(props.subcategory) {
+      
+      if(props.price || props.itemVolume) {
+          if(props.itemVolume) {
+              return(<div className="item-price">₹ {props.itemVolume.half}, {props.itemVolume.full}</div>)
+          } else {
+              return(<div className="item-price">₹ {props.price}</div>)
+          }
+      } else {
           const list = props.subcategory.map((subcategoryItem) =>
             <div key={subcategoryItem._id} className="dropdown-item">
                 {subcategoryItem.half ? <li className="row sub-row"><div className="col-8">{subcategoryItem.itemName}</div><div className="col-4 sub-price-col">{subcategoryItem.full}/{subcategoryItem.half}</div></li> : <li className="row sub-row"><div className="col-9">{subcategoryItem.itemName}</div><div className="col-3 sub-price-col">{subcategoryItem.full}/(n.a)</div></li>}
@@ -46,8 +53,6 @@ const MenuItems = (props) => {
           </div>
 
         );
-      } else {
-          return(<div className="item-price">₹ {props.price}</div>)
       }
   }
 
