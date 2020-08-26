@@ -127,7 +127,8 @@ input[type=number] {
 /* ***********************Menu category*************************** */
 .menu-category {
     display: block;
-    height: 3.7rem;
+    min-height: 3rem;
+    overflow: hidden;
     margin: 0 1.5%;
 }
 .menu-category ul{
@@ -140,11 +141,11 @@ input[type=number] {
     font-family: 'Ubuntu', sans-serif;
     color: #e0e0e0;
     background-color: #282828;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     float: left;
     letter-spacing: 0.3rem;
     list-style: none;
-    padding: 1% 2%;
+    padding: 0.5rem 0.8rem;
     margin: 2px 0.2rem 0;
     cursor: pointer;
 }

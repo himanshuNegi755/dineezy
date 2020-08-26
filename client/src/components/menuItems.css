@@ -16,7 +16,7 @@
 .card-for-item .item-name{
     display: inline-block;
     font-family: 'Noto Serif', serif;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     padding-top: 0.6rem;
 }
 .na-icon{
@@ -27,16 +27,19 @@
     float: right;
     padding-top: 0.3rem;
 }
+.item-description{
+  font-size: 0.9rem;
+}
 .card-for-item .card-footer{
     padding: 0 0.5rem;
     background-color: #303030;
     color: white;
     border-radius: 0 0 7px 7px;
 }
-.item-price{
+.card-for-item .item-price{
     display: inline-block;
-    font-family: 'Ubuntu', sans-serif;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    margin: 0.8rem;
 }
 .cardBtn-div{
     float: right;
@@ -101,7 +104,7 @@
     color: white;
     border: 0;
     border-radius: 3px;
-    padding: 0.5rem 1rem;
+    padding: 0.3rem 0.8rem;
     margin: 0 0.5rem;
 }
 .edit-btn:hover{
@@ -125,7 +128,7 @@
     width: 2rem;
   }
   .item-description{
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
   .qty-div{
     text-align: center;

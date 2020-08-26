@@ -13,14 +13,17 @@
 .show-menu-cards .item-name{
   display: inline-block;
   font-family: 'Noto Serif', serif;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  padding-top: 0.8rem;
 }
 .show-menu-cards .vnv-id{
-  width: 3rem;
+  width: 2rem;
   float: right;
 }
 .show-menu-cards .item-description{
   font-size: 0.9rem;
+  color: #e0e0e0;
+  text-shadow: 1px 1px 3px #101010;
   height: 2rem;
   line-height: 1.3;
 }

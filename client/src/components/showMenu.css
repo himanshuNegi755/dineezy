@@ -3,7 +3,8 @@ body{
   color: white;
 }
 .category-menu {
-    height: 3.7rem;
+    min-height: 3rem;
+    overflow: hidden;
     margin: 0 1.5%;
 }
 .category-menu ul{
@@ -16,11 +17,11 @@ body{
     font-family: 'Ubuntu', sans-serif;
     color: #e0e0e0;
     background-color: #303030;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     float: left;
-    letter-spacing: 0.3rem;
+    letter-spacing: 0.2rem;
     list-style: none;
-    padding: 1% 2%;
+    padding: 0.8rem 1rem;
     margin: 2px 0.2rem 0;
     cursor: pointer;
 }
@@ -54,11 +55,11 @@ body{
 .items-card {
     margin: 0 1%;
 }
-
 .cart-option {
     background-color:  #202020;
     border-radius: 3px 28px 28px 3px;
     margin: 5px 0 0;
+    max-height: 3.2rem;
     font-size: 1.3rem;
     text-align: center;
     cursor: pointer;
@@ -80,9 +81,7 @@ body{
     border-radius: 10%;
     color: #fff;
 }
-
 /* ***********************show Cart Overlay Css****************************** */
-
 
 .cart-overlay {
     position: fixed;
