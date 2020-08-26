@@ -19,7 +19,7 @@ class ShopPage extends Component{
         super(props);
 
         this.state = { userEmail: '', loggedIn: true, showModal: false, shopName: '', shopAddress: '', noOfTables: 1,
-                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', editItemAvailability: '', category: [], itemsByCategory: [], currentItemCategory: '', userPhoneNo: [], noOfShop: 0, subcategory: [{itemName: '', half: '', full: ''}], showSubcategoryDisplay: 'none', showHalfFullPriceDisplay: 'block', advRotate: 'rotate(0turn)', volume: {full: '', half: ''}}
+                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', editItemAvailability: '', category: [], itemsByCategory: [], currentItemCategory: '', userPhoneNo: [], noOfShop: 0, subcategory: [{itemName: '', half: '', full: ''}], showSubcategoryDisplay: 'none', showHalfFullPriceDisplay: 'block', advRotate: 'rotate(0turn)', volume: {full: '', half: ''}, editSubcategory: [{itemName: '', half: '', full: ''}], editVolume: {full: '', half: ''}}
 
         this.suggestionRef = React.createRef();
     }
@@ -104,16 +104,34 @@ class ShopPage extends Component{
 
         var itemObj = this.state.menuItemList.filter(item => item.itemName === value)
 
-        this.setState({
-            editItemName: itemObj[0].itemName,
-            editVegOrNonVeg: itemObj[0].vegOrNonVeg,
-            editItemPrice: itemObj[0].price,
-            editItemDescription: itemObj[0].description,
-            editItemCategory: itemObj[0].category,
-            editItemId: itemObj[0]._id,
-            editItemAvailability: itemObj[0].availability,
-            showItemEditModal: !this.showItemEditModal
-        });
+        if(itemObj[0].subcategory.length > 0) {
+            this.setState({
+                editItemName: itemObj[0].itemName,
+                editVegOrNonVeg: itemObj[0].vegOrNonVeg,
+                editItemDescription: itemObj[0].description,
+                editItemCategory: itemObj[0].category,
+                editItemId: itemObj[0]._id,
+                editItemAvailability: itemObj[0].availability,
+                editSubcategory: itemObj[0].subcategory,
+                showSubcategoryDisplay: 'block',
+                showHalfFullPriceDisplay: 'none',
+                showItemEditModal: !this.showItemEditModal
+            });                        
+        }else {
+            this.setState({
+                editItemName: itemObj[0].itemName,
+                editVegOrNonVeg: itemObj[0].vegOrNonVeg,
+                editItemPrice: itemObj[0].price,
+                editItemDescription: itemObj[0].description,
+                editItemCategory: itemObj[0].category,
+                editItemId: itemObj[0]._id,
+                editItemAvailability: itemObj[0].availability,
+                editVolume: itemObj[0].volume,
+                showSubcategoryDisplay: 'none',
+                showHalfFullPriceDisplay: 'block',
+                showItemEditModal: !this.showItemEditModal
+            });
+        }
 
     }
 
@@ -448,8 +466,62 @@ class ShopPage extends Component{
                                     </Form.Group>
 
                                     <Form.Group>
-                                        <Form.Control type="number" placeholder="Item Price" name='editItemPrice' value={this.state.editItemPrice} onChange={this.handleInputChange} min="1"/>
+                                        <Form.Label style={{color: 'red'}}>If You don't have half/full option, only enter full price <strong>leave half price field empty</strong></Form.Label>
                                     </Form.Group>
+
+                                    <Form.Group style={{display: this.state.showHalfFullPriceDisplay}}>
+                                        <div className="row">
+                                            <div className="col">
+                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='full' onChange={this.handleInputChange} min="1"/>
+                                            </div>
+                                            <div className="col">
+                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='half' onChange={this.handleInputChange} min="1"/>
+                                            </div>
+                                        </div>
+                                    </Form.Group>
+
+                                    <Form.Group>
+                                        <span className="adv-opt" onClick={()=>{
+                                                if(this.state.showSubcategoryDisplay === 'none'){
+                                                    this.setState({showSubcategoryDisplay: 'block', showHalfFullPriceDisplay: 'none', advRotate: 'rotate(0.5turn)'})
+                                                } else {
+                                                    this.setState({showSubcategoryDisplay: 'none', showHalfFullPriceDisplay: 'block', advRotate: 'rotate(0turn)'})
+                                                }
+                                            }}>Advance Options <i className="fas fa-angle-down" style={{transform: this.state.advRotate}}></i></span>
+                                    </Form.Group>
+
+                                    <div className="div-for-subcategory" style={{display: this.state.showSubcategoryDisplay}}>
+                                        <Form.Group>
+                                            {
+                                                this.state.subcategory.map((subcategory, index) => {
+                                                    return(
+                                                        <div key={index} className="row sub-row">
+                                                            <div className="sub-col col-5">
+                                                                <Form.Control type="text" placeholder="subcategory name" name='itemName' onChange={event => this.handleChangeInSub(index, event)} value={subcategory.itemName}/>
+                                                            </div>
+                                                            <div className="sub-col col-3">
+                                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='full' onChange={event => this.handleChangeInSub(index, event)} min="1"/>
+                                                            </div>
+                                                            <div className="sub-col col-3">
+                                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='half' onChange={event => this.handleChangeInSub(index, event)} min="1"/>
+                                                            </div>
+                                                            <div className="sub-col col-1">
+                                                                <button type="button" className="del-btn" onClick={() => this.deleteSubcategory(index)}>
+                                                                    <i styel={{color: 'white'}} className="fas fa-trash-alt"></i>
+                                                                </button>
+                                                            </div>
+
+                                                        </div>
+                                                        )
+                                                })
+                                            }
+                                        </Form.Group>
+                                        <div className="add-sub-div">
+                                            <button type="button" className="add-sub-btn form-btn" onClick={(e) => this.addSubcategory(e)}>
+                                                Add Subcategory
+                                            </button>
+                                        </div>
+                                    </div>
 
                                     <Form.Group>
                                         <Form.Control type="text" placeholder="One Line description of item" name='editItemDescription' value={this.state.editItemDescription} onChange={this.handleInputChange}/>
