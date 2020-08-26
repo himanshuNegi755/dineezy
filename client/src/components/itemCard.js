@@ -4,6 +4,9 @@ import './itemCard.css';
 import NonVeg from '../images/nonVeg.svg';
 import Vegg from '../images/Veg.svg';
 import Eggi from '../images/Egg.svg';
+import PopularItem from '../images/popularItem.svg';
+import NewItem from '../images/newItem.svg';
+import SpecialItem from '../images/specialItem.svg';
 
 const ItemCard = (props) => {
 
@@ -55,6 +58,11 @@ const ItemCard = (props) => {
                     <Card.Text className="item-description">
                         {props.description}
                     </Card.Text>
+                    <Card.Text>
+                        <div>{props.itemStatusNew ? <img className="itemNotif" src={NewItem} alt="new item"/> : null} {props.itemStatusPopular ? <img className="itemNotif" src={PopularItem} alt="popular item"/> : null} 
+                        {props.itemStatusChefSpecial ? <img className="itemNotif" src={SpecialItem} alt="chef speciality"/> : null}</div>
+                    </Card.Text>
+                    
                     <Card.Text  className="item-price">
                         ₹ {props.price}
                     </Card.Text>
