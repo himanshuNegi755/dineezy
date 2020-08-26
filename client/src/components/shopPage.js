@@ -117,7 +117,7 @@ class ShopPage extends Component{
                 showHalfFullPriceDisplay: 'none',
                 editItemStatusNew: itemObj[0].newItem,
                 editItemStatusPopular: itemObj[0].popular,
-                editItemStatusChefSpeciality: itemObj[0].chefSpeical,
+                editItemStatusChefSpeciality: itemObj[0].chefSpecial,
                 showItemEditModal: !this.showItemEditModal
             });   
         }else {
@@ -134,7 +134,7 @@ class ShopPage extends Component{
                 showHalfFullPriceDisplay: 'block',
                 editItemStatusNew: itemObj[0].newItem,
                 editItemStatusPopular: itemObj[0].popular,
-                editItemStatusChefSpeciality: itemObj[0].chefSpeical,
+                editItemStatusChefSpeciality: itemObj[0].chefSpecial,
                 showItemEditModal: !this.showItemEditModal
             });
         }
