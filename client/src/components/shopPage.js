@@ -119,7 +119,7 @@ class ShopPage extends Component{
                 editItemStatusPopular: itemObj[0].popular,
                 editItemStatusChefSpeciality: itemObj[0].chefSpecial,
                 showItemEditModal: !this.showItemEditModal
-            });   
+            });
         }else {
             this.setState({
                 editItemName: itemObj[0].itemName,
@@ -234,7 +234,7 @@ class ShopPage extends Component{
                 this.loadCategoryFunction(this.state.shopIdVar);
                 this.loadItemFunction(this.state.currentItemCategory);
             })
-            
+
         } else {
             console.log('this is not the category one');
             axios.put(`${process.env.REACT_APP_BACKEND_API}/menu`, {
@@ -255,7 +255,7 @@ class ShopPage extends Component{
                 //this.setState({itemName: '', vegOrNonVeg: '', itemPrice: 0, itemDescription: '', itemCategory: ''});
             })
         }
-        
+
         this.setState({itemName: '', vegOrNonVeg: '', itemPrice: 0, itemDescription: '', itemCategory: '', subcategory: [{itemName: '', half: '', full: ''}], volume: {full: '', half: ''}});
     }
 
@@ -296,7 +296,7 @@ class ShopPage extends Component{
 
     editItemDetails = () => {
         this.setState({showItemEditModal: !this.state.showItemEditModal});
-        
+
         if(this.state.editSubcategory[0].itemName !== '') {
             axios.put(`${process.env.REACT_APP_BACKEND_API}/menu/item_update/sub`, {
             shopId: this.state.shopIdVar,
@@ -416,7 +416,7 @@ class ShopPage extends Component{
             values.splice(index, 1);
             this.setState({subcategory: values});
         }
-        
+
     }
 
     render() {
@@ -474,7 +474,6 @@ class ShopPage extends Component{
                             <div className="menu-category" style={{visibility: this.state.showSearchBarAndCategory}}>
                                 <ul>{this.renderItemCategory()}</ul>
                             </div>
-                            <hr/>
                             <div className="menu-list-div">
                                 {this.menuItemList()}
                             </div>
@@ -581,7 +580,7 @@ class ShopPage extends Component{
                                           />
 
                                     </Form.Group>
-                                    
+
                                     <Form.Group>
                                         <img className="itemNotif" src={NewItem} alt="new item" onClick={() => {this.setState({editItemStatusNew: !this.state.editItemStatusNew})}}/>
                                         <img className="itemNotif" src={PopularItem} alt="popular item" onClick={() => {this.setState({editItemStatusPopular: !this.state.editItemStatusPopular})}}/>
