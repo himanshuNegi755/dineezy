@@ -10,7 +10,10 @@ var menu = new Schema({
              category: String,
              availability: {type: Boolean, default: true},
              volume: {half: Number, full: Number},
-             subcategory: [{itemName: String, half: Number, full: Number}]
+             subcategory: [{itemName: String, half: Number, full: Number}],
+             newItem: {type: Boolean, default: false},
+             popular: {type: Boolean, default: false},
+             chefSpecial: {type: Boolean, default: false}
             } ]
 });
 

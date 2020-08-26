@@ -19,7 +19,7 @@ class ShopPage extends Component{
         super(props);
 
         this.state = { userEmail: '', loggedIn: true, showModal: false, shopName: '', shopAddress: '', noOfTables: 1,
-                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', editItemAvailability: '', category: [], itemsByCategory: [], currentItemCategory: '', userPhoneNo: [], noOfShop: 0, subcategory: [{itemName: '', half: '', full: ''}], showSubcategoryDisplay: 'none', showHalfFullPriceDisplay: 'block', advRotate: 'rotate(0turn)', volume: {full: '', half: ''}, editSubcategory: [{itemName: '', half: '', full: ''}], editVolume: {full: '', half: ''}}
+                      shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', editItemAvailability: '', editItemStatusNew: false, editItemStatusPopular: false, editItemStatusChefSpeciality: false, category: [], itemsByCategory: [], currentItemCategory: '', userPhoneNo: [], noOfShop: 0, subcategory: [{itemName: '', half: '', full: ''}], showSubcategoryDisplay: 'none', showHalfFullPriceDisplay: 'block', advRotate: 'rotate(0turn)', volume: {full: '', half: ''}, editSubcategory: [{itemName: '', half: '', full: ''}], editVolume: {full: '', half: ''}}
 
         this.suggestionRef = React.createRef();
     }
@@ -115,8 +115,11 @@ class ShopPage extends Component{
                 editSubcategory: itemObj[0].subcategory,
                 showSubcategoryDisplay: 'block',
                 showHalfFullPriceDisplay: 'none',
+                editItemStatusNew: itemObj[0].newItem,
+                editItemStatusPopular: itemObj[0].popular,
+                editItemStatusChefSpeciality: itemObj[0].chefSpeical,
                 showItemEditModal: !this.showItemEditModal
-            });                        
+            });   
         }else {
             this.setState({
                 editItemName: itemObj[0].itemName,
@@ -129,6 +132,9 @@ class ShopPage extends Component{
                 editVolume: itemObj[0].volume,
                 showSubcategoryDisplay: 'none',
                 showHalfFullPriceDisplay: 'block',
+                editItemStatusNew: itemObj[0].newItem,
+                editItemStatusPopular: itemObj[0].popular,
+                editItemStatusChefSpeciality: itemObj[0].chefSpeical,
                 showItemEditModal: !this.showItemEditModal
             });
         }
@@ -290,7 +296,29 @@ class ShopPage extends Component{
 
     editItemDetails = () => {
         this.setState({showItemEditModal: !this.state.showItemEditModal});
-        axios.put(`${process.env.REACT_APP_BACKEND_API}/menu/item_update`, {
+        
+        if(this.state.editSubcategory[0].itemName !== '') {
+            axios.put(`${process.env.REACT_APP_BACKEND_API}/menu/item_update/sub`, {
+            shopId: this.state.shopIdVar,
+            menuItemId: this.state.editItemId,
+            itemName: this.state.editItemName,
+            vegOrNonVeg: this.state.editVegOrNonVeg,
+            description: this.state.editItemDescription,
+            category: this.state.editItemCategory,
+            availability: this.state.editItemAvailability,
+            subcategory: this.state.editSubcategory,
+            newItem: this.state.editItemStatusNew,
+            popular: this.state.editItemStatusPopular,
+            chefSpecial: this.state.editItemStatusChefSpeciality
+            })
+            .then(res => {
+                console.log(res.data);
+                this.getMenuFunction(this.state.shopIdVar);
+                this.loadItemFunction(this.state.currentItemCategory);
+                this.setState({editSubcategory: [{itemName: '', half: '', full: ''}]});
+            })
+        } else {
+            axios.put(`${process.env.REACT_APP_BACKEND_API}/menu/item_update`, {
             shopId: this.state.shopIdVar,
             menuItemId: this.state.editItemId,
             itemName: this.state.editItemName,
@@ -298,15 +326,18 @@ class ShopPage extends Component{
             price: this.state.editItemPrice,
             description: this.state.editItemDescription,
             category: this.state.editItemCategory,
-            availability: this.state.editItemAvailability
+            availability: this.state.editItemAvailability,
+            newItem: this.state.editItemStatusNew,
+            popular: this.state.editItemStatusPopular,
+            chefSpecial: this.state.editItemStatusChefSpeciality
             })
-        .then(res => {
-            console.log(res.data);
-            this.getMenuFunction(this.state.shopIdVar);
-            this.loadItemFunction(this.state.currentItemCategory);
-            //this.props.loadComponentAgain();
-
-        })
+            .then(res => {
+                console.log(res.data);
+                this.getMenuFunction(this.state.shopIdVar);
+                this.loadItemFunction(this.state.currentItemCategory);
+                //this.props.loadComponentAgain();
+            })
+        }
     }
 
     //UI update functions
@@ -355,20 +386,37 @@ class ShopPage extends Component{
     }
 
     //all functions related to subcategory
-    addSubcategory = () => {
-        this.setState({subcategory: [...this.state.subcategory, {itemName: '', half: '', full: ''}]});
+    addSubcategory = (mode) => {
+        if(mode === 'edit') {
+            this.setState({editSubcategory: [...this.state.editSubcategory, {itemName: '', half: '', full: ''}]});
+        } else if(mode === 'new item') {
+            this.setState({subcategory: [...this.state.subcategory, {itemName: '', half: '', full: ''}]});
+        }
     }
 
-    handleChangeInSub = (index, event) => {
-        const values = [...this.state.subcategory];
-        values[index][event.target.name] = event.target.value;
-        this.setState({subcategory: values});
+    handleChangeInSub = (index, event, mode) => {
+        if(mode === 'edit') {
+            const values = [...this.state.editSubcategory];
+            values[index][event.target.name] = event.target.value;
+            this.setState({editSubcategory: values});
+        } else if(mode === 'new item') {
+            const values = [...this.state.subcategory];
+            values[index][event.target.name] = event.target.value;
+            this.setState({subcategory: values});
+        }
     }
 
-    deleteSubcategory = (index) => {
-        const values = [...this.state.subcategory];
-        values.splice(index, 1);
-        this.setState({subcategory: values});
+    deleteSubcategory = (index, mode) => {
+        if(mode === 'edit') {
+            const values = [...this.state.editSubcategory];
+            values.splice(index, 1);
+            this.setState({editSubcategory: values});
+        } else if(mode === 'new item') {
+            const values = [...this.state.subcategory];
+            values.splice(index, 1);
+            this.setState({subcategory: values});
+        }
+        
     }
 
     render() {
@@ -444,7 +492,7 @@ class ShopPage extends Component{
                         aria-labelledby="item-edit-modal"
                         centered
                         show={this.state.showItemEditModal}
-                        onHide={() => { this.setState({showItemEditModal: !this.state.showItemEditModal}) }}
+                        onHide={() => { this.setState({editSubcategory: [{itemName: '', half: '', full: ''}], showItemEditModal: !this.state.showItemEditModal})}}
                         >
                             <Modal.Header className="form-header" closeButton>
                                 <div className="Form-title">
@@ -480,33 +528,23 @@ class ShopPage extends Component{
                                         </div>
                                     </Form.Group>
 
-                                    <Form.Group>
-                                        <span className="adv-opt" onClick={()=>{
-                                                if(this.state.showSubcategoryDisplay === 'none'){
-                                                    this.setState({showSubcategoryDisplay: 'block', showHalfFullPriceDisplay: 'none', advRotate: 'rotate(0.5turn)'})
-                                                } else {
-                                                    this.setState({showSubcategoryDisplay: 'none', showHalfFullPriceDisplay: 'block', advRotate: 'rotate(0turn)'})
-                                                }
-                                            }}>Advance Options <i className="fas fa-angle-down" style={{transform: this.state.advRotate}}></i></span>
-                                    </Form.Group>
-
                                     <div className="div-for-subcategory" style={{display: this.state.showSubcategoryDisplay}}>
                                         <Form.Group>
                                             {
-                                                this.state.subcategory.map((subcategory, index) => {
+                                                this.state.editSubcategory.map((subcategory, index) => {
                                                     return(
                                                         <div key={index} className="row sub-row">
                                                             <div className="sub-col col-5">
-                                                                <Form.Control type="text" placeholder="subcategory name" name='itemName' onChange={event => this.handleChangeInSub(index, event)} value={subcategory.itemName}/>
+                                                                <Form.Control type="text" placeholder="subcategory name" name='itemName' onChange={event => this.handleChangeInSub(index, event, 'edit')} value={subcategory.itemName}/>
                                                             </div>
                                                             <div className="sub-col col-3">
-                                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='full' onChange={event => this.handleChangeInSub(index, event)} min="1"/>
+                                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='full' onChange={event => this.handleChangeInSub(index, event, 'edit')} min="1" value={subcategory.full}/>
                                                             </div>
                                                             <div className="sub-col col-3">
-                                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='half' onChange={event => this.handleChangeInSub(index, event)} min="1"/>
+                                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='half' onChange={event => this.handleChangeInSub(index, event, 'edit')} min="1" value={subcategory.half}/>
                                                             </div>
                                                             <div className="sub-col col-1">
-                                                                <button type="button" className="del-btn" onClick={() => this.deleteSubcategory(index)}>
+                                                                <button type="button" className="del-btn" onClick={() => this.deleteSubcategory(index, 'edit')}>
                                                                     <i styel={{color: 'white'}} className="fas fa-trash-alt"></i>
                                                                 </button>
                                                             </div>
@@ -517,7 +555,7 @@ class ShopPage extends Component{
                                             }
                                         </Form.Group>
                                         <div className="add-sub-div">
-                                            <button type="button" className="add-sub-btn form-btn" onClick={(e) => this.addSubcategory(e)}>
+                                            <button type="button" className="add-sub-btn form-btn" onClick={() => this.addSubcategory('edit')}>
                                                 Add Subcategory
                                             </button>
                                         </div>
@@ -543,11 +581,11 @@ class ShopPage extends Component{
                                           />
 
                                     </Form.Group>
-
+                                    
                                     <Form.Group>
-                                        <img className="itemNotif" src={NewItem} alt="new item"/>
-                                        <img className="itemNotif" src={PopularItem} alt="popular item"/>
-                                        <img className="itemNotif" src={SpecialItem} alt="chef speciality"/>
+                                        <img className="itemNotif" src={NewItem} alt="new item" onClick={() => {this.setState({editItemStatusNew: !this.state.editItemStatusNew})}}/>
+                                        <img className="itemNotif" src={PopularItem} alt="popular item" onClick={() => {this.setState({editItemStatusPopular: !this.state.editItemStatusPopular})}}/>
+                                        <img className="itemNotif" src={SpecialItem} alt="chef speciality" onClick={() => {this.setState({editItemStatusChefSpeciality: !this.state.editItemStatusChefSpeciality})}}/>
                                     </Form.Group>
                                     <div className="btn-div">
                                       <button type="button" className="submit-btn form-btn" onClick={this.editItemDetails}>
@@ -623,16 +661,16 @@ class ShopPage extends Component{
                                                     return(
                                                         <div key={index} className="row sub-row">
                                                             <div className="sub-col col-5">
-                                                                <Form.Control type="text" placeholder="subcategory name" name='itemName' onChange={event => this.handleChangeInSub(index, event)} value={subcategory.itemName}/>
+                                                                <Form.Control type="text" placeholder="subcategory name" name='itemName' onChange={event => this.handleChangeInSub(index, event, 'new item')} value={subcategory.itemName}/>
                                                             </div>
                                                             <div className="sub-col col-3">
-                                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='full' onChange={event => this.handleChangeInSub(index, event)} min="1"/>
+                                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='full' onChange={event => this.handleChangeInSub(index, event, 'new item')} min="1"/>
                                                             </div>
                                                             <div className="sub-col col-3">
-                                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='half' onChange={event => this.handleChangeInSub(index, event)} min="1"/>
+                                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='half' onChange={event => this.handleChangeInSub(index, event, 'new item')} min="1"/>
                                                             </div>
                                                             <div className="sub-col col-1">
-                                                                <button type="button" className="del-btn" onClick={() => this.deleteSubcategory(index)}>
+                                                                <button type="button" className="del-btn" onClick={() => this.deleteSubcategory(index, 'new item')}>
                                                                     <i styel={{color: 'white'}} className="fas fa-trash-alt"></i>
                                                                 </button>
                                                             </div>
@@ -643,7 +681,7 @@ class ShopPage extends Component{
                                             }
                                         </Form.Group>
                                         <div className="add-sub-div">
-                                            <button type="button" className="add-sub-btn form-btn" onClick={(e) => this.addSubcategory(e)}>
+                                            <button type="button" className="add-sub-btn form-btn" onClick={() => this.addSubcategory('new item')}>
                                                 Add Subcategory
                                             </button>
                                         </div>
