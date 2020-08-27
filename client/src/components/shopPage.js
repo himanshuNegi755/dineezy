@@ -39,9 +39,13 @@ class ShopPage extends Component{
     }
 
     //function to handle input change
-    handleInputChange = (e) => {
+    handleInputChange = (e, mode) => {
         if (e.target.name === 'full' || e.target.name === 'half'){
-            this.setState({volume: {...this.state.volume, [e.target.name]: e.target.value}})
+            if (mode === 'edit') {
+                this.setState({editVolume: {...this.state.editVolume, [e.target.name]: e.target.value}})
+            } else if(mode === 'new item') {
+                this.setState({volume: {...this.state.volume, [e.target.name]: e.target.value}})
+            }
         } else {
             this.setState({
                 [e.target.name]: e.target.value
@@ -262,7 +266,10 @@ class ShopPage extends Component{
     showShopAfterAdding = () => {
         axios.get(`${process.env.REACT_APP_BACKEND_API}/shop/get_shops/${this.state.userEmail}`)
             .then(res => {
-                this.setState({shopList: res.data[0].shop})
+                if(res.data.length > 0){
+                  this.setState({shopList: res.data[0].shop})  
+                }
+                //this.setState({shopList: res.data[0].shop})
             })
     }
 
@@ -323,7 +330,7 @@ class ShopPage extends Component{
             menuItemId: this.state.editItemId,
             itemName: this.state.editItemName,
             vegOrNonVeg: this.state.editVegOrNonVeg,
-            price: this.state.editItemPrice,
+            volume: this.state.editVolume,
             description: this.state.editItemDescription,
             category: this.state.editItemCategory,
             availability: this.state.editItemAvailability,
@@ -501,11 +508,11 @@ class ShopPage extends Component{
                             <Modal.Body>
                                 <Form>
                                     <Form.Group>
-                                        <Form.Control type="text" placeholder="Item Name" name='editItemName' value={this.state.editItemName} onChange={this.handleInputChange}/>
+                                        <Form.Control type="text" placeholder="Item Name" name='editItemName' value={this.state.editItemName} onChange={e => this.handleInputChange(e)}/>
                                     </Form.Group>
 
                                     <Form.Group>
-                                      <select className="custom-select" id="inputGroupSelect02" type="text" placeholder="Veg/Non-Veg" name='editVegOrNonVeg' value={this.state.editVegOrNonVeg} onChange={this.handleInputChange}>
+                                      <select className="custom-select" id="inputGroupSelect02" type="text" placeholder="Veg/Non-Veg" name='editVegOrNonVeg' value={this.state.editVegOrNonVeg} onChange={e => this.handleInputChange(e)}>
                                         <option value="veg">Veg</option>
                                         <option value="non-veg">Non-veg</option>
                                         <option value="egg">Egg</option>
@@ -513,16 +520,16 @@ class ShopPage extends Component{
                                     </Form.Group>
 
                                     <Form.Group>
-                                        <Form.Label style={{color: 'red'}}>If You don't have half/full option, only enter full price <strong>leave half price field empty</strong></Form.Label>
+                                        <Form.Label style={{color: 'red'}}>If You don't have half/full option, only enter full price <strong>put a zero in half price field</strong></Form.Label>
                                     </Form.Group>
 
                                     <Form.Group style={{display: this.state.showHalfFullPriceDisplay}}>
                                         <div className="row">
                                             <div className="col">
-                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='full' onChange={this.handleInputChange} min="1"/>
+                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='full' onChange={e => this.handleInputChange(e, 'edit')} min="1" value={this.state.editVolume.full}/>
                                             </div>
                                             <div className="col">
-                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='half' onChange={this.handleInputChange} min="1"/>
+                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='half' onChange={e => this.handleInputChange(e, 'edit')} min="1" value={this.state.editVolume.half}/>
                                             </div>
                                         </div>
                                     </Form.Group>
@@ -561,11 +568,11 @@ class ShopPage extends Component{
                                     </div>
 
                                     <Form.Group>
-                                        <Form.Control type="text" placeholder="One Line description of item" name='editItemDescription' value={this.state.editItemDescription} onChange={this.handleInputChange}/>
+                                        <Form.Control type="text" placeholder="One Line description of item" name='editItemDescription' value={this.state.editItemDescription} onChange={e => this.handleInputChange(e)}/>
                                     </Form.Group>
 
                                     <Form.Group>
-                                        <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='editItemCategory' value={this.state.editItemCategory} onChange={this.handleInputChange}/>
+                                        <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='editItemCategory' value={this.state.editItemCategory} onChange={e => this.handleInputChange(e)}/>
                                     </Form.Group>
 
                                     <Form.Group>
@@ -618,10 +625,10 @@ class ShopPage extends Component{
                                 <Form>
 
                                     <Form.Group>
-                                        <Form.Control type="text" placeholder="Item Name" name='itemName' value={this.state.itemName} onChange={this.handleInputChange}/>
+                                        <Form.Control type="text" placeholder="Item Name" name='itemName' value={this.state.itemName} onChange={e => this.handleInputChange(e)}/>
                                     </Form.Group>
                                     <Form.Group>
-                                      <select className="custom-select" id="inputGroupSelect02" type="text" placeholder="Veg/Non-Veg" name='vegOrNonVeg' value={this.state.vegOrNonVeg} onChange={this.handleInputChange}>
+                                      <select className="custom-select" id="inputGroupSelect02" type="text" placeholder="Veg/Non-Veg" name='vegOrNonVeg' value={this.state.vegOrNonVeg} onChange={e => this.handleInputChange(e)}>
                                         <option value="veg">Veg</option>
                                         <option value="non-veg">Non-veg</option>
                                         <option value="egg">Egg</option>
@@ -635,10 +642,10 @@ class ShopPage extends Component{
                                     <Form.Group style={{display: this.state.showHalfFullPriceDisplay}}>
                                         <div className="row">
                                             <div className="col">
-                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='full' onChange={this.handleInputChange} min="1"/>
+                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='full' onChange={e => this.handleInputChange(e, 'new item')} min="1"/>
                                             </div>
                                             <div className="col">
-                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='half' onChange={this.handleInputChange} min="1"/>
+                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='half' onChange={e => this.handleInputChange(e, 'new item')} min="1"/>
                                             </div>
                                         </div>
                                     </Form.Group>
@@ -687,11 +694,11 @@ class ShopPage extends Component{
                                     </div>
 
                                     <Form.Group>
-                                        <Form.Control type="text" placeholder="One Line description of item" name='itemDescription' value={this.state.itemDescription} onChange={this.handleInputChange}/>
+                                        <Form.Control type="text" placeholder="One Line description of item" name='itemDescription' value={this.state.itemDescription} onChange={e => this.handleInputChange(e)}/>
                                     </Form.Group>
 
                                     <Form.Group>
-                                        <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='itemCategory' value={this.state.itemCategory} onChange={this.handleInputChange}/>
+                                        <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='itemCategory' value={this.state.itemCategory} onChange={e => this.handleInputChange(e)}/>
                                     </Form.Group>
                                     <div className="btn-div">
                                       <button type="button" className="submit-btn form-btn" onClick={this.addNewItemToMenuFunction}>
@@ -721,15 +728,15 @@ class ShopPage extends Component{
                                 <Form onSubmit={this.handleSubmit}>
 
                                     <Form.Group controlId="formBasicName">
-                                        <Form.Control type="text" placeholder="Shop Name" name='shopName' value={this.state.shopName} onChange={this.handleInputChange}/>
+                                        <Form.Control type="text" placeholder="Shop Name" name='shopName' value={this.state.shopName} onChange={e => this.handleInputChange(e)}/>
                                     </Form.Group>
 
                                     <Form.Group controlId="formBasicEmail">
-                                        <Form.Control as="textarea" rows="3" placeholder="Address" name='shopAddress' className="address-text-area" value={this.state.shopAddress} onChange={this.handleInputChange}/>
+                                        <Form.Control as="textarea" rows="3" placeholder="Address" name='shopAddress' className="address-text-area" value={this.state.shopAddress} onChange={e => this.handleInputChange(e)}/>
                                     </Form.Group>
 
                                     <Form.Group controlId="formBasicPassword">
-                                        <Form.Control type="number" placeholder="Number Of Tables" min="1" name='noOfTables' value={this.state.noOfTable} onChange={this.handleInputChange}/>
+                                        <Form.Control type="number" placeholder="Number Of Tables" min="1" name='noOfTables' value={this.state.noOfTable} onChange={e => this.handleInputChange(e)}/>
                                     </Form.Group>
                                     <div className="btn-div">
                                       <button type="button" className="submit-btn form-btn" onClick={this.onSubmit}>
