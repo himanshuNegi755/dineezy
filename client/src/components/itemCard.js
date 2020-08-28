@@ -47,6 +47,15 @@ const ItemCard = (props) => {
                 )
         }
     }
+    
+    const showPrice = () => {
+      if(props.itemVolume) {
+          if(props.itemVolume.half === 0) {return(<div className="item-price">₹ {props.itemVolume.full}</div>)}
+          else { return(<div className="item-price">₹ {props.itemVolume.half}/{props.itemVolume.full}</div>) }
+      } else {
+          return(<div className="item-price">₹ {props.price}</div>)
+      }
+  }
 
         return (
             <Card className="show-menu-cards" bg="light">
@@ -64,7 +73,7 @@ const ItemCard = (props) => {
                     </Card.Text>
                     
                     <Card.Text  className="item-price">
-                        ₹ {props.price}
+                        {showPrice()}
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer>

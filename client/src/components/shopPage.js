@@ -22,6 +22,28 @@ class ShopPage extends Component{
                       shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', editItemAvailability: '', editItemStatusNew: false, editItemStatusPopular: false, editItemStatusChefSpeciality: false, category: [], itemsByCategory: [], currentItemCategory: '', userPhoneNo: [], noOfShop: 0, subcategory: [{itemName: '', half: '', full: ''}], showSubcategoryDisplay: 'none', showHalfFullPriceDisplay: 'block', advRotate: 'rotate(0turn)', volume: {full: '', half: ''}, editSubcategory: [{itemName: '', half: '', full: ''}], editVolume: {full: '', half: ''}}
 
         this.suggestionRef = React.createRef();
+        
+        //refs for new item modal
+        this.newItemNameRef = React.createRef();
+        this.newItemFullPriceRef = React.createRef();
+        this.newItemHalfPriceRef = React.createRef();
+        this.newItemCategoryRef = React.createRef();
+        this.newItemSubategoryNameRef = React.createRef();
+        this.newItemSubcategoryFullPriceRef = React.createRef();
+        this.newItemSubcategoryHalfPriceRef = React.createRef();
+        
+        //refs for new shop
+        this.shopNameRef = React.createRef();
+        this.shopAddressRef = React.createRef();
+        
+        //refs for edit item
+        this.editItemNameRef = React.createRef();
+        this.editItemFullPriceRef = React.createRef();
+        this.editItemHalfPriceRef = React.createRef();
+        this.editItemCategoryRef = React.createRef();
+        this.editItemSubategoryNameRef = React.createRef();
+        this.editItemSubcategoryFullPriceRef = React.createRef();
+        this.editItemSubcategoryHalfPriceRef = React.createRef();
     }
 
 
@@ -159,19 +181,24 @@ class ShopPage extends Component{
 
     //add new show functions
     onSubmit = () => {
-        this.setState({showModal: !this.state.showModal})
+        if(this.state.shopName === '') {
+            this.shopNameRef.current.focus();
+        } else if(this.state.shopAddress === '') {
+            this.shopAddressRef.current.focus();
+        } else {
+            this.setState({showModal: !this.state.showModal})
 
-        axios.put(`${process.env.REACT_APP_BACKEND_API}/shop`, {
-            userEmail: this.state.userEmail,
-            shopName: this.state.shopName,
-            shopAddress: this.state.shopAddress,
-            noOfTables: this.state.noOfTables
-        })
-        .then(res => {
-            console.log(res.data);
-            this.showShopAfterAdding();
-        })
-
+            axios.put(`${process.env.REACT_APP_BACKEND_API}/shop`, {
+                userEmail: this.state.userEmail,
+                shopName: this.state.shopName,
+                shopAddress: this.state.shopAddress,
+                noOfTables: this.state.noOfTables
+            })
+            .then(res => {
+                console.log(res.data);
+                this.showShopAfterAdding();
+            })
+        }
     }
 
     //category functions
@@ -221,46 +248,61 @@ class ShopPage extends Component{
     //shop functions
     addNewItemToMenuFunction = () => {
 
-        this.setState({showNewItemAddModal: !this.state.showNewItemAddModal})
         if(this.state.subcategory[0].itemName !== '') {
-            console.log('this is the one with category');
-            axios.put(`${process.env.REACT_APP_BACKEND_API}/menu/sub`, {
-            shopId: this.state.shopIdVar,
-            itemName: this.state.itemName,
-            vegOrNonVeg: this.state.vegOrNonVeg,
-            description: this.state.itemDescription,
-            category: this.state.itemCategory,
-            subcategory: this.state.subcategory
+            if(this.state.itemName === '' ) {
+                this.newItemNameRef.current.focus();
+            } else if(this.state.itemCategory === '') {
+                this.newItemCategoryRef.current.focus();
+            } else {
+                this.setState({showNewItemAddModal: !this.state.showNewItemAddModal})
+                axios.put(`${process.env.REACT_APP_BACKEND_API}/menu/sub`, {
+                    shopId: this.state.shopIdVar,
+                    itemName: this.state.itemName,
+                    vegOrNonVeg: this.state.vegOrNonVeg,
+                    description: this.state.itemDescription,
+                    category: this.state.itemCategory,
+                    subcategory: this.state.subcategory
                 })
-            .then(res => {
-                console.log(res.data);
-                this.getMenuFunction(this.state.shopIdVar);
-                this.loadCategoryFunction(this.state.shopIdVar);
-                this.loadItemFunction(this.state.currentItemCategory);
-            })
+                .then(res => {
+                    console.log(res.data);
+                    this.getMenuFunction(this.state.shopIdVar);
+                    this.loadCategoryFunction(this.state.shopIdVar);
+                    this.loadItemFunction(this.state.currentItemCategory);
+                })
+                this.setState({itemName: '', vegOrNonVeg: '', itemPrice: 0, itemDescription: '', itemCategory: '', subcategory: [{itemName: '', half: '', full: ''}], volume: {full: '', half: ''}});
+            }
 
         } else {
-            console.log('this is not the category one');
-            axios.put(`${process.env.REACT_APP_BACKEND_API}/menu`, {
-            shopId: this.state.shopIdVar,
-            itemName: this.state.itemName,
-            vegOrNonVeg: this.state.vegOrNonVeg,
-            //price: this.state.itemPrice,
-            description: this.state.itemDescription,
-            category: this.state.itemCategory,
-            volume: this.state.volume
+            if(this.state.itemName === '' ) {
+                this.newItemNameRef.current.focus();
+            } else if(this.state.volume.full === '') {
+                this.newItemFullPriceRef.current.focus();
+            } else if(this.state.volume.half === '') {
+                this.newItemHalfPriceRef.current.focus();
+            } else if(this.state.itemCategory === '') {
+                this.newItemCategoryRef.current.focus();
+            } else {
+                this.setState({showNewItemAddModal: !this.state.showNewItemAddModal})
+                axios.put(`${process.env.REACT_APP_BACKEND_API}/menu`, {
+                    shopId: this.state.shopIdVar,
+                    itemName: this.state.itemName,
+                    vegOrNonVeg: this.state.vegOrNonVeg,
+                    //price: this.state.itemPrice,
+                    description: this.state.itemDescription,
+                    category: this.state.itemCategory,
+                    volume: this.state.volume
                 })
-            .then(res => {
-                console.log(res.data);
-                this.getMenuFunction(this.state.shopIdVar);
-                this.loadCategoryFunction(this.state.shopIdVar);
-                this.loadItemFunction(this.state.currentItemCategory);
+                .then(res => {
+                    console.log(res.data);
+                    this.getMenuFunction(this.state.shopIdVar);
+                    this.loadCategoryFunction(this.state.shopIdVar);
+                    this.loadItemFunction(this.state.currentItemCategory);
 
-                //this.setState({itemName: '', vegOrNonVeg: '', itemPrice: 0, itemDescription: '', itemCategory: ''});
-            })
+                    //this.setState({itemName: '', vegOrNonVeg: '', itemPrice: 0, itemDescription: '', itemCategory: ''});
+                })
+                this.setState({itemName: '', vegOrNonVeg: '', itemPrice: 0, itemDescription: '', itemCategory: '', subcategory: [{itemName: '', half: '', full: ''}], volume: {full: '', half: ''}});
+            }
         }
-
-        this.setState({itemName: '', vegOrNonVeg: '', itemPrice: 0, itemDescription: '', itemCategory: '', subcategory: [{itemName: '', half: '', full: ''}], volume: {full: '', half: ''}});
     }
 
     showShopAfterAdding = () => {
@@ -302,48 +344,66 @@ class ShopPage extends Component{
     }
 
     editItemDetails = () => {
-        this.setState({showItemEditModal: !this.state.showItemEditModal});
-
         if(this.state.editSubcategory[0].itemName !== '') {
-            axios.put(`${process.env.REACT_APP_BACKEND_API}/menu/item_update/sub`, {
-            shopId: this.state.shopIdVar,
-            menuItemId: this.state.editItemId,
-            itemName: this.state.editItemName,
-            vegOrNonVeg: this.state.editVegOrNonVeg,
-            description: this.state.editItemDescription,
-            category: this.state.editItemCategory,
-            availability: this.state.editItemAvailability,
-            subcategory: this.state.editSubcategory,
-            newItem: this.state.editItemStatusNew,
-            popular: this.state.editItemStatusPopular,
-            chefSpecial: this.state.editItemStatusChefSpeciality
-            })
-            .then(res => {
-                console.log(res.data);
-                this.getMenuFunction(this.state.shopIdVar);
-                this.loadItemFunction(this.state.currentItemCategory);
-                this.setState({editSubcategory: [{itemName: '', half: '', full: ''}]});
-            })
+            if(this.state.editItemName === '') {
+                this.editItemNameRef.current.focus();
+            } else if(this.state.editItemCategory === '') {
+                this.editItemCategoryRef.current.focus();
+            } else {
+                this.setState({showItemEditModal: !this.state.showItemEditModal});
+                
+                axios.put(`${process.env.REACT_APP_BACKEND_API}/menu/item_update/sub`, {
+                shopId: this.state.shopIdVar,
+                menuItemId: this.state.editItemId,
+                itemName: this.state.editItemName,
+                vegOrNonVeg: this.state.editVegOrNonVeg,
+                description: this.state.editItemDescription,
+                category: this.state.editItemCategory,
+                availability: this.state.editItemAvailability,
+                subcategory: this.state.editSubcategory,
+                newItem: this.state.editItemStatusNew,
+                popular: this.state.editItemStatusPopular,
+                chefSpecial: this.state.editItemStatusChefSpeciality
+                })
+                .then(res => {
+                    console.log(res.data);
+                    this.getMenuFunction(this.state.shopIdVar);
+                    this.loadItemFunction(this.state.currentItemCategory);
+                    this.setState({editSubcategory: [{itemName: '', half: '', full: ''}]});
+                })
+            }
         } else {
-            axios.put(`${process.env.REACT_APP_BACKEND_API}/menu/item_update`, {
-            shopId: this.state.shopIdVar,
-            menuItemId: this.state.editItemId,
-            itemName: this.state.editItemName,
-            vegOrNonVeg: this.state.editVegOrNonVeg,
-            volume: this.state.editVolume,
-            description: this.state.editItemDescription,
-            category: this.state.editItemCategory,
-            availability: this.state.editItemAvailability,
-            newItem: this.state.editItemStatusNew,
-            popular: this.state.editItemStatusPopular,
-            chefSpecial: this.state.editItemStatusChefSpeciality
-            })
-            .then(res => {
-                console.log(res.data);
-                this.getMenuFunction(this.state.shopIdVar);
-                this.loadItemFunction(this.state.currentItemCategory);
-                //this.props.loadComponentAgain();
-            })
+            if(this.state.editItemName === '') {
+                this.editItemNameRef.current.focus();
+            } else if(this.state.editVolume.full === '') {
+                this.editItemFullPriceRef.current.focus();
+            } else if(this.state.editVolume.half === '') {
+                this.editItemHalfPriceRef.current.focus();
+            } else if(this.state.editItemCategory === '') {
+                this.editItemCategoryRef.current.focus();
+            } else {
+                this.setState({showItemEditModal: !this.state.showItemEditModal});
+                
+                axios.put(`${process.env.REACT_APP_BACKEND_API}/menu/item_update`, {
+                    shopId: this.state.shopIdVar,
+                    menuItemId: this.state.editItemId,
+                    itemName: this.state.editItemName,
+                    vegOrNonVeg: this.state.editVegOrNonVeg,
+                    volume: this.state.editVolume,
+                    description: this.state.editItemDescription,
+                    category: this.state.editItemCategory,
+                    availability: this.state.editItemAvailability,
+                    newItem: this.state.editItemStatusNew,
+                    popular: this.state.editItemStatusPopular,
+                    chefSpecial: this.state.editItemStatusChefSpeciality
+                })
+                .then(res => {
+                    console.log(res.data);
+                    this.getMenuFunction(this.state.shopIdVar);
+                    this.loadItemFunction(this.state.currentItemCategory);
+                    //this.props.loadComponentAgain();
+                })
+            }
         }
     }
 
@@ -508,7 +568,7 @@ class ShopPage extends Component{
                             <Modal.Body>
                                 <Form>
                                     <Form.Group>
-                                        <Form.Control type="text" placeholder="Item Name" name='editItemName' value={this.state.editItemName} onChange={e => this.handleInputChange(e)}/>
+                                        <Form.Control type="text" placeholder="Item Name" name='editItemName' value={this.state.editItemName} onChange={e => this.handleInputChange(e)} ref={this.editItemNameRef}/>
                                     </Form.Group>
 
                                     <Form.Group>
@@ -526,10 +586,10 @@ class ShopPage extends Component{
                                     <Form.Group style={{display: this.state.showHalfFullPriceDisplay}}>
                                         <div className="row">
                                             <div className="col">
-                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='full' onChange={e => this.handleInputChange(e, 'edit')} min="1" value={this.state.editVolume.full}/>
+                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='full' onChange={e => this.handleInputChange(e, 'edit')} min="1" value={this.state.editVolume.full} ref={this.editItemFullPriceRef}/>
                                             </div>
                                             <div className="col">
-                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='half' onChange={e => this.handleInputChange(e, 'edit')} min="1" value={this.state.editVolume.half}/>
+                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='half' onChange={e => this.handleInputChange(e, 'edit')} min="1" value={this.state.editVolume.half} ref={this.editItemHalfPriceRef}/>
                                             </div>
                                         </div>
                                     </Form.Group>
@@ -541,13 +601,13 @@ class ShopPage extends Component{
                                                     return(
                                                         <div key={index} className="row sub-row">
                                                             <div className="sub-col col-5">
-                                                                <Form.Control type="text" placeholder="subcategory name" name='itemName' onChange={event => this.handleChangeInSub(index, event, 'edit')} value={subcategory.itemName}/>
+                                                                <Form.Control type="text" placeholder="subcategory name" name='itemName' onChange={event => this.handleChangeInSub(index, event, 'edit')} value={subcategory.itemName} ref={this.editItemSubcategoryNameRef}/>
                                                             </div>
                                                             <div className="sub-col col-3">
-                                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='full' onChange={event => this.handleChangeInSub(index, event, 'edit')} min="1" value={subcategory.full}/>
+                                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='full' onChange={event => this.handleChangeInSub(index, event, 'edit')} min="1" value={subcategory.full} ref={this.editItemSubcategoryFullPriceRef}/>
                                                             </div>
                                                             <div className="sub-col col-3">
-                                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='half' onChange={event => this.handleChangeInSub(index, event, 'edit')} min="1" value={subcategory.half}/>
+                                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='half' onChange={event => this.handleChangeInSub(index, event, 'edit')} min="1" value={subcategory.half} ref={this.editItemSubcategoryHalfPriceRef}/>
                                                             </div>
                                                             <div className="sub-col col-1">
                                                                 <button type="button" className="del-btn" onClick={() => this.deleteSubcategory(index, 'edit')}>
@@ -572,7 +632,7 @@ class ShopPage extends Component{
                                     </Form.Group>
 
                                     <Form.Group>
-                                        <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='editItemCategory' value={this.state.editItemCategory} onChange={e => this.handleInputChange(e)}/>
+                                        <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='editItemCategory' value={this.state.editItemCategory} onChange={e => this.handleInputChange(e)} ref={this.editItemCategoryRef}/>
                                     </Form.Group>
 
                                     <Form.Group>
@@ -625,7 +685,7 @@ class ShopPage extends Component{
                                 <Form>
 
                                     <Form.Group>
-                                        <Form.Control type="text" placeholder="Item Name" name='itemName' value={this.state.itemName} onChange={e => this.handleInputChange(e)}/>
+                                        <Form.Control type="text" placeholder="Item Name" name='itemName' value={this.state.itemName} onChange={e => this.handleInputChange(e)} ref={this.newItemNameRef}/>
                                     </Form.Group>
                                     <Form.Group>
                                       <select className="custom-select" id="inputGroupSelect02" type="text" placeholder="Veg/Non-Veg" name='vegOrNonVeg' value={this.state.vegOrNonVeg} onChange={e => this.handleInputChange(e)}>
@@ -636,16 +696,16 @@ class ShopPage extends Component{
                                     </Form.Group>
 
                                     <Form.Group>
-                                        <Form.Label style={{color: 'red'}}>If You don't have half/full option, only enter full price <strong>leave half price field empty</strong></Form.Label>
+                                        <Form.Label style={{color: 'red'}}>If You don't have half/full option, only enter full price <strong>put a zero in half price field</strong></Form.Label>
                                     </Form.Group>
 
                                     <Form.Group style={{display: this.state.showHalfFullPriceDisplay}}>
                                         <div className="row">
                                             <div className="col">
-                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='full' onChange={e => this.handleInputChange(e, 'new item')} min="1"/>
+                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='full' onChange={e => this.handleInputChange(e, 'new item')} min="1" ref={this.newItemFullPriceRef}/>
                                             </div>
                                             <div className="col">
-                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='half' onChange={e => this.handleInputChange(e, 'new item')} min="1"/>
+                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='half' onChange={e => this.handleInputChange(e, 'new item')} min="1" ref={this.newItemHalfPriceRef}/>
                                             </div>
                                         </div>
                                     </Form.Group>
@@ -667,13 +727,13 @@ class ShopPage extends Component{
                                                     return(
                                                         <div key={index} className="row sub-row">
                                                             <div className="sub-col col-5">
-                                                                <Form.Control type="text" placeholder="subcategory name" name='itemName' onChange={event => this.handleChangeInSub(index, event, 'new item')} value={subcategory.itemName}/>
+                                                                <Form.Control type="text" placeholder="subcategory name" name='itemName' onChange={event => this.handleChangeInSub(index, event, 'new item')} value={subcategory.itemName} ref={this.newItemSubcategoryNameRef}/>
                                                             </div>
                                                             <div className="sub-col col-3">
-                                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='full' onChange={event => this.handleChangeInSub(index, event, 'new item')} min="1"/>
+                                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='full' onChange={event => this.handleChangeInSub(index, event, 'new item')} min="1" ref={this.newItemSubcategoryFullPriceRef}/>
                                                             </div>
                                                             <div className="sub-col col-3">
-                                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='half' onChange={event => this.handleChangeInSub(index, event, 'new item')} min="1"/>
+                                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='half' onChange={event => this.handleChangeInSub(index, event, 'new item')} min="1" ref={this.newItemSubcategoryHalfPriceRef}/>
                                                             </div>
                                                             <div className="sub-col col-1">
                                                                 <button type="button" className="del-btn" onClick={() => this.deleteSubcategory(index, 'new item')}>
@@ -698,7 +758,7 @@ class ShopPage extends Component{
                                     </Form.Group>
 
                                     <Form.Group>
-                                        <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='itemCategory' value={this.state.itemCategory} onChange={e => this.handleInputChange(e)}/>
+                                        <Form.Control type="text" placeholder="Item Category like main course, starter ..." name='itemCategory' value={this.state.itemCategory} onChange={e => this.handleInputChange(e)} ref={this.newItemCategoryRef}/>
                                     </Form.Group>
                                     <div className="btn-div">
                                       <button type="button" className="submit-btn form-btn" onClick={this.addNewItemToMenuFunction}>
@@ -727,15 +787,15 @@ class ShopPage extends Component{
                             <Modal.Body>
                                 <Form onSubmit={this.handleSubmit}>
 
-                                    <Form.Group controlId="formBasicName">
-                                        <Form.Control type="text" placeholder="Shop Name" name='shopName' value={this.state.shopName} onChange={e => this.handleInputChange(e)}/>
+                                    <Form.Group>
+                                        <Form.Control type="text" placeholder="Shop Name" name='shopName' value={this.state.shopName} onChange={e => this.handleInputChange(e)} ref={this.shopNameRef}/>
                                     </Form.Group>
 
-                                    <Form.Group controlId="formBasicEmail">
-                                        <Form.Control as="textarea" rows="3" placeholder="Address" name='shopAddress' className="address-text-area" value={this.state.shopAddress} onChange={e => this.handleInputChange(e)}/>
+                                    <Form.Group>
+                                        <Form.Control as="textarea" rows="3" placeholder="Address" name='shopAddress' className="address-text-area" value={this.state.shopAddress} onChange={e => this.handleInputChange(e)} ref={this.shopAddressRef}/>
                                     </Form.Group>
-
-                                    <Form.Group controlId="formBasicPassword">
+                                    
+                                    <Form.Group>
                                         <Form.Control type="number" placeholder="Number Of Tables" min="1" name='noOfTables' value={this.state.noOfTable} onChange={e => this.handleInputChange(e)}/>
                                     </Form.Group>
                                     <div className="btn-div">
