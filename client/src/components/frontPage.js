@@ -2,10 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import './frontPage.css';
 import NavbarForSite from './navbar';
+import FAQ from './faq';
 import Footer from './footer';
 import MenuGerms from '../images/menu-germs.jpeg';
 import Service from '../images/service.jpeg';
 import ScanMenu from '../images/menu-scan.jpeg';
+
 
 const FrontPage = (props) => {
 
@@ -118,6 +120,9 @@ const FrontPage = (props) => {
                     </div>
                 </section>
 
+                <section className="faq-div">
+                    <FAQ />
+                </section>
                 <section id="pricing-section">
                     <div>
                         <h1 className="pricing-heading">Pricing</h1>
