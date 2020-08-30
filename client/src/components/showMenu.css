@@ -3,8 +3,6 @@ body{
   color: white;
 }
 .category-menu {
-    min-height: 3rem;
-    overflow: hidden;
     margin: 0 1.5%;
 }
 .category-menu ul{
@@ -133,7 +131,12 @@ body{
   transition: 0.2s;
   background-color: #e30000;
 }
-
+@media (min-width: 901px){
+  .category-menu {
+      min-height: 3rem;
+      overflow: hidden;
+  }
+}
 @media screen and (min-width: 650px) {
   .cart-side-bar {
     width: 30vw;

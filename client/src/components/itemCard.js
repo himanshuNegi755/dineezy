@@ -59,10 +59,13 @@ const ItemCard = (props) => {
                         {props.description}
                     </Card.Text>
                     <Card.Text>
-                        <div>{props.itemStatusNew ? <img className="itemNotif" src={NewItem} alt="new item"/> : null} {props.itemStatusPopular ? <img className="itemNotif" src={PopularItem} alt="popular item"/> : null} 
-                        {props.itemStatusChefSpecial ? <img className="itemNotif" src={SpecialItem} alt="chef speciality"/> : null}</div>
+                        <div>
+                          {props.itemStatusNew ? <img className="itemNotif" src={NewItem} alt="new item"/> : null}
+                          {props.itemStatusPopular ? <img className="itemNotif" src={PopularItem} alt="popular item"/> : null}
+                          {props.itemStatusChefSpecial ? <img className="itemNotif" src={SpecialItem} alt="chef speciality"/> : null}
+                        </div>
                     </Card.Text>
-                    
+
                     <Card.Text  className="item-price">
                         ₹ {props.price}
                     </Card.Text>
