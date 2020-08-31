@@ -131,7 +131,6 @@ body{
   transition: 0.2s;
   background-color: #e30000;
 }
-
 @media (min-width: 901px){
   .category-menu {
       min-height: 3rem;
@@ -168,7 +167,7 @@ body{
       color: #fff;
   }
   .cart-option{
-    border-radius: 3px;
+    width: 25%;
   }
 }
 

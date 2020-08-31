@@ -20,21 +20,21 @@ const ShowMenu = (props) => {
     const [totalPrice, setTotalPrice] = useState(0);
     const ENDPOINT = `http://localhost:8000`;
     const [cartItemIdArr, setCartItemIdArr] = useState([]);
-    
+
     useEffect(() => {
         //console.log(this.props.match.params);
         axios.get(`${process.env.REACT_APP_BACKEND_API}/item_categories/${props.match.params.shopId}`)
         .then(res => {
             setCategory(res.data);
-        })  
-        
+        })
+
         socket = io(ENDPOINT);
         socket.emit('join', {shopId: props.match.params.shopId, tableNo: props.match.params.tableNo});
-        
+
     }, [props.match.params.shopId, props.match.params.tableNo, ENDPOINT]);
-    
+
     useEffect(() => {
-        
+
         let noOfItemsInCartVar = 0;
         let totalPriceVar = 0;
 
@@ -45,7 +45,7 @@ const ShowMenu = (props) => {
 
         setNoOfItemsInCart(noOfItemsInCartVar);
         setTotalPrice(totalPriceVar);
-        
+
     }, [itemsInCart])
 
     const loadItemFunction = (itemCategory) => {
@@ -82,11 +82,11 @@ const ShowMenu = (props) => {
     const addItemsInCart = (itemObj) => {
         setCartItemIdArr([...cartItemIdArr, itemObj.itemId]);
         setItemsInCart([...itemsInCart, itemObj]);
-        
+
         setVisibility("visible");
         setTransform("translateX(0)");
     }
-    
+
     const renderMenuItemList = () => {
         const list = itemsByCategory.map((menuItem) =>
             <div key={menuItem.menu._id}>
@@ -100,7 +100,7 @@ const ShowMenu = (props) => {
     const removeItemFromCart = (itemId) => {
         let itemIdArr = cartItemIdArr.filter(item => item !== itemId);
         setCartItemIdArr(itemIdArr);
-        
+
         let itemArray = itemsInCart.filter(item => item.itemId !== itemId);
         setItemsInCart(itemArray);
     }
@@ -141,7 +141,7 @@ const ShowMenu = (props) => {
         //cartItems.forEach(itemName => removeItemFromCart(itemName));
         setCartItemIdArr([]);
         setItemsInCart([]);
-        
+
     }
 
     return (
@@ -150,14 +150,14 @@ const ShowMenu = (props) => {
             <NavbarForSite/>
 
             <div className="category-menu row">
-                <div className="col-lg-1 col-md-2 col-sm-2 cart-option" onClick={ () => {
+                <div className="col-lg-1 col-md-2 col-sm-3 cart-option" onClick={ () => {
                         setVisibility('visible');
                         setTransform('translateX(0)');
                     }}>
                     <i className="fas fa-cart-plus cart-icon"></i>
                     <span className="cart-items">{noOfItemsInCart}</span>
                 </div>
-                <div className="col-lg-11 col-md-10 col-sm-10 ">
+                <div className="col-lg-11 col-md-9 col-sm-9 ">
                     <div className="default-list">{renderItemCategory()}</div>
                     <div className="dropdown category-drop">
                       <button className="btn btn-secondary dropdown-toggle category-btn" type="button" id="categorydropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

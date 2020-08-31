@@ -22,7 +22,7 @@ class ShopPage extends Component{
                       shopList: [], menuItemList: [], shopIdVar: "", suggestions: [], item: '', itemNameAsObjectArr: [], itemNameList: [], showNewItemAddModal: false, itemName: '', vegOrNonVeg: 'veg',  itemPrice: 0, itemDescription: '', itemCategory: '', showSearchBarAndCategory: 'hidden', showItemEditModal: false, editItemName: '', editVegOrNonVeg: '', editItemPrice: '', editItemDescription: '', editItemCategory: '', editItemId: '', editItemAvailability: '', editItemStatusNew: false, editItemStatusPopular: false, editItemStatusChefSpeciality: false, category: [], itemsByCategory: [], currentItemCategory: '', userPhoneNo: [], noOfShop: 0, subcategory: [{itemName: '', half: '', full: ''}], showSubcategoryDisplay: 'none', showHalfFullPriceDisplay: 'block', advRotate: 'rotate(0turn)', volume: {full: '', half: ''}, editSubcategory: [{itemName: '', half: '', full: ''}], editVolume: {full: '', half: ''}}
 
         this.suggestionRef = React.createRef();
-        
+
         //refs for new item modal
         this.newItemNameRef = React.createRef();
         this.newItemFullPriceRef = React.createRef();
@@ -31,11 +31,11 @@ class ShopPage extends Component{
         this.newItemSubategoryNameRef = React.createRef();
         this.newItemSubcategoryFullPriceRef = React.createRef();
         this.newItemSubcategoryHalfPriceRef = React.createRef();
-        
+
         //refs for new shop
         this.shopNameRef = React.createRef();
         this.shopAddressRef = React.createRef();
-        
+
         //refs for edit item
         this.editItemNameRef = React.createRef();
         this.editItemFullPriceRef = React.createRef();
@@ -309,7 +309,7 @@ class ShopPage extends Component{
         axios.get(`${process.env.REACT_APP_BACKEND_API}/shop/get_shops/${this.state.userEmail}`)
             .then(res => {
                 if(res.data.length > 0){
-                  this.setState({shopList: res.data[0].shop})  
+                  this.setState({shopList: res.data[0].shop})
                 }
                 //this.setState({shopList: res.data[0].shop})
             })
@@ -351,7 +351,7 @@ class ShopPage extends Component{
                 this.editItemCategoryRef.current.focus();
             } else {
                 this.setState({showItemEditModal: !this.state.showItemEditModal});
-                
+
                 axios.put(`${process.env.REACT_APP_BACKEND_API}/menu/item_update/sub`, {
                 shopId: this.state.shopIdVar,
                 menuItemId: this.state.editItemId,
@@ -383,7 +383,7 @@ class ShopPage extends Component{
                 this.editItemCategoryRef.current.focus();
             } else {
                 this.setState({showItemEditModal: !this.state.showItemEditModal});
-                
+
                 axios.put(`${process.env.REACT_APP_BACKEND_API}/menu/item_update`, {
                     shopId: this.state.shopIdVar,
                     menuItemId: this.state.editItemId,
@@ -586,10 +586,10 @@ class ShopPage extends Component{
                                     <Form.Group style={{display: this.state.showHalfFullPriceDisplay}}>
                                         <div className="row">
                                             <div className="col">
-                                                <Form.Control type="number" placeholder="full Price (Rs.)" name='full' onChange={e => this.handleInputChange(e, 'edit')} min="1" value={this.state.editVolume.full} ref={this.editItemFullPriceRef}/>
+                                                <Form.Control type="number" placeholder="full Price (₹.)" name='full' onChange={e => this.handleInputChange(e, 'edit')} min="1" value={this.state.editVolume.full} ref={this.editItemFullPriceRef}/>
                                             </div>
                                             <div className="col">
-                                                <Form.Control type="number" placeholder="half Price (Rs.)" name='half' onChange={e => this.handleInputChange(e, 'edit')} min="1" value={this.state.editVolume.half} ref={this.editItemHalfPriceRef}/>
+                                                <Form.Control type="number" placeholder="half Price (₹.)" name='half' onChange={e => this.handleInputChange(e, 'edit')} min="1" value={this.state.editVolume.half} ref={this.editItemHalfPriceRef}/>
                                             </div>
                                         </div>
                                     </Form.Group>
@@ -645,13 +645,13 @@ class ShopPage extends Component{
                                             checked={this.state.editItemAvailability}
                                             onChange={ (e) => {this.setState({[e.target.name]: e.target.checked})}}
                                           />
-
                                     </Form.Group>
-
+                                    
                                     <Form.Group>
-                                        <img className="itemNotif" src={NewItem} alt="new item" onClick={() => {this.setState({editItemStatusNew: !this.state.editItemStatusNew})}}/>
-                                        <img className="itemNotif" src={PopularItem} alt="popular item" onClick={() => {this.setState({editItemStatusPopular: !this.state.editItemStatusPopular})}}/>
-                                        <img className="itemNotif" src={SpecialItem} alt="chef speciality" onClick={() => {this.setState({editItemStatusChefSpeciality: !this.state.editItemStatusChefSpeciality})}}/>
+                                        <Form.Label>Set as: </Form.Label>
+                                        <span className="notif-off item-notif" onClick={() => {this.setState({editItemStatusNew: !this.state.editItemStatusNew})}}>New</span>
+                                        <span className="notif-off item-notif" onClick={() => {this.setState({editItemStatusPopular: !this.state.editItemStatusPopular})}}>Popular</span>
+                                        <span className="notif-off item-notif" onClick={() => {this.setState({editItemStatusChefSpeciality: !this.state.editItemStatusChefSpeciality})}}>Special</span>
                                     </Form.Group>
                                     <div className="btn-div">
                                       <button type="button" className="submit-btn form-btn" onClick={this.editItemDetails}>
@@ -794,7 +794,7 @@ class ShopPage extends Component{
                                     <Form.Group>
                                         <Form.Control as="textarea" rows="3" placeholder="Address" name='shopAddress' className="address-text-area" value={this.state.shopAddress} onChange={e => this.handleInputChange(e)} ref={this.shopAddressRef}/>
                                     </Form.Group>
-                                    
+
                                     <Form.Group>
                                         <Form.Control type="number" placeholder="Number Of Tables" min="1" name='noOfTables' value={this.state.noOfTable} onChange={e => this.handleInputChange(e)}/>
                                     </Form.Group>
