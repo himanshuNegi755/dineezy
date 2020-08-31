@@ -1,0 +1,16 @@
+.faq-list-item {
+    list-style: none;
+    line-height: 2.5;
+    cursor: pointer;
+    text-align: left;
+    margin-left: 120px;
+}
+
+.ans {
+    margin-left: 40px;
+    line-height: 1.5;
+}
+
+.a-tag-in-faq-list {
+    color: black;
+}

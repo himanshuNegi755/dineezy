@@ -122,7 +122,7 @@
     border-radius: 20px;
     right: 10rem;
     color: black;
-    width: 90%;
+    width: 93%;
     padding: 0;
     box-shadow: 0 0 4px black;
 }
@@ -135,7 +135,11 @@
   padding: 0.5rem 1.5rem;
   margin-bottom: 1rem;
 }
+.email-dropdown{
+    width: 100%;
+}
 .email-dropdown ul{
+    width: 100%;
     padding: 0;
     margin: 0;
 }
@@ -148,7 +152,7 @@
     background-color: #fff;
 }
 .email-ind button{
-  transition: 0.2s;
+    transition: 0.2s;
     background-color: #202020;
     color: white;
     font-size: 0.7rem;

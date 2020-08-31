@@ -7,8 +7,11 @@
 }
 
 .show-menu-cards .card-body{
+  display: inline-block;
   border-radius: 5px 5px 0 0;
   background-color: #303030;
+  min-height: 5rem;
+  overflow: hidden;
 }
 .show-menu-cards .item-name{
   display: inline-block;
@@ -18,7 +21,6 @@
 }
 .show-menu-cards .vnv-id{
   width: 2rem;
-  float: right;
 }
 .show-menu-cards .item-description{
   font-size: 0.9rem;
@@ -30,6 +32,7 @@
 .show-menu-cards .item-price{
   font-family: 'Ubuntu', sans-serif;
   font-size: 1.2rem;
+  margin: 0;
 }
 .show-menu-cards .item-quantity{
   float: right;
@@ -60,7 +63,7 @@
 .in-cart{
   padding: 0.375rem;
 }
-@media (max-width: 1000px){
+@media (max-width: 1231px){
   .show-menu-cards {
       width: 49%;
   }

@@ -22,6 +22,9 @@
 .na-icon{
   color: red;
 }
+.notif-div{
+  padding: 0.2rem 0;
+}
 .vnv-id{
     width: 2rem;
     float: right;
@@ -29,6 +32,7 @@
 }
 .item-description{
   font-size: 0.9rem;
+  margin: 0;
 }
 .card-for-item .card-footer{
     padding: 0 0.5rem;

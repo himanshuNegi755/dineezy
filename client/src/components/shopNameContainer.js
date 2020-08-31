@@ -12,7 +12,11 @@ class ShopNameContainer extends Component{
 
         this.state = { showOptions: false, showFileUploadModal: false, showMenuOption: false, showQRCodeModal: false, noOfTablesArr: [], currentTable: 1, showQRCodeForTables: false, showQRCodeForKitchen: false, kitchenAccessEmailList: [], emailToAdd: '', file: null}
 
+        //ref for shop drop down menu
         this.shopDropDownRef = React.createRef();
+        
+        //ref for email to add
+        this.emaiToAddRef = React.createRef();
     }
 
     //function to handle input change
@@ -170,7 +174,7 @@ class ShopNameContainer extends Component{
                     </div>
 
                     <Form.Group controlId="formBasicName">
-                        <Form.Control type="text" placeholder="Enter Email for Kitchen Access" name='emailToAdd' value={this.state.emailToAdd} onChange={this.handleInputChange}/>
+                        <Form.Control type="text" placeholder="Enter Gmail for Kitchen Access" name='emailToAdd' value={this.state.emailToAdd} onChange={this.handleInputChange} ref={this.emaiToAddRef}/>
                         <button className="add-email" type="button" onClick={ () => {this.addEmailToAccessListFunction(this.state.emailToAdd)
                         this.setState({emailToAdd: ''})}}>
                             ADD
@@ -190,16 +194,19 @@ class ShopNameContainer extends Component{
     }
 
     addEmailToAccessListFunction = (emailToAdd) => {
-        axios.put(`${process.env.REACT_APP_BACKEND_API}/add/email_access`, {
-            userEmail: this.props.userEmail,
-            shopId: this.props.shopId,
-            email: emailToAdd
-        })
-        .then(res => {
-            console.log(res.data);
-            this.getEmailListForKitchenAccessFunction();
-            //this.showShopAfterAdding();
-        })
+        if(emailToAdd === '') {
+            this.emaiToAddRef.current.focus();
+        } else {
+            axios.put(`${process.env.REACT_APP_BACKEND_API}/add/email_access`, {
+                userEmail: this.props.userEmail,
+                shopId: this.props.shopId,
+                email: emailToAdd
+            })
+            .then(res => {
+                this.getEmailListForKitchenAccessFunction();
+                //this.showShopAfterAdding();
+            })
+        }
     }
 
     getEmailListForKitchenAccessFunction = () => {

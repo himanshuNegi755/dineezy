@@ -48,32 +48,38 @@ const ItemCard = (props) => {
         }
     }
 
-        return (
-            <Card className="show-menu-cards" bg="light">
-                <Card.Body>
-                    <Card.Title>
-                        <div className="item-name">{props.itemName}</div>
-                        <div className="vnv-id">{showVegOrNonVegImage(props.vegOrNonVeg)}</div>
-                    </Card.Title>
-                    <Card.Text className="item-description">
-                        {props.description}
-                    </Card.Text>
-                    <Card.Text>
-                        <div>
-                          {props.itemStatusNew ? <img className="itemNotif" src={NewItem} alt="new item"/> : null}
-                          {props.itemStatusPopular ? <img className="itemNotif" src={PopularItem} alt="popular item"/> : null}
-                          {props.itemStatusChefSpecial ? <img className="itemNotif" src={SpecialItem} alt="chef speciality"/> : null}
-                        </div>
-                    </Card.Text>
+    const showPrice = () => {
+      if(props.itemVolume) {
+          if(props.itemVolume.half === 0) {return(<div className="item-price">₹ {props.itemVolume.full}</div>)}
+          else { return(<div className="item-price">₹ {props.itemVolume.half}/{props.itemVolume.full}</div>) }
+      } else {
+          return(<div className="item-price">₹ {props.price}</div>)
+      }
+  }
 
-                    <Card.Text  className="item-price">
-                        ₹ {props.price}
-                    </Card.Text>
-                </Card.Body>
-                <Card.Footer>
-                    {showAddToCartButtonOrStatus()}
-                </Card.Footer>
-            </Card>
+        return (
+                <Card className="show-menu-cards" bg="light">
+                    <Card.Body>
+                        <Card.Title className="row">
+                            <div className="item-name col-lg-5 col-md-6 col-sm-6">{props.itemName} {props.itemAvailability ? null : <i className="fas fa-low-vision na-icon"></i>}</div>
+                            <div className="notif-div col-lg-5 col-md-4 col-sm-4">
+                              {props.itemStatusNew ? <span className="new-notif item-notif">New</span> : null}
+                              {props.itemStatusPopular ? <span className="popular-notif item-notif">Popular</span> : null}
+                              {props.itemStatusChefSpecial ? <span className="special-notif item-notif">Special</span> : null}
+                            </div>
+                            <div className="vnv-id ml-auto">{showVegOrNonVegImage(props.vegOrNonVeg)}</div>
+                        </Card.Title>
+                        <Card.Text className="item-description">
+                            {props.description}
+                        </Card.Text>
+                        <Card.Text  className="item-price">
+                            {showPrice()}
+                        </Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                        {showAddToCartButtonOrStatus()}
+                    </Card.Footer>
+                </Card>
         );
 }
 
