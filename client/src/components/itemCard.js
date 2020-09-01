@@ -54,7 +54,7 @@ const ItemCard = (props) => {
           return(null)
       }
   }
-    
+
     const showSubcategory = () => {
         if(props.itemSubcategory.length > 0) {
             const list = props.itemSubcategory.map((subcategoryItem) =>
@@ -64,7 +64,7 @@ const ItemCard = (props) => {
             );
 
             return (
-              <div className="sub-drop dropdown">
+              <div className="subc-drop dropdown">
                 <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Subcategories
                 </button>
@@ -75,7 +75,7 @@ const ItemCard = (props) => {
                   {list}
                 </div>
               </div>
-            );            
+            );
         } else {
             return(null);
         }
