@@ -51,7 +51,7 @@ const ItemCard = (props) => {
           if(props.itemVolume.half === 0) {return(<div className="item-price">₹ {props.itemVolume.full}</div>)}
           else { return(<div className="item-price">₹ {props.itemVolume.half}/{props.itemVolume.full}</div>) }
       } else {
-          return(<div className="item-price">₹ {props.price}</div>)
+          return(null)
       }
   }
     
