@@ -255,8 +255,6 @@ input[type=number] {
   margin: 0 0.2rem;
   font-size: 0.5rem;
   font-weight: 600;
-}
-.new-notif, .popular-notif, .special-notif, .notif-off{
   transition: 0.2s;
   color: black;
 }

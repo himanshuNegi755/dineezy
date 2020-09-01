@@ -4,9 +4,6 @@ import './menuItems.css';
 import NonVeg from '../images/nonVeg.svg';
 import Vegg from '../images/Veg.svg';
 import Eggi from '../images/Egg.svg';
-import PopularItem from '../images/popularItem.svg';
-import NewItem from '../images/newItem.svg';
-import SpecialItem from '../images/specialItem.svg';
 
 
 const MenuItems = (props) => {
