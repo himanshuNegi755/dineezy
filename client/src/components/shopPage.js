@@ -7,9 +7,6 @@ import './shopPage.css';
 import NavbarForSite from './navbar';
 import ShopNameContainer from './shopNameContainer';
 import MenuItems from './menuItems';
-import PopularItem from '../images/popularItem.svg';
-import NewItem from '../images/newItem.svg';
-import SpecialItem from '../images/specialItem.svg';
 import Footer from './footer';
 
 
@@ -375,9 +372,9 @@ class ShopPage extends Component{
         } else {
             if(this.state.editItemName === '') {
                 this.editItemNameRef.current.focus();
-            } else if(this.state.editVolume.full === '') {
+            } else if(this.state.editVolume.full === '' || this.state.editVolume.full<=0) {
                 this.editItemFullPriceRef.current.focus();
-            } else if(this.state.editVolume.half === '') {
+            } else if(this.state.editVolume.half === '' || this.state.editVolume.half<0) {
                 this.editItemHalfPriceRef.current.focus();
             } else if(this.state.editItemCategory === '') {
                 this.editItemCategoryRef.current.focus();
@@ -649,9 +646,9 @@ class ShopPage extends Component{
                                     
                                     <Form.Group>
                                         <Form.Label>Set as: </Form.Label>
-                                        <span className="notif-off item-notif" onClick={() => {this.setState({editItemStatusNew: !this.state.editItemStatusNew})}}>New</span>
-                                        <span className="notif-off item-notif" onClick={() => {this.setState({editItemStatusPopular: !this.state.editItemStatusPopular})}}>Popular</span>
-                                        <span className="notif-off item-notif" onClick={() => {this.setState({editItemStatusChefSpeciality: !this.state.editItemStatusChefSpeciality})}}>Special</span>
+                                        <span className={this.state.editItemStatusNew ? 'new-notif item-notif' : 'notif-off item-notif'} onClick={() => {this.setState({editItemStatusNew: !this.state.editItemStatusNew})}}>New</span>
+                                        <span className={this.state.editItemStatusPopular ? 'popular-notif item-notif' : 'notif-off item-notif'} onClick={() => {this.setState({editItemStatusPopular: !this.state.editItemStatusPopular})}}>Popular</span>
+                                        <span className={this.state.editItemStatusChefSpeciality ? 'special-notif item-notif' : 'notif-off item-notif'} onClick={() => {this.setState({editItemStatusChefSpeciality: !this.state.editItemStatusChefSpeciality})}}>Special</span>
                                     </Form.Group>
                                     <div className="btn-div">
                                       <button type="button" className="submit-btn form-btn" onClick={this.editItemDetails}>

@@ -28,7 +28,6 @@ mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: tru
 const authRoutes = require("./routes/auth-routes");
 const phoneVerificationRoutes = require("./routes/phone-verification-routes");
 const databaseApiRoutes = require("./routes/database-api-routes");
-const socketRoutes = require("./routes/socket-routes");
 
 const PORT = process.env.PORT || 8000;
 
@@ -51,7 +50,6 @@ app.use(passport.session());
 app.use('/api', authRoutes);
 app.use('/api', phoneVerificationRoutes);
 app.use('/api', databaseApiRoutes);
-app.use('/api', socketRoutes);
 
 app.get('/shops', (req, res) => res.redirect(process.env.CLIENT_URI+'/shops' || 'http://localhost:3000/shops'));
 app.get('/', (req, res) => res.redirect(process.env.CLIENT_URI || 'http://localhost:3000'));
@@ -89,7 +87,7 @@ io.on('connection', function(socket){
     socket.on('join', (data) => {
         if(data.tableNo){
             
-            socket.join(data.shopId);
+            //socket.join(data.shopId);
             //('CH6IL9pF44T6kBujAAAA').emit('tableTaken', {tableNo: data.tableNo, status: 'taken'});
             //socket.emit('tableTaken', {tableNo: data.tableNo, status: 'taken'});
             console.log(data.shopId, data.tableNo);
