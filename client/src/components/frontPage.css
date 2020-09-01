@@ -105,6 +105,9 @@
 .signUp-button-from-pricing {
     text-decoration: none !important;
 }
+.faq-div{
+  background-color: #202020;
+}
 @media (max-width: 1200px){
   .front-title-div h1{
     font-size: 2rem;

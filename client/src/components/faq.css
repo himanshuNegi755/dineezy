@@ -1,14 +1,26 @@
-.faq-list-item {
-    list-style: none;
-    line-height: 2.5;
-    cursor: pointer;
-    text-align: left;
-    margin-left: 120px;
+.faq-heading{
+  font-family: 'Righteous', cursive;
+  text-align: center;
+  padding: 3rem 0 0;
 }
-
+.faq-heading h1{
+  font-size: 4rem;
+}
+.faq-list{
+  padding: 2rem 6rem 6rem;
+}
+.faq-list-item {
+    line-height: 2.5;
+    text-align: left;
+    font-size: 1.2rem;
+}
+.faq-list-item em{
+    cursor: pointer;
+}
 .ans {
     margin-left: 40px;
     line-height: 1.5;
+    font-size: 0.9rem;
 }
 
 .a-tag-in-faq-list {

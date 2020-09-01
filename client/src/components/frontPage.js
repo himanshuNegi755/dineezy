@@ -120,9 +120,6 @@ const FrontPage = (props) => {
                     </div>
                 </section>
 
-                <section className="faq-div">
-                    <FAQ />
-                </section>
                 <section id="pricing-section">
                     <div>
                         <h1 className="pricing-heading">Pricing</h1>
@@ -172,7 +169,10 @@ const FrontPage = (props) => {
 
                 </section>
 
-
+                <section className="faq-div">
+                    <FAQ />
+                </section>
+                
                 <div id="footer">
                     <Footer />
                 </div>
