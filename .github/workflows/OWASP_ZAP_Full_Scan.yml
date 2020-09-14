@@ -1,0 +1,13 @@
+   
+on:
+name: OWASP ZAP Full Scan
+  push:
+    branches: 
+    - master
+      
+steps:
+  - name: ZAP Scan
+    uses: zaproxy/action-full-scan@v0.1.0
+    with:
+      target: 'https://www.dineezy.com/'
+
