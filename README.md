@@ -1,4 +1,5 @@
 # Digital Menu and QR based Restaurant Management System
+[![HitCount](http://hits.dwyl.com/himanshuNegi755/dineezy.svg)](http://hits.dwyl.com/himanshuNegi755/dineezy)
 
 ## Dineezy is made using these awesome tools
 | [ReactJS](https://reactjs.org/) - [NodeJS]() - [ExpressJS]() - [Socket*io*]()	|
