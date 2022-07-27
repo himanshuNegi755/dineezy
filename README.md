@@ -2,6 +2,8 @@
 [![HitCount](http://hits.dwyl.com/himanshuNegi755/dineezy.svg)](http://hits.dwyl.com/himanshuNegi755/dineezy)
 [![Known Vulnerabilities](https://snyk.io/test/github/himanshuNegi755/dineezy/badge.svg)](https://snyk.io/test/github/himanshuNegi755/dineezy)
 
+![dineezy-hero-section](https://github.com/himanshuNegi755/dineezy/blob/master/images/dineezy-hero-section.png?raw=true)
+
 ## Dineezy is made using these awesome tools
 | [ReactJS](https://reactjs.org/) - [NodeJS]() - [ExpressJS]() - [Socket*io*]()	|
 |--|
