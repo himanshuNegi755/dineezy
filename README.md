@@ -1,4 +1,4 @@
-# Digital Menu and QR based Restaurant Management System
+# Digital Menu and QR code based Restaurant Management System
 [![HitCount](http://hits.dwyl.com/himanshuNegi755/dineezy.svg)](http://hits.dwyl.com/himanshuNegi755/dineezy)
 [![Known Vulnerabilities](https://snyk.io/test/github/himanshuNegi755/dineezy/badge.svg)](https://snyk.io/test/github/himanshuNegi755/dineezy)
 
