@@ -1,0 +1,14 @@
+{
+"schemaVersion": 2,
+"dockerfileLines": [
+                    "FROM node:20-alpine",
+                    "RUN mkdir -p /usr/src/app",
+                    "WORKDIR /usr/src/app",
+                    "COPY . /usr/src/app",
+                    "RUN npm install && npm cache clean --force",
+                    "ENV NODE_ENV production",
+                    "ENV PORT 8000",
+                    "EXPOSE 8000",
+                    "CMD [ \"node\", \"app.js\" ]"
+                ]
+}
